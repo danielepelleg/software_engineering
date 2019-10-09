@@ -16,6 +16,7 @@ public class Main {
 
         // Creo le liste di Attività e Persone e inserisco i dati creati
         Person[] persons = new Person[]{a, me, you};
+        System.out.println("Password di Tom: " + me.getPassword());
         me.Registration(ciclismo);
         System.out.println(ciclismo.show());
         me.Unsubscribe(ciclismo);
