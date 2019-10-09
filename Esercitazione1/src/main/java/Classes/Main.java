@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         // Creo degli Oggetti Admin, Membri, Corsi e Gare
         Member me = new Member("tommaso", "veltri", "tom", "1234");
-        Member you = new Member("gianluca", "vacchi", "vacchigianlu", "1234");
+        Member you = new Member("luca", "vacchi", "vacchigianlu", "1234");
         Member he = new Member("piero", "tuni", "pierino", "1234");
         Member vince = new Member("Vincenzo", "Magri", "Vince", "9876");
         Admin a = new Admin("gino", "paoli", "ginogino", "1234");
@@ -16,6 +16,9 @@ public class Main {
 
         // Creo le liste di Attività e Persone e inserisco i dati creati
         Person[] persons = new Person[]{a, me, you};
+        for (Person p : persons){
+            System.out.println(p.show());
+        }
         System.out.println("Password di Tom: " + me.getPassword());
         me.Registration(ciclismo);
         System.out.println(ciclismo.show());
