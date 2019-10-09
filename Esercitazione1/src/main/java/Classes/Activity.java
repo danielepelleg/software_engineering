@@ -100,7 +100,6 @@ public class Activity {
      *
      * @return String the string
      *
-     * @since 1.0
      */
     public String show(){
         String s = " Name: '" + this.getName() + "'" + ", Subscribers: '" + this.getPersonArray().length + "' \n";
