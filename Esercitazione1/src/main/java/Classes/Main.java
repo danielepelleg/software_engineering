@@ -9,6 +9,7 @@ public class Main {
         Member me = new Member("tommaso", "veltri", "tom", "1234");
         Member you = new Member("gianluca", "vacchi", "vacchigianlu", "1234");
         Member he = new Member("piero", "tuni", "pierino", "1234");
+        Member vince = new Member("Vincenzo", "Magri", "Vince", "9876");
         Admin a = new Admin("gino", "paoli", "ginogino", "1234");
         Race ciclismo = new Race("Tour");
         Course yoga = new Course("Gru");
@@ -29,7 +30,7 @@ public class Main {
         System.out.println("Persone Iscritte a Ciclismo - Dopo Iscrizione");
         System.out.println(ciclismo.getPersonArray().length);
         // L'admin crea un nuovo membro e lo inserisce nella lista di persone
-        persons = a.addMember("Vincenzo", "Magri", "Vince", "9876", persons);
+        persons = a.addMember(vince, persons);
         System.out.println("Persone nella lista: AddMember");
         for (Person p : persons){
             p.show();
