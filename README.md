@@ -1,4 +1,4 @@
-# software_engineering
+# Software Engineering
 Software Engineering assignments. @UniPR
 
 ### Contributors
