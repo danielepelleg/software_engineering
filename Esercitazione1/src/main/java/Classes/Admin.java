@@ -62,7 +62,7 @@ public class Admin extends Member {
         // Se il membro da rimuovere non è presente ritorno l'array iniziale
         else return people;
     }
-    
+
     public Activity[] addActivity(Activity a, Activity[] activities){
         // Creo una variabile booleana che controlla che il membro non sia già
         // presente nella lista di persone in cui lo inserisco
@@ -122,8 +122,7 @@ public class Admin extends Member {
     }
 
     public void Registration(Activity a, Member m){
-        Person[] p = new Person[]{m};
-        a.Registration(p);
+        a.Registration(m);
     }
 
     public void Unsubscribe(Activity a, Member m){

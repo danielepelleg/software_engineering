@@ -6,8 +6,7 @@ public class Member extends Person {
     }
 
     public void Registration(Activity a){
-        Person[] me = new Person[]{Member.this};
-        a.Registration(me);
+        a.Registration(Member.this);
     }
 
     public void Unsubscribe(Activity a){

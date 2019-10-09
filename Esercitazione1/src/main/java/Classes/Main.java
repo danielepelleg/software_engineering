@@ -16,6 +16,11 @@ public class Main {
 
         // Creo le liste di Attività e Persone e inserisco i dati creati
         Person[] persons = new Person[]{a, me, you};
+        me.Registration(ciclismo);
+        System.out.println(ciclismo.show());
+        me.Unsubscribe(ciclismo);
+        System.out.println(ciclismo.show());
+        /*
         System.out.println("Persone nella lista:");
         for (Person p : persons){
             p.show();}
@@ -35,10 +40,13 @@ public class Main {
         for (Person p : persons){
             p.show();
         }
+        you.Unsubscribe(ciclismo);
         persons = a.deleteMember(you, persons);
         System.out.println("Persone nella lista: DeleteMember");
         for (Person p : persons){
             p.show();}
+        System.out.println("Persone Iscritte a Ciclismo - Dopo Iscrizione");
+        System.out.println(ciclismo.getPersonArray().length);
         for (Person i : ciclismo.getPersonArray()){
             System.out.println(i.getUsername());
         }
@@ -62,6 +70,7 @@ public class Main {
         for(int i = 0; i < ciclismo.getPersonArray().length; i++){
             System.out.println(ciclismo.getPersonArray()[i].getUsername());
         }
+         */
 
     }
 }
