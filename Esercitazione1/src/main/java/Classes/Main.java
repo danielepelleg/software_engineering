@@ -13,17 +13,12 @@ public class Main {
         Admin a = new Admin("gino", "paoli", "ginogino", "1234");
         Race ciclismo = new Race("Tour");
         Course yoga = new Course("Gru");
+        Activity[] activities = new Activity[]{};
+        Person[] people = new Person[]{};
 
         // Creo le liste di Attività e Persone e inserisco i dati creati
-        Person[] persons = new Person[]{a, me, you};
-        for (Person p : persons){
-            System.out.println(p.show());
-        }
-        System.out.println("Password di Tom: " + me.getPassword());
-        me.Registration(ciclismo);
-        System.out.println(ciclismo.show());
-        me.Unsubscribe(ciclismo);
-        System.out.println(ciclismo.show());
+        a.editMember(he, "gianni", "bimbo", "tucan", "123");
+
         /*
         System.out.println("Persone nella lista:");
         for (Person p : persons){

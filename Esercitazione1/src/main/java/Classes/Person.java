@@ -9,14 +9,14 @@ import java.security.NoSuchAlgorithmException;
  * the password and the hashed password
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
- * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Person{
-    private String name;
-    private String  surname;
-    private String username;
+    protected String name;
+    protected String  surname;
+    protected String username;
     private String password;
-    private String hashed_password;
+    protected String hashed_password;
 
     /**
      * Class constructor.
@@ -55,7 +55,7 @@ public class Person{
     }
 
     /**
-     * This method sets the Person's hashed password
+     * Set the Person's hashed password
      * A message digest is a cryptographic hash function containing a string of digits created by a one-way hashing formula.
      * This one use the MD5 hash cryptographic function, a simple one
      * The message digest takes the string password bytes
@@ -65,8 +65,6 @@ public class Person{
      * The operation of encryption is managed inside a try-catch
      *
      * @param password for the Person.
-     *
-     * @return void
      *
      */
     public void setHashedPassword(String password) {
@@ -100,22 +98,21 @@ public class Person{
     }
 
     /**
-     * This method returns the Person's hashed password.
      *
-     *
+     * @return String Person's hashed password
      */
     public String getPassword(){
         return hashed_password;
     }
 
     /**
-     * This method returns a string showing person's
+     * Return a string showing person's
      * name, surname and username
      *
      * @return String the string
      *
      */
     public String show(){
-        return "Name: \t" + name + "\t Surname: \t" + surname + "\t Username: " + username;
+        return "Name: \t" + this.getName() + "\t Surname: \t" + this.getSurname() + "\t Username: " + this.getUsername();
     }
 }
