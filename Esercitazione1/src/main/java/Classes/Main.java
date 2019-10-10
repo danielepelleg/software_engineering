@@ -12,8 +12,6 @@ public class Main {
         Admin a = new Admin("gino", "paoli", "ginogino", "1234");
         Race ciclismo = new Race("Tour");
         Course yoga = new Course("Gru");
-        Activity[] activities = new Activity[]{};
-        Person[] people = new Person[]{};
 
         // Creo le liste di Attività e Persone e inserisco i dati creati
         Person[] persons = new Person[]{a, me, you};
@@ -24,9 +22,9 @@ public class Main {
         System.out.println("Password di Tom: " + me.getPassword());
 
         //Un socio si registra in un attivit�
-        me.Registration(ciclismo);
+        me.Subscribe(ciclismo);
         //Un admin registra un altro socio in un attivit�
-        a.Registration(ciclismo, you);
+        a.Subscribe(ciclismo, you);
         System.out.println(ciclismo.show());
         //Un socio si disinscrive da un attivit�
         me.Unsubscribe(ciclismo);
@@ -35,7 +33,7 @@ public class Main {
         System.out.println(ciclismo.show());
 
         //Un admin si registra in un attivita
-        a.Registration(yoga);
+        a.Subscribe(yoga);
         System.out.println(yoga.show());
         //Un admin si disiscrive dall'attivit�
         a.Unsubscribe(yoga);
@@ -56,7 +54,7 @@ public class Main {
         }
         System.out.println("\n");
         //Un admin elimina il socio appena creato dall'array persons
-        a.deleteMember(vince, persons);
+        persons = a.deleteMember(vince, persons);
         for (Person p : persons){
             System.out.println(p.show());
         }
@@ -65,77 +63,22 @@ public class Main {
         //Creo una nuova attivit� da aggiungere alla lista di attivit� del club
         Race motorRace = new Race("GrandPrix F1");
         //L'admin inserisce l'attivit� nell'array activities
-        a.addActivity(motorRace, activities);
+        activities = a.addActivity(motorRace, activities);
         for (Activity x : activities){
             System.out.println(x.show());
         }
         //L'admin modifica il nome dell'activity
-        a.EditActivity(motorRace, "GrandPrix MotoGp");
+        a.editActivity(motorRace, "GrandPrix Gp");
         for (Activity x : activities){
             System.out.println(x.show());
         }
         //Un admin elimina l'attivit� appena creata dall'array activities
+        activities = a.deleteActivity(motorRace, activities);
         for (Activity x : activities){
             System.out.println(x.show());
         }
 
 
-
-
-
-
-
-        /*
-        System.out.println("Persone nella lista:");
-        for (Person p : persons){
-            p.show();}
-        persons = a.deleteMember(he, persons);
-        System.out.println("Persone nella lista: DeleteMember non Presente");
-        for (Person p : persons){
-            p.show();}
-        Activity[] activities = new Activity[]{ciclismo, yoga};
-        a.Registration(ciclismo, me);
-        //me.Registration(ciclismo);
-        you.Registration(ciclismo);
-        System.out.println("Persone Iscritte a Ciclismo - Dopo Iscrizione");
-        System.out.println(ciclismo.getPersonArray().length);
-        // L'admin crea un nuovo membro e lo inserisce nella lista di persone
-        persons = a.addMember(vince, persons);
-        System.out.println("Persone nella lista: AddMember");
-        for (Person p : persons){
-            p.show();
-        }
-        you.Unsubscribe(ciclismo);
-        persons = a.deleteMember(you, persons);
-        System.out.println("Persone nella lista: DeleteMember");
-        for (Person p : persons){
-            p.show();}
-        System.out.println("Persone Iscritte a Ciclismo - Dopo Iscrizione");
-        System.out.println(ciclismo.getPersonArray().length);
-        for (Person i : ciclismo.getPersonArray()){
-            System.out.println(i.getUsername());
-        }
-        System.out.println(Arrays.toString(ciclismo.getPersonArray()));
-
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Premi INVIO per continuare");
-        sc.nextLine();
-        me.Unsubscribe(ciclismo);
-        System.out.println("Persone Iscritte a Ciclismo - Dopo Cancellazione (Tom)");
-        System.out.println(ciclismo.getPersonArray().length);
-        for(int i = 0; i < ciclismo.getPersonArray().length; i++){
-            System.out.println(ciclismo.getPersonArray()[i].getUsername());
-        }
-
-        System.out.println("Premi INVIO per continuare");
-        sc.nextLine();
-        you.Unsubscribe(ciclismo);
-        System.out.println("Persone Iscritte a Ciclismo - Dopo Cancellazione (Gianlu)");
-        System.out.println(ciclismo.getPersonArray().length);
-        for(int i = 0; i < ciclismo.getPersonArray().length; i++){
-            System.out.println(ciclismo.getPersonArray()[i].getUsername());
-        }
-         */
 
     }
 }
