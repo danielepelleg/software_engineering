@@ -12,6 +12,8 @@ public class Main {
         Admin a = new Admin("gino", "paoli", "ginogino", "1234");
         Race ciclismo = new Race("Tour");
         Course yoga = new Course("Gru");
+        Activity[] activities = new Activity[]{};
+        Person[] people = new Person[]{};
 
         // Creo le liste di AttivitÃ  e Persone e inserisco i dati creati
         Person[] persons = new Person[]{a, me, you};
@@ -20,25 +22,25 @@ public class Main {
         }
         Activity[] activities = new Activity[]{ciclismo, yoga};
         System.out.println("Password di Tom: " + me.getPassword());
-        
-        //Un socio si registra in un attività
+
+        //Un socio si registra in un attivitï¿½
         me.Registration(ciclismo);
-        //Un admin registra un altro socio in un attività
+        //Un admin registra un altro socio in un attivitï¿½
         a.Registration(ciclismo, you);
         System.out.println(ciclismo.show());
-        //Un socio si disinscrive da un attività
+        //Un socio si disinscrive da un attivitï¿½
         me.Unsubscribe(ciclismo);
-        //Un admin disiscrive un socio da un attività
+        //Un admin disiscrive un socio da un attivitï¿½
         a.Unsubscribe(ciclismo, you);
         System.out.println(ciclismo.show());
-        
+
         //Un admin si registra in un attivita
         a.Registration(yoga);
         System.out.println(yoga.show());
-        //Un admin si disiscrive dall'attività
+        //Un admin si disiscrive dall'attivitï¿½
         a.Unsubscribe(yoga);
         System.out.println(yoga.show());
-        
+
         //Creo un nuovo socio da aggiungere alla lista di persone del club
         Member vince = new Member("Vincenzo", "Magri", "Vince", "9876");
         //L'admin inserisce il nuovo socio nell'array persons
@@ -59,10 +61,10 @@ public class Main {
             System.out.println(p.show());
         }
         System.out.println("\n");
-        
-        //Creo una nuova attività da aggiungere alla lista di attività del club
+
+        //Creo una nuova attivitï¿½ da aggiungere alla lista di attivitï¿½ del club
         Race motorRace = new Race("GrandPrix F1");
-        //L'admin inserisce l'attività nell'array activities
+        //L'admin inserisce l'attivitï¿½ nell'array activities
         a.addActivity(motorRace, activities);
         for (Activity x : activities){
             System.out.println(x.show());
@@ -72,17 +74,17 @@ public class Main {
         for (Activity x : activities){
             System.out.println(x.show());
         }
-        //Un admin elimina l'attività appena creata dall'array activities
+        //Un admin elimina l'attivitï¿½ appena creata dall'array activities
         for (Activity x : activities){
             System.out.println(x.show());
         }
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
         /*
         System.out.println("Persone nella lista:");
         for (Person p : persons){
@@ -137,4 +139,3 @@ public class Main {
 
     }
 }
-

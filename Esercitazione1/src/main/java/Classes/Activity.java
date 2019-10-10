@@ -6,12 +6,12 @@ import java.lang.*;
  * The class has the name of the activity and an array of person registered to it
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
- * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 
 public class Activity {
-    private String name;
-    private Person[] PersonArray;
+    protected String name;
+    protected Person[] PersonArray;
 
     /**
      * Class constructor.
@@ -19,7 +19,6 @@ public class Activity {
      * @param name the name of the activity to be created
      *
      */
-
     public Activity(String name){
         this.name = name;
         this.PersonArray = new Person[]{};
@@ -38,8 +37,8 @@ public class Activity {
     }
 
     /**
-     * This method adds a new subscriber, inside an array, to the activity
-     * The activity must not contain the person to register.
+     * Add a new subscriber to the activity
+     * The activity must not contain the person to register
      *
      * @param ego the array that contains the person to be added to @PersonArray
      *
@@ -63,7 +62,7 @@ public class Activity {
     }
 
     /**
-     * This method removes a subscriber from the activity
+     * Remove a subscriber from the activity
      * The activity must not be empty
      * The activity must contain the person to unsubscribe
      *
@@ -95,7 +94,7 @@ public class Activity {
     }
 
     /**
-     * This method returns a string showing activity's
+     * Return a string showing activity's
      * number of subscribers and their username
      *
      * @return String the string
