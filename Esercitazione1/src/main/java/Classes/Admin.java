@@ -17,13 +17,12 @@ public class Admin extends Member {
         // Scorro la lista di persone e controllo che l'oggetto Membro m non sia già presente
         // all'interno, se esso è presente allora check = true
         for (Integer i = 0; i < people.length; i++){
-            if (people[i].getUsername() != m.getUsername())
+            if (people[i].getUsername() == m.getUsername())
                 check = true;
-            else check = false;
         }
         // Se non è presente creo il nuovo array temp composto
         // dall'array persone + array contenente membro
-        if (check){
+        if (check==false){
             System.arraycopy(people, 0, temp, 0, people.length);
             System.arraycopy(member, 0, temp, people.length, member.length);
             // Ritorno il nuovo array contenente come ultimo elemento m
@@ -34,15 +33,7 @@ public class Admin extends Member {
     }
 
     public Person[] deleteMember (Member m, Person[] people) {
-        // Creo l'array di persone "temp" che andrà a contenere le  persone
-        // prima presenti nella lista senza l'oggetto Membro m
-        Person[] temp = new Person[people.length - 1];
-        // Variabile che conta le persone inserite in temp per arraycopy
-        int person_entered = 0;
-        // Variabile booleana che controlla che il membro che vado a togliere
-        // sia effettivamente presente nella lista di persone
         boolean check = false;
-        // Controllo che l'oggetto Membro m sia presente nell'array people
         for (Person p : people) {
             if (p == m)
                 check = true;
@@ -50,6 +41,8 @@ public class Admin extends Member {
         // Se è presente creo il nuovo array temp composto
         // dall'array persone - elemento Membro m
         if (check) {
+        	Person[] temp = new Person[people.length - 1];
+        	 int person_entered = 0;
             for (Integer i = 0; i < people.length; i++) {
                 if (m.getUsername() != people[i].getUsername()) {
                     System.arraycopy(people, i, temp, person_entered, 1);

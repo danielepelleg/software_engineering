@@ -109,6 +109,7 @@ public class Activity {
                 s += " " + p.getUsername() + "\n";
             }
         }
+        else s += " Non sono presenti iscritti" + "\n";
         return  s;
     }
 }
