@@ -2,6 +2,8 @@
 *.class
 *.iml 
 *.xml
+*.classpath
+*.project
 
 # Log file
 *.log
