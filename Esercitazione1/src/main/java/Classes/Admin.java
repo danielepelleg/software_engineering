@@ -153,6 +153,16 @@ public class Admin extends Member {
         a.Unsubscribe(m);
     }
 
+    /**
+     * Edit the parameters of a member
+     *
+     * @param m Member to edit
+     * @param n new Name
+     * @param s new Surname
+     * @param u new Username
+     * @param p new Password
+     *
+     */
     public void editMember(Member m, String n, String s, String u, String p){
         m.setName(n);
         m.setSurname(s);
@@ -160,6 +170,13 @@ public class Admin extends Member {
         m.setPassword(p);
     }
 
+    /**
+     * Edit the parameters of an activity
+     *
+     * @param a Activity to edit
+     * @param n new Name
+     *
+     */
     public void editActivity(Activity a, String n){
         a.setName(n);
     }

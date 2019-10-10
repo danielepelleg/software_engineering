@@ -1,4 +1,5 @@
 package Classes;
+
 import java.lang.*;
 
 /**
@@ -8,7 +9,6 @@ import java.lang.*;
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
-
 public class Activity {
     protected String name;
     protected Person[] PersonArray;
@@ -42,7 +42,6 @@ public class Activity {
      *
      * @param ego the array that contains the person to be added to @PersonArray
      *
-     * @return void
      */
     public void Registration(Person ego){
         Person [] p = new Person[]{ego};
@@ -68,7 +67,6 @@ public class Activity {
      *
      * @param ego the person to be removed from the activity
      *
-     * @return void
      */
     public void Unsubscribe(Person ego){
         if (getPersonArray().length != 0) {
