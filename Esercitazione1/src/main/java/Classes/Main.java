@@ -1,84 +1,155 @@
 package Classes;
 
-import java.util.Arrays;
-import java.util.Scanner;
+/**
+ * Main Class
+ * Test, through a simulation, the classes and methods created
+ * Every step is ended by an ENTER input
+ *
+ * 1)   Create initial arrays of Admin, Members and Activity
+ * 2a)  The admins add, remove and edit members
+ * 2b)  The admins add, remove and edit activities
+ * 3)   A member signs up to a Race and to a Course, then unsubscribe to one of them
+ * 4)   Show information about admins, members and activities
+ *
+ * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
+ */
 
 public class Main {
-    public static void main(String[] args) {
-        // Creo degli Oggetti Admin, Membri, Corsi e Gare
-        Member me = new Member("tommaso", "veltri", "tom", "1234");
-        Member you = new Member("luca", "vacchi", "vacchigianlu", "1234");
-        Member he = new Member("piero", "tuni", "pierino", "1234");
-        Admin a = new Admin("gino", "paoli", "ginogino", "1234");
-        Race ciclismo = new Race("Tour");
-        Course yoga = new Course("Gru");
-
-        // Creo le liste di Attività e Persone e inserisco i dati creati
-        Person[] persons = new Person[]{a, me, you};
-        for (Person p : persons){
-            System.out.println(p.show());
+    public static void main(String[] args){
+        System.out.println("------ 1) Create initial arrays of Admin, Members and Activity ------");
+        Member m1 = new Member("Tommaso", "Boni", "Tom", "12345");
+        Member m2 = new Member("Luca", "Perini", "Luke", "98765");
+        Admin a1 = new Admin("Giacomo", "Neri", "Jack", "hardtoguess");
+        Admin a2 = new Admin("Chiara", "Zanetti", "Chicca", "hardtofind");
+        Person[] persons = new Person[]{m1, m2};
+        System.out.println("Created 2 administrators and 2 members:\n");
+        System.out.println(" a" + "1\t"  + a1.show());
+        System.out.println(" a" + "2\t"  + a2.show());
+        for (int i = 0; i < persons.length; i++) {
+            System.out.println(" m" + (i + 1) + "\t" + persons[i].show());
         }
-        Activity[] activities = new Activity[]{ciclismo, yoga};
-        System.out.println("Password di Tom: " + me.getPassword());
-
-        //Un socio si registra in un attivit�
-        me.Subscribe(ciclismo);
-        //Un admin registra un altro socio in un attivit�
-        a.Subscribe(ciclismo, you);
-        System.out.println(ciclismo.show());
-        //Un socio si disinscrive da un attivit�
-        me.Unsubscribe(ciclismo);
-        //Un admin disiscrive un socio da un attivit�
-        a.Unsubscribe(ciclismo, you);
-        System.out.println(ciclismo.show());
-
-        //Un admin si registra in un attivita
-        a.Subscribe(yoga);
-        System.out.println(yoga.show());
-        //Un admin si disiscrive dall'attivit�
-        a.Unsubscribe(yoga);
-        System.out.println(yoga.show());
-
-        //Creo un nuovo socio da aggiungere alla lista di persone del club
-        Member vince = new Member("Vincenzo", "Magri", "Vince", "9876");
-        //L'admin inserisce il nuovo socio nell'array persons
-        persons = a.addMember(vince, persons);
-        for (Person p : persons){
-            System.out.println(p.show());
+        Race bikeRace = new Race("Tour de France");
+        Course yogaCourse = new Course("Jnana Yoga");
+        Activity[] activities = new Activity[]{bikeRace, yogaCourse};
+        System.out.println("\nCreated 1 Race and 1 Course:\n");
+        for (Activity a : activities) {
+            System.out.println(a.show());
         }
-        System.out.println("\n");
-        //Un admin modifica i dati di un socio
-        a.editMember(vince, "Marco", "Rossi", "Mark12", "1234");
-        for (Person p : persons){
-            System.out.println(p.show());
-        }
-        System.out.println("\n");
-        //Un admin elimina il socio appena creato dall'array persons
-        persons = a.deleteMember(vince, persons);
-        for (Person p : persons){
-            System.out.println(p.show());
-        }
-        System.out.println("\n");
+        System.out.print("\nPress ENTER  to continue the simulation\n");
+        try{System.in.read();}catch (Exception e){ System.out.println(e.getMessage());}
 
-        //Creo una nuova attivit� da aggiungere alla lista di attivit� del club
+
+
+        System.out.println("------ 2a) The admins add, remove and edit members ------");
+        System.out.println("Created 1 new member m3.");
+        System.out.println("The admin " + a2.getUsername() + " adds the new member to the persons array. Here is the members:\n");
+        Member m3 = new Member("Pietro", "Poli", "Pie", "45678");
+        persons = a2.addMember(m3, persons);
+        for (int i = 0; i < persons.length; i++) {
+            if (i != persons.length-1)
+                System.out.println(" m" + (i + 1) + "\t" + persons[i].show());
+            else System.out.print(" m" + (i + 1) + "\t" + persons[i].show());
+        }
+        System.out.println("   <-- new member!\n");
+        System.out.println("The admin " + a2.getUsername() + " subscribes the member m2 to the " + bikeRace.getName() + ".\nHere is the subscribers to the activity:\n");
+        a2.Subscribe(bikeRace, m2);
+        System.out.println(bikeRace.show());
+        System.out.println("The admin " + a1.getUsername() + " unsubscribe the member m2 to the " + bikeRace.getName() + ".\nHere is the subscribers to the activity:\n");
+        a1.Unsubscribe(bikeRace, m2);
+        System.out.println(bikeRace.show());
+        System.out.println("\nThe admin " + a1.getUsername() + " edits the member m1 stats. \n" +
+                a1.getUsername() + " removes the object from the persons array and reinsert it inside with the updated stats.\n");
+        a1.deleteMember(m1, persons);
+        System.out.print(m1.show() + "\t Password: " + m1.getPassword());
+        System.out.println("\n |\n | changing\n |");
+        a1.editMember(m1, "Camilla", "Bacchi", "Cami", "noteasy");
+        System.out.print(m1.show() + "\t Password: " + m1.getPassword() + "\n");
+        System.out.println("\nHere is the members:\n");
+        for (int i = 0; i < persons.length; i++) {
+            if (i != 0)
+                System.out.println(" m" + (i + 1) + "\t" + persons[i].show());
+            else{
+                System.out.print(" m" + (i + 1) + "\t" + persons[i].show());
+                System.out.println("   <-- updated member !");
+            }
+        }
+        System.out.println("\nPress ENTER  to continue the simulation\n");
+        try{System.in.read();}catch (Exception e){ System.out.println(e.getMessage());}
+
+
+
+        System.out.println("------ 2b) The admins add, remove and edit activities ------");
         Race motorRace = new Race("GrandPrix F1");
-        //L'admin inserisce l'attivit� nell'array activities
-        activities = a.addActivity(motorRace, activities);
-        for (Activity x : activities){
-            System.out.println(x.show());
+        System.out.println("Created 1 new activity " + motorRace.getName() + ".");
+        System.out.println("The admin " + a1.getUsername() + " adds the new activity to the activities array. Here is the activities:\n");
+        activities = a1.addActivity(motorRace, activities);
+        for (int i = 0; i < activities.length; i++) {
+            if (i != activities.length-1)
+                System.out.println(activities[i].show());
+            else System.out.print(activities[i].show());
         }
-        //L'admin modifica il nome dell'activity
-        a.editActivity(motorRace, "GrandPrix Gp");
-        for (Activity x : activities){
-            System.out.println(x.show());
+        System.out.println("   <-- new activity!\n");
+        System.out.println("The admin " + a2.getUsername() + " edits the activity " + motorRace.getName() + " stats. \n" +
+                a2.getUsername() + " removes the object from the activities array and reinsert it inside with the updated stats.\n");
+        a2.deleteActivity(motorRace, activities);
+        System.out.print(motorRace.show());
+        System.out.println("\n |\n | changing\n |");
+        a2.editActivity(motorRace, "GrandPrix Gp");
+        System.out.println(motorRace.show());
+        System.out.println("\nHere is the activities:\n");
+        for (int i = 0; i < activities.length; i++) {
+            if (i != activities.length-1)
+                System.out.println(activities[i].show());
+            else{
+                System.out.print(activities[i].show());
+                System.out.println("   <-- updated activity !");
+            }
         }
-        //Un admin elimina l'attivit� appena creata dall'array activities
-        activities = a.deleteActivity(motorRace, activities);
-        for (Activity x : activities){
-            System.out.println(x.show());
+        System.out.println("\nPress ENTER  to continue the simulation");
+        try{System.in.read();}catch (Exception e){ System.out.println(e.getMessage());}
+
+        System.out.println("------ 3) A member signs up to a Race and to a Course, then unsubscribe to one of them  ------");
+        System.out.println(m1.getUsername() + " and " + m3.getUsername() + " both subscribe to " + bikeRace.getName() + " and " + yogaCourse.getName()+".");
+        System.out.println("The admin " + a1.getUsername() + " subscribes the member " + m2.getUsername() + " to the " + bikeRace.getName() +
+                " and he signs up to the " + yogaCourse.getName() + "\n");
+        m1.Subscribe(bikeRace);
+        m1.Subscribe(yogaCourse);
+        m3.Subscribe(bikeRace);
+        m3.Subscribe(yogaCourse);
+        a1.Subscribe(bikeRace, m2);
+        m2.Subscribe(yogaCourse);
+        for (Activity a : activities){
+            System.out.println(a.show());
         }
+        System.out.println("\n" + m1.getUsername() + " unsubscribe to " + yogaCourse.getName() + " and " + m3.getUsername() + " unsubscribe to " + bikeRace.getName());
+        System.out.println("The admin " + a2.getUsername() + " unsubscribe the member " + m2.getUsername() + " to " + yogaCourse.getName() +
+                " and he unsubscribe to the " + bikeRace.getName());
+        System.out.println(m2.getUsername() + " subscribes to " + motorRace.getName() + ".\n");
+        m1.Unsubscribe(yogaCourse);
+        m3.Unsubscribe(bikeRace);
+        a2.Unsubscribe(yogaCourse, m2);
+        m2.Unsubscribe(bikeRace);
+        m2.Subscribe(motorRace);
+        for (Activity a : activities){
+            System.out.println(a.show());
+        }
+        System.out.println("\nPress ENTER  to continue the simulation");
+        try{System.in.read();}catch (Exception e){ System.out.println(e.getMessage());}
 
 
 
+        System.out.println("------ 4) Show information about admins, members and activities  ------");
+        System.out.println("Here's the admins:\n");
+        System.out.println(a1.show());
+        System.out.println(a2.show());
+        System.out.println("\nHere's the members:\n");
+        for (int i = 0; i < persons.length; i++) {
+            System.out.println(" m" + (i + 1) + "\t" + persons[i].show());
+        }
+        System.out.println("\nHere's the activities:\n");
+        for (Activity a : activities){
+            System.out.println(a.show());
+        }
     }
 }

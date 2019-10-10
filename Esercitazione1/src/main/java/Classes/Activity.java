@@ -106,7 +106,7 @@ public class Activity {
                 s += " " + p.getUsername() + "\n";
             }
         }
-        else s += " Non sono presenti iscritti" + "\n";
+        else s += " \t\tThere are no subscribers here. ";
         return  s;
     }
 }

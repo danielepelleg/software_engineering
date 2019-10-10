@@ -168,6 +168,7 @@ public class Admin extends Member {
         m.setSurname(s);
         m.setUsername(u);
         m.setPassword(p);
+        m.setHashedPassword(p);
     }
 
     /**
