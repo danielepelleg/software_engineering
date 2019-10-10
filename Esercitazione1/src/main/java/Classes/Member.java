@@ -9,6 +9,7 @@ package Classes;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Member extends Person {
+
     /**
      * Class constructor.
      *

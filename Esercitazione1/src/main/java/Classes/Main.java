@@ -18,6 +18,7 @@ public class Main {
 
         // Creo le liste di Attività e Persone e inserisco i dati creati
         a.editMember(he, "gianni", "bimbo", "tucan", "123");
+        System.out.println(he.show());
 
         /*
         System.out.println("Persone nella lista:");
