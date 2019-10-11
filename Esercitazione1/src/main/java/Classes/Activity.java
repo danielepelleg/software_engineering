@@ -1,7 +1,5 @@
 package Classes;
 
-import java.lang.*;
-
 /**
  * Activity Class
  * The class has the name of the activity and an array of person registered to it
@@ -10,8 +8,8 @@ import java.lang.*;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Activity {
-    protected String name;
-    protected Person[] PersonArray;
+    private String name;
+    private Person[] PersonArray;
 
     /**
      * Class constructor.

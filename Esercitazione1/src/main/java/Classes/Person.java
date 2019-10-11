@@ -12,11 +12,11 @@ import java.security.NoSuchAlgorithmException;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Person{
-    protected String name;
-    protected String  surname;
-    protected String username;
+    private String name;
+    private String  surname;
+    private String username;
     private String password;
-    protected String hashed_password;
+    private String hashed_password;
 
     /**
      * Class constructor.

@@ -55,7 +55,7 @@ public class Main {
         System.out.println("The admin " + a2.getUsername() + " subscribes the member m2 to the " + bikeRace.getName() + ".\nHere is the subscribers to the activity:\n");
         a2.Subscribe(bikeRace, m2);
         System.out.println(bikeRace.show());
-        System.out.println("The admin " + a1.getUsername() + " unsubscribe the member m2 to the " + bikeRace.getName() + ".\nHere is the subscribers to the activity:\n");
+        System.out.println("The admin " + a1.getUsername() + " unsubscribes the member m2 to the " + bikeRace.getName() + ".\nHere is the subscribers to the activity:\n");
         a1.Unsubscribe(bikeRace, m2);
         System.out.println(bikeRace.show());
         System.out.println("\nThe admin " + a1.getUsername() + " edits the member m1 stats. \n" +
@@ -112,7 +112,7 @@ public class Main {
         System.out.println("------ 3) A member signs up to a Race and to a Course, then unsubscribe to one of them  ------");
         System.out.println(m1.getUsername() + " and " + m3.getUsername() + " both subscribe to " + bikeRace.getName() + " and " + yogaCourse.getName()+".");
         System.out.println("The admin " + a1.getUsername() + " subscribes the member " + m2.getUsername() + " to the " + bikeRace.getName() +
-                " and he signs up to the " + yogaCourse.getName() + "\n");
+                " and Luke signs up to the " + yogaCourse.getName() + "\n");
         m1.Subscribe(bikeRace);
         m1.Subscribe(yogaCourse);
         m3.Subscribe(bikeRace);
@@ -122,9 +122,9 @@ public class Main {
         for (Activity a : activities){
             System.out.println(a.show());
         }
-        System.out.println("\n" + m1.getUsername() + " unsubscribe to " + yogaCourse.getName() + " and " + m3.getUsername() + " unsubscribe to " + bikeRace.getName());
-        System.out.println("The admin " + a2.getUsername() + " unsubscribe the member " + m2.getUsername() + " to " + yogaCourse.getName() +
-                " and he unsubscribe to the " + bikeRace.getName());
+        System.out.println("\n" + m1.getUsername() + " unsubscribes to " + yogaCourse.getName() + " and " + m3.getUsername() + " unsubscribe to " + bikeRace.getName());
+        System.out.println("The admin " + a2.getUsername() + " unsubscribes the member " + m2.getUsername() + " to " + yogaCourse.getName() +
+                " and Luke unsubscribes to the " + bikeRace.getName());
         System.out.println(m2.getUsername() + " subscribes to " + motorRace.getName() + ".\n");
         m1.Unsubscribe(yogaCourse);
         m3.Unsubscribe(bikeRace);
