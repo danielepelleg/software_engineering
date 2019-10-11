@@ -1,4 +1,4 @@
-package Classes;
+package it.unipr.fava_pellegrini;
 
 /**
  * Admin Class - Member Subclass

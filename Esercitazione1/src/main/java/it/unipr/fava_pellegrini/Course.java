@@ -1,4 +1,4 @@
-package Classes;
+package it.unipr.fava_pellegrini;
 
 /**
  * Course Class - Activity Subclass

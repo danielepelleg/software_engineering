@@ -1,4 +1,4 @@
-package Classes;
+package it.unipr.fava_pellegrini;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
