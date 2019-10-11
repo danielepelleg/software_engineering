@@ -22,12 +22,18 @@ public class Main {
         Member m2 = new Member("Luca", "Perini", "Luke", "98765");
         Admin a1 = new Admin("Giacomo", "Neri", "Jack", "hardtoguess");
         Admin a2 = new Admin("Chiara", "Zanetti", "Chicca", "hardtofind");
-        Person[] persons = new Person[]{m1, m2};
+        Person[] persons = new Person[]{a1,a2,m1,m2};
         System.out.println("Created 2 administrators and 2 members:\n");
-        System.out.println(" a" + "1\t"  + a1.show());
-        System.out.println(" a" + "2\t"  + a2.show());
+        int counter1 = 1; int counter2 = 1;
         for (int i = 0; i < persons.length; i++) {
-            System.out.println(" m" + (i + 1) + "\t" + persons[i].show());
+        	if(persons[i].getClass() == Admin.class) {
+        		System.out.println(" a" + counter1 + "\t"  + persons[i].show());
+        		counter1++;
+        	}
+        	else if(persons[i].getClass() == Member.class) {
+        		System.out.println(" m" + counter2 + "\t" + persons[i].show());
+        		counter2++;
+        	}
         }
         Race bikeRace = new Race("Tour de France");
         Course yogaCourse = new Course("Jnana Yoga");
@@ -36,20 +42,17 @@ public class Main {
         for (Activity a : activities) {
             System.out.println(a.show());
         }
-        System.out.print("\nPress ENTER  to continue the simulation\n");
-        try{System.in.read();}catch (Exception e){ System.out.println(e.getMessage());}
-
-
-
-        System.out.println("------ 2a) The admins add, remove and edit members ------");
+        
+        System.out.println("\n------ 2a) The admins add, remove and edit members ------");
         System.out.println("Created 1 new member m3.");
         System.out.println("The admin " + a2.getUsername() + " adds the new member to the persons array. Here is the members:\n");
         Member m3 = new Member("Pietro", "Poli", "Pie", "45678");
         persons = a2.addMember(m3, persons);
         for (int i = 0; i < persons.length; i++) {
+        	if(persons[i].getClass() == Member.class)
             if (i != persons.length-1)
-                System.out.println(" m" + (i + 1) + "\t" + persons[i].show());
-            else System.out.print(" m" + (i + 1) + "\t" + persons[i].show());
+                System.out.println(" m" + (i - 1) + "\t" + persons[i].show());
+            else System.out.print(" m" + (i - 1) + "\t" + persons[i].show());
         }
         System.out.println("   <-- new member!\n");
         System.out.println("The admin " + a2.getUsername() + " subscribes the member m2 to the " + bikeRace.getName() + ".\nHere is the subscribers to the activity:\n");
@@ -67,19 +70,17 @@ public class Main {
         System.out.print(m1.show() + "\t Password: " + m1.getPassword() + "\n");
         System.out.println("\nHere is the members:\n");
         for (int i = 0; i < persons.length; i++) {
-            if (i != 0)
-                System.out.println(" m" + (i + 1) + "\t" + persons[i].show());
-            else{
-                System.out.print(" m" + (i + 1) + "\t" + persons[i].show());
-                System.out.println("   <-- updated member !");
+        	if(persons[i].getClass() == Member.class) {
+        		if (i != 2)
+        			System.out.println(" m" + (i - 1) + "\t" + persons[i].show());
+        		else{
+        			System.out.print(" m" + (i - 1) + "\t" + persons[i].show());
+        			System.out.println("   <-- updated member !");
+        		}
             }
         }
-        System.out.println("\nPress ENTER  to continue the simulation\n");
-        try{System.in.read();}catch (Exception e){ System.out.println(e.getMessage());}
 
-
-
-        System.out.println("------ 2b) The admins add, remove and edit activities ------");
+        System.out.println("\n------ 2b) The admins add, remove and edit activities ------");
         Race motorRace = new Race("GrandPrix F1");
         System.out.println("Created 1 new activity " + motorRace.getName() + ".");
         System.out.println("The admin " + a1.getUsername() + " adds the new activity to the activities array. Here is the activities:\n");
@@ -106,10 +107,8 @@ public class Main {
                 System.out.println("   <-- updated activity !");
             }
         }
-        System.out.println("\nPress ENTER  to continue the simulation");
-        try{System.in.read();}catch (Exception e){ System.out.println(e.getMessage());}
 
-        System.out.println("------ 3) A member signs up to a Race and to a Course, then unsubscribe to one of them  ------");
+        System.out.println("\n------ 3) A member signs up to a Race and to a Course, then unsubscribe to one of them  ------");
         System.out.println(m1.getUsername() + " and " + m3.getUsername() + " both subscribe to " + bikeRace.getName() + " and " + yogaCourse.getName()+".");
         System.out.println("The admin " + a1.getUsername() + " subscribes the member " + m2.getUsername() + " to the " + bikeRace.getName() +
                 " and Luke signs up to the " + yogaCourse.getName() + "\n");
@@ -134,18 +133,19 @@ public class Main {
         for (Activity a : activities){
             System.out.println(a.show());
         }
-        System.out.println("\nPress ENTER  to continue the simulation");
-        try{System.in.read();}catch (Exception e){ System.out.println(e.getMessage());}
-
-
-
+        
         System.out.println("------ 4) Show information about admins, members and activities  ------");
-        System.out.println("Here's the admins:\n");
-        System.out.println(a1.show());
-        System.out.println(a2.show());
         System.out.println("\nHere's the members:\n");
+        counter1 = 1; counter2 = 1;
         for (int i = 0; i < persons.length; i++) {
-            System.out.println(" m" + (i + 1) + "\t" + persons[i].show());
+        	if(persons[i].getClass() == Admin.class) {
+        		System.out.println(" a" + counter1 + "\t"  + persons[i].show());
+        		counter1++;
+        	}
+        	else if(persons[i].getClass() == Member.class) {
+        		System.out.println(" m" + counter2 + "\t" + persons[i].show());
+        		counter2++;
+        	}
         }
         System.out.println("\nHere's the activities:\n");
         for (Activity a : activities){
