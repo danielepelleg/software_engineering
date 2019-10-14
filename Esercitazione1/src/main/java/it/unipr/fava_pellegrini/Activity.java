@@ -47,7 +47,7 @@ public class Activity {
         boolean check = false;
         for (Person pe : p){
             for (Person pa : getPersonArray()){
-                if (pe.getUsername() == pa.getUsername())
+                if (pe.equals(pa))
                     check = true;
             }
         }
@@ -71,13 +71,13 @@ public class Activity {
             Person[] temp = new Person[getPersonArray().length - 1];
             int inserted = 0;
             boolean check = false;
-            for (Integer i = 0; i < getPersonArray().length; i++) {
-                if (getPersonArray()[i].getUsername() == ego.getUsername())
+            for (int i = 0; i < getPersonArray().length; i++) {
+                if (getPersonArray()[i].equals(ego))
                     check = true;
             }
             if (check) {
-                for (Integer i = 0; i < getPersonArray().length; i++) {
-                    if (getPersonArray()[i].getUsername() != ego.getUsername()) {
+                for (int i = 0; i < getPersonArray().length; i++) {
+                    if (!getPersonArray()[i].equals(ego)) {
                         System.arraycopy(getPersonArray(), i, temp, inserted, 1);
                         inserted++;
                     }

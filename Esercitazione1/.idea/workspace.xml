@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aecfe3a9-0463-4a71-b4db-172596b5ea83" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Classes/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Classes/Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Classes/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Classes/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Classes/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Classes/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="3838e5d8-bceb-4582-bbe4-39619f649f02" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +11,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1S0M7YHgXNkjORDm7gH4WMnOuyA" />
+  <component name="ProjectId" id="1S3hn31LUdcaRicEwaFjcNgvCtS" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -27,10 +22,6 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -46,11 +37,11 @@
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Classes.Main" />
-      <module name="Esercitazione1" />
+      <option name="MAIN_CLASS_NAME" value="it.unipr.fava_pellegrini.Main" />
+      <module name="com.unipr.it" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Classes.*" />
+          <option name="PATTERN" value="it.unipr.fava_pellegrini.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -69,14 +60,13 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="aecfe3a9-0463-4a71-b4db-172596b5ea83" name="Default Changelist" comment="" />
-      <created>1570695892607</created>
+      <changelist id="3838e5d8-bceb-4582-bbe4-39619f649f02" name="Default Changelist" comment="" />
+      <created>1570798349758</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1570695892607</updated>
-      <workItem from="1570695894271" duration="657000" />
-      <workItem from="1570697537429" duration="311000" />
-      <workItem from="1570728585877" duration="17765000" />
+      <updated>1570798349758</updated>
+      <workItem from="1570798351292" duration="168000" />
+      <workItem from="1571063680056" duration="2566000" />
     </task>
     <servers />
   </component>

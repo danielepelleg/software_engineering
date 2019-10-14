@@ -25,15 +25,14 @@ public class Main {
         Person[] persons = new Person[]{a1,a2,m1,m2};
         System.out.println("Created 2 administrators and 2 members:\n");
         int counter1 = 1; int counter2 = 1;
-        for (int i = 0; i < persons.length; i++) {
-        	if(persons[i].getClass() == Admin.class) {
-        		System.out.println(" a" + counter1 + "\t"  + persons[i].show());
-        		counter1++;
-        	}
-        	else if(persons[i].getClass() == Member.class) {
-        		System.out.println(" m" + counter2 + "\t" + persons[i].show());
-        		counter2++;
-        	}
+        for (Person person : persons) {
+            if (person.getClass() == Admin.class) {
+                System.out.println(" a" + counter1 + "\t" + person.show());
+                counter1++;
+            } else if (person.getClass() == Member.class) {
+                System.out.println(" m" + counter2 + "\t" + person.show());
+                counter2++;
+            }
         }
         Race bikeRace = new Race("Tour de France");
         Course yogaCourse = new Course("Jnana Yoga");
@@ -137,15 +136,14 @@ public class Main {
         System.out.println("------ 4) Show information about admins, members and activities  ------");
         System.out.println("\nHere's the members:\n");
         counter1 = 1; counter2 = 1;
-        for (int i = 0; i < persons.length; i++) {
-        	if(persons[i].getClass() == Admin.class) {
-        		System.out.println(" a" + counter1 + "\t"  + persons[i].show());
-        		counter1++;
-        	}
-        	else if(persons[i].getClass() == Member.class) {
-        		System.out.println(" m" + counter2 + "\t" + persons[i].show());
-        		counter2++;
-        	}
+        for (Person person : persons) {
+            if (person.getClass() == Admin.class) {
+                System.out.println(" a" + counter1 + "\t" + person.show());
+                counter1++;
+            } else if (person.getClass() == Member.class) {
+                System.out.println(" m" + counter2 + "\t" + person.show());
+                counter2++;
+            }
         }
         System.out.println("\nHere's the activities:\n");
         for (Activity a : activities){

@@ -35,8 +35,8 @@ public class Admin extends Member {
     public Person[] addMember (Member m, Person[] people){
         boolean check = false;
         Person[] member = new Person[]{m};
-        for (Integer i = 0; i < people.length; i++){
-            if (people[i].getUsername() == m.getUsername())
+        for (Person person : people) {
+            if (person.equals(m))
                 check = true;
         }
         if (!check){
@@ -60,14 +60,15 @@ public class Admin extends Member {
     public Person[] deleteMember (Member m, Person[] people) {
         boolean check = false;
         for (Person p : people) {
-            if (p == m)
+            if (p.equals(m)) {
                 check = true;
+            }
         }
         if (check) {
             Person[] temp = new Person[people.length - 1];
             int person_entered = 0;
-            for (Integer i = 0; i < people.length; i++) {
-                if (m.getUsername() != people[i].getUsername()) {
+            for (int i = 0; i < people.length; i++) {
+                if (!m.equals(people[i])) {
                     System.arraycopy(people, i, temp, person_entered, 1);
                     person_entered++;
                 }
@@ -89,8 +90,8 @@ public class Admin extends Member {
     public Activity[] addActivity(Activity a, Activity[] activities){
         boolean check = false;
         Activity[] activity = new Activity[]{a};
-        for (Integer i = 0; i < activities.length; i++){
-            if (activities[i].getName() == a.getName())
+        for (Activity value : activities) {
+            if (value.equals(a))
                 check = true;
         }
         if (!check){
@@ -114,14 +115,15 @@ public class Admin extends Member {
     public Activity[] deleteActivity(Activity a, Activity[] activities){
         boolean check = false;
         for (Activity s : activities) {
-            if (s == a)
+            if (s.equals(a)) {
                 check = true;
+            }
         }
         if (check) {
             Activity[] temp = new Activity[activities.length - 1];
             int inserted = 0;
-            for (Integer i = 0; i < activities.length; i++) {
-                if (a.getName() != activities[i].getName()) {
+            for (int i = 0; i < activities.length; i++) {
+                if (!a.equals(activities[i])) {
                     System.arraycopy(activities, i, temp, inserted, 1);
                     inserted++;
                 }
