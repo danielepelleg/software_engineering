@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3838e5d8-bceb-4582-bbe4-39619f649f02" name="Default Changelist" comment="" />
+    <list default="true" id="3838e5d8-bceb-4582-bbe4-39619f649f02" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Person.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +21,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Chess-Validator" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -38,7 +44,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipr.fava_pellegrini.Main" />
-      <module name="com.unipr.it" />
+      <module name="Esercitazione1" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipr.fava_pellegrini.*" />
@@ -67,6 +73,7 @@
       <updated>1570798349758</updated>
       <workItem from="1570798351292" duration="168000" />
       <workItem from="1571063680056" duration="2566000" />
+      <workItem from="1571080238894" duration="679000" />
     </task>
     <servers />
   </component>
