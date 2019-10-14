@@ -4,6 +4,7 @@
 *.xml
 *.classpath
 *.project
+*.workspace
 
 # Log file
 *.log

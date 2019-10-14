@@ -1,5 +1,9 @@
 # Sport-Club-
-The program runs a sport club, using inheritance and composition. The club is managed as a group of people and activity. When the classes are implemented, the program runs a simple simulation. Maven Project
+The program runs a sport club, using inheritance and composition. The club is managed in the Main() Class as a group of people and activity. The program runs, through different steps, a simple simulation, testing the classes and the methods created.
+
+
+
+Maven Project
 
 ### Contributors
 

@@ -13,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Person{
     private String name;
-    private String  surname;
+    private String surname;
     private String username;
     private String password;
     private String hashed_password;

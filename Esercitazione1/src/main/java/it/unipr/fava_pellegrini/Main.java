@@ -3,7 +3,6 @@ package it.unipr.fava_pellegrini;
 /**
  * Main Class
  * Test, through a simulation, the classes and methods created
- * Every step is ended by an ENTER input
  *
  * 1)   Create initial arrays of Admin, Members and Activity
  * 2a)  The admins add, remove and edit members
