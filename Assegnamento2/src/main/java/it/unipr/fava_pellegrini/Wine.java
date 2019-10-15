@@ -4,19 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Wine Class
+ * Each wine has the name, the year of production, the data sheet, a list
+ * containing the vineyard from which it comes from, and the available amount.
  *
  */
 public class Wine {
     private String name;
     private int year;
     private String notes;
-    private List<String>  vines = new ArrayList<String>();
+    private List<String>  vineyards = new ArrayList<String>();
+    private int amount;
 
     public Wine(String name, int year, String notes, List<String>  vines) {
         this.name = name;
         this.year = year;
         this.notes = notes;
-        this.vines = vines;
+        this.vineyards = vines;
     }
 
     public String getName() {
@@ -43,20 +47,24 @@ public class Wine {
         this.notes = notes;
     }
 
-    public List<String> getVines() {
-        return vines;
+    public List<String> getVineyards() {
+        return vineyards;
     }
 
-    public void setVines(List<String> vines) {
-        this.vines = vines;
+    public void setAmount(int amount) {this.amount = amount; }
+
+    public int getAmount() { return amount; }
+
+    public void setVineyards(List<String> vines) {
+        this.vineyards = vines;
     }
 
     @Override
     public String toString(){
         String show = "Name: " + getName() + " Year: " + getYear() + " Notes: " + getNotes() + "\n Vines List:\n";
-        for (String s : getVines()){
+        for (String s : getVineyards()){
             show += " " + s + "\n";
         }
-        return show;
+        return show += " Amount: " + getAmount() + "\n";
     }
 }

@@ -48,12 +48,8 @@ public class Client extends Person {
      */
     public String searchWine(Winehouse store, String wine_name, int wine_year){
         List<Wine> result = store.searchWine(wine_name, wine_year);
-        int quantity = 0;
-        for(Wine v : result){
-            quantity++;
-        }
         if (!result.isEmpty()){
-            return result.get(0).toString()  + "\n Quantity: " + quantity + "\n";
+            return result.get(0).toString();
         }
         else
             return " There are no wines with these characteristics";
