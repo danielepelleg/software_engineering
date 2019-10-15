@@ -3,16 +3,26 @@
   <component name="ChangeListManager">
     <list default="true" id="be49cbad-0e3d-4b08-9158-187ade4ec3f6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Wine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Wine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Winehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Winehouse.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -28,7 +38,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/pom.xml" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/.idea/misc.xml&#10;C:/Users/Daniele/source/repos/software_engineering/Assegnamento2/pom.xml&#10;C:/Users/Daniele/source/repos/software_engineering/Assegnamento2/.idea/vcs.xml&#10;C:/Users/Daniele/source/repos/software_engineering/Assegnamento2/.idea/compiler.xml" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Assegnamento1" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -110,7 +120,7 @@
       <option name="presentableId" value="Default" />
       <updated>1571132972353</updated>
       <workItem from="1571132976353" duration="9980000" />
-      <workItem from="1571152892547" duration="4398000" />
+      <workItem from="1571152892547" duration="4691000" />
     </task>
     <servers />
   </component>
