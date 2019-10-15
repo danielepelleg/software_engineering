@@ -1,7 +1,6 @@
 # Compiled class file
 *.class
-*.iml 
-*.xml
+*.imlU
 *.classpath
 *.project
 *.workspace
