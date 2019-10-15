@@ -1,3 +1,5 @@
+package it.unipr.fava_pellegrini;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +23,14 @@ public class Main {
         vines_w1.add("Gingio");
         vines_w1.add("Giangio");
         Wine w1 = new Wine("Nero", 1989, "Buono", vines_w1);
+        Wine w2 = new Wine("Nero", 1989, "Buono", vines_w1);
+        Wine w3 = new Wine("Bianco", 1999, "Cattivo", vines_w1);
         Client c1 = new Client("Tommaso", "Gaspari", "Tommy", "1234");
         c1.Registration(house);
+        house.addWine(w1);
+        house.addWine(w2);
+        house.addWine(w3);
         System.out.println(c1.searchWine(house, w1.getName(), w1.getYear()));
+        System.out.println(c1.searchWine(house, w3.getName(), w3.getYear()));
     }
 }

@@ -1,11 +1,19 @@
+package it.unipr.fava_pellegrini;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 public class Winehouse {
-    private ArrayList<Wine> wines;
-    private ArrayList<Person> users;
-    private LinkedHashMap<Person, List<Wine>> orders;
+    public ArrayList<Wine> wines;
+    public ArrayList<Person> users;
+    public LinkedHashMap<Person, List<Wine>> orders;
+
+    Winehouse(){
+        this.wines = new ArrayList<Wine>();
+        this.users = new ArrayList<Person>();
+        this.orders = new LinkedHashMap<Person, List<Wine>>();
+    };
 
     public ArrayList<Wine> getWines() {
         return wines;
@@ -31,11 +39,13 @@ public class Winehouse {
         this.orders = orders;
     }
 
-    public Winehouse(){
-        ArrayList<Wine> wines = new ArrayList<Wine>();
-        ArrayList<Person> users = new ArrayList<Person>();
-        LinkedHashMap<Person, List<Wine>> orders = new LinkedHashMap<Person, List<Wine>>();
-    };
+    public void Registration(Person newPerson){
+        getUsers().add(newPerson);
+    }
+
+    public void addWine(Wine newWine){
+        wines.add(newWine);
+    }
 
     public List<Wine> searchWine(String n, int y) {
         ArrayList<Wine> result = new ArrayList<Wine>();
@@ -44,9 +54,5 @@ public class Winehouse {
                 result.add(w);
         }
         return result;
-    }
-
-    public void Registration(Person p){
-        getUsers().add(p);
     }
 }

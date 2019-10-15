@@ -1,3 +1,5 @@
+package it.unipr.fava_pellegrini;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,9 +53,9 @@ public class Wine {
 
     @Override
     public String toString(){
-        String show = " Name: " + getName() + " Year: " + getYear() + " Notes: " + getNotes() + "\n Vines List:\n";
+        String show = "Name: " + getName() + " Year: " + getYear() + " Notes: " + getNotes() + "\n Vines List:\n";
         for (String s : getVines()){
-            show += s + "\n";
+            show += " " + s + "\n";
         }
         return show;
     }
