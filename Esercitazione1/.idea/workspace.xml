@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3838e5d8-bceb-4582-bbe4-39619f649f02" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Admin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Person.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,15 +18,20 @@
   <component name="ProjectId" id="1S3hn31LUdcaRicEwaFjcNgvCtS" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Chess-Validator" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -73,7 +77,9 @@
       <updated>1570798349758</updated>
       <workItem from="1570798351292" duration="168000" />
       <workItem from="1571063680056" duration="2566000" />
-      <workItem from="1571080238894" duration="679000" />
+      <workItem from="1571080238894" duration="1321000" />
+      <workItem from="1571129248397" duration="1266000" />
+      <workItem from="1571130538907" duration="1857000" />
     </task>
     <servers />
   </component>
