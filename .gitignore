@@ -1,10 +1,10 @@
 # Compiled class file
 *.class
-*.iml 
-*.xml
+*.imlU
 *.classpath
 *.project
 *.workspace
+*.xml
 
 # Log file
 *.log
@@ -30,3 +30,7 @@ hs_err_pid*
 /target/
 !/Assegnamento1/.idea/workspace.xml
 !/Assegnamento2/.idea/workspace.xml
+!/Assegnamento2/.idea/workspace.xml
+!/Assegnamento2/.idea/compiler.xml
+!/Assegnamento2/.idea/misc.xml
+!/Assegnamento2/.idea/vcs.xml
