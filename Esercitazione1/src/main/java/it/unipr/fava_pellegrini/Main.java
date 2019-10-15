@@ -13,7 +13,6 @@ package it.unipr.fava_pellegrini;
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
-
 public class Main {
     public static void main(String[] args){
         System.out.println("------ 1) Create initial arrays of Admin, Members and Activity ------");
