@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="it.unipr.fava_pellegrini" />
+        <module name="Assegnamento2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Assegnamento2" target="12" />
       <module name="it.unipr.fava_pellegrini" target="12" />
     </bytecodeTargetLevel>
   </component>
