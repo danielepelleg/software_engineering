@@ -7,15 +7,16 @@ import java.util.List;
 /**
  * Winehouse Class
  * The Wine Store (Database). It has the list of all wines available, the list of the persons registered,
- * and a list which contains every order a client does.
+ * a list containing every request of a customer and a list which contains every order successfully elaborated.
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 
 public class Winehouse {
-    private ArrayList<Wine> wines;
+    private LinkedHashMap<Wine, Integer> wines;
     private ArrayList<Person> users;
+    private LinkedHashMap<Person, List<Wine>> request;
     private LinkedHashMap<Person, List<Wine>> orders;
 
     /**
@@ -25,16 +26,17 @@ public class Winehouse {
      *
      */
     Winehouse(){
-        this.wines = new ArrayList<Wine>();
+        this.wines = new LinkedHashMap<Wine, Integer>();
         this.users = new ArrayList<Person>();
+        this.request = new LinkedHashMap<Person, List<Wine>>();
         this.orders = new LinkedHashMap<Person, List<Wine>>();
     };
 
-    public ArrayList<Wine> getWines() {
+    public LinkedHashMap<Wine, Integer> getWines() {
         return wines;
     }
 
-    public void setWines(ArrayList<Wine> wines) {
+    public void setWines(LinkedHashMap<Wine, Integer> wines) {
         this.wines = wines;
     }
 
@@ -44,6 +46,14 @@ public class Winehouse {
 
     public void setUsers(ArrayList<Person> users) {
         this.users = users;
+    }
+
+    public LinkedHashMap<Person, List<Wine>> getRequest() {
+        return request;
+    }
+
+    public void setRequest(LinkedHashMap<Person, List<Wine>> request) {
+        this.request = request;
     }
 
     public LinkedHashMap<Person, List<Wine>> getOrders() {
@@ -69,7 +79,18 @@ public class Winehouse {
      * @param newWine the wine to add to the store
      */
     public void addWine(Wine newWine){
-        wines.add(newWine);
+        wines.put(newWine, newWine.getAmount());
+    }
+
+    /**
+     * Add a wine to the request list.
+     *
+     * @param buyerClient the client who makes the request
+     * @param requestedWine the requested Wine
+     */
+    public void requestWine(Client buyerClient, Wine requestedWine){
+        request.put(buyerClient, buyerClient.getCart());
+        buyerClient.getCart().clear();
     }
 
     /**
@@ -82,10 +103,25 @@ public class Winehouse {
      */
     public List<Wine> searchWine(String wine_name, int wine_year) {
         ArrayList<Wine> result = new ArrayList<Wine>();
-        for (Wine w : getWines()) {
+        for (Wine w : getWines().keySet()) {
             if (w.getName().equals(wine_name) && w.getYear() == wine_year)
                 result.add(w);
         }
         return result;
+    }
+
+    /**
+     * Check the availability of the wine requested
+     *
+     * @param checkWine wine to check whether is in the store
+     *
+     * @return boolean value, true if present - false if not present
+     */
+    public boolean checkAvailability(Wine checkWine) {
+        for (Wine w : getWines().keySet()) {
+            if (w.equals(checkWine) && w.getAmount() != 0)
+                return true;
+        }
+        return false;
     }
 }

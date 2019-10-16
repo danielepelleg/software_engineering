@@ -16,11 +16,12 @@ public class Wine {
     private List<String>  vineyards = new ArrayList<String>();
     private int amount;
 
-    public Wine(String name, int year, String notes, List<String>  vines) {
+    public Wine(String name, int year, String notes, List<String>  vines, int amount) {
         this.name = name;
         this.year = year;
         this.notes = notes;
         this.vineyards = vines;
+        this.amount = amount;
     }
 
     public String getName() {
