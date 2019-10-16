@@ -29,6 +29,6 @@ public class Main {
         c1.buyWine(house, w1);
         System.out.println(c1.getCart());
         System.out.println(w1);
-        
+
     }
 }

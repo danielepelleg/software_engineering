@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f6b9c24-bfd9-464c-84ab-7a2b217bfd50" name="Default Changelist" comment="" />
+    <list default="true" id="5f6b9c24-bfd9-464c-84ab-7a2b217bfd50" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Winehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Winehouse.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571232697555</updated>
-      <workItem from="1571232701634" duration="1422000" />
+      <workItem from="1571232701634" duration="4020000" />
     </task>
     <servers />
   </component>
