@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f6b9c24-bfd9-464c-84ab-7a2b217bfd50" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unipr/fava_pellegrini/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="5f6b9c24-bfd9-464c-84ab-7a2b217bfd50" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
