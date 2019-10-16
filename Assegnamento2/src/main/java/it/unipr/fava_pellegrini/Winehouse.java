@@ -1,6 +1,7 @@
 package it.unipr.fava_pellegrini;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -16,8 +17,8 @@ import java.util.List;
 public class Winehouse {
     private ArrayList<Wine> wines;
     private ArrayList<Person> users;
-    private LinkedHashMap<Client, List<Wine>> request;
-    private LinkedHashMap<Client, List<Wine>> orders;
+    private LinkedHashMap<Client, HashMap<Wine, Integer>> request;
+    private LinkedHashMap<Client, HashMap<Wine, Integer>> orders;
 
     /**
      * Class constructor.
@@ -28,8 +29,8 @@ public class Winehouse {
     Winehouse(){
         this.wines = new ArrayList<Wine>();
         this.users = new ArrayList<Person>();
-        this.request = new LinkedHashMap<Client, List<Wine>>();
-        this.orders = new LinkedHashMap<Client, List<Wine>>();
+        this.request = new LinkedHashMap<Client, HashMap<Wine, Integer>>();
+        this.orders = new LinkedHashMap<Client, HashMap<Wine, Integer>>();
     };
 
     public ArrayList<Wine> getWines() {
@@ -48,19 +49,19 @@ public class Winehouse {
         this.users = users;
     }
 
-    public LinkedHashMap<Client, List<Wine>> getRequest() {
+    public LinkedHashMap<Client, HashMap<Wine, Integer>> getRequest() {
         return request;
     }
 
-    public void setRequest(LinkedHashMap<Client, List<Wine>> request) {
+    public void setRequest(LinkedHashMap<Client, HashMap<Wine, Integer>> request) {
         this.request = request;
     }
 
-    public LinkedHashMap<Client, List<Wine>> getOrders() {
+    public LinkedHashMap<Client, HashMap<Wine, Integer>> getOrders() {
         return orders;
     }
 
-    public void setOrders(LinkedHashMap<Client, List<Wine>> orders) {
+    public void setOrders(LinkedHashMap<Client, HashMap<Wine, Integer>> orders) {
         this.orders = orders;
     }
 
@@ -88,9 +89,10 @@ public class Winehouse {
      * @param buyerClient the client who makes the request
      * @param requestedWine the requested Wine
      */
-    public void requestWine(Client buyerClient, Wine requestedWine, int quantityWine){
-        request.put(buyerClient, buyerClient.getCart());
-        buyerClient.getCart().clear();
+    public void requestWine(Client buyerClient, Wine requestedWine, int bottles){
+        HashMap winesList = new HashMap();
+        winesList.put(requestedWine,bottles);
+        request.put(buyerClient, winesList);
     }
 
     /**
@@ -117,11 +119,22 @@ public class Winehouse {
      *
      * @return boolean value, true if present - false if not present
      */
-    public boolean checkAvailability(Wine checkWine, int checkQuantity) {
-        for (Wine w : getWines()) {
-            if (w.equals(checkWine) && w.getAmount() >= checkQuantity)
-                return true;
+    public boolean checkAvailability(HashMap<Wine,Integer> checkList) {
+        for (Wine w : getWines().keySet()) {
+            for (Wine w1 : checkList.keySet()){
+                if (w.equals(w1) && getWines().get(w) >= checkList.get(w1)){
+                    return true;
+                }
+            }
         }
         return false;
+    }
+
+    public void manageRequest(Admin admin){
+        for (Client c : getRequest().keySet()){
+            if(checkAvailability(getRequest().get(c))){
+
+            }
+        }
     }
 }

@@ -14,14 +14,14 @@ public class Wine {
     private int year;
     private String notes;
     private List<String>  vineyards = new ArrayList<String>();
-    private int amount;
+    private int bottleAmount;
 
-    public Wine(String name, int year, String notes, List<String>  vines, int amount) {
+    public Wine(String name, int year, String notes, List<String>  vines, int bottleAmount) {
         this.name = name;
         this.year = year;
         this.notes = notes;
         this.vineyards = vines;
-        this.amount = amount;
+        this.bottleAmount = bottleAmount;
     }
 
     public String getName() {
@@ -52,9 +52,9 @@ public class Wine {
         return vineyards;
     }
 
-    public void setAmount(int amount) {this.amount = amount; }
+    public void setBottleAmount(int amount) {this.bottleAmount = amount; }
 
-    public int getAmount() { return amount; }
+    public int getBottleAmount() { return bottleAmount; }
 
     public void setVineyards(List<String> vines) {
         this.vineyards = vines;
@@ -66,6 +66,6 @@ public class Wine {
         for (String s : getVineyards()){
             show += " " + s + "\n";
         }
-        return show += " Amount: " + getAmount() + "\n";
+        return show += " Amount: " + getBottleAmount() + "\n";
     }
 }

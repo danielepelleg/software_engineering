@@ -76,18 +76,7 @@ public class Client extends Person {
      * @param buyWine the wine to buy
      *
      */
-    public void buyWine(Winehouse store, Wine buyWine, int buyQuantity){
-        store.requestWine(Client.this, buyWine, buyQuantity);
-        /*if(store.checkAvailability(buyWine, buyQuantity)){
-            List<Wine> newCart = new ArrayList<Wine>();
-            for (Wine w : this.cart){
-                newCart.add(w);
-            }
-            newCart.add(buyWine);
-            store.requestWine(Client.this, buyWine, buyQuantity);
-            setCart(newCart);
-            buyWine.setAmount(buyWine.getAmount()-1);
-        }
-        else System.out.println("This wine is not available at the moment.");*/
+    public void buyWine(Winehouse store, Wine buyWine, int bottles){
+        store.requestWine(Client.this, buyWine, bottles);
     }
 }
