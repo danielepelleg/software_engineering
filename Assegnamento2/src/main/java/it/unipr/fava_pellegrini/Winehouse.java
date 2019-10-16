@@ -1,6 +1,7 @@
 package it.unipr.fava_pellegrini;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -14,10 +15,10 @@ import java.util.List;
  */
 
 public class Winehouse {
-    private LinkedHashMap<Wine, Integer> wines;
+    private ArrayList<Wine> wines;
     private ArrayList<Person> users;
-    private LinkedHashMap<Person, List<Wine>> request;
-    private LinkedHashMap<Person, List<Wine>> orders;
+    private LinkedHashMap<Client, HashMap<Wine, Integer>> request;
+    private LinkedHashMap<Client, HashMap<Wine, Integer>> orders;
 
     /**
      * Class constructor.
@@ -26,17 +27,17 @@ public class Winehouse {
      *
      */
     Winehouse(){
-        this.wines = new LinkedHashMap<Wine, Integer>();
+        this.wines = new ArrayList<Wine>();
         this.users = new ArrayList<Person>();
-        this.request = new LinkedHashMap<Person, List<Wine>>();
-        this.orders = new LinkedHashMap<Person, List<Wine>>();
+        this.request = new LinkedHashMap<Client, HashMap<Wine, Integer>>();
+        this.orders = new LinkedHashMap<Client, HashMap<Wine, Integer>>();
     };
 
-    public LinkedHashMap<Wine, Integer> getWines() {
+    public ArrayList<Wine> getWines() {
         return wines;
     }
 
-    public void setWines(LinkedHashMap<Wine, Integer> wines) {
+    public void setWines(ArrayList<Wine> wines) {
         this.wines = wines;
     }
 
@@ -48,19 +49,19 @@ public class Winehouse {
         this.users = users;
     }
 
-    public LinkedHashMap<Person, List<Wine>> getRequest() {
+    public LinkedHashMap<Client, HashMap<Wine, Integer>> getRequest() {
         return request;
     }
 
-    public void setRequest(LinkedHashMap<Person, List<Wine>> request) {
+    public void setRequest(LinkedHashMap<Client, HashMap<Wine, Integer>> request) {
         this.request = request;
     }
 
-    public LinkedHashMap<Person, List<Wine>> getOrders() {
+    public LinkedHashMap<Client, HashMap<Wine, Integer>> getOrders() {
         return orders;
     }
 
-    public void setOrders(LinkedHashMap<Person, List<Wine>> orders) {
+    public void setOrders(LinkedHashMap<Client, HashMap<Wine, Integer>> orders) {
         this.orders = orders;
     }
 
@@ -79,7 +80,7 @@ public class Winehouse {
      * @param newWine the wine to add to the store
      */
     public void addWine(Wine newWine){
-        wines.put(newWine, newWine.getAmount());
+        wines.add(newWine);
     }
 
     /**
@@ -88,9 +89,10 @@ public class Winehouse {
      * @param buyerClient the client who makes the request
      * @param requestedWine the requested Wine
      */
-    public void requestWine(Client buyerClient, Wine requestedWine){
-        request.put(buyerClient, buyerClient.getCart());
-        buyerClient.getCart().clear();
+    public void requestWine(Client buyerClient, Wine requestedWine, int bottles){
+        HashMap winesList = new HashMap();
+        winesList.put(requestedWine,bottles);
+        request.put(buyerClient, winesList);
     }
 
     /**
@@ -103,7 +105,7 @@ public class Winehouse {
      */
     public List<Wine> searchWine(String wine_name, int wine_year) {
         ArrayList<Wine> result = new ArrayList<Wine>();
-        for (Wine w : getWines().keySet()) {
+        for (Wine w : getWines()) {
             if (w.getName().equals(wine_name) && w.getYear() == wine_year)
                 result.add(w);
         }
@@ -117,11 +119,22 @@ public class Winehouse {
      *
      * @return boolean value, true if present - false if not present
      */
-    public boolean checkAvailability(Wine checkWine) {
+    public boolean checkAvailability(HashMap<Wine,Integer> checkList) {
         for (Wine w : getWines().keySet()) {
-            if (w.equals(checkWine) && w.getAmount() != 0)
-                return true;
+            for (Wine w1 : checkList.keySet()){
+                if (w.equals(w1) && getWines().get(w) >= checkList.get(w1)){
+                    return true;
+                }
+            }
         }
         return false;
+    }
+
+    public void manageRequest(Admin admin){
+        for (Client c : getRequest().keySet()){
+            if(checkAvailability(getRequest().get(c))){
+
+            }
+        }
     }
 }
