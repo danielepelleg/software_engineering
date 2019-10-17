@@ -28,7 +28,7 @@
 *.rar:
 
 # Intellij
-/Assegnamento2/.idea/
+/Assegnamento2/.idea/*
 *.iml
 *.iws
 /Assegnamento2/*.xml
