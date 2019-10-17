@@ -15,6 +15,9 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
 # Package Files #
 *.jar
 *.war
@@ -24,14 +27,28 @@
 *.tar.gz
 *.rar
 
+# Intellij
+Assegnamento2/.idea/
+*.iml
+*.iws
+
+# Eclipse
+.classpath
+.project
+.settings/
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-/target/
-!/Assegnamento1/.idea/workspace.xml
-!/Assegnamento2/.idea/workspace.xml
-!/Assegnamento2/.idea/compiler.xml
-!/Assegnamento2/.idea/misc.xml
-!/Assegnamento2/.idea/vcs.xml
-!/Assegnamento2/.idea/
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+
+
+
+
 
