@@ -15,21 +15,22 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Winehouse {
     private ArrayList<Wine> wines;
     private ArrayList<Person> users;
-    private LinkedHashMap<Client, HashMap<Wine, Integer>> request;
-    private LinkedHashMap<Client, HashMap<Wine, Integer>> orders;
+    private ArrayList<Order> request;
+    private ArrayList<Order> orders;
 
     /**
      * Class constructor.
-     *
+     * <p>
      * Once the Constructor is called it generates the list to manage the wine store.
-     *
      */
-    Winehouse(){
+    Winehouse() {
         this.wines = new ArrayList<Wine>();
         this.users = new ArrayList<Person>();
-        this.request = new LinkedHashMap<Client, HashMap<Wine, Integer>>();
+        this.request = new ArrayList<Order>();
         this.orders = new LinkedHashMap<Client, HashMap<Wine, Integer>>();
-    };
+    }
+
+    ;
 
     public ArrayList<Wine> getWines() {
         return wines;
@@ -68,7 +69,7 @@ public class Winehouse {
      *
      * @param newPerson the person to register to the database
      */
-    public void Registration(Person newPerson){
+    public void Registration(Person newPerson) {
         getUsers().add(newPerson);
     }
 
@@ -77,20 +78,20 @@ public class Winehouse {
      *
      * @param newWine the wine to add to the store
      */
-    public void addWine(Wine newWine){
+    public void addWine(Wine newWine) {
         wines.add(newWine);
     }
 
     /**
      * Add a wine to the request list.
      *
-     * @param buyerClient the client who makes the request
+     * @param buyerClient   the client who makes the request
      * @param requestedWine the requested Wine
-     * @param bottles the amount of bottles to add
+     * @param bottles       the amount of bottles to add
      */
-    public void requestWine(Client buyerClient, Wine requestedWine, int bottles){
+    public void requestWine(Client buyerClient, Wine requestedWine, int bottles) {
         HashMap requestList = new HashMap();
-        requestList.put(requestedWine,bottles);
+        requestList.put(requestedWine, bottles);
         request.put(buyerClient, requestList);
     }
 
@@ -98,8 +99,8 @@ public class Winehouse {
      * Add a wine to the order list.
      *
      * @param buyerClient the client who makes the order
-     * @param orderWine the Wine to order
-     * @param bottles the amount of bottles to add
+     * @param orderWine   the Wine to order
+     * @param bottles     the amount of bottles to add
      */
     public void orderWine(Client buyerClient, Wine orderWine, int bottles) {
         HashMap orderList = new HashMap();
@@ -112,7 +113,6 @@ public class Winehouse {
      *
      * @param wine_name name of the wine to search
      * @param wine_year year of the wine to search
-     *
      * @return the list containing the wines you searched
      */
     public List<Wine> searchWine(String wine_name, int wine_year) {
@@ -128,7 +128,6 @@ public class Winehouse {
      * Check the availability of the wine requested
      *
      * @param checkWine wine to check whether is in the store
-     *
      * @return boolean value, true if present - false if not present
      */
     /*public boolean checkAvailability(HashMap<Wine,Integer> checkList) {
@@ -143,32 +142,14 @@ public class Winehouse {
     }*/
     public boolean checkAvailability(Wine checkWine, int wineQuantity) {
         for (Wine w : getWines()) {
-            if (w.equals(checkWine) && w.getBottleAmount() >= wineQuantity){
-                    return true;
-                }
+            if (w.equals(checkWine) && w.getBottleAmount() >= wineQuantity) {
+                return true;
             }
+        }
         return false;
     }
 
 
-    public boolean manageRequest(Client checkClient){
-        /*
-        this.request.forEach((key, value) -> {
-            if (key.equals(checkClient)) {
-                value.forEach((key2, value2) -> {
-                    if (checkAvailability(key2, value2)) {
-                    }
-                });
-            }
-        });
-        return false;
-         */
-        HashMap<Client, HashMap<Wine, Integer>> map = this.request;
-        for (HashMap.Entry<Client, HashMap<Wine, Integer>> entry : map.entrySet()) {
-            Client key = entry.getKey();
-            HashMap<Wine, Integer> value = entry.getValue();
-            for(HashMap<Wine, Integer> entry2 : entry.getValue());
-            // ...
-        }
+    public void manageRequest(Client checkClient) {
     }
 }
