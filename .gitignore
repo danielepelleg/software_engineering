@@ -25,12 +25,8 @@
 *.ear
 *.zip
 *.tar.gz
-*.rar
+*.rar:
 
-# Intellij
-Assegnamento2/.idea/
-*.iml
-*.iws
 
 # Eclipse
 .classpath
