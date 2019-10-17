@@ -21,6 +21,7 @@ public class Main {
         Wine w1 = new Wine("Nero", 1989, "Buono", vines_w1, 3);
         Wine w2 = new Wine("Bianco", 1999, "Cattivo", vines_w1, 2);
         Client c1 = new Client("Tommaso", "Gaspari", "Tommy", "1234");
+        Admin a1 = new Admin("Tommaso", "Gaspari", "Tommy", "1234");
         c1.Registration(house);
         Bottle b1 = new Bottle(w1, 4);
         Bottle b2 = new Bottle(w2, 2);
@@ -30,6 +31,8 @@ public class Main {
         System.out.println(c1.searchWine(house, w1.getName(), w1.getYear()));
         System.out.println(c1.searchWine(house, w2.getName(), w2.getYear()));
         c1.buyWine(house, w1, 8);
+        a1.sellWine(house, house.getOrders().get(0));
+        a1.deleteOrder(house, house.getOrders().get(0));
 
     }
 }

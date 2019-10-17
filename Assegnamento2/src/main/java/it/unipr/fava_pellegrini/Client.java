@@ -96,6 +96,7 @@ public class Client extends Person {
      *
      */
     public void buyWine(Winehouse store, Wine buyWine, int bottles) throws IOException, InterruptedException {
+        /*
         if(store.checkAvailability(buyWine, bottles)) {
             Order newOrder = new Order(Client.this, buyWine, bottles);
             store.addOrder(newOrder);
@@ -135,6 +136,17 @@ public class Client extends Person {
                     }
                 }
             }
+        }*/
+        Order newOrder = new Order(Client.this, buyWine, bottles);
+        store.addOrder(newOrder);
+        System.out.println("Your order is being processed please wait");
+        String anim= "|/-\\";
+        for (int x =0 ; x <= 100 ; x++) {
+            String data = "\r" + anim.charAt(x % anim.length()) + " " + x;
+            System.out.write(data.getBytes());
+            Thread.sleep(30);
         }
+        System.out.println("\tDone! \nYour order has been added successfully!\n");
+        System.out.println(newOrder.toString());
     }
 }
