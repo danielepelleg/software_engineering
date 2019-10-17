@@ -28,11 +28,11 @@
 *.rar:
 
 # Intellij
-Assegnamento2/.idea/
+/Assegnamento2/.idea/
 *.iml
 *.iws
-Assegnamento2/*.xml
-Assegnamento2/*.iml
+/Assegnamento2/*.xml
+/Assegnamento2/*.iml
 
 # Eclipse
 .classpath
