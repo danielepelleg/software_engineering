@@ -26,7 +26,7 @@ public class Main {
         //house.addWine(w3);
         System.out.println(c1.searchWine(house, w1.getName(), w1.getYear()));
         System.out.println(c1.searchWine(house, w2.getName(), w2.getYear()));
-        c1.buyWine(house, w1);
+        c1.buyWine(house, w1, 2);
         System.out.println(c1.getCart());
         System.out.println(w1);
 

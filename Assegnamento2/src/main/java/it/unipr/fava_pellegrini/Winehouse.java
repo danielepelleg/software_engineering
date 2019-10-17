@@ -1,9 +1,7 @@
 package it.unipr.fava_pellegrini;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Winehouse Class
@@ -88,11 +86,25 @@ public class Winehouse {
      *
      * @param buyerClient the client who makes the request
      * @param requestedWine the requested Wine
+     * @param bottles the amount of bottles to add
      */
     public void requestWine(Client buyerClient, Wine requestedWine, int bottles){
-        HashMap winesList = new HashMap();
-        winesList.put(requestedWine,bottles);
-        request.put(buyerClient, winesList);
+        HashMap requestList = new HashMap();
+        requestList.put(requestedWine,bottles);
+        request.put(buyerClient, requestList);
+    }
+
+    /**
+     * Add a wine to the order list.
+     *
+     * @param buyerClient the client who makes the order
+     * @param orderWine the Wine to order
+     * @param bottles the amount of bottles to add
+     */
+    public void orderWine(Client buyerClient, Wine orderWine, int bottles) {
+        HashMap orderList = new HashMap();
+        orderList.put(orderWine, bottles);
+        orders.put(buyerClient, orderList);
     }
 
     /**
@@ -119,22 +131,44 @@ public class Winehouse {
      *
      * @return boolean value, true if present - false if not present
      */
-    public boolean checkAvailability(HashMap<Wine,Integer> checkList) {
-        for (Wine w : getWines().keySet()) {
+    /*public boolean checkAvailability(HashMap<Wine,Integer> checkList) {
+        for (Wine w : getWines()) {
             for (Wine w1 : checkList.keySet()){
-                if (w.equals(w1) && getWines().get(w) >= checkList.get(w1)){
+                if (w.equals(w1) && w.getBottleAmount() >= checkList.get(w1)){
                     return true;
                 }
             }
         }
         return false;
+    }*/
+    public boolean checkAvailability(Wine checkWine, int wineQuantity) {
+        for (Wine w : getWines()) {
+            if (w.equals(checkWine) && w.getBottleAmount() >= wineQuantity){
+                    return true;
+                }
+            }
+        return false;
     }
 
-    public void manageRequest(Admin admin){
-        for (Client c : getRequest().keySet()){
-            if(checkAvailability(getRequest().get(c))){
 
+    public boolean manageRequest(Client checkClient){
+        /*
+        this.request.forEach((key, value) -> {
+            if (key.equals(checkClient)) {
+                value.forEach((key2, value2) -> {
+                    if (checkAvailability(key2, value2)) {
+                    }
+                });
             }
+        });
+        return false;
+         */
+        HashMap<Client, HashMap<Wine, Integer>> map = this.request;
+        for (HashMap.Entry<Client, HashMap<Wine, Integer>> entry : map.entrySet()) {
+            Client key = entry.getKey();
+            HashMap<Wine, Integer> value = entry.getValue();
+            for(HashMap<Wine, Integer> entry2 : entry.getValue());
+            // ...
         }
     }
 }
