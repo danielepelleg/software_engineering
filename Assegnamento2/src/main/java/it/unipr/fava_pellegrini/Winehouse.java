@@ -83,23 +83,21 @@ public class Winehouse {
     }
 
     /**
-     * Add a wine to the request list.
+     * Add a order to the request list.
      *
-     * @param buyerClient   the client who makes the request
-     * @param requestedWine the requested Wine
-     * @param bottles       the amount of bottles to add
+     * @param newRequest Request (Order obj) to add
      */
-    public void requestWine(Client buyerClient, Wine requestedWine, int bottles) {
+    public void addRequest(Order newRequest) {
+        this.request.add(newRequest);
     }
 
     /**
-     * Add a wine to the order list.
+     * Add a order to the order list.
      *
-     * @param buyerClient the client who makes the order
-     * @param orderWine   the Wine to order
-     * @param bottles     the amount of bottles to add
+     * @param newOrder Order to add
      */
-    public void orderWine(Client buyerClient, Wine orderWine, int bottles) {
+    public void addOrder(Order newOrder) {
+        this.orders.add(newOrder);
     }
 
     /**
@@ -122,9 +120,16 @@ public class Winehouse {
      * Check the availability of the wine requested
      *
      * @param checkWine wine to check whether is in the store
+     * @param bottleAmount the amount of bottle to check the availability
+     *
      * @return boolean value, true if present - false if not present
      */
-    public void checkAvailability(Wine checkWine, int wineQuantity) {
+    public boolean checkAvailability(Wine checkWine, int bottleAmount) {
+        for (Bottle b : bottles){
+            if (b.getWine() == checkWine && b.getBottleAmount() >= bottleAmount)
+                return true;
+        }
+        return false;
     }
 
 

@@ -56,9 +56,14 @@ public class Wine {
 
     @Override
     public String toString(){
-        String show = "Name: " + getName() + " Year: " + getYear() + " Notes: " + getNotes() + "\n Vines List:\n";
+        String show = " Name: " + getName() + "\n Year: " + getYear() + "\n Notes: " + getNotes() + "\n Vines List:";
+        int index = 0;
         for (String s : getVineyards()){
-            show += " " + s + "\n";
+            if (index != getVineyards().size()-1) {
+                show += " " + s + ",";
+                index++;
+            }
+            else show += " " + s + "\n";
         }
         return show;
     }

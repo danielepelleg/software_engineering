@@ -112,7 +112,8 @@ public class Person{
      * @return String the string
      *
      */
-    public String show(){
-        return "Name: \t" + this.getName() + "\t Surname: \t" + this.getSurname() + "\t Username: " + this.getUsername();
+    @Override
+    public String toString(){
+        return " Name: \t" + this.getName() + "\n Surname: \t" + this.getSurname() + "\n Username: " + this.getUsername();
     }
 }

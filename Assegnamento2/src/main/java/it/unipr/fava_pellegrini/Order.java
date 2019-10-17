@@ -4,12 +4,15 @@ public class Order {
     Client buyer;
     Wine wineChosen;
     int bottleAmount;
-    boolean processed;
 
     Order(Client buyer, Wine wineChosen, int wineAmount){
         this.buyer = buyer;
         this.wineChosen = wineChosen;
         this.bottleAmount = wineAmount;
-        processed = false;
+    }
+
+    @Override
+    public String toString(){
+        return "Client:\n" + this.buyer.toString() + "\n\nWine Chosen:\n" + this.wineChosen.toString() + "\n" + "Quantity: " + this.bottleAmount;
     }
 }
