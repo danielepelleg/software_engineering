@@ -15,7 +15,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Winehouse {
     private ArrayList<Bottle> bottles;
     private ArrayList<Person> users;
-    private ArrayList<Order> request;
     private ArrayList<Order> orders;
 
     /**
@@ -26,7 +25,6 @@ public class Winehouse {
     Winehouse() {
         this.bottles = new ArrayList<Bottle>();
         this.users = new ArrayList<Person>();
-        this.request = new ArrayList<Order>();
         this.orders = new ArrayList<Order>();
     }
 
@@ -46,14 +44,6 @@ public class Winehouse {
 
     public void setUsers(ArrayList<Person> users) {
         this.users = users;
-    }
-
-    public ArrayList<Order> getRequest() {
-        return request;
-    }
-
-    public void setRequest(ArrayList<Order> request) {
-        this.request = request;
     }
 
     public ArrayList<Order> getOrders() {
@@ -80,15 +70,6 @@ public class Winehouse {
      */
     public void addBottle(Bottle newBottle) {
         bottles.add(newBottle);
-    }
-
-    /**
-     * Add a order to the request list.
-     *
-     * @param newRequest Request (Order obj) to add
-     */
-    public void addRequest(Order newRequest) {
-        this.request.add(newRequest);
     }
 
     /**
@@ -132,7 +113,11 @@ public class Winehouse {
         return false;
     }
 
-
-    public void manageRequest(Client checkClient) {
+    public String printBottles(){
+        String result = "Bottles:\n";
+        for(Bottle b: this.getBottles()){
+            result = result + b.toString() + "\n";
+        }
+        return  result;
     }
 }

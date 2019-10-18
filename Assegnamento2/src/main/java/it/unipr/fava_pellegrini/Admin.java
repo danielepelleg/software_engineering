@@ -24,9 +24,18 @@ public class Admin extends Person {
         super(name, surname, username, password);
     }
 
-    public void sellWine(Winehouse store, Order sellOrder){
+    public void sellWine(Winehouse store){
         for (Order o : store.getOrders()){
             if(store.checkAvailability(o.getWineChosen(), o.getBottleAmount())){
+                for(Bottle b : store.getBottles()){ //decremento le bottiglie dalla lista della winehouse
+                    if(b.getWine().equals(o.getWineChosen())){
+                        b.setBottleAmount(b.getBottleAmount() - o.getBottleAmount());
+                    }
+                }
+                //inserisco le bottiglie nel carrello del cliente
+                Bottle sellBottles = new Bottle(o.getWineChosen(),o.getBottleAmount());
+                // in ordine sarebbe meglio mettere una lista di bottiglie al posto degli attributi vino e bottleamount
+                o.getBuyer().addToCart(sellBottles);
                 o.setProcessed(true);
             }
             else{
@@ -60,5 +69,31 @@ public class Admin extends Person {
 
     public void deleteOrder(Winehouse store, Order removeOrder){
         store.getOrders().remove(removeOrder);
+    }
+
+    public void refillBottle(Winehouse store, Bottle newBottles){
+        if(!store.getBottles().isEmpty()){
+            for(Bottle b: store.getBottles()){
+                if(b.equals(newBottles)){
+                    b.setBottleAmount(b.getBottleAmount() + newBottles.getBottleAmount());
+                }
+                else store.addBottle(newBottles);
+            }
+        }
+        else store.addBottle(newBottles);
+        this.sendNotification(store);
+    }
+
+    public void sendNotification(Winehouse store){
+        for (Order o : store.getOrders()){
+            if(o.isNotification() == true && (o.isProcessed() == false)){
+                for (Bottle b: store.getBottles()){
+                    if (o.getWineChosen() == b.getWine() && b.getBottleAmount() >= o.getBottleAmount()){
+                        System.out.println("The notification on the availability of the number of bottles requested has been sent to the client" + o.getBuyer().toString());
+                        o.setProcessed(true);
+                    }
+                }
+            }
+        }
     }
 }

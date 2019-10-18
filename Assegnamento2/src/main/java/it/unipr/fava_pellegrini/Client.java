@@ -17,7 +17,7 @@ import java.util.Scanner;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Client extends Person {
-    List<Wine> cart = new ArrayList<Wine>();
+    List<Bottle> cart = new ArrayList<Bottle>();
 
     /**
      * Class constructor.
@@ -31,12 +31,12 @@ public class Client extends Person {
      */
     Client(String name, String surname, String username, String password){
         super(name, surname, username, password);
-        this.cart = new ArrayList<Wine>();
+        this.cart = new ArrayList<Bottle>();
     }
 
-    public List<Wine> getCart(){return this.cart;}
+    public List<Bottle> getCart(){return this.cart;}
 
-    public void setCart (List<Wine> cart){ this.cart = cart;}
+    public void setCart (List<Bottle> cart){ this.cart = cart;}
 
     /**
      * Register the client to the Winehouse Store
@@ -148,5 +148,17 @@ public class Client extends Person {
         }
         System.out.println("\tDone! \nYour order has been added successfully!\n");
         System.out.println(newOrder.toString());
+    }
+
+    public void addToCart(Bottle newBottles){
+        this.cart.add(newBottles);
+    }
+
+    public String showCart(){
+        String result = "User cart:\n";
+        for (Bottle b : getCart()){
+            result = result + "Wine:\n" + b.getWine() + " Number of bottles: " + b.getBottleAmount() + "\n";
+        }
+        return result;
     }
 }
