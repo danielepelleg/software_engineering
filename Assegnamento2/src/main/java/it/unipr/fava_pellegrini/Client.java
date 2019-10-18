@@ -2,6 +2,7 @@ package it.unipr.fava_pellegrini;
 
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,56 +97,11 @@ public class Client extends Person {
      *
      */
     public void buyWine(Winehouse store, Wine buyWine, int bottles) throws IOException, InterruptedException {
-        /*
-        if(store.checkAvailability(buyWine, bottles)) {
-            Order newOrder = new Order(Client.this, buyWine, bottles);
-            store.addOrder(newOrder);
-            System.out.println("Your order is being processed please wait");
-            String anim= "|/-\\";
-            for (int x =0 ; x <= 100 ; x++) {
-                String data = "\r" + anim.charAt(x % anim.length()) + " " + x;
-                System.out.write(data.getBytes());
-                Thread.sleep(30);
-            }
-            System.out.println("\tDone! \nPurchase Successful!\n");
-            System.out.println(newOrder.toString());
-        }
-        else{
-            Scanner input = new Scanner (System.in);
-            System.out.println("The product is currently not available. ");
-            System.out.println("Would you like to be notified when back in stock? (y/n)" );
-            String decision;
-            decision = input.nextLine();
-            boolean loop = true;
-            while(loop) {
-                switch (decision) {
-                    case "y":
-                        Order newRequest = new Order(Client.this, buyWine, bottles);
-                        store.addRequest(newRequest);
-                        System.out.println("Your notification request has been processed. You'll be warned when the bottle comes back in stock. ");
-                        loop = false;
-                        break;
-                    case "n":
-                        System.out.println("Restock comes every week! Come back soon!");
-                        loop = false;
-                        break;
-                    default: {
-                        System.out.println("Not valid Input. Please try again. ");
-                        decision = input.nextLine();
-                        break;
-                    }
-                }
-            }
-        }*/
         Order newOrder = new Order(Client.this, buyWine, bottles);
         store.addOrder(newOrder);
         System.out.println("Your order is being processed please wait");
-        String anim= "|/-\\";
-        for (int x =0 ; x <= 100 ; x++) {
-            String data = "\r" + anim.charAt(x % anim.length()) + " " + x;
-            System.out.write(data.getBytes());
-            Thread.sleep(30);
-        }
+        ProgressBar p = new ProgressBar();
+        p.progress();
         System.out.println("\tDone! \nYour order has been added successfully!\n");
         System.out.println(newOrder.toString());
     }

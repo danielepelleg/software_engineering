@@ -1,7 +1,6 @@
 package it.unipr.fava_pellegrini;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Winehouse Class

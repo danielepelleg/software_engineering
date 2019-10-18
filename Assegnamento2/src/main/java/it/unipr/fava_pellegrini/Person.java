@@ -114,6 +114,6 @@ public class Person{
      */
     @Override
     public String toString(){
-        return " Name: \t" + this.getName() + "\n Surname: \t" + this.getSurname() + "\n Username: " + this.getUsername();
+        return " Name: \t" + this.getName() + "\n Surname: \t" + this.getSurname() + "\n Username: \t" + this.getUsername();
     }
 }
