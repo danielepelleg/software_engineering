@@ -25,14 +25,14 @@ public class Main {
         c1.Registration(house);
         Bottle b1 = new Bottle(w1, 4);
         Bottle b2 = new Bottle(w2, 2);
-        house.addBottle(b1);
-        house.addBottle(b2);
-        //house.addWine(w3);
-        System.out.println(c1.searchWine(house, w1.getName(), w1.getYear()));
-        System.out.println(c1.searchWine(house, w2.getName(), w2.getYear()));
-        c1.buyWine(house, w1, 8);
-        a1.sellWine(house, house.getOrders().get(0));
-        a1.deleteOrder(house, house.getOrders().get(0));
+        a1.refillBottle(house, b1);
+        //System.out.println(c1.searchWine(house, w1.getName(), w1.getYear()));
+        //System.out.println(c1.searchWine(house, w2.getName(), w2.getYear()));
+        c1.buyWine(house, w1, 5);
+        a1.sellWine(house);
+        System.out.println(c1.showCart());
+        a1.refillBottle(house, b1);
+        //System.out.println(house.printBottles());
 
     }
 }
