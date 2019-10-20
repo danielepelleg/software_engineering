@@ -1,12 +1,14 @@
 package it.unipr.fava_pellegrini;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Wine Class
- * Each wine has the name, the year of production, the data sheet, a list
- * containing the vineyard from which it comes from, and the available amount.
+ *
+ * Each wine has the name, the year of production, the data sheet and a list
+ * containing the vineyard from which it comes from
  *
  */
 public class Wine {
@@ -15,11 +17,51 @@ public class Wine {
     private String notes;
     private List<String>  vineyards = new ArrayList<String>();
 
-    public Wine(String name, int year, String notes, List<String>  vines, int bottleAmount) {
+    /**
+     * Class Constructor
+     *
+     * @param name the name of the wine
+     * @param year the year of production
+     * @param notes a description of the wine
+     * @param vineyards a list of String contaaining the vineyards
+     *
+     */
+    public Wine(String name, int year, String notes, List<String>  vineyards) {
         this.name = name;
         this.year = year;
         this.notes = notes;
-        this.vineyards = vines;
+        this.vineyards = vineyards;
+    }
+
+    /**
+     * Class Constructor
+     *
+     * @param name the name of the wine
+     * @param year the year of production
+     * @param notes a description of the wine
+     * @param vineyards a list of String contaaining the vineyards
+     *
+     */
+    public Wine(String name, int year, String notes, String... vineyards) {
+        this.name = name;
+        this.year = year;
+        this.notes = notes;
+        this.vineyards.addAll(Arrays.asList(vineyards));
+    }
+
+    /**
+     * Class Constructor
+     *
+     * @param name the name of the wine
+     * @param year the year of production
+     * @param notes a description of the wine
+     *
+     */
+    public Wine(String name, int year, String notes) {
+        this.name = name;
+        this.year = year;
+        this.notes = notes;
+        this.vineyards = new ArrayList<String>();
     }
 
     public String getName() {
@@ -54,6 +96,22 @@ public class Wine {
         this.vineyards = vines;
     }
 
+    /**
+     * Add a new vineyard to the vineyards list
+     *
+     * @param newVineyard the vineyard to add
+     */
+    public void addVinewyard(String newVineyard){
+        this.vineyards.add(newVineyard);
+    }
+
+    /**
+     * Return a string showing the wine's
+     * name, year, notes and prints the list of vineyards
+     *
+     * @return String the string
+     *
+     */
     @Override
     public String toString(){
         String show = " Name: " + getName() + "\n Year: " + getYear() + "\n Notes: " + getNotes() + "\n Vines List:";

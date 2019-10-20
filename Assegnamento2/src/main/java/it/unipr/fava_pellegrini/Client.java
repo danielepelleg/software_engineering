@@ -1,12 +1,9 @@
 package it.unipr.fava_pellegrini;
 
 import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Client Class - Person Subclass
@@ -19,6 +16,7 @@ import java.util.Scanner;
  */
 public class Client extends Person {
     List<Bottle> cart = new ArrayList<Bottle>();
+    boolean logged;
 
     /**
      * Class constructor.
@@ -33,11 +31,21 @@ public class Client extends Person {
     Client(String name, String surname, String username, String password){
         super(name, surname, username, password);
         this.cart = new ArrayList<Bottle>();
+        this.logged = false;
     }
 
     public List<Bottle> getCart(){return this.cart;}
 
     public void setCart (List<Bottle> cart){ this.cart = cart;}
+
+    public boolean isLogged() {
+        return logged;
+    }
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
+
 
     /**
      * Register the client to the Winehouse Store
@@ -55,16 +63,18 @@ public class Client extends Person {
      * @param checkUsername the username credential chosen yo sign in
      * @param checkPassword the password credential chosen to sign in
      */
-    public void Login(Winehouse store, String checkUsername, String checkPassword){
-        /* TODO implementing Login (bool-string)? */
+    public void Login(Winehouse store, String checkUsername, String checkPassword) throws IOException, InterruptedException {
         Client tempClient = new Client("Client", "Testing", checkUsername, checkPassword);
         tempClient.setPassword(checkPassword);
+        ProgressBar l = new ProgressBar();
+        l.loading();
         for (Person p : store.getUsers()){
             if (p.getUsername().equals(checkUsername) && p.getPassword().equals(tempClient.getPassword())){
                 System.out.println("Login Successful!");
             }
             else System.out.println("Bad Login. The username or password you have entered is invalid.");
         }
+        setLogged(true);
     }
 
     /**
@@ -97,19 +107,23 @@ public class Client extends Person {
      *
      */
     public void buyWine(Winehouse store, Wine buyWine, int bottles) throws IOException, InterruptedException {
-        Order newOrder = new Order(Client.this, buyWine, bottles);
-        store.addOrder(newOrder);
-        System.out.println("Your order is being processed please wait");
-        ProgressBar p = new ProgressBar();
-        p.progress();
-        System.out.println("\tDone! \nYour order has been added successfully!\n");
-        System.out.println(newOrder.toString());
+        if(this.logged){
+            Order newOrder = new Order(Client.this, buyWine, bottles);
+            store.addOrder(newOrder);
+            System.out.println("Your order is being processed please wait");
+            ProgressBar p = new ProgressBar();
+            p.progress();
+            System.out.println("\tDone! \nYour order has been added successfully!\n");
+            System.out.println(newOrder.toString());}
+        else System.out.println("You must be logged to get access to the shop! ");
     }
 
-    public void addToCart(Bottle newBottles){
-        this.cart.add(newBottles);
-    }
-
+    /**
+     * Return a string showing the client's information
+     *
+     * @return String the string
+     *
+     */
     public String showCart(){
         String result = "User cart:\n";
         for (Bottle b : getCart()){
