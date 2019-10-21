@@ -1,15 +1,18 @@
 package it.unipr.fava_pellegrini;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Main Class
  * Test, through a simulation, the classes and methods created
  *
  * 1) The Winehouse is initialized with some users, an admin and some wines
- * 2) User UX signs in and buy some of the bottle BX
+ * 2a) User UX signs in and buy some of the bottle BX
+ * 2b) User UY signs in and buy all the bottle BY
+ * 3) User UZ signs to buy some of the bottle UY now gone out of stock, so ask to be notified when
+ *      the bottle BY comes back available
+ * 4) The employee refill the missing bottles UY and the system send a notification to the user UZ
+ *      about the new availability of the bottle
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
@@ -30,38 +33,33 @@ public class Main {
         Wine WY = new Wine("Franciacorta Brut DOCG", 2011, "Champagne, Spumante", "Pinot Nero 22%", "Chardonnay 77%", "Pinot Bianco 1%");
         Bottle BX = new Bottle(WX, 5);
         Bottle BY = new Bottle(WY, 3);
-        A1.refillBottle(store, BX);
-        A1.refillBottle(store, BY);
+        A1.refillBottle(store, BX, 0);
+        A1.refillBottle(store, BY, 0);
         System.out.println(store.toString());
 
-        System.out.println("------ 2) User UX signs in and buy some of the bottle BX ------");
+        System.out.println("------ 2a) User UX signs in and buy some of the bottle BX ------");
         UX.Login(store, "Jack", "winelover");
-        System.out.println("\nCustomer UX: Buying 4 bottle of the Wine " + BX.getWine().getName());
+        System.out.println("\nCustomer UX: Buying 4 bottles of the Wine " + BX.getWine().getName());
         UX.buyWine(store, WX, 4);
-        System.out.println("The admin A1 checks the requests in the order list and sell the wine to the customer UX:");
+        System.out.println("The admin A1 checks the requests in the orders list and sell the wine to the customer UX:");
         A1.sellWine(store);
 
-        // TODO Implementing Main
-        /*Winehouse house = new Winehouse();
-        List<String> vines_w1 = new ArrayList<String>();
-        vines_w1.add("Gingio");
-        vines_w1.add("Giangio");
-        Wine w1 = new Wine("Nero", 1989, "Buono", vines_w1);
-        Wine w2 = new Wine("Bianco", 1999, "Cattivo", vines_w1);
-        Client c1 = new Client("Tommaso", "Gaspari", "Tommy", "1234");
-        Admin a1 = new Admin("Tommaso", "Gaspari", "Tommy", "1234");
-        c1.Registration(house);
-        Bottle b1 = new Bottle(w1, 4);
-        Bottle b2 = new Bottle(w2, 2);
-        a1.refillBottle(house, b1);
-        //System.out.println(c1.searchWine(house, w1.getName(), w1.getYear()));
-        //System.out.println(c1.searchWine(house, w2.getName(), w2.getYear()));
-        c1.buyWine(house, w1, 5);
-        c1.Login(house, "Tommy", "1234");
-        c1.buyWine(house, w1, 5);
-        a1.sellWine(house);
-        System.out.println(c1.showCart());
-        a1.refillBottle(house, b1);
-        //System.out.println(house.printBottles());*/
+        System.out.println("\n------ 2b) User UY signs in and buy all the bottles BY ------");
+        UY.Login(store, "Giovy", "sparklingwine");
+        System.out.println("\nCustomer UY: Buying all the 3 bottles of the Wine " + BY.getWine().getName());
+        UY.buyWine(store, WY, 3);
+        System.out.println("The admin A1 checks the requests in the orders list and sell the wine to the customer UY:");
+        A1.sellWine(store);
+
+        System.out.println("\n\n------ 3) User UZ signs to buy some of the bottle UY now gone out of stock, so ask to be notified when \n" +
+                "      the bottle BY comes back available ------");
+        UZ.Login(store, "Mark", "proseccolover");
+        UZ.buyWine(store, WY, 2);
+        A1.sellWine(store);
+
+        System.out.println("------ 4) The employee refill the missing bottles UY and the system send a notification to the user UZ \n" +
+                "      about the new availability of the bottle ------");
+        A1.refillBottle(store, BY, 2);
+        A1.sendNotification(store);
     }
 }

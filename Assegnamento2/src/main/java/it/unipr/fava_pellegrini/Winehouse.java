@@ -142,6 +142,18 @@ public class Winehouse {
     }
 
     /**
+     * Show an alert if after a purchase a bottle goes out of stock.
+     *
+     * @param outofstockBottle the bottle to check
+     */
+    public void outofstockWarning(Bottle outofstockBottle){
+        for (Bottle b : this.bottles){
+            if (b.getWine() == outofstockBottle.getWine() && b.getBottleAmount() == 0)
+                System.out.println("The following bottle " + b.getWine().getName() + ", " + b.getWine().getYear() + " has now gone out of stock.");
+        }
+    }
+
+    /**
      * Return a string showing the bottles list
      *
      * @return String the string
@@ -175,7 +187,9 @@ public class Winehouse {
     }
 
     /**
+     * Show information about the database
      *
+     * @return String the information string
      */
     @Override
     public String toString(){

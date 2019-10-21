@@ -45,6 +45,7 @@ public class Admin extends Person {
      */
     public void sellWine(Winehouse store){
         for (Order o : store.getOrders()){
+            if(!o.isProcessed()){
             if(store.checkAvailability(o.getOrderBottle().getWine(), o.getOrderBottle().getBottleAmount())){
                 for(Bottle b : store.getBottles()){
                     if(b.getWine().equals(o.getOrderBottle().getWine()))
@@ -53,11 +54,12 @@ public class Admin extends Person {
                 addToCart(o.getBuyer(), o.getOrderBottle());
                 o.setProcessed(true);
                 System.out.println("Purchase Successful! Order Summary:\n\n" + o.toString());
+                store.outofstockWarning(o.getOrderBottle());
             }
             else{
                 Scanner input = new Scanner (System.in);
-                System.out.println("The following product is currently not available:\n" + o.toString() +"\n");
-                System.out.println("Would you like to be notified when back in stock? (y/n)" );
+                System.out.println("The following product is currently not available:\n" + o.toString() + "\n" +
+                        "Would you like to be notified when back in stock? (y/n)" );
                 String decision;
                 decision = input.nextLine();
                 boolean loop = true;
@@ -79,7 +81,7 @@ public class Admin extends Person {
                         }
                     }
                 }
-            }
+            }}
         }
     }
 
@@ -101,15 +103,18 @@ public class Admin extends Person {
      * @param newBottles the bottle to refill or add
      *
      */
-    public void refillBottle(Winehouse store, Bottle newBottles){
+    public void refillBottle(Winehouse store, Bottle newBottles, int newAmount){
+        boolean present = false;
         if(!store.getBottles().isEmpty()){
             for(Bottle b: store.getBottles()){
-                if(b.equals(newBottles)) {
-                    b.setBottleAmount(b.getBottleAmount() + newBottles.getBottleAmount());
+                if(b.getWine().getName() == newBottles.getWine().getName() && b.getWine().getYear() == newBottles.getWine().getYear()) {
+                    present = true;
+                    b.setBottleAmount(b.getBottleAmount() + newAmount);
                     System.out.println("The following bottle has been refilled:\n" + b.toString());
                 }
             }
-            store.addBottle(newBottles);
+            if(!present)
+                store.addBottle(newBottles);
         }
         else{
             store.addBottle(newBottles);
@@ -129,8 +134,8 @@ public class Admin extends Person {
             if(o.isNotification() && !o.isProcessed()){
                 for (Bottle b: store.getBottles()){
                     if (o.getOrderBottle().getWine() == b.getWine() && b.getBottleAmount() >= o.getOrderBottle().getBottleAmount()){
-                        System.out.println("The notification on the availability of the number of bottles requested has been sent to the following client:\n" + o.getBuyer().toString() +
-                                "\n" + o.getBuyer().getSurname() + ", Do you want to buy the bottle? (y/n)");
+                        System.out.println("\nThe notification on the availability of the number of bottles requested has been sent to the following client:\n" + o.getBuyer().toString() +
+                                "\n\n" + o.getBuyer().getUsername() + ", Do you want to buy the bottle? (y/n)");
                         Scanner input = new Scanner(System.in);
                         String decision = input.nextLine();
                         boolean loop = true;
@@ -140,9 +145,11 @@ public class Admin extends Person {
                                     store.updateBottle(b, o.getOrderBottle().getBottleAmount());
                                     addToCart(o.getBuyer(), o.getOrderBottle());
                                     o.setProcessed(true);
+                                    o.setNotification(false);
                                     ProgressBar p = new ProgressBar();
                                     p.progress();
                                     System.out.println("Purchase Successful! Order summary:\n" + o.toString());
+                                    store.outofstockWarning(o.getOrderBottle());
                                     loop = false;
                                     break;
                                 case "n":
