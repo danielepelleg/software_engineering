@@ -86,7 +86,7 @@ public class Order {
     @Override
     public String toString(){
         String show = "Client:\n" + this.buyer.toString() + "\n\nBottle Chosen:\n" + this.orderBottle.toString()
-                + "\nProcessed: " + status(this.processed) + "\n";
+                + "\n Processed: " + status(this.processed) + "\n";
         if (isNotification())
             return show += "\nNotification: " + status(this.notification) + "\n";
         else return show;

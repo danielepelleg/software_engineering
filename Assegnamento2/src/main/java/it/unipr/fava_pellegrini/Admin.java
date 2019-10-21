@@ -52,7 +52,7 @@ public class Admin extends Person {
                 }
                 addToCart(o.getBuyer(), o.getOrderBottle());
                 o.setProcessed(true);
-                System.out.println("Purchase Successful! Order Summary:\n" + o.toString());
+                System.out.println("Purchase Successful! Order Summary:\n\n" + o.toString());
             }
             else{
                 Scanner input = new Scanner (System.in);
@@ -110,10 +110,10 @@ public class Admin extends Person {
                 }
             }
             store.addBottle(newBottles);
-            System.out.println("The following bottle has been added:\n" + newBottles.toString());
         }
-        else store.addBottle(newBottles);
-        System.out.println("The following bottle has been added:\n" + newBottles.toString());
+        else{
+            store.addBottle(newBottles);
+        }
     }
 
     /**

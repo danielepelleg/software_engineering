@@ -68,13 +68,16 @@ public class Client extends Person {
         tempClient.setPassword(checkPassword);
         ProgressBar l = new ProgressBar();
         l.loading();
+        boolean found = false;
         for (Person p : store.getUsers()){
             if (p.getUsername().equals(checkUsername) && p.getPassword().equals(tempClient.getPassword())){
-                System.out.println("Login Successful!");
+                found = true;
+                setLogged(true);
             }
-            else System.out.println("Bad Login. The username or password you have entered is invalid.");
         }
-        setLogged(true);
+        if(found)
+            System.out.println("\tLogin Successful!");
+        else System.out.println("\tBad Login. The username or password you have entered is invalid.");
     }
 
     /**
@@ -110,10 +113,10 @@ public class Client extends Person {
         if(this.logged){
             Order newOrder = new Order(Client.this, buyWine, bottles);
             store.addOrder(newOrder);
-            System.out.println("Your order is being processed please wait");
+            System.out.println("Your order is being processed please wait . . .");
             ProgressBar p = new ProgressBar();
             p.progress();
-            System.out.println("\tDone! \nYour order has been added successfully!\n");
+            System.out.print("\tDone! \nYour order has been added successfully!\nYour request will be elaborated soon:\n\n");
             System.out.println(newOrder.toString());}
         else System.out.println("You must be logged to get access to the shop! ");
     }

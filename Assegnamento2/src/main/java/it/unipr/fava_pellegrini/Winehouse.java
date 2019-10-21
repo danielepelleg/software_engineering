@@ -148,10 +148,76 @@ public class Winehouse {
      *
      */
     public String printBottles(){
-        String result = "Bottles:\n";
-        for(Bottle b: this.getBottles()){
-            result = result + b.toString() + "\n";
+        if(!this.bottles.isEmpty()){
+            int index_b = 0;
+            String result = "BOTTLES:\n";
+            for (Bottle b : this.getBottles()) {
+                index_b++;
+                result += b.toString() + "\t\t\t\t <--- B";
+                switch (index_b) {
+                    case 1:
+                        result += "X\n\n";
+                        break;
+                    case 2:
+                        result += "Y\n\n";
+                        break;
+                    case 3:
+                        result += "Z\n\n";
+                    default:
+                        result += "\n\n";
+                        break;
+                }
+
+            }
+            return result;
         }
-        return  result;
+        else return "There are no wines available in the store. Try later.";
+    }
+
+    /**
+     *
+     */
+    @Override
+    public String toString(){
+        String show = "USERS:\n";
+        int index_u = 0;
+        int index_a = 0;
+        for (Person p : this.users){
+            if (p.getClass() == Client.class) {
+                index_u++;
+                show += p.toString() + "\t <--- U";
+                switch (index_u) {
+                    case 1:
+                        show += "X\n\n";
+                        break;
+                    case 2:
+                        show += "Y\n\n";
+                        break;
+                    case 3:
+                        show += "Z\n\n";
+                    default:
+                        break;
+                }
+            }
+            if (p.getClass() == Admin.class) {
+                index_a++;
+                show += p.toString() + "\t <--- A";
+                switch (index_a) {
+                    case 1:
+                        show += "1\n\n";
+                        break;
+                    case 2:
+                        show += "2\n\n";
+                        break;
+                    case 3:
+                        show += "3\n\n";
+                    default:
+                        show += "\n\n";
+                        break;
+                }
+            }
+        }
+        show += printBottles();
+        return show;
     }
 }
