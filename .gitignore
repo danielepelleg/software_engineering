@@ -29,10 +29,13 @@
 
 # Intellij
 /Assegnamento2/.idea/*
-*.iml
-*.iws
 /Assegnamento2/*.xml
 /Assegnamento2/*.iml
+/Assegnamento3/.idea/*
+/Assegnamento3/*.xml
+/Assegnamento3/*.iml
+*.iml
+*.iws
 
 # Eclipse
 .classpath
