@@ -41,25 +41,20 @@ public class Main {
         UX.Login(store, "Jack", "winelover");
         System.out.println("\nCustomer UX: Buying 4 bottles of the Wine " + BX.getWine().getName());
         UX.buyWine(store, WX, 4);
-        System.out.println("The admin A1 checks the requests in the orders list and sell the wine to the customer UX:");
-        A1.sellWine(store);
 
         System.out.println("\n------ 2b) User UY signs in and buy all the bottles BY ------");
         UY.Login(store, "Giovy", "sparklingwine");
         System.out.println("\nCustomer UY: Buying all the 3 bottles of the Wine " + BY.getWine().getName());
         UY.buyWine(store, WY, 3);
-        System.out.println("The admin A1 checks the requests in the orders list and sell the wine to the customer UY:");
-        A1.sellWine(store);
 
         System.out.println("\n\n------ 3) User UZ signs to buy some of the bottle UY now gone out of stock, so ask to be notified when \n" +
                 "      the bottle BY comes back available ------");
         UZ.Login(store, "Mark", "proseccolover");
-        UZ.buyWine(store, WY, 2);
-        A1.sellWine(store);
+        UZ.askNotification(store, WY, 2);
 
         System.out.println("------ 4) The employee refill the missing bottles UY and the system send a notification to the user UZ \n" +
                 "      about the new availability of the bottle ------");
         A1.refillBottle(store, BY, 2);
-        A1.sendNotification(store);
+        System.out.println("----------------------------\n" + store.getOrders().toString());
     }
 }

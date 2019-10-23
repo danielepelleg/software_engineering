@@ -126,6 +126,57 @@ public class Winehouse {
     }
 
     /**
+     *
+     */
+    public void buyWine(Client buyer, Wine buyWine, int buyAmount) throws InterruptedException {
+        if (buyer.logged) {
+            Order newOrder = new Order(buyer, buyWine, buyAmount);
+            if (checkAvailability(buyWine, buyAmount)) {
+                for (Bottle b : getBottles()) {
+                    if (b.getWine().equals(buyWine))
+                        updateBottle(b, buyAmount);
+                }
+                addOrder(newOrder);
+                System.out.println("Your order is being processed please wait . . .");
+                ProgressBar p = new ProgressBar();
+                p.progress();
+                newOrder.setProcessed(true);
+                System.out.println("Purchase Successful! Order Summary:\n\n" + newOrder.toString());
+                this.outofstockWarning(newOrder.getOrderBottle());
+            }
+        }
+        else System.out.println("Please sign in to make a order.");
+    }
+
+    /**
+     * Print the notification message on the console if the bottle comes back in stock.
+     * Ask the client if proceed with order and buying it, if so add to the client's cart and show the order summary.
+     *
+     *
+     */
+    public void sendNotification(){
+        for (Order o : getOrders()){
+            if(o.isNotification() && !o.isProcessed()){
+                if(checkAvailability(o.getOrderBottle().getWine(), o.getOrderBottle().getBottleAmount())){
+                    System.out.println("\nThe notification on the availability of the number of bottles requested has been sent to the following client:\n" + o.getBuyer().toString());
+                    o.setNotification(false);
+                }
+            }
+        }
+        cleanOrders();
+    }
+
+    public void cleanOrders(){
+        ArrayList<Order> newList = new ArrayList<Order>();
+        for (Order o: this.orders){
+            if(!o.isNotification() && o.isProcessed()){
+                newList.add(o);
+            }
+        }
+        setOrders(newList);
+    }
+
+    /**
      * Check the availability of the wine requested
      *
      * @param checkWine wine to check whether is in the store
