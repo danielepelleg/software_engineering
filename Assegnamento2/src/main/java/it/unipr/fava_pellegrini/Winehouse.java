@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Winehouse Class
  * The Wine Store (Database). It has the list of all wines available, the list of the persons registered,
- * a list containing every request of a customer and a list which contains every order requested, on notification or elaborated.
+ * and a list which contains every order to be elaborated, on notification or completed.
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
@@ -23,12 +23,10 @@ public class Winehouse {
      *
      */
     Winehouse() {
-        this.bottles = new ArrayList<Bottle>();
-        this.users = new ArrayList<Person>();
-        this.orders = new ArrayList<Order>();
+        this.bottles = new ArrayList<>();
+        this.users = new ArrayList<>();
+        this.orders = new ArrayList<>();
     }
-
-    ;
 
     public ArrayList<Bottle> getBottles() {
         return bottles;
@@ -102,10 +100,13 @@ public class Winehouse {
      */
     public void updateBottle(Bottle editBottle, int newAmount){
         for (Bottle b : this.bottles){
-            if (b.getBottleAmount() >= newAmount)
-                b.setBottleAmount(b.getBottleAmount()-newAmount);
+            if(b.equals(editBottle)){
+                if (b.getBottleAmount() >= newAmount)
+                    b.setBottleAmount(b.getBottleAmount()-newAmount);
+        }
         }
     }
+
 
     /**
      * Search the wine requested inside the store
@@ -126,7 +127,11 @@ public class Winehouse {
     }
 
     /**
+     * If the client is logged, let him purchase the amount of wine chosen.
      *
+     * @param buyer   the client
+     * @param buyWine the wine to buy
+     * @param buyAmount the quantity of bottle to buy
      */
     public void buyWine(Client buyer, Wine buyWine, int buyAmount) throws InterruptedException {
         if (buyer.logged) {
@@ -150,8 +155,6 @@ public class Winehouse {
 
     /**
      * Print the notification message on the console if the bottle comes back in stock.
-     * Ask the client if proceed with order and buying it, if so add to the client's cart and show the order summary.
-     *
      *
      */
     public void sendNotification(){
@@ -166,6 +169,9 @@ public class Winehouse {
         cleanOrders();
     }
 
+    /**
+     * Remove the orders already notified.
+     */
     public void cleanOrders(){
         ArrayList<Order> newList = new ArrayList<Order>();
         for (Order o: this.orders){
@@ -213,26 +219,26 @@ public class Winehouse {
     public String printBottles(){
         if(!this.bottles.isEmpty()){
             int index_b = 0;
-            String result = "BOTTLES:\n";
+            StringBuilder result = new StringBuilder("BOTTLES:\n");
             for (Bottle b : this.getBottles()) {
                 index_b++;
-                result += b.toString() + "\t\t\t\t <--- B";
+                result.append(b.toString()).append("\t\t\t\t <--- B");
                 switch (index_b) {
                     case 1:
-                        result += "X\n\n";
+                        result.append("X\n\n");
                         break;
                     case 2:
-                        result += "Y\n\n";
+                        result.append("Y\n\n");
                         break;
                     case 3:
-                        result += "Z\n\n";
+                        result.append("Z\n\n");
                     default:
-                        result += "\n\n";
+                        result.append("\n\n");
                         break;
                 }
 
             }
-            return result;
+            return result.toString();
         }
         else return "There are no wines available in the store. Try later.";
     }
@@ -244,45 +250,45 @@ public class Winehouse {
      */
     @Override
     public String toString(){
-        String show = "USERS:\n";
+        StringBuilder show = new StringBuilder("USERS:\n");
         int index_u = 0;
         int index_a = 0;
         for (Person p : this.users){
             if (p.getClass() == Client.class) {
                 index_u++;
-                show += p.toString() + "\t <--- U";
+                show.append(p.toString()).append("\t <--- U");
                 switch (index_u) {
                     case 1:
-                        show += "X\n\n";
+                        show.append("X\n\n");
                         break;
                     case 2:
-                        show += "Y\n\n";
+                        show.append("Y\n\n");
                         break;
                     case 3:
-                        show += "Z\n\n";
+                        show.append("Z\n\n");
                     default:
                         break;
                 }
             }
             if (p.getClass() == Admin.class) {
                 index_a++;
-                show += p.toString() + "\t <--- A";
+                show.append(p.toString()).append("\t <--- A");
                 switch (index_a) {
                     case 1:
-                        show += "1\n\n";
+                        show.append("1\n\n");
                         break;
                     case 2:
-                        show += "2\n\n";
+                        show.append("2\n\n");
                         break;
                     case 3:
-                        show += "3\n\n";
+                        show.append("3\n\n");
                     default:
-                        show += "\n\n";
+                        show.append("\n\n");
                         break;
                 }
             }
         }
-        show += printBottles();
-        return show;
+        show.append(printBottles());
+        return show.toString();
     }
 }
