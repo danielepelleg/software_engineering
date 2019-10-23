@@ -47,14 +47,15 @@ public class Main {
         System.out.println("\nCustomer UY: Buying all the 3 bottles of the Wine " + BY.getWine().getName());
         UY.buyWine(store, WY, 3);
 
-        System.out.println("\n\n------ 3) User UZ signs to buy some of the bottle UY now gone out of stock, so ask to be notified when \n" +
-                "      the bottle BY comes back available ------");
+
+        System.out.println("\n------ 3) User UZ signs and to buy some of the bottle UY now gone out of stock, so ask to be notified when \n" +
+                "      the bottle BY comes back available ------\n");
+        UZ.searchWine(store, WY.getName(), WY.getYear());
         UZ.Login(store, "Mark", "proseccolover");
         UZ.askNotification(store, WY, 2);
 
         System.out.println("------ 4) The employee refill the missing bottles UY and the system send a notification to the user UZ \n" +
                 "      about the new availability of the bottle ------");
-        A1.refillBottle(store, BY, 2);
-        System.out.println("----------------------------\n" + store.getOrders().toString());
+        A1.refillBottle(store, BY, 3);
     }
 }

@@ -2,15 +2,12 @@ package it.unipr.fava_pellegrini;
 
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Client Class - Person Subclass
  * Each Client has the name attribute, the surname, the username,
- * the password ,the hashed password generated from the last one and
- * a cart in which puts the wines he requests.
+ * the password, the hashed password generated from the last one and a boolean value
+ * showing the status of the client, if logged or not
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
@@ -39,7 +36,6 @@ public class Client extends Person {
     public void setLogged(boolean logged) {
         this.logged = logged;
     }
-
 
     /**
      * Register the client to the Winehouse Store
@@ -75,26 +71,21 @@ public class Client extends Person {
     }
 
     /**
-     * Search the wine the client choose in the store
+     * Search the wine the client choose in the store.
      *
      * @param store     the Winehouse store the client wants to search into
      * @param wine_name the name of the wine searched
      * @param wine_year the year of the wine searched
+     *
      * @return a String with the information about the wine searched. If the wine
      * is not present in the store informs the client about it
      */
-    public String searchWine(Winehouse store, String wine_name, int wine_year) {
-        List<Bottle> result = store.searchWine(wine_name, wine_year);
-        if (!result.isEmpty()) {
-            return result.get(0).toString();
-        } else
-            return " There are no wines with these characteristics";
+    public void searchWine(Winehouse store, String wine_name, int wine_year) {
+        store.searchWine(wine_name, wine_year);
     }
 
     /**
-     * Add the wine, if present, in the order list.
-     * If the wine is not present, ask the client if to be notified when available.
-     * If the client accepts, create a new Request in Winehouse
+     * Buy a bottle a number of bottles of a wine available in the store
      *
      * @param store   the Winehouse Store the client wants to make the request
      * @param buyWine the wine to buy
@@ -104,10 +95,18 @@ public class Client extends Person {
         store.buyWine(Client.this, buyWine, bottles);
     }
 
+    /**
+     * Turn on the notification about the availability of the wine, so to be
+     * notified when there's enough bottles to buy
+     *
+     * @param store the Winehouse Store
+     * @param buyWine the wine requested
+     * @param bottles the amount of bottles requested
+     */
     public void askNotification(Winehouse store, Wine buyWine, int bottles){
         Order newOrder = new Order(Client.this, buyWine, bottles);
         store.addOrder(newOrder);
         newOrder.setNotification(true);
-        System.out.println("Your notification request has been processed. You'll be warned when the bottle comes back in stock.\n" + newOrder.toString() + "\n");
+        System.out.println("Your notification request has been processed. You'll be warned when the bottle comes back in stock.\n\n" + newOrder.toString() + "\n");
     }
 }

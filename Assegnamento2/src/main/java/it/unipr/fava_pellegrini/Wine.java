@@ -15,7 +15,7 @@ public class Wine {
     private String name;
     private int year;
     private String notes;
-    private List<String>  vineyards = new ArrayList<String>();
+    private List<String>  vineyards = new ArrayList<>();
 
     /**
      * Class Constructor
@@ -23,7 +23,7 @@ public class Wine {
      * @param name the name of the wine
      * @param year the year of production
      * @param notes a description of the wine
-     * @param vineyards a list of String contaaining the vineyards
+     * @param vineyards a list of String containing the vineyards
      *
      */
     public Wine(String name, int year, String notes, List<String>  vineyards) {
@@ -39,7 +39,7 @@ public class Wine {
      * @param name the name of the wine
      * @param year the year of production
      * @param notes a description of the wine
-     * @param vineyards a list of String contaaining the vineyards
+     * @param vineyards a list of String containing the vineyards
      *
      */
     public Wine(String name, int year, String notes, String... vineyards) {

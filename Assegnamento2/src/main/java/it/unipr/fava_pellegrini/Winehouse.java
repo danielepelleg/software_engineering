@@ -117,13 +117,19 @@ public class Winehouse {
      * @return the list containing the wines you searched
      *
      */
-    public List<Bottle> searchWine(String wine_name, int wine_year) {
-        ArrayList<Bottle> result = new ArrayList<Bottle>();
-        for (Bottle b : getBottles()) {
-            if (b.getWine().getName().equals(wine_name) && b.getWine().getYear() == wine_year)
-                result.add(b);
+    public void searchWine(String wine_name, int wine_year) {
+        boolean found = false;
+        if(!this.bottles.isEmpty()) {
+            for (Bottle b : getBottles()) {
+                if (b.getWine().getName().equals(wine_name) && b.getWine().getYear() == wine_year) {
+                    System.out.print(b.toString()+"\n");
+                    outofstockWarning(b);
+                    found = true;
+                }
+            }
         }
-        return result;
+        if(!found)
+            System.out.println("There wine searched is not present in the store.");
     }
 
     /**
@@ -206,7 +212,7 @@ public class Winehouse {
     public void outofstockWarning(Bottle outofstockBottle){
         for (Bottle b : this.bottles){
             if (b.getWine() == outofstockBottle.getWine() && b.getBottleAmount() == 0)
-                System.out.println("The following bottle " + b.getWine().getName() + ", " + b.getWine().getYear() + " has now gone out of stock.");
+                System.out.println("\nThe following bottle " + b.getWine().getName() + ", " + b.getWine().getYear() + " has now gone out of stock.\n");
         }
     }
 
@@ -249,11 +255,11 @@ public class Winehouse {
      * @return String the information string
      */
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder show = new StringBuilder("USERS:\n");
         int index_u = 0;
         int index_a = 0;
-        for (Person p : this.users){
+        for (Person p : this.users) {
             if (p.getClass() == Client.class) {
                 index_u++;
                 show.append(p.toString()).append("\t <--- U");

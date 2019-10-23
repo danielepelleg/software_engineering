@@ -1,7 +1,5 @@
 package it.unipr.fava_pellegrini;
 
-import java.util.Scanner;
-
 /**
  * Admin Class - Person Subclass
  * Each admin has the name attribute, the surname, the username,
