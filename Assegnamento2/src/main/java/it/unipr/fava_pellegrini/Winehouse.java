@@ -140,7 +140,7 @@ public class Winehouse {
      * @param buyAmount the quantity of bottle to buy
      */
     public void buyWine(Client buyer, Wine buyWine, int buyAmount) throws InterruptedException {
-        if (buyer.logged) {
+        if (buyer.isLogged()) {
             Order newOrder = new Order(buyer, buyWine, buyAmount);
             if (checkAvailability(buyWine, buyAmount)) {
                 for (Bottle b : getBottles()) {
