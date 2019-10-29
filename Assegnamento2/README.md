@@ -7,7 +7,7 @@
   <p align="center">
     Java implementation of a software representing a wine store. 
     
-![UMLClass](src/main/resources/Diagram1.svg)
+![UMLClass](src/main/resources/Diagram1.png)
 
 Maven Project
 
