@@ -17,9 +17,9 @@
   
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
-  - [UML](#uml)
-    - [UML Class Diagram](#uml-class-diagram)
-    - [UML Use-Case Diagram](#uml-usecase-diagram)
+  - [UML Diagrams](#uml)
+    - [Class Diagram](#uml-class-diagram)
+    - [Use-Case Diagram](#uml-usecase-diagram)
   - [Getting Started](#getting-started)
     - [Updates](#updates)
   - [License](#license)
@@ -57,12 +57,12 @@
    Some functions like: login, purchasing and shipping are time-simulated with a loading or a progress animation.
   
   <!-- UML DIAGRAMS  -->
-   ## UML Class Diagram
+   ## Class Diagram
    <p align="center">
     <img src="./src/main/resources/Diagram1.svg" alt="ClassDiagram">
    </p>
    
-   ## UML Use-Case Diagram
+   ## Use-Case Diagram
    <p align="center">
        <img src="./src/main/resources/Diagram2.svg" alt="UseCaseDiagram">
    </p>
