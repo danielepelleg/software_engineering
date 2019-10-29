@@ -1,11 +1,16 @@
-# Winehouse
+<br />
+<p align="center">
+  <a href="https://github.com/danielepelleg/software_engineering">
+    <img src="./src/main/resources/wine.png" alt="Logo" width="130" height="130">
+  </a>
+  <h1 align="center">Winehouse</h1>
+  <p align="center">
+    Instagram spies catcher.  
+</p>
 
+Java implementation of a software representing a wine store.
 
-<html>
-    <img src="Diagram1.png"
-         alt="Markdown Diagram1"
-         align="middle"/>
-</html>
+![Class](src/main/resources/Diagram1.svg)
 
 Maven Project
 
