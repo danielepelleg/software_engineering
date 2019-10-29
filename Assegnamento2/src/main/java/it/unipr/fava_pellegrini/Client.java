@@ -118,7 +118,9 @@ public class Client extends Person {
         Order newOrder = new Order(Client.this, buyWine, bottles);
         store.addOrder(newOrder);
         newOrder.setNotification(true);
-        System.out.println("Your notification request has been processed. You'll be warned when the bottle comes back in stock.\n\n" + newOrder.toString() + "\n");
+        System.out.println("The notification request has been processed. You'll be warned when the bottle comes back in stock.\n");
+        System.out.println("The System will send the notification to the client:\n" + newOrder.getBuyer().toString() + "\n");
+        System.out.println("The bottles requested in the notification are:\n" + newOrder.getOrderBottle().toString() + "\n" );
     }
 
     /**

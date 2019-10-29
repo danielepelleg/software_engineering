@@ -42,6 +42,6 @@ public class Bottle {
      *
      */
     public String toString(){
-        return this.wine.toString() + " Quantity: " + this.bottleAmount;
+        return this.wine.toString() + " Quantity of bottles: " + this.bottleAmount;
     }
 }
