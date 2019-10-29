@@ -1,0 +1,80 @@
+@startuml
+
+title Class Diagram
+
+package Database <<Database>> {
+  class Winehouse{
+    -bottles : ArrayList<Bottle>
+    -users : ArrayList<Person>
+    -orders : ArrayList<Order>
+    +void registration()
+    +void addBottle()
+    +void addOrder()
+    +void deleteOrder()
+    +void updateBottle()
+    +void checkAvailability()
+    +void searchWine()
+    +void buyWine()
+    +void outofstockWarning()
+    +void sendNotification()
+    +void cleanOrders()
+  }
+}
+Winehouse *-up- Order
+Winehouse *-right- Person
+Winehouse *-left- Bottle
+
+class Person {
+    __ private data __
+    -name : String
+    -surname : String
+    -username : String
+    -password : String
+    -- crypted --
+    -hashed_password : String
+}
+
+class Client {
+    -logged : boolean
+    -purchases : ArrayList<Bottle>
+    +void registration()
+    +void login()
+    +void searchWine()
+    +void buyWine()
+    +void askNotification()
+}
+
+class Admin {
+    +void deleteOrder()
+    +void refillOrder()
+    +void shipOrder()
+}
+
+Person <|-up- Client : <<Inheritance>>
+Person <|-down- Admin : <<Inheritance>>
+
+class Wine {
+    -name : String
+    -year : Integer
+    -notes : String
+    -vineyards : ArrayList<String>
+}
+
+class Bottle {
+    -wine : Wine
+    -bottleAmount : Integer
+}
+
+Bottle "*" o-down- "1" Wine : contains
+
+class Order {
+    -buyer : Client
+    -orderBottle : Bottle
+    -processed : boolean
+    -notification : boolean
+}
+
+Order "*" o-left- "1" Bottle : contains
+Order "*" o-right- "1" Client : contains
+
+@enduml

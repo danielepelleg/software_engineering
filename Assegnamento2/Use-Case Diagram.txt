@@ -1,0 +1,24 @@
+@startuml
+
+title Use Case Diagram
+
+left to right direction
+
+actor Admin
+actor Client
+actor Person
+
+Person -down-|> (Admin)
+Person -down-|> (Client)
+
+rectangle  Winehouse_Database {
+    Client -- (Registration)
+    Client -- (Login)
+    Client -- (Search Wine)
+    Client -- (Ask Notification)
+    Admin -- (Refill Bottles)
+    (Login) .> (Buy Wine) : <<include>>
+    
+}
+
+@enduml
