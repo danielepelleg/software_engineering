@@ -68,11 +68,14 @@ public class Admin extends Person {
      */
     public void shipOrder(Winehouse store) throws InterruptedException {
         for (Order o : store.getOrders()) {
-            if (o.isProcessed()) {
+            if (o.isProcessed() && !o.isShipped()) {
                 System.out.println("The order has been shipped by the admin...");
                 ProgressBar p = new ProgressBar();
                 p.progress();
                 o.getBuyer().addPurchase(o.getOrderBottle().getWine(), o.getOrderBottle().getBottleAmount());
+                o.setShipped(true);
+                o.setTrackingNumber();
+                System.out.println("The tracking number is: " + o.getTrackingNumber());
             }
         }
     }

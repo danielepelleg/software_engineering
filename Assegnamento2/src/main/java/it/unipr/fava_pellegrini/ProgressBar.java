@@ -69,7 +69,7 @@ public class ProgressBar {
     public void progress() throws InterruptedException {
         ProgressBar.this.update(0, 100);
         for (int i = 0; i < 1000; i++) {
-            Thread.sleep(8);
+            Thread.sleep(1);
             ProgressBar.this.update(i, 1000);
         }
     }
@@ -86,7 +86,7 @@ public class ProgressBar {
         for (int x = 0; x <= 100; x++) {
             String data = "\r" + anim.charAt(x % anim.length()) + " " + x;
             System.out.write(data.getBytes());
-            Thread.sleep(30);
+            Thread.sleep(10);
         }
     }
 }

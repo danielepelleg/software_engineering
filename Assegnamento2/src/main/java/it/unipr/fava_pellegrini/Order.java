@@ -1,5 +1,7 @@
 package it.unipr.fava_pellegrini;
 
+import java.util.Random;
+
 /**
  * Order Class
  * Each order has the relative Client's object, the bottle chosen by the client,
@@ -12,8 +14,10 @@ package it.unipr.fava_pellegrini;
 public class Order {
     private Client buyer;
     private Bottle orderBottle;
+    private String trackingNumber;
     private boolean processed;
     private boolean notification;
+    public boolean shipped;
 
     /**
      * Class constructor.
@@ -28,6 +32,7 @@ public class Order {
         this.orderBottle = new Bottle(wineChosen, wineAmount);
         this.processed = false;
         this.notification = false;
+        this.shipped = false;
     }
 
     public Client getBuyer() {
@@ -46,6 +51,25 @@ public class Order {
         this.orderBottle = orderBottle;
     }
 
+    public String getTrackingNumber() {
+        return trackingNumber;
+    }
+
+    /**
+     * Generates a random tracking number, a string of Char and Integer
+     */
+    public void setTrackingNumber() {
+        Random random = new Random();
+        String code = "";
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for(Integer i = 0; i < 13; i++ ){
+            if (i == 0 || i == 1 || i == 11 || i == 12)
+                code += alphabet.charAt(random.nextInt(alphabet.length()));
+            else code += random.nextInt(10);
+        }
+        this.trackingNumber = code;
+    }
+
     public boolean isProcessed() {
         return processed;
     }
@@ -60,6 +84,14 @@ public class Order {
 
     public void setNotification(boolean notification) {
         this.notification = notification;
+    }
+
+    public boolean isShipped() {
+        return shipped;
+    }
+
+    public void setShipped(boolean shipped) {
+        this.shipped = shipped;
     }
 
     /**

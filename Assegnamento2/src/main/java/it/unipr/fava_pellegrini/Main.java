@@ -41,13 +41,13 @@ public class Main {
         UX.login(store, "Jack", "winelover");
         System.out.println("\nCustomer UX: Buying 4 bottles of the Wine " + BX.getWine().getName());
         UX.buyWine(store, WX, 4);
-        A1.shipOrder(store, UX, WX, 4);
+        A1.shipOrder(store);
 
         System.out.println("\n------ 2b) User UY signs in and buy all the bottles BY ------");
         UY.login(store, "Giovy", "sparklingwine");
         System.out.println("\nCustomer UY: Buying all the 3 bottles of the Wine " + BY.getWine().getName());
         UY.buyWine(store, WY, 3);
-        A1.shipOrder(store, UY, WY, 3);
+        A1.shipOrder(store);
 
         System.out.println("\n------ 3) User UZ signs and to buy some of the bottle UY now gone out of stock, so ask to be notified when \n" +
                 "      the bottle BY comes back available ------\n");
