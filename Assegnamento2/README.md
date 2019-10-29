@@ -2,13 +2,10 @@
 
 
 <html>
-    <img src="https://www.plantuml.com/plantuml/svg/dLKzZzim3DtrAuHCxHKUkWP1SEdTSa1nBT3Xne2M6LkmB1cId8FHvh-Nbgp47saBT7CUdyX7FafvT1wixnh5c9TU8NzIu1n_bb1QQ1XhGTHG8dy63pauvBjT-jpl-K_6kGW7tgJ6odGE1uZpB3UUiZc-vGTheVygdTzz2TW-4eXgv-7l11WzXeqjbl5l0nJ3dyv65jnYIRW5But-y74IWAA8jPPeI3432rJeSOrtRG4UxsGH5OhwS0Qf89TA-duMTGXMLCCmPd3UzIlCTDwSd3UYVWEhfIuNYNJnQhmyIR7kJoW47JIxW5_OXLqDu2RBU0Wki3ZV1HWxP2ow62ayUdWyyjRACus1qoo0VaThD3H8nlpmbaH7o7Ns3ZfOV0TkgT8x-Rk0Covitteiw3CY5RWAY-EQVqbwdvH4xKUzcJ9bYGCjDsQOq5Yk8qTeNV-yY__O9aehzV-w3AvUs4ZYHzdKyi1FpHoAHgRP_tqvBPwaKclSLR9DA9M92REkJVl0Hdztlm8uojZIdNxH5LhfGGkwrXEQmfFFHcLh7hlT_UJ17RzxcXP1BzfZII8YpVXWo9HtfZGzs69kL6JiRvv7vrAzzw7sDivnyl0S6jE5rb9LEZuUt3ni-4FeV_Dv4xLlkJ3QWzGk5GdpIZN8LnmwYFEQl4zZncswHI52AoHgalpQDNauDjjzQmGwjzvIFLcIPMomjPqTeMwYmjXCT6bevwhesj2KPsLPZSIhzxVE7-d9eJ-2tm00"
-         alt="Markdown Monster icon"
+    <img src="Diagram1.png"
+         alt="Markdown Diagram1"
          class="center"/>
 </html>
-
-
-![PlantUML model][foto1]
 
 Maven Project
 
