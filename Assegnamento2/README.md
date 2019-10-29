@@ -55,14 +55,13 @@
    Some functions like: login, purchasing and shipping are time-simulated with a loading or a progress animation.
    ## UML Class Diagram
    <p align="center">
-    <img src="./src/main/resources/Diagram1.png" alt="Logo">
+    <img src="./src/main/resources/Diagram1.svg" alt="ClassDiagram">
    </p>
    
    <!-- UML USE-CASE DIAGRAM -->
    ## UML Use-Case Diagram
    <p align="center">
-   
-   ![UMLUseCase](src/main/resources/Diagram2.svg)
+       <img src="./src/main/resources/Diagram2.svg" alt="UseCaseDiagram">
    </p>
    
    <!-- LICENSE -->
