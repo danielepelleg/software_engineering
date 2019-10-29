@@ -32,7 +32,7 @@
    
    <!-- UML USE-CASE DIAGRAM -->
    ## UML Use-Case Diagram
-   ![UMLClass](src/main/resources/Diagram2.png)
+   ![UMLUseCase](src/main/resources/Diagram2.png)
    
    <!-- LICENSE -->
    ## LICENSE
