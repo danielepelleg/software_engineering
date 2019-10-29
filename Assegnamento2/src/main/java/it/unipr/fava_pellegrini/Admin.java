@@ -41,13 +41,13 @@ public class Admin extends Person {
      * @param newBottles the bottle to refill or add
      *
      */
-    public void refillBottle(Winehouse store, Bottle newBottles, int newAmount){
+    public void refillBottle(Winehouse store, Bottle newBottles){
         boolean present = false;
         if(!store.getBottles().isEmpty()){
             for(Bottle b: store.getBottles()){
-                if(b.getWine().getName() == newBottles.getWine().getName() && b.getWine().getYear() == newBottles.getWine().getYear()) {
+                if(b.getWine().getName().equals(newBottles.getWine().getName()) && b.getWine().getYear() == newBottles.getWine().getYear()) {
                     present = true;
-                    b.setBottleAmount(b.getBottleAmount() + newAmount);
+                    b.setBottleAmount(b.getBottleAmount() + newBottles.getBottleAmount());
                     System.out.println("The following bottle has been refilled:\n" + b.toString());
                     store.sendNotification();
                 }

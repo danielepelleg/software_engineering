@@ -33,8 +33,8 @@ public class Main {
         Wine WY = new Wine("Franciacorta Brut DOCG", 2011, "Champagne, Spumante", "Pinot Nero 22%", "Chardonnay 77%", "Pinot Bianco 1%");
         Bottle BX = new Bottle(WX, 5);
         Bottle BY = new Bottle(WY, 3);
-        A1.refillBottle(store, BX, 0);
-        A1.refillBottle(store, BY, 0);
+        A1.refillBottle(store, BX);
+        A1.refillBottle(store, BY);
         System.out.println(store.toString());
 
         System.out.println("------ 2a) User UX signs in and buy some of the bottle BX ------");
@@ -63,6 +63,7 @@ public class Main {
 
         System.out.println("------ 4) The employee refill the missing bottles UY and the system send a notification to the user UZ \n" +
                 "      about the new availability of the bottle ------");
-        A1.refillBottle(store, BY, 3);
+        Bottle BY1 = new Bottle(WY, 3);
+        A1.refillBottle(store, BY1);
     }
 }
