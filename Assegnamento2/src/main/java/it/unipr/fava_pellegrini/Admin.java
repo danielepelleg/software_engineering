@@ -64,15 +64,16 @@ public class Admin extends Person {
      * Simulate the shipment of the order, add to the client purchases list the bottles buyed
      *
      * @param store the Winehouse Store
-     * @param buyer   the client
-     * @param buyWine the wine buyed by the client
-     * @param buyAmount the quantity of bottle to buyed
      *
      */
-    public void shipOrder(Winehouse store, Client buyer, Wine buyWine, int buyAmount) throws InterruptedException {
-        System.out.println("The order has been shipped by the admin...");
-        ProgressBar p = new ProgressBar();
-        p.progress();
-        buyer.addPurchase(buyWine,buyAmount);
+    public void shipOrder(Winehouse store) throws InterruptedException {
+        for (Order o : store.getOrders()) {
+            if (o.isProcessed()) {
+                System.out.println("The order has been shipped by the admin...");
+                ProgressBar p = new ProgressBar();
+                p.progress();
+                o.getBuyer().addPurchase(o.getOrderBottle().getWine(), o.getOrderBottle().getBottleAmount());
+            }
+        }
     }
 }
