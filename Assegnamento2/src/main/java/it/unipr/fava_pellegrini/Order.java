@@ -120,7 +120,7 @@ public class Order {
         String show = "Client:\n" + this.buyer.toString() + "\n\nBottle Chosen:\n" + this.orderBottle.toString()
                 + "\n Processed: " + status(this.processed) + "\n";
         if (isNotification())
-            return show += "\nNotification: " + status(this.notification);
+            return show += "Notification: " + status(this.notification);
         else return show;
     }
 }

@@ -122,6 +122,7 @@ public class Winehouse {
         if(!this.bottles.isEmpty()) {
             for (Bottle b : getBottles()) {
                 if (b.getWine().getName().equals(wine_name) && b.getWine().getYear() == wine_year) {
+                    System.out.print("SEARCH RESULT:\n");
                     System.out.print(b.toString()+"\n");
                     outofstockWarning(b);
                     found = true;
@@ -213,7 +214,7 @@ public class Winehouse {
     public void outofstockWarning(Bottle outofstockBottle){
         for (Bottle b : this.bottles){
             if (b.getWine() == outofstockBottle.getWine() && b.getBottleAmount() == 0)
-                System.out.println("\nThe following bottle " + b.getWine().getName() + ", " + b.getWine().getYear() + " has now gone out of stock.\n");
+                System.out.println("\n!WARNING! The bottles of the following wine: " + b.getWine().getName() + "of the " + b.getWine().getYear() + ", are out of stock.\n");
         }
     }
 
