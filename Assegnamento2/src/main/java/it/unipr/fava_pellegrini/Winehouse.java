@@ -155,6 +155,7 @@ public class Winehouse {
                 System.out.println("Purchase Successful! Order Summary:\n\n" + newOrder.toString());
                 this.outofstockWarning(newOrder.getOrderBottle());
             }
+            else System.out.println("The wine searched is not currently available. If you want, try to ask for notification!");
         }
         else System.out.println("Please sign in to make a order.");
     }

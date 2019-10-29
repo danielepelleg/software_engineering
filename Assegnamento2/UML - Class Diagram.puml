@@ -1,5 +1,4 @@
 @startuml
-
 title Class Diagram
 
 package Database <<Database>> {
@@ -20,9 +19,9 @@ package Database <<Database>> {
     +void cleanOrders()
   }
 }
-Winehouse *-up- Order
-Winehouse *-right- Person
-Winehouse *-left- Bottle
+Winehouse o-- Order
+Winehouse o-- Person
+Winehouse o-- Bottle
 
 class Person {
     __ private data __
@@ -44,14 +43,18 @@ class Client {
     +void askNotification()
 }
 
+Client -- Wine
+
 class Admin {
     +void deleteOrder()
     +void refillOrder()
     +void shipOrder()
 }
 
+Admin -up- Order
+
 Person <|-up- Client : <<Inheritance>>
-Person <|-down- Admin : <<Inheritance>>
+Person <|-left- Admin : <<Inheritance>>
 
 class Wine {
     -name : String
@@ -65,16 +68,18 @@ class Bottle {
     -bottleAmount : Integer
 }
 
-Bottle "*" o-down- "1" Wine : contains
+Bottle "*" *-up- "1" Wine : contains
 
 class Order {
     -buyer : Client
     -orderBottle : Bottle
+    -trackingNumber : String
     -processed : boolean
     -notification : boolean
+    -shipped : boolean
 }
 
-Order "*" o-left- "1" Bottle : contains
-Order "*" o-right- "1" Client : contains
+Order "*" *-left- "1" Bottle : contains
+Order "*" *-right- "1" Client : contains
 
 @enduml

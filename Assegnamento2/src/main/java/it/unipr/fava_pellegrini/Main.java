@@ -39,20 +39,25 @@ public class Main {
 
         System.out.println("------ 2a) User UX signs in and buy some of the bottle BX ------");
         UX.login(store, "Jack", "winelover");
-        System.out.println("\nCustomer UX: Buying 4 bottles of the Wine " + BX.getWine().getName());
+        System.out.println("\nCustomer UX: Searching 4 bottles of the Wine " + BX.getWine().getName());
+        UX.searchWine(store, WX.getName(), WX.getYear());
+        System.out.println("\nThe bottles searched are available, so the user decides to buy the wine");
         UX.buyWine(store, WX, 4);
         A1.shipOrder(store);
 
         System.out.println("\n------ 2b) User UY signs in and buy all the bottles BY ------");
         UY.login(store, "Giovy", "sparklingwine");
-        System.out.println("\nCustomer UY: Buying all the 3 bottles of the Wine " + BY.getWine().getName());
+        System.out.println("\nCustomer UY: Searching the 3 bottles of the Wine " + BY.getWine().getName());
+        UY.searchWine(store, WY.getName(), WY.getYear());
+        System.out.println("\nThe bottles searched are available, so the user decides to buy the wine");
         UY.buyWine(store, WY, 3);
         A1.shipOrder(store);
 
         System.out.println("\n------ 3) User UZ signs and to buy some of the bottle UY now gone out of stock, so ask to be notified when \n" +
                 "      the bottle BY comes back available ------\n");
-        UZ.searchWine(store, WY.getName(), WY.getYear());
         UZ.login(store, "Mark", "proseccolover");
+        System.out.println("\nCustomer UZ: Searching 2 bottles of the Wine " + BY.getWine().getName());
+        UZ.searchWine(store, WY.getName(), WY.getYear());
         UZ.askNotification(store, WY, 2);
 
         System.out.println("------ 4) The employee refill the missing bottles UY and the system send a notification to the user UZ \n" +
