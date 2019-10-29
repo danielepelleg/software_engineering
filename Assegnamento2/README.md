@@ -28,11 +28,17 @@
    
    <!-- UML CLASS DIAGRAM -->
    ## UML Class Diagram
-   ![UMLClass](src/main/resources/Diagram1.png)
+   <p align="center">
+   
+   ![UMLClass](src/main/resources/Diagram1.svg)
+   </p>
    
    <!-- UML USE-CASE DIAGRAM -->
    ## UML Use-Case Diagram
-   ![UMLUseCase](src/main/resources/Diagram2.png)
+   <p align="center">
+   
+   ![UMLUseCase](src/main/resources/Diagram2.svg)
+   </p>
    
    <!-- LICENSE -->
    ## LICENSE
