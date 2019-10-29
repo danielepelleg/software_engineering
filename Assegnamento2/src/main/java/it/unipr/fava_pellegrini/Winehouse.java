@@ -214,7 +214,7 @@ public class Winehouse {
     public void outofstockWarning(Bottle outofstockBottle){
         for (Bottle b : this.bottles){
             if (b.getWine() == outofstockBottle.getWine() && b.getBottleAmount() == 0)
-                System.out.println("\n!WARNING! The bottles of the following wine: " + b.getWine().getName() + "of the " + b.getWine().getYear() + ", are out of stock.\n");
+                System.out.println("\n!WARNING! The bottles of the following wine: " + b.getWine().getName() + "of the " + b.getWine().getYear() + ", are now out of stock.\n");
         }
     }
 

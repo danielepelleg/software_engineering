@@ -41,7 +41,7 @@ public class Main {
         UX.login(store, "Jack", "winelover");
         System.out.println("\nCustomer UX searches the the Wine " + BY.getWine().getName() + " of the " + BY.getWine().getYear());
         UX.searchWine(store, WX.getName(), WX.getYear());
-        System.out.println("\nThe bottles searched are available, so the user decides to buy 4 bottles of the wine");
+        System.out.println("\nThe wine searched is available, so the user decides to buy 4 bottles of the wine");
         UX.buyWine(store, WX, 4);
         A1.shipOrder(store);
 
@@ -49,7 +49,7 @@ public class Main {
         UY.login(store, "Giovy", "sparklingwine");
         System.out.println("\nCustomer UY searches the the Wine " + BY.getWine().getName() + " of the " + BY.getWine().getYear());
         UY.searchWine(store, WY.getName(), WY.getYear());
-        System.out.println("\nThe bottles searched are available, so the user decides to buy 3 bottles of the wine");
+        System.out.println("\nThe wine searched is available, so the user decides to buy 3 bottles of the wine");
         UY.buyWine(store, WY, 3);
         A1.shipOrder(store);
 
@@ -58,7 +58,7 @@ public class Main {
         UZ.login(store, "Mark", "proseccolover");
         System.out.println("\nCustomer UZ searches the the Wine " + BY.getWine().getName() + " of the " + BY.getWine().getYear());
         UZ.searchWine(store, WY.getName(), WY.getYear());
-        System.out.println("The bottles searched by the User UZ are out of stock so he asks for notification\n");
+        System.out.println("The bottles of the wine searched by the User UZ are out of stock so he asks for notification\n");
         UZ.askNotification(store, WY, 2);
 
         System.out.println("------ 4) The employee refill the missing bottles UY and the system send a notification to the user UZ \n" +
