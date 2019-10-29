@@ -2,6 +2,7 @@ package it.unipr.fava_pellegrini;
 
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Client Class - Person Subclass
@@ -13,7 +14,8 @@ import java.io.IOException;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Client extends Person {
-    boolean logged;
+    private boolean logged;
+    private ArrayList<Bottle> purchases;
 
     /**
      * Class constructor.
@@ -27,6 +29,15 @@ public class Client extends Person {
     Client(String name, String surname, String username, String password) {
         super(name, surname, username, password);
         this.logged = false;
+        this.purchases = new  ArrayList<>();
+    }
+
+    public ArrayList<Bottle> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(ArrayList<Bottle> purchases) {
+        this.purchases = purchases;
     }
 
     public boolean isLogged() {
@@ -108,5 +119,17 @@ public class Client extends Person {
         store.addOrder(newOrder);
         newOrder.setNotification(true);
         System.out.println("Your notification request has been processed. You'll be warned when the bottle comes back in stock.\n\n" + newOrder.toString() + "\n");
+    }
+
+    /**
+     * Add a new purchase to the purchases list
+     *
+     * @param buyWine the wine to buy
+     * @param buyAmount the quantity of bottle to buy
+     *
+     */
+    public void addPurchase(Wine buyWine, int buyAmount){
+        Bottle newBottle = new  Bottle(buyWine, buyAmount);
+        this.purchases.add(newBottle);
     }
 }
