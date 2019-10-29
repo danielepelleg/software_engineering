@@ -5,12 +5,9 @@
   </a>
   <h1 align="center">Winehouse</h1>
   <p align="center">
-    Instagram spies catcher.  
-</p>
-
-Java implementation of a software representing a wine store.
-
-![Class](src/main/resources/Diagram1.svg)
+    Java implementation of a software representing a wine store. 
+    
+![UMLClass](src/main/resources/Diagram1.svg)
 
 Maven Project
 
