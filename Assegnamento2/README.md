@@ -18,8 +18,8 @@
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
   - [UML Diagrams](#uml)
-    - [Class Diagram](#uml-class-diagram)
-    - [Use-Case Diagram](#uml-usecase-diagram)
+    - [Class Diagram](#class-diagram)
+    - [Use-Case Diagram](#usecase-diagram)
   - [Getting Started](#getting-started)
     - [Updates](#updates)
   - [License](#license)
@@ -62,7 +62,7 @@
     <img src="./src/main/resources/Diagram1.svg" alt="ClassDiagram">
    </p>
    
-   ## Use-Case Diagram
+   ## UseCase Diagram
    <p align="center">
        <img src="./src/main/resources/Diagram2.svg" alt="UseCaseDiagram">
    </p>
