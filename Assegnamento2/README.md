@@ -17,9 +17,11 @@
   
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
-  - [UML Class Diagram](#uml-class-diagram)
-  - [UML Use-Case Diagram](#uml-usecase-diagram)
+  - [UML](#uml)
+    - [UML Class Diagram](#uml-class-diagram)
+    - [UML Use-Case Diagram](#uml-usecase-diagram)
   - [Getting Started](#getting-started)
+    - [Updates](#updates)
   - [License](#license)
   - [Contributors](#contributors)
    
@@ -53,23 +55,32 @@
     about the new availability of the bottle
     
    Some functions like: login, purchasing and shipping are time-simulated with a loading or a progress animation.
+  
+  <!-- UML DIAGRAMS  -->
    ## UML Class Diagram
    <p align="center">
     <img src="./src/main/resources/Diagram1.svg" alt="ClassDiagram">
    </p>
    
-   <!-- UML USE-CASE DIAGRAM -->
    ## UML Use-Case Diagram
    <p align="center">
        <img src="./src/main/resources/Diagram2.svg" alt="UseCaseDiagram">
    </p>
    
+   <!-- GETTING STARTED -->
+   ## Getting Started
+   You can just clone this repository.
+   
+   ### Updates
+   Pull this repository for updates.
+   
    <!-- LICENSE -->
    ## LICENSE
+   Distributed under the GPL License. See `LICENSE` for more information.
    <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"title="Flaticon">www.flaticon.com</a></div>
    
    <!-- CONTRIBUTORS -->
-   ### Contributors
+   ## CONTRIBUTORS
    [Daniele Pellegrini](https://github.com/danielepelleg) - 285240
    
    [Riccardo Fava](https://github.com/BeleRicks11) - 287516
