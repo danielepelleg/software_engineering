@@ -1,4 +1,3 @@
-@startuml
 title Class Diagram
 
 package Database <<Database>> {
@@ -81,5 +80,3 @@ class Order {
 
 Order "*" *-left- "1" Bottle : contains
 Order "*" *-right- "1" Client : contains
-
-@enduml

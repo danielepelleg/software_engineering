@@ -1,5 +1,3 @@
-@startuml
-
 title Use Case Diagram
 
 left to right direction
@@ -20,5 +18,3 @@ rectangle  Winehouse_Database {
     (Search Wine) <.left. (Buy Wine) : <<extends>>
     (Search Wine) <.right. (Ask Notification) : <<extends>>
 }
-
-@enduml
