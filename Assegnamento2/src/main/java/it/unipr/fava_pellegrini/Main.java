@@ -25,10 +25,10 @@ public class Main {
         Client UY = new Client("Giovanna", "Sirati", "Giovy", "sparklingwine");
         Client UZ = new Client("Marco", "Maggi", "Mark", "proseccolover");
         Admin A1 = new Admin("Maria", "Faresi", "Mary", "0FaresiWine1");
-        UX.Registration(store);
-        UY.Registration(store);
-        UZ.Registration(store);
-        store.Registration(A1);
+        UX.registration(store);
+        UY.registration(store);
+        UZ.registration(store);
+        store.addUser(A1);
         Wine WX = new Wine("Lambrusco Marcello", 2013, "Rosso, Frizzante", "Lambrusco Maestri");
         Wine WY = new Wine("Franciacorta Brut DOCG", 2011, "Champagne, Spumante", "Pinot Nero 22%", "Chardonnay 77%", "Pinot Bianco 1%");
         Bottle BX = new Bottle(WX, 5);
@@ -38,13 +38,13 @@ public class Main {
         System.out.println(store.toString());
 
         System.out.println("------ 2a) User UX signs in and buy some of the bottle BX ------");
-        UX.Login(store, "Jack", "winelover");
+        UX.login(store, "Jack", "winelover");
         System.out.println("\nCustomer UX: Buying 4 bottles of the Wine " + BX.getWine().getName());
         UX.buyWine(store, WX, 4);
         A1.shipOrder(store, UX, WX, 4);
 
         System.out.println("\n------ 2b) User UY signs in and buy all the bottles BY ------");
-        UY.Login(store, "Giovy", "sparklingwine");
+        UY.login(store, "Giovy", "sparklingwine");
         System.out.println("\nCustomer UY: Buying all the 3 bottles of the Wine " + BY.getWine().getName());
         UY.buyWine(store, WY, 3);
         A1.shipOrder(store, UY, WY, 3);
@@ -52,7 +52,7 @@ public class Main {
         System.out.println("\n------ 3) User UZ signs and to buy some of the bottle UY now gone out of stock, so ask to be notified when \n" +
                 "      the bottle BY comes back available ------\n");
         UZ.searchWine(store, WY.getName(), WY.getYear());
-        UZ.Login(store, "Mark", "proseccolover");
+        UZ.login(store, "Mark", "proseccolover");
         UZ.askNotification(store, WY, 2);
 
         System.out.println("------ 4) The employee refill the missing bottles UY and the system send a notification to the user UZ \n" +

@@ -53,8 +53,8 @@ public class Client extends Person {
      *
      * @param store the Winehouse the client wants to register to
      */
-    public void Registration(@NotNull Winehouse store) {
-        store.Registration(Client.this);
+    public void registration(@NotNull Winehouse store) {
+        store.addUser(Client.this);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Client extends Person {
      * @param checkUsername the username credential chosen yo sign in
      * @param checkPassword the password credential chosen to sign in
      */
-    public void Login(Winehouse store, String checkUsername, String checkPassword) throws IOException, InterruptedException {
+    public void login(Winehouse store, String checkUsername, String checkPassword) throws IOException, InterruptedException {
         Client tempClient = new Client("Client", "Testing", checkUsername, checkPassword);
         tempClient.setPassword(checkPassword);
         ProgressBar l = new ProgressBar();
@@ -103,7 +103,7 @@ public class Client extends Person {
      * @param bottles the quantity of bottle to buy
      */
     public void buyWine(Winehouse store, Wine buyWine, int bottles) throws IOException, InterruptedException {
-        store.buyWine(Client.this, buyWine, bottles);
+        store.sellWine(Client.this, buyWine, bottles);
     }
 
     /**

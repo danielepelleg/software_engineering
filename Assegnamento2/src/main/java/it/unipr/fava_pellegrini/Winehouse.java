@@ -58,7 +58,7 @@ public class Winehouse {
      * @param newPerson the person to register to the database
      *
      */
-    public void Registration(Person newPerson) {
+    public void addUser(Person newPerson) {
         getUsers().add(newPerson);
     }
 
@@ -136,16 +136,16 @@ public class Winehouse {
      * If the client is logged, let him purchase the amount of wine chosen.
      *
      * @param buyer   the client
-     * @param buyWine the wine to buy
-     * @param buyAmount the quantity of bottle to buy
+     * @param sellWine the wine to buy
+     * @param sellAmount the quantity of bottle to buy
      */
-    public void buyWine(Client buyer, Wine buyWine, int buyAmount) throws InterruptedException {
+    public void sellWine(Client buyer, Wine sellWine, int sellAmount) throws InterruptedException {
         if (buyer.isLogged()) {
-            Order newOrder = new Order(buyer, buyWine, buyAmount);
-            if (checkAvailability(buyWine, buyAmount)) {
+            Order newOrder = new Order(buyer, sellWine, sellAmount);
+            if (checkAvailability(sellWine, sellAmount)) {
                 for (Bottle b : getBottles()) {
-                    if (b.getWine().equals(buyWine))
-                        updateBottle(b, buyAmount);
+                    if (b.getWine().equals(sellWine))
+                        updateBottle(b, sellAmount);
                 }
                 addOrder(newOrder);
                 System.out.println("Your order is being processed please wait . . .");
