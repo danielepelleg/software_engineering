@@ -4,7 +4,7 @@
 <html>
     <img src="Diagram1.png"
          alt="Markdown Diagram1"
-         class="center"/>
+         align="middle"/>
 </html>
 
 Maven Project
