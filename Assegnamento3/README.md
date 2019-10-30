@@ -52,14 +52,14 @@
     2) Randomly, every official adds or updates some employees. The sequence of every action must be broken
         with a random timed wait. Once a new fiscal code is generated, it is compared to the already existing ones.
     
-    3) Randomly, every director and administrator does a research on the list of employees of a workplace. The sequence
-        of every action must be broken with a random timed wait.
+    3) Randomly, every director and administrator does a research on the list of employees of a workplace. 
+        The sequence of every action must be broken with a random timed wait.
     
-    4) The simulation test will be over after a random timed timer. This timer must ensure a right time to let every actor
-        does a right number of actions to test the system and to ensure a good concurrency management.
+    4) The simulation test will be over after a random timed timer. This timer must ensure a right time to let 
+        every actor does a right number of actions to test the system and to ensure a good concurrency management.
     
-    5) The server will shut down the service when all the tests of the clients will be over and they will have shut down 
-        the comunication with the server itself.
+    5) The server will shut down the service when all the tests of the clients will be over and they will have 
+        shut down the comunication with the server itself.
     
    
   <!-- UML DIAGRAMS  -->
