@@ -1,0 +1,58 @@
+@startuml
+title Class Diagram
+
+top to bottom direction
+
+package SERVER <<Database>> {
+  class BusinessCompany{
+    -workplaces : ArrayList<Workplace>
+    -employees : ArrayList<Employee>
+    +void checkFiscalCode()
+  }
+}
+
+SERVER o-down- Workplace
+SERVER o-down- Employee
+
+class Workplace{
+    -name : String
+    -address : String
+}
+
+class Employee {
+    __ private data __
+    -name : String
+    -surname : String
+    -fiscalCode : String
+    -workplace : Workplace
+    -mansion : String
+    -startActivity : Date
+    -endActivity : Date
+}
+
+Employee *-left- Workplace
+
+class Official {
+    -username : String
+    -password : String
+    -- crypted --
+    -hashed_password : String
+    ____
+    +void login(BusinessCompany)
+    +void addEmployee(Employee)
+    +void updateData(Employee)
+}
+
+class Director {
+    -adminPrivilege = false : boolean
+    +void searchEmployee(Employee)
+}
+
+Employee <|-right- Official : <<Inheritance>>
+Official <|-right- Director : <<Inheritance>>
+Director <|-up- Administrator : <<Inheritance>>
+
+class Administrator {
+    -adminPrivilege = true : boolean
+}
+@enduml

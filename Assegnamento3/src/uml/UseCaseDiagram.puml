@@ -1,0 +1,23 @@
+@startuml
+title Use Case Diagram
+
+left to right direction
+
+actor Administrator
+actor Official
+actor Employee
+actor Director
+
+Employee -right-|> (Official) : <<inheritance>>
+Official -down-|> (Director) : <<inheritance>>
+Director -down-|> (Administrator) : <<inheritance>>
+
+rectangle  SERVER {
+    Official -- (Login)
+    Director -- (Login)
+    Administrator -- (Login)
+    (Login) <.. (Add Employee) : <<extends>> (Official)
+    (Login) <.. (Update Personal Data) : <<extends>> (Official)
+    (Login) <.. (Search Employee) : <<extends>> (Director)
+}
+@enduml
