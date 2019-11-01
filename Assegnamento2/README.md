@@ -17,7 +17,7 @@
   
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
-  - [UML Diagrams](#uml)
+  - [UML Diagrams](#uml-diagrams)
     - [Class Diagram](#class-diagram)
     - [Use-Case Diagram](#usecase-diagram)
   - [Getting Started](#getting-started)
