@@ -19,9 +19,9 @@ package Database <<Database>> {
     +void cleanOrders()
   }
 }
-Winehouse o-- Order
-Winehouse o-- Person
-Winehouse o-- Bottle
+Winehouse *-- Order
+Winehouse *-- Person
+Winehouse *-- Bottle
 
 class Person {
     __ private data __
@@ -79,6 +79,6 @@ class Order {
     -shipped : boolean
 }
 
-Order "*" *-left- "1" Bottle : contains
-Order "*" *-right- "1" Client : contains
+Order "*" o-left- "1" Bottle : contains
+Order "*" o-right- "1" Client : contains
 @enduml

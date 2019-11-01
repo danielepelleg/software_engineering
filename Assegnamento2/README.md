@@ -59,12 +59,12 @@
   <!-- UML DIAGRAMS  -->
    ## Class Diagram
    <p align="center">
-    <img src="./src/main/resources/Diagram1.svg" alt="ClassDiagram">
+    <img src="./src/main/resources/ClassDiagram.svg" alt="ClassDiagram">
    </p>
    
    ## UseCase Diagram
    <p align="center">
-       <img src="./src/main/resources/Diagram2.svg" alt="UseCaseDiagram">
+       <img src="./src/main/resources/UseCaseDiagram.svg" alt="UseCaseDiagram">
    </p>
    
    <!-- GETTING STARTED -->
