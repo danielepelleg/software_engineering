@@ -81,7 +81,7 @@
    ## LICENSE
    Distributed under the GPL License. See `LICENSE` for more information.
    <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"title="Flaticon">www.flaticon.com</a></div>
-   <div>UML Diagrams created with <a href="http://plantuml.com/" title="PlantUML">PlantUML</a> using relative JetBrain's plugin <a href="https://plugins.jetbrains.com/plugin/7017-plantuml-integration/"title="JetBrains_PlantUML">https://plugins.jetbrains.com/plugin/7017-plantuml-integration/</a></div>
+   <div>UML Diagrams created with <a href="http://plantuml.com/" title="PlantUML">PlantUML</a> using JetBrain's plugin <a href="https://plugins.jetbrains.com/plugin/7017-plantuml-integration/"title="JetBrains_PlantUML">https://plugins.jetbrains.com/plugin/7017-plantuml-integration/</a></div>
    
    <!-- CONTRIBUTORS -->
    ## CONTRIBUTORS
