@@ -19,5 +19,6 @@ rectangle  SERVER {
     (Login) <.. (Add Employee) : <<extends>> (Official)
     (Login) <.. (Update Personal Data) : <<extends>> (Official)
     (Login) <.. (Search Employee) : <<extends>> (Director)
+    (Login) <.. (Search Employee) : <<extends>> (Administrator)
 }
 @enduml
