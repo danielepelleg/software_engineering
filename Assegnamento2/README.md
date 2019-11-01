@@ -57,6 +57,9 @@
    Some functions like: login, purchasing and shipping are time-simulated with a loading or a progress animation.
   
   <!-- UML DIAGRAMS  -->
+   ## UML Diagrams
+   UML Diagrams (_.puml files_) are located in _./src/main/uml_. It has been used PlantUML component that allows to quickly write uml diagrams using a simple and intuitive language.
+   The _.svg and .png files_ are located in _./src/main/resources_.
    ## Class Diagram
    <p align="center">
     <img src="./src/main/resources/ClassDiagram.svg" alt="ClassDiagram">
@@ -78,6 +81,7 @@
    ## LICENSE
    Distributed under the GPL License. See `LICENSE` for more information.
    <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"title="Flaticon">www.flaticon.com</a></div>
+   <div>UML Diagrams created with <a href="http://plantuml.com/" title="PlantUML">PlantUML</a> using relative JetBrain's plugin <a href="https://plugins.jetbrains.com/plugin/7017-plantuml-integration/"title="JetBrains_PlantUML">https://plugins.jetbrains.com/plugin/7017-plantuml-integration/</a></div>
    
    <!-- CONTRIBUTORS -->
    ## CONTRIBUTORS
