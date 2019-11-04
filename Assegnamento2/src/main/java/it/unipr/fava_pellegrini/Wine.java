@@ -101,7 +101,7 @@ public class Wine {
      *
      * @param newVineyard the vineyard to add
      */
-    public void addVinewyard(String newVineyard){
+    public void addVineyard(String newVineyard){
         this.vineyards.add(newVineyard);
     }
 

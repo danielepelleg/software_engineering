@@ -1,20 +1,26 @@
+@startuml
 title Use Case Diagram
 
 left to right direction
 
+actor Logged_Client
+actor Not_Registered_User
 actor Admin
-actor Client
-actor Person
 
-Person -down-|> (Admin) : <<inheritance>>
-Person -right-|> (Client) : <<inheritance>>
 
-rectangle  Winehouse_Database {
-    Client -- (Registration)
-    Client -down- (Login)
+rectangle  Winehouse {
+
+    Not_Registered_User -right- (Registration)
+    Not_Registered_User -up- (Search Wine)
+
+    Logged_Client -- (Search Wine)
+    Logged_Client -- (Ask Notification)
+    Logged_Client -- (Make Purchase)
+
     Admin -- (Refill Bottles)
     Admin -- (Ship Order)
-    (Login) <.. (Search Wine) : <<extends>>
-    (Search Wine) <.left. (Buy Wine) : <<extends>>
-    (Search Wine) <.right. (Ask Notification) : <<extends>>
+
+    (Search Wine) <.up. (Ask Notification) : <<include>>
+    (Search Wine) <.up. (Make Purchase) : <<include>>
 }
+@enduml

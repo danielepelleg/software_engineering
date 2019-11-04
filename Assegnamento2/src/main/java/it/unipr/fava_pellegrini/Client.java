@@ -64,11 +64,9 @@ public class Client extends Person {
      * @param checkUsername the username credential chosen yo sign in
      * @param checkPassword the password credential chosen to sign in
      */
-    public void login(Winehouse store, String checkUsername, String checkPassword) throws IOException, InterruptedException {
+    public void login(Winehouse store, String checkUsername, String checkPassword){
         Client tempClient = new Client("Client", "Testing", checkUsername, checkPassword);
         tempClient.setPassword(checkPassword);
-        ProgressBar l = new ProgressBar();
-        l.loading();
         boolean found = false;
         for (Person p : store.getUsers()) {
             if (p.getUsername().equals(checkUsername) && p.getPassword().equals(tempClient.getPassword())) {
@@ -102,7 +100,7 @@ public class Client extends Person {
      * @param buyWine the wine to buy
      * @param bottles the quantity of bottle to buy
      */
-    public void buyWine(Winehouse store, Wine buyWine, int bottles) throws IOException, InterruptedException {
+    public void buyWine(Winehouse store, Wine buyWine, int bottles){
         store.sellWine(Client.this, buyWine, bottles);
     }
 
