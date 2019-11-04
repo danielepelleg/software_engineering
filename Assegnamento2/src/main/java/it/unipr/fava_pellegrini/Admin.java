@@ -73,6 +73,12 @@ public class Admin extends Person {
         else System.out.println("This admin is not registered in the Winehouse");
     }
 
+    /**
+     * Control if the Admin is registered into the Winehouse
+     *
+     * @param store the Winehouse Store
+     *
+     */
     public boolean isRegistered(Winehouse store) {
         for (Person p : store.getUsers()) {
             if (p.getUsername().equals(this.getUsername()) && p.getPassword().equals(this.getPassword())) {
