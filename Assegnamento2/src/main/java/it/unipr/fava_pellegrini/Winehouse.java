@@ -152,7 +152,7 @@ public class Winehouse {
      * @param sellWine the wine to buy
      * @param sellAmount the quantity of bottle to buy
      */
-    public void sellWine(Client buyer, Wine sellWine, int sellAmount) throws InterruptedException {
+    public void sellWine(Client buyer, Wine sellWine, int sellAmount){
         if (buyer.isLogged()) {
             Order newOrder = new Order(buyer, sellWine, sellAmount);
             if (checkAvailability(sellWine, sellAmount)) {
@@ -162,8 +162,6 @@ public class Winehouse {
                 }
                 addOrder(newOrder);
                 System.out.println("Your order is being processed please wait . . .");
-                ProgressBar p = new ProgressBar();
-                p.progress();
                 newOrder.setProcessed(true);
                 System.out.println("Purchase Successful! Order Summary:\n\n" + newOrder.toString());
                 this.outofstockWarning(newOrder.getOrderBottle());

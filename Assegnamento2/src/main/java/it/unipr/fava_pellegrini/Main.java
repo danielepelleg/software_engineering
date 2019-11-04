@@ -18,7 +18,7 @@ import java.io.IOException;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args){
         System.out.println("------ 1) The Winehouse is initialized with some users, an admin and some wines ------");
         Winehouse store = new Winehouse();
         Client UX = new Client("Giacomo", "Pini", "Jack", "winelover");

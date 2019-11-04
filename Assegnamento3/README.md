@@ -59,7 +59,7 @@
         every actor does a right number of actions to test the system and to ensure a good concurrency management.
     
     5) The server will shut down the service when all the tests of the clients will be over and they will have 
-        shut down the comunication with the server itself.
+        shut down the communication with the server itself.
     
    
   <!-- UML DIAGRAMS  -->
