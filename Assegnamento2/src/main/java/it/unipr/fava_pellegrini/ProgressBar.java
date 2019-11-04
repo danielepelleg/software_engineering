@@ -15,7 +15,7 @@ public class ProgressBar {
     private StringBuilder progress;
 
     /**
-     * Class Constructor
+     * Constructor method
      *
      * Initialize progress bar properties.
      */
@@ -24,7 +24,7 @@ public class ProgressBar {
     }
 
     /**
-     * Bar Initializer for Class Constructor
+     * Bar Initializer for Constructor method
      */
     private void init() {
         this.progress = new StringBuilder(60);

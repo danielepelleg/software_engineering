@@ -19,6 +19,17 @@ public class Person{
     private String hashed_password;
 
     /**
+     * This constructor generates an empty person
+     *
+     */
+    public Person() {
+        this.name = "";
+        this.surname = "";
+        this.username = "";
+        this.password = "";
+    }
+
+    /**
      * Class constructor.
      *
      * Once the Constructor has given the attributes it generates the hashed
@@ -69,7 +80,7 @@ public class Person{
      */
     public void setHashedPassword(String password) {
         try {
-            if(password == null){
+            if(password == null || password.isEmpty()){
                 this.hashed_password = null;
             }
             else {

@@ -2,7 +2,6 @@ package it.unipr.fava_pellegrini;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Wine Class
@@ -15,10 +14,21 @@ public class Wine {
     private String name;
     private int year;
     private String notes;
-    private List<String>  vineyards = new ArrayList<>();
+    private ArrayList<String>  vineyards = new ArrayList<String>();
 
     /**
-     * Class Constructor
+     * This constructor generates an empty Wine object.
+     *
+     */
+    public Wine() {
+        this.name = "";
+        this.year = 1900;
+        this.notes = "";
+        this.vineyards = new ArrayList<String>();
+    }
+
+    /**
+     * This constructor generates a Wine object from its parameters.
      *
      * @param name the name of the wine
      * @param year the year of production
@@ -26,7 +36,7 @@ public class Wine {
      * @param vineyards a list of String containing the vineyards
      *
      */
-    public Wine(String name, int year, String notes, List<String>  vineyards) {
+    public Wine(String name, int year, String notes, ArrayList<String>  vineyards) {
         this.name = name;
         this.year = year;
         this.notes = notes;
@@ -88,11 +98,11 @@ public class Wine {
         this.notes = notes;
     }
 
-    public List<String> getVineyards() {
+    public ArrayList<String> getVineyards() {
         return vineyards;
     }
 
-    public void setVineyards(List<String> vines) {
+    public void setVineyards(ArrayList<String> vines) {
         this.vineyards = vines;
     }
 

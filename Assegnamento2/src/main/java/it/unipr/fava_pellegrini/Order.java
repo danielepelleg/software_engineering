@@ -20,14 +20,26 @@ public class Order {
     public boolean shipped;
 
     /**
-     * Class constructor.
+     * This constructor generates an empty Order object
+     *
+     */
+    public Order () {
+        this.buyer = new Client();
+        this.orderBottle = new Bottle();
+        this.processed = false;
+        this.notification = false;
+        this.shipped = false;
+    }
+
+    /**
+     * This constructor generates an Order object from its parameters.
      *
      * @param buyer the order's relative client
      * @param wineAmount the wine chosen
      * @param wineChosen the quantity of of wine chosen
      *
      */
-    Order(Client buyer, Wine wineChosen, int wineAmount){
+    public Order(Client buyer, Wine wineChosen, int wineAmount){
         this.buyer = buyer;
         this.orderBottle = new Bottle(wineChosen, wineAmount);
         this.processed = false;

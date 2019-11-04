@@ -12,21 +12,34 @@ import java.util.*;
  */
 
 public class Winehouse {
+    private String name;
     private ArrayList<Bottle> bottles;
     private ArrayList<Person> users;
     private ArrayList<Order> orders;
 
     /**
-     * Class constructor.
-     *
-     * Once the Constructor is called it generates the lists to manage the wine store.
-     *
+     * This constructor generates an empty Winehouse object.
      */
     Winehouse() {
-        this.bottles = new ArrayList<>();
-        this.users = new ArrayList<>();
-        this.orders = new ArrayList<>();
+        this.name = "";
+        this.bottles = new ArrayList<Bottle>();
+        this.users = new ArrayList<Person>();
+        this.orders = new ArrayList<Order>();
     }
+
+    /**
+     * This constructor generates a Winehouse object from its parameters.
+     */
+    Winehouse(String name, ArrayList<Bottle> bottles, ArrayList<Person> users, ArrayList<Order> orders) {
+        this.name = name;
+        this.bottles = new ArrayList<Bottle>(bottles);
+        this.users = new ArrayList<Person>(users);
+        this.orders = new ArrayList<Order>(orders);
+    }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 
     public ArrayList<Bottle> getBottles() {
         return bottles;
@@ -107,7 +120,6 @@ public class Winehouse {
         }
     }
 
-
     /**
      * Search the wine requested inside the store
      *
@@ -156,7 +168,7 @@ public class Winehouse {
                 System.out.println("Purchase Successful! Order Summary:\n\n" + newOrder.toString());
                 this.outofstockWarning(newOrder.getOrderBottle());
             }
-            else System.out.println("The wine searched is not currently available. If you want, try to ask for notification!");
+            else System.out.println("The bottles searched are not currently available. If you want, try to ask for notification!");
         }
         else System.out.println("Please sign in to make a order.");
     }

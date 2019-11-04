@@ -18,8 +18,15 @@ public class Client extends Person {
     private ArrayList<Bottle> purchases;
 
     /**
-     * Class constructor.
-     * When called, the constructor generates an empty cart for every customer.
+     * This constructor generates an empty Client Object
+     * It can be used to create an unRegistered Client
+     */
+    public Client () {
+    }
+
+    /**
+     * This constructor generates a Client object from its parameters.
+     * When called, the constructor generates an empty cart for this client.
      *
      * @param name     the name of the member to be created
      * @param surname  the surname of the member to be created
@@ -59,6 +66,7 @@ public class Client extends Person {
 
     /**
      * Sign in the client to the Winehouse Store
+     * Use a temporary client because the checkPassword inserted as parameter is not hashed
      *
      * @param store         the Winehouse the client wants to sign in to
      * @param checkUsername the username credential chosen yo sign in
@@ -66,7 +74,6 @@ public class Client extends Person {
      */
     public void login(Winehouse store, String checkUsername, String checkPassword) throws IOException, InterruptedException {
         Client tempClient = new Client("Client", "Testing", checkUsername, checkPassword);
-        tempClient.setPassword(checkPassword);
         ProgressBar l = new ProgressBar();
         l.loading();
         boolean found = false;
@@ -76,9 +83,10 @@ public class Client extends Person {
                 setLogged(true);
             }
         }
-        if (found)
+        if (found){
             System.out.println("\tLogin Successful!");
-        else System.out.println("\tBad Login. The username or password you have entered is invalid.");
+        }
+        else System.out.println("\tBad Login. The username or password you have entered is invalid. Retry!");
     }
 
     /**
@@ -115,12 +123,15 @@ public class Client extends Person {
      * @param bottles the amount of bottles requested
      */
     public void askNotification(Winehouse store, Wine buyWine, int bottles){
-        Order newOrder = new Order(Client.this, buyWine, bottles);
-        store.addOrder(newOrder);
-        newOrder.setNotification(true);
-        System.out.println("The notification request has been processed. You'll be warned when the bottle comes back in stock.\n");
-        System.out.println("The System will send the notification to the client:\n" + newOrder.getBuyer().toString() + "\n");
-        System.out.println("The bottles requested in the notification are:\n" + newOrder.getOrderBottle().toString() + "\n" );
+        if (this.isLogged()) {
+            Order newOrder = new Order(Client.this, buyWine, bottles);
+            store.addOrder(newOrder);
+            newOrder.setNotification(true);
+            System.out.println("The notification request has been processed. You'll be warned when the bottle comes back in stock.\n");
+            System.out.println("The System will send the notification to the client:\n" + newOrder.getBuyer().toString() + "\n");
+            System.out.println("The bottles requested in the notification are:\n" + newOrder.getOrderBottle().toString() + "\n" );
+        }
+        else System.out.println("Please sign in to ask for notification");
     }
 
     /**

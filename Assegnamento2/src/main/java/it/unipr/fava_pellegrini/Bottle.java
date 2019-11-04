@@ -12,12 +12,21 @@ public class Bottle {
     private int bottleAmount;
 
     /**
-     * Class constructor.
+     * This constructor generates an empty Bottle object
+     *
+     */
+    public Bottle(){
+        this.wine = new Wine();
+        this.bottleAmount = 0;
+    }
+
+    /**
+     * This constructor generates a Bottle from its parameters.
      *
      * @param wine the wine to be bottled
      * @param bottleAmount the number of bottles to be added
      */
-    Bottle(Wine wine, int bottleAmount){
+    public Bottle(Wine wine, int bottleAmount){
         this.wine = wine;
         this.bottleAmount = bottleAmount;
     }
