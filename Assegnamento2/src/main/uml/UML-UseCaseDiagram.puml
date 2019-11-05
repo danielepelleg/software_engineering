@@ -3,24 +3,22 @@ title Use Case Diagram
 
 left to right direction
 
+actor Admin
 actor Logged_Client
 actor Not_Registered_User
-actor Admin
-
 
 rectangle  Winehouse {
-
-    Not_Registered_User -right- (Registration)
-    Not_Registered_User -up- (Search Wine)
-
-    Logged_Client -- (Search Wine)
-    Logged_Client -- (Ask Notification)
     Logged_Client -- (Make Purchase)
+    Logged_Client -- (Ask Notification)
+    Logged_Client -- (Search Wine)
+
+    Not_Registered_User -- (Registration)
+    Not_Registered_User -- (Search Wine)
 
     Admin -- (Refill Bottles)
     Admin -- (Ship Order)
 
-    (Search Wine) <.up. (Ask Notification) : <<include>>
-    (Search Wine) <.up. (Make Purchase) : <<include>>
+    (Search Wine) <.left. (Make Purchase) : <<include>>
+    (Search Wine) <.down. (Ask Notification) : <<include>>
 }
 @enduml
