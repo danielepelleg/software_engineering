@@ -82,7 +82,7 @@ public class Client extends Person {
             }
         }
         if (found){
-            System.out.println("\tLogin Successful!");
+            System.out.println("Login Successful!");
         }
         else System.out.println("\tBad Login. The username or password you have entered is invalid. Retry!");
     }

@@ -19,9 +19,9 @@ package Database <<Database>> {
     +void cleanOrders()
   }
 }
-Winehouse *-- Order
-Winehouse *-- Person
-Winehouse *-- Bottle
+Winehouse "0 .. 1" *-- "0 .. *" Order
+Winehouse "0 .. 1" *-- "0 .. *" Person
+Winehouse "0 .. 1" *-- "0 .. *" Bottle
 
 class Person {
     __ private data __
