@@ -74,6 +74,10 @@ public class Client extends Person {
      */
     public void login(Winehouse store, String checkUsername, String checkPassword){
         Client tempClient = new Client("Client", "Testing", checkUsername, checkPassword);
+<<<<<<< HEAD
+=======
+        tempClient.setPassword(checkPassword);
+>>>>>>> developer2
         boolean found = false;
         for (Person p : store.getUsers()) {
             if (p.getUsername().equals(checkUsername) && p.getPassword().equals(tempClient.getPassword())) {

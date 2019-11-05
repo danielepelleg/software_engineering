@@ -95,6 +95,7 @@ public class Admin extends Person {
      *
      */
     public void shipOrder(Winehouse store){
+<<<<<<< HEAD
         if(isRegistered(store)) {
             for (Order o : store.getOrders()) {
                 if (o.isProcessed() && !o.isShipped()) {
@@ -104,6 +105,15 @@ public class Admin extends Person {
                     o.setTrackingNumber();
                     System.out.println("The tracking number is: " + o.getTrackingNumber());
                 }
+=======
+        for (Order o : store.getOrders()) {
+            if (o.isProcessed() && !o.isShipped()) {
+                System.out.println("The order has been shipped by the admin...");
+                o.getBuyer().addPurchase(o.getOrderBottle().getWine(), o.getOrderBottle().getBottleAmount());
+                o.setShipped(true);
+                o.setTrackingNumber();
+                System.out.println("The tracking number is: " + o.getTrackingNumber());
+>>>>>>> developer2
             }
         }
         else System.out.println("This admin is not registered in the Winehouse");
