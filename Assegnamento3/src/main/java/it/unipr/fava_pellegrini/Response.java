@@ -6,14 +6,14 @@ public class Response implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private final int value;
+  private final String value;
 
-  public Response(final int v)
+  public Response(final String r)
   {
-    this.value = v;
+    this.value = r;
   }
 
-  public int getValue()
+  public String getValue()
   {
     return this.value;
   }

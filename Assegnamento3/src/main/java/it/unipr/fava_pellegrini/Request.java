@@ -6,15 +6,15 @@ public class Request implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private final int value;
+  private final int id;
 
-  public Request(final int v)
+  public Request(final int id)
   {
-    this.value = v;
+    this.id = id;
   }
 
   public int getValue()
   {
-    return this.value;
+    return this.id;
   }
 }

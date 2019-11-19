@@ -1,5 +1,7 @@
 package it.unipr.fava_pellegrini;
 
+import java.io.IOException;
+
 /**
  * Main Class
  * Test, through a simulation, the classes and methods created
@@ -19,4 +21,10 @@ package it.unipr.fava_pellegrini;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Main {
+    public static void main(final String[] args) throws IOException {
+        Workplace w1 = new Workplace("Azienda", "Via Martiri della Liberazione 21");
+        Employee e1 = new Employee("Giacomo", "Pini", "Gino", "1234", "GCMPNI67S10A944S", w1, "Official", "2011-11-03", "2030-12-03");
+        Server server = new Server();
+        server.addEmployee(e1);
+    }
 }

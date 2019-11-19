@@ -8,10 +8,14 @@ public class Employee {
     private String fiscalCode;
     private Workplace workplace;
     private String mansion;
-    private Date startActivity;
-    private Date endActivity;
+    private String startActivity;
+    private String endActivity;
 
-    public Employee(final String name, final String surname, final String fiscalCode, final Workplace workplace, final String mansion, final Date startActivity, final Date endActivity) {
+    private String username;
+    private String password;
+    private String hashed_password;
+
+    public Employee(final String name, final String surname, final String username, final String password, final String fiscalCode, final Workplace workplace, final String mansion, final String startActivity, final String endActivity) {
         this.name = name;
         this.surname = surname;
         this.fiscalCode = fiscalCode;
@@ -19,6 +23,9 @@ public class Employee {
         this.mansion = mansion;
         this.startActivity = startActivity;
         this.endActivity = endActivity;
+
+        this.username = username;
+        this.password = password;
     }
 
     public String getName() {
@@ -61,19 +68,27 @@ public class Employee {
         this.mansion = mansion;
     }
 
-    public Date getStartActivity() {
-        return startActivity;
+    public String getUsername() {
+        return username;
     }
 
-    public void setStartActivity(Date startActivity) {
-        this.startActivity = startActivity;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Date getEndActivity() {
-        return endActivity;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEndActivity(Date endActivity) {
-        this.endActivity = endActivity;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getHashed_password() {
+        return hashed_password;
+    }
+
+    public void setHashed_password(String hashed_password) {
+        this.hashed_password = hashed_password;
     }
 }

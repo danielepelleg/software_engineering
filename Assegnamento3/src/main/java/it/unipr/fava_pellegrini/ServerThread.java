@@ -21,6 +21,10 @@ public class ServerThread implements Runnable
     this.socket = c;
   }
 
+  public enum RequestList {
+      RequestLogin, Request;
+  }
+  
   @Override
   public void run()
   {
@@ -29,8 +33,7 @@ public class ServerThread implements Runnable
 
     try
     {
-      is = new ObjectInputStream(new BufferedInputStream(
-          this.socket.getInputStream()));
+      is = new ObjectInputStream(new BufferedInputStream(this.socket.getInputStream()));
     }
     catch (Exception e)
     {
@@ -47,31 +50,48 @@ public class ServerThread implements Runnable
     {
       try
       {
+          // take the request sent by the client on its output stream
         Object i = is.readObject();
 
         if (i instanceof Request)
         {
+            // convert the object in a request
           Request rq = (Request) i;
 
-          System.out.format("thread %s receives: %s from its client%n",
-              id, rq.getValue());
+          String result = null;
+
+            RequestList command = RequestList.valueOf(i.getClass().getSimpleName());
+            switch (command){
+                case RequestLogin:
+                    RequestLogin requestLogin = (RequestLogin) rq;
+                    result = login(requestLogin);
+                    System.out.println(result);
+                    break;
+            }
+
           Thread.sleep(SLEEPTIME);
 
           if (os == null)
           {
-            os = new ObjectOutputStream(new BufferedOutputStream(
-                this.socket.getOutputStream()));
+            os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
           }
 
-          Response rs = new Response(r.nextInt(MAX));
+          Response rs = new Response(result);
 
-          System.out.format("thread %s sends: %s to its client%n",
-              id, rs.getValue());
+          // send a response
           os.writeObject(rs);
           os.flush();
 
-          if (rs.getValue() == 0)
-          {
+          /*
+          rs = close();
+            os.writeObject(rs);
+            os.flush();
+
+           */
+
+
+          /*if (rs.getValue() == "quit")
+          {*/
             if (this.server.getPool().getActiveCount() == 1)
             {
               this.server.close();
@@ -80,7 +100,7 @@ public class ServerThread implements Runnable
             this.socket.close();
 
             return;
-          }
+         // }
         }
       }
       catch (Exception e)
@@ -89,5 +109,17 @@ public class ServerThread implements Runnable
         System.exit(0);
       }
     }
+  }
+
+  public String login(RequestLogin request){
+      for (Employee e : this.server.getEmployees()){
+          if(request.getUsername().equals(e.getUsername()) && request.getPassword().equals(e.getPassword()))
+              return "Login Successful!";
+      }
+      return "Bad Login. Retry!";
+  }
+
+  public Response close(){
+      return new Response("quit");
   }
 }

@@ -26,20 +26,21 @@ public class Client
       ObjectInputStream  is = null;
 
       Random r = new Random();
-
+/*
       while (true)
-      {
-        Request rq = new Request(r.nextInt(MAX));
+      {*/
 
-        System.out.format("Client sends: %s to Server", rq.getValue());
+        RequestLogin rq = new RequestLogin(1, "Gino", "1234");
+
+        System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
+
 
         os.writeObject(rq);
         os.flush();
 
         if (is == null)
         {
-          is = new ObjectInputStream(new BufferedInputStream(
-              client.getInputStream()));
+          is = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
         }
 
         Object o = is.readObject();
@@ -50,12 +51,13 @@ public class Client
 
           System.out.format(" and received: %s from Server%n", rs.getValue());
 
-          if (rs.getValue() == 0)
+          /*
+          if (rs.getValue() == "quit")
           {
             break;
-          }
+          }*/
         }
-      }
+      //}
 
       client.close();
     }
