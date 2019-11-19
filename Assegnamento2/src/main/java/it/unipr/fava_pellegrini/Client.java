@@ -1,7 +1,6 @@
 package it.unipr.fava_pellegrini;
 
 import org.jetbrains.annotations.NotNull;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -84,7 +83,7 @@ public class Client extends Person {
         if (found){
             System.out.println("Login Successful!");
         }
-        else System.out.println("\tBad Login. The username or password you have entered is invalid. Retry!");
+        else System.out.println("Bad Login. The username or password you have entered is invalid. Retry!");
     }
 
     /**

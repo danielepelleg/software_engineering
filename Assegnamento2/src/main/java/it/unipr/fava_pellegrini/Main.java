@@ -1,7 +1,5 @@
 package it.unipr.fava_pellegrini;
 
-import java.io.IOException;
-
 /**
  * Main Class
  * Test, through a simulation, the classes and methods created
