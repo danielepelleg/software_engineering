@@ -4,8 +4,7 @@ public class  RequestLogin extends Request{
     private final String username;
     private final String password;
 
-    public RequestLogin(int id, String username, String password) {
-        super(id);
+    public RequestLogin( String username, String password) {
         this.username = username;
         this.password = password;
     }

@@ -22,7 +22,7 @@ public class ServerThread implements Runnable
   }
 
   public enum RequestList {
-      RequestLogin, Request;
+      RequestLogin, Request, RequestAddEmployee;
   }
   
   @Override
@@ -60,14 +60,20 @@ public class ServerThread implements Runnable
 
           String result = null;
 
-            RequestList command = RequestList.valueOf(i.getClass().getSimpleName());
-            switch (command){
-                case RequestLogin:
-                    RequestLogin requestLogin = (RequestLogin) rq;
-                    result = login(requestLogin);
-                    System.out.println(result);
-                    break;
-            }
+          RequestList command = RequestList.valueOf(i.getClass().getSimpleName());
+          switch (command){
+            case RequestLogin:
+              RequestLogin requestLogin = (RequestLogin) rq;
+              result = login(requestLogin);
+              System.out.println(result);
+              break;
+            case RequestAddEmployee:
+              RequestAddEmployee requestAddEmployee = (RequestAddEmployee) rq;
+              result = createEmployee(requestAddEmployee);
+              System.out.println(result);
+              System.out.println(((RequestAddEmployee) rq).getName());
+              break;
+          }
 
           Thread.sleep(SLEEPTIME);
 
@@ -117,6 +123,24 @@ public class ServerThread implements Runnable
               return "Login Successful!";
       }
       return "Bad Login. Retry!";
+  }
+
+  public String createEmployee(RequestAddEmployee request){
+    Employee newEmployee = new Employee(request.getName(), request.getSurname(), request.getUsername(), request.getPassword(), request.getFiscalCode(), request.getWorkplace(), request.getMansion(), request.getStartActivity(), request.getEndActivity());
+    if (checkFiscalCode(newEmployee)){
+      this.server.addEmployee(newEmployee);
+      return "The employee has been added to the database! ";
+    }
+    else return "The fiscal code of this employee is already registered in the database. Please check and try again! ";
+  }
+
+  public boolean checkFiscalCode(Employee newEmployee){
+    for (Employee e : this.server.employees){
+      if (e.getFiscalCode().equals(newEmployee.getFiscalCode())){
+        return false;
+      }
+    }
+    return true;
   }
 
   public Response close(){

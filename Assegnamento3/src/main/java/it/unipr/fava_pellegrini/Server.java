@@ -33,7 +33,7 @@ public class Server
     this.socket = new ServerSocket(SPORT);
     System.out.println("Il Server è in attesa sulla porta " + this.SPORT + "...");
     Workplace w1 = new Workplace("Azienda", "Via Martiri della Liberazione 21");
-    Employee e1 = new Employee("Giacomo", "Pini", "Gino", "1234", "GCMPNI67S10A944S", w1, "Official", "2011-11-03", "2030-12-03");
+    Employee e1 = new Employee("Giacomo", "Pini", "Gino", "1234", "GCMPNI67S10A944S", w1, Mansion.Director, "2011-11-03", "2030-12-03");
     ArrayList<Employee> listemployee = new ArrayList<>();
     listemployee.add(e1);
     ArrayList<Workplace> listworkplace = new ArrayList<>();

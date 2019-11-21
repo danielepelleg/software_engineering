@@ -1,8 +1,6 @@
 package it.unipr.fava_pellegrini;
 
-import java.util.Date;
-
-public class Employee {
+public class RequestAddEmployee extends Request{
     private String name;
     private String surname;
     private String fiscalCode;
@@ -11,11 +9,10 @@ public class Employee {
     private String startActivity;
     private String endActivity;
 
-    private String username;
-    private String password;
-    private String hashed_password;
+    private final String username;
+    private final String password;
 
-    public Employee(final String name, final String surname, final String username, final String password, final String fiscalCode, final Workplace workplace, final Mansion mansion, final String startActivity, final String endActivity) {
+    public RequestAddEmployee(final String name, final String surname, final String username, final String password, final String fiscalCode, final Workplace workplace, final Mansion mansion, final String startActivity, final String endActivity) {
         this.name = name;
         this.surname = surname;
         this.fiscalCode = fiscalCode;
@@ -23,9 +20,16 @@ public class Employee {
         this.mansion = mansion;
         this.startActivity = startActivity;
         this.endActivity = endActivity;
-
         this.username = username;
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getName() {
@@ -68,27 +72,19 @@ public class Employee {
         this.mansion = mansion;
     }
 
-    public String getUsername() {
-        return username;
+    public String getStartActivity() {
+        return startActivity;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setStartActivity(String startActivity) {
+        this.startActivity = startActivity;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEndActivity() {
+        return endActivity;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getHashed_password() {
-        return hashed_password;
-    }
-
-    public void setHashed_password(String hashed_password) {
-        this.hashed_password = hashed_password;
+    public void setEndActivity(String endActivity) {
+        this.endActivity = endActivity;
     }
 }
