@@ -1,8 +1,9 @@
 package it.unipr.fava_pellegrini;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Employee {
+public class Employee implements Serializable {
     private String name;
     private String surname;
     private String fiscalCode;
@@ -90,5 +91,34 @@ public class Employee {
 
     public void setHashed_password(String hashed_password) {
         this.hashed_password = hashed_password;
+    }
+
+    public String getStartActivity() {
+        return startActivity;
+    }
+
+    public void setStartActivity(String startActivity) {
+        this.startActivity = startActivity;
+    }
+
+    public String getEndActivity() {
+        return endActivity;
+    }
+
+    public void setEndActivity(String endActivity) {
+        this.endActivity = endActivity;
+    }
+
+    @Override
+    public String toString(){
+        return  "Name: " + this.name + "\n" +
+                "Surname: " + this.surname + "\n" +
+                "Username: " + this.username + "\n" +
+                "Fiscal Code: " + this.fiscalCode + "\n" +
+                "Workplace: " + this.workplace.toString() + "\n" +
+                "Mansion: " + this.mansion.toString() + "\n" +
+                "Start Activity Date: " + this.startActivity + "\n" +
+                "End Activity Date: " + this.endActivity + "\n";
+
     }
 }

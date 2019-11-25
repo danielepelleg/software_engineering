@@ -21,7 +21,7 @@ import java.io.IOException;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Main {
-    public static void main(final String[] args) throws IOException, ClassNotFoundException {
+    public static void main(final String[] args) throws IOException, ClassNotFoundException{
         Client c1 = new Client();
         Client c2 = new Client();
         c1.connect();

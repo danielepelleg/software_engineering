@@ -12,9 +12,18 @@ public class Client
   private static final int SPORT = 4444;
   private static final String SHOST = "localhost";
   private static final int MAX = 100;
+
   private Employee user;
+  private boolean logged;
+
   private Socket client;
 
+  ObjectOutputStream os;
+  ObjectInputStream  is;
+
+  public void setUser(Employee user) {
+    this.user = user;
+  }
 
  /* public void run()
   {
@@ -83,9 +92,7 @@ public class Client
     }
   }
 
-  public void showResponse() throws IOException, ClassNotFoundException {
-    ObjectInputStream  is = null;
-
+  public void showResponse() throws IOException, ClassNotFoundException{
     if (is == null)
     {
       is = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
@@ -96,8 +103,8 @@ public class Client
     if (o instanceof Response)
     {
       Response rs = (Response) o;
-
       System.out.format(" and received: %s from Server%n", rs.getValue());
+      checkLogin(rs);
 
       if (rs.getValue() == "quit")
       {
@@ -107,14 +114,30 @@ public class Client
   }
 
 
-  public void login(String username, String password) throws IOException, ClassNotFoundException {
-    ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
-    RequestLogin req = new RequestLogin(username, password);
-    os.writeObject(req);
+  public void login(String username, String password) throws IOException, ClassNotFoundException{
+    this.os = new ObjectOutputStream(client.getOutputStream());
+    this.is = null;
+    RequestLogin rq = new RequestLogin(username, password);
+    System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
+    os.writeObject(rq);
     os.flush();
     this.showResponse();
     //TODO controllare che il login sia valido
     //TODO Assegnare i valori dell'utente loggato a questo client
+  }
+
+  public void checkLogin(Response response){
+   if(response.getValue().equals("Bad Login. Retry!")) {
+       System.out.println("You are not logged into the server. You must be logged to make researches.");
+       this.logged = false;
+   }
+   if(response.getValue().equals("Login Successful!")) {
+       System.out.println("You are now logged in.");
+       this.user = (Employee) response.getObject();
+       System.out.println("You are now logged as\n" + this.user.toString());
+       this.logged = true;
+   }
+     //setUser((Employee) response.getObject());
   }
 
   public static void main(final String[] args)

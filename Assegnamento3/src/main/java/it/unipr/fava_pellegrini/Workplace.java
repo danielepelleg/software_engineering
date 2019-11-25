@@ -1,6 +1,8 @@
 package it.unipr.fava_pellegrini;
 
-public class Workplace {
+import java.io.Serializable;
+
+public class Workplace implements Serializable {
     private String name;
     private String address;
 
@@ -23,5 +25,10 @@ public class Workplace {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString(){
+        return this.name + ", " + this.address;
     }
 }
