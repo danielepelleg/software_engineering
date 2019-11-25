@@ -1,5 +1,7 @@
 package it.unipr.fava_pellegrini;
 
+import java.io.IOException;
+
 /**
  * Main Class
  * Test, through a simulation, the classes and methods created
@@ -19,7 +21,14 @@ package it.unipr.fava_pellegrini;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Main {
-    public static void main(String[] args){
-        System.out.println("Prova");
+    public static void main(final String[] args) throws IOException, ClassNotFoundException{
+        Client c1 = new Client();
+        Client c2 = new Client();
+        c1.connect();
+        c2.connect();
+        c1.login("Gino","1234");
+        c2.login("Gino","1234");
+        c1.closeConnection();
+        c2.closeConnection();
     }
 }
