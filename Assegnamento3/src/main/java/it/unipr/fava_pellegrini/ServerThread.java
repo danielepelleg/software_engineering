@@ -111,12 +111,13 @@ public class ServerThread implements Runnable {
   }
 
   public String createEmployee(RequestAddEmployee request) {
-    Employee newEmployee = new Employee(request.getName(), request.getSurname(), request.getUsername(), request.getPassword(), request.getFiscalCode(), request.getWorkplace(), request.getMansion(), request.getStartActivity(), request.getEndActivity());
-    if (checkFiscalCode(newEmployee)) {
-      this.server.addEmployee(newEmployee);
-      return "The employee has been added to the database!";
+    //Employee newEmployee = new Employee(request.getName(), request.getSurname(), request.getUsername(), request.getPassword(), request.getFiscalCode(), request.getWorkplace(), request.getMansion(), request.getStartActivity(), request.getEndActivity());
+    if (checkFiscalCode(request.getNewEmployee())) {
+      this.server.addEmployee(request.getNewEmployee());
+      return "The employee has been added to the database! ";
     }
-    else return "The fiscal code of this employee is already registered in the database. Please check and try again!";
+    else return "The fiscal code of this employee is already registered in the database. Please check and try again! ";
+    //TODO Lista codici fiscali
   }
 
   public boolean checkFiscalCode(Employee newEmployee) {
@@ -134,7 +135,7 @@ public class ServerThread implements Runnable {
         return new Employee(e.getName(), e.getSurname(), e.getUsername(), e.getPassword(), e.getFiscalCode(), e.getWorkplace(), e.getMansion(), e.getStartActivity(), e.getEndActivity());
     }
     return null;
+    // TODO Gestire eccezione in caso di employee null, cosa risponde il server?
   }
 
 }
-
