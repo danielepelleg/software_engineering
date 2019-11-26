@@ -17,7 +17,7 @@ public class ServerThread implements Runnable {
   }
 
   public enum RequestList {
-    RequestLogin, RequestAddEmployee,RequestCloseConnection;
+    RequestLogin, RequestAddEmployee, RequestResearch, RequestCloseConnection;
   }
 
   @Override
@@ -71,6 +71,17 @@ public class ServerThread implements Runnable {
               os.flush();
               System.out.println(result);
               break;
+            case RequestResearch:
+              RequestResearch requestResearch = (RequestResearch) rq;
+              Thread.sleep(SLEEPTIME);
+              if (os == null) {
+                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
+              }
+              Response researchResponse = new Response(doResearch(requestResearch));
+              os.writeObject(researchResponse);
+              os.flush();
+              System.out.println(doResearch(requestResearch));
+              break;
             case RequestCloseConnection:
               Thread.sleep(SLEEPTIME);
               if (os == null) {
@@ -86,14 +97,6 @@ public class ServerThread implements Runnable {
               return;
           }
 
-/*
-          if (this.server.getPool().getActiveCount() == 1) {
-            this.server.close();
-          }
-
-          this.socket.close();
-*/
-          // }
         }
       } catch (Exception e) {
         e.printStackTrace();
@@ -119,6 +122,31 @@ public class ServerThread implements Runnable {
     else return "The fiscal code of this employee is already registered in the database. Please check and try again!";
   }
 
+  public String doResearch(RequestResearch request){
+    String research = "";
+    int totalMembers = 0;
+    if (request.getMansion().equals(Mansion.Director)) {
+      for (Employee e : this.server.getEmployees()) {
+        if (request.getWorkplace().getName().equals(e.getWorkplace().getName()) && request.getWorkplace().getAddress().equals(e.getWorkplace().getAddress())){
+          if (e.getMansion() != Mansion.Administrator) {
+            research += e.getName() + " " + e.getSurname() + "\n";
+            totalMembers++;
+          }
+        }
+      }
+    }
+    else if(request.getMansion().equals(Mansion.Administrator)) {
+      for (Employee e : this.server.getEmployees()) {
+        if (e.getWorkplace().getName().equals(request.getWorkplace().getName()) && e.getWorkplace().getAddress().equals(request.getWorkplace().getAddress())) {
+          research += e.getName() + " " + e.getSurname() + "\n";
+          totalMembers++;
+        }
+      }
+    }
+    return research + "Total: " + totalMembers + "\n";
+  }
+
+
   public boolean checkFiscalCode(Employee newEmployee) {
     for (Employee e : this.server.employees) {
       if (e.getFiscalCode().equals(newEmployee.getFiscalCode())) {
@@ -130,8 +158,10 @@ public class ServerThread implements Runnable {
 
   public Employee getEmployeeRequested(RequestLogin request) {
     for (Employee e : this.server.getEmployees()) {
-      if (request.getUsername().equals(e.getUsername()) && request.getPassword().equals(e.getPassword()))
-        return new Employee(e.getName(), e.getSurname(), e.getUsername(), e.getPassword(), e.getFiscalCode(), e.getWorkplace(), e.getMansion(), e.getStartActivity(), e.getEndActivity());
+      if (request.getUsername().equals(e.getUsername()) && request.getPassword().equals(e.getPassword())){
+        //return new Employee(e.getName(), e.getSurname(), e.getUsername(), e.getPassword(), e.getFiscalCode(), e.getWorkplace(), e.getMansion(), e.getStartActivity(), e.getEndActivity());
+        return e;
+      }
     }
     return null;
   }
