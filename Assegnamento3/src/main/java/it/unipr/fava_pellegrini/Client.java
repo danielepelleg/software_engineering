@@ -14,7 +14,7 @@ public class Client
   private static final int MAX = 100;
 
   private Employee user;
-  private boolean logged; //Tenere o no?
+  private boolean logged;
 
   private Socket client;
 
@@ -32,6 +32,47 @@ public class Client
   {
     try
     {
+      // Open a socket connection
+      Socket  client = new Socket(SHOST, SPORT);
+
+      // Open Input - Output Channels
+      ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
+      ObjectInputStream  is = null;
+/*
+      while (true)
+      {
+
+        //RequestLogin rq = new RequestLogin(r.nextInt(MAX), "Gino", "1234");
+        Request rq;
+
+        System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
+
+
+        os.writeObject(rq);
+        os.flush();
+
+        if (is == null)
+        {
+          is = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+        }
+
+        Object o = is.readObject();
+
+        if (o instanceof Response)
+        {
+          Response rs = (Response) o;
+
+          System.out.format(" and received: %s from Server%n", rs.getValue());
+
+          /*
+          if (rs.getValue() == "quit")
+          {
+            break;
+          }
+        }
+      //}
+
+      client.close();
     }
     catch (IOException | ClassNotFoundException e)
     {
@@ -47,7 +88,7 @@ public class Client
      System.out.println(this.getResponse().getValue());
  }
 
-  public void connect() throws IOException {
+  public void connect(){
     try {
       // Open a socket connection
       client = new Socket(SHOST, SPORT);
@@ -56,8 +97,6 @@ public class Client
     {
       e.printStackTrace();
     }
-    this.os = new ObjectOutputStream(client.getOutputStream());
-    this.is = null;
   }
 
   public Response getResponse() throws IOException, ClassNotFoundException{
@@ -101,6 +140,8 @@ public class Client
   }
 
   public void login(String username, String password) throws IOException, ClassNotFoundException{
+    this.os = new ObjectOutputStream(client.getOutputStream());
+    this.is = null;
     RequestLogin rq = new RequestLogin(username, password);
     System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
     os.writeObject(rq);
@@ -112,15 +153,13 @@ public class Client
    if(response.getValue().equals("Bad Login. Retry!")) {
        System.out.println("You are not logged into the server. You must be logged to make researches.");
        this.logged = false;
-       // TODO Gestire nuovo tentativo
    }
    if(response.getValue().equals("Login Successful!")) {
        this.user = (Employee) response.getObject();
        System.out.println("You are now logged as\n" + this.user.toString());
        this.logged = true;
    }
-
-
+     //setUser((Employee) response.getObject());
   }
 
   public static void main(final String[] args)
@@ -128,3 +167,4 @@ public class Client
    // new Client().run();
   }
 }
+
