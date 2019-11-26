@@ -28,7 +28,8 @@ public class Main {
         c1.connect();
         c2.connect();
         c1.login("Gino","1234");
-        c2.createUser("Chiara", "Rossi", "Kia", "1234", "RSSCHR77A09A944Y", w2, Mansion.Official, "13-11-2012",  "31-12-2022");
+        c2.login("Gino", "1234");
+        c1.createUser("Chiara", "Rossi", "Kia", "1234", "RSSCHR77A09A944Y", w2, Mansion.Official, "13-11-2012",  "31-12-2022");
         c1.closeConnection();
         c2.closeConnection();
         //TODO Provare a far fare più azioni a un solo client -> non funziona

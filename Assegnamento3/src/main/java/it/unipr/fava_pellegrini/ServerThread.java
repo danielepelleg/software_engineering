@@ -67,19 +67,18 @@ public class ServerThread implements Runnable {
           }
 
           Thread.sleep(SLEEPTIME);
-
           if (os == null) {
             os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
           }
-
           Response rs = new Response(result);
+
           switch (command) {
             case RequestLogin:
               rs.setObject(getEmployeeRequested((RequestLogin) rq));
             case RequestAddEmployee:
               rs.setObject(this.server.employees.get(this.server.employees.size() - 1));
           }
-          
+
           // send a response
           os.writeObject(rs);
           os.flush();
@@ -112,13 +111,12 @@ public class ServerThread implements Runnable {
   }
 
   public String createEmployee(RequestAddEmployee request) {
-    //Employee newEmployee = new Employee(request.getName(), request.getSurname(), request.getUsername(), request.getPassword(), request.getFiscalCode(), request.getWorkplace(), request.getMansion(), request.getStartActivity(), request.getEndActivity());
     if (checkFiscalCode(request.getNewEmployee())) {
       this.server.addEmployee(request.getNewEmployee());
       return "The employee has been added to the database! ";
     }
     else return "The fiscal code of this employee is already registered in the database. Please check and try again! ";
-    //TODO Lista codici fiscali
+    // TODO Lista codici fiscali
   }
 
   public boolean checkFiscalCode(Employee newEmployee) {

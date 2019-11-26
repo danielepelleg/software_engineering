@@ -40,7 +40,7 @@ public class Client
    client.close();
  }
 
-  public void connect() throws IOException {
+  public void connect(){
     try {
       // Open a socket connection
       client = new Socket(SHOST, SPORT);
@@ -49,16 +49,14 @@ public class Client
     {
       e.printStackTrace();
     }
-    this.os = new ObjectOutputStream(client.getOutputStream());
-    this.is = null;
   }
 
   public void showResponse(Request request) throws IOException, ClassNotFoundException{
-    if (is == null)
+
+     if (is == null)
     {
       is = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
     }
-
     Object o = is.readObject();
 
     if (o instanceof Response)
@@ -83,6 +81,8 @@ public class Client
 
 
   public void login(String username, String password) throws IOException, ClassNotFoundException{
+      this.os = new ObjectOutputStream(client.getOutputStream());
+      this.is = null;
     RequestLogin rq = new RequestLogin(username, password);
     System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
     os.writeObject(rq);
