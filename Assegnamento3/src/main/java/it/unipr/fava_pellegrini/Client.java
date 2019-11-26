@@ -104,7 +104,6 @@ public class Client
     {
       is = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
     }
-
     Object o = is.readObject();
 
     if (o instanceof Response)
@@ -167,4 +166,3 @@ public class Client
    // new Client().run();
   }
 }
-
