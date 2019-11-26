@@ -1,9 +1,6 @@
 package it.unipr.fava_pellegrini;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Random;
 
@@ -20,7 +17,7 @@ public class ServerThread implements Runnable {
   }
 
   public enum RequestList {
-    RequestLogin, Request, RequestAddEmployee;
+    RequestLogin, RequestAddEmployee,RequestCloseConnection;
   }
 
   @Override
@@ -35,10 +32,6 @@ public class ServerThread implements Runnable {
 
       return;
     }
-
-    String id = String.valueOf(this.hashCode());
-
-    Random r = new Random();
 
     while (true) {
       try {
@@ -56,44 +49,50 @@ public class ServerThread implements Runnable {
             case RequestLogin:
               RequestLogin requestLogin = (RequestLogin) rq;
               result = login(requestLogin);
+              Thread.sleep(SLEEPTIME);
+              if (os == null) {
+                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
+              }
+              Response loginResponse = new Response(result);
+              loginResponse.setEmployee(getEmployeeRequested((RequestLogin) rq));
+              os.writeObject(loginResponse);
+              os.flush();
               System.out.println(result);
               break;
             case RequestAddEmployee:
               RequestAddEmployee requestAddEmployee = (RequestAddEmployee) rq;
               result = createEmployee(requestAddEmployee);
+              Thread.sleep(SLEEPTIME);
+              if (os == null) {
+                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
+              }
+              Response addEmployeeResponse = new Response(result);
+              os.writeObject(addEmployeeResponse);
+              os.flush();
               System.out.println(result);
-              System.out.println(((RequestAddEmployee) rq).getName());
               break;
+            case RequestCloseConnection:
+              Thread.sleep(SLEEPTIME);
+              if (os == null) {
+                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
+              }
+              Response closeConnectionResponse = new Response("Connection Closed");
+              os.writeObject(closeConnectionResponse);
+              os.flush();
+              this.server.close();
+              return;
+            default:
+              this.server.close();
+              return;
           }
 
-          Thread.sleep(SLEEPTIME);
-
-          if (os == null) {
-            os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
-          }
-
-          Response rs = new Response(result);
-          switch (command) {
-            case RequestLogin:
-              rs.setEmployee(getEmployeeRequested((RequestLogin) rq));
-              //  System.out.println(rs.getObject().toString());
-          }
-
-
-          // send a response
-          os.writeObject(rs);
-          os.flush();
-
-
-          /*if (rs.getValue() == "quit")
-          {*/
+/*
           if (this.server.getPool().getActiveCount() == 1) {
             this.server.close();
           }
 
           this.socket.close();
-
-          return;
+*/
           // }
         }
       } catch (Exception e) {
@@ -115,9 +114,9 @@ public class ServerThread implements Runnable {
     Employee newEmployee = new Employee(request.getName(), request.getSurname(), request.getUsername(), request.getPassword(), request.getFiscalCode(), request.getWorkplace(), request.getMansion(), request.getStartActivity(), request.getEndActivity());
     if (checkFiscalCode(newEmployee)) {
       this.server.addEmployee(newEmployee);
-      return "The employee has been added to the database! ";
+      return "The employee has been added to the database!";
     }
-    else return "The fiscal code of this employee is already registered in the database. Please check and try again! ";
+    else return "The fiscal code of this employee is already registered in the database. Please check and try again!";
   }
 
   public boolean checkFiscalCode(Employee newEmployee) {
@@ -137,8 +136,5 @@ public class ServerThread implements Runnable {
     return null;
   }
 
-  public Response close() {
-    return new Response("quit");
-  }
 }
 

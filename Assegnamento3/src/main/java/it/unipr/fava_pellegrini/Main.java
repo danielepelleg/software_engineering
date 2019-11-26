@@ -22,13 +22,11 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(final String[] args) throws IOException, ClassNotFoundException{
+        Workplace w = new Workplace("Industria", "Via Mazzini 90");
         Client c1 = new Client();
-        Client c2 = new Client();
         c1.connect();
-        c2.connect();
         c1.login("Gino","1234");
-        c2.login("Gino","1234");
+        c1.addEmployee("Marco", "Rossi", "Mark", "1234", "MRCRSI67S10A944S", w, Mansion.Employee, "2011-11-03", "2030-12-03");
         c1.closeConnection();
-        c2.closeConnection();
     }
 }
