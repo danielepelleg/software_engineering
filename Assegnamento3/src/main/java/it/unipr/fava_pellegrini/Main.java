@@ -22,16 +22,11 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(final String[] args) throws IOException, ClassNotFoundException{
-        Workplace w2 = new Workplace("Azienda2",  "Via Calatafimi 13");
+        Workplace w = new Workplace("Industria", "Via Mazzini 90");
         Client c1 = new Client();
-        Client c2 = new Client();
         c1.connect();
-        c2.connect();
         c1.login("Gino","1234");
-        c2.login("Gino", "1234");
-        c1.createUser("Chiara", "Rossi", "Kia", "1234", "RSSCHR77A09A944Y", w2, Mansion.Official, "13-11-2012",  "31-12-2022");
+        c1.addEmployee("Marco", "Rossi", "Mark", "1234", "MRCRSI67S10A944S", w, Mansion.Employee, "2011-11-03", "2030-12-03");
         c1.closeConnection();
-        c2.closeConnection();
-        //TODO Provare a far fare più azioni a un solo client -> non funziona
     }
 }

@@ -21,6 +21,9 @@ public class Client
   ObjectOutputStream os;
   ObjectInputStream  is;
 
+  public void Client(){
+  }
+
   public void setUser(Employee user) {
     this.user = user;
   }
@@ -36,8 +39,12 @@ public class Client
     }
   }*/
 
- public void closeConnection() throws IOException {
-   client.close();
+ public void closeConnection() throws IOException, ClassNotFoundException {
+     RequestCloseConnection rq = new RequestCloseConnection();
+     System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
+     os.writeObject(rq);
+     os.flush();
+     System.out.println(this.getResponse().getValue());
  }
 
   public void connect(){
@@ -51,9 +58,8 @@ public class Client
     }
   }
 
-  public void showResponse(Request request) throws IOException, ClassNotFoundException{
-
-     if (is == null)
+  public Response getResponse() throws IOException, ClassNotFoundException{
+    if (is == null)
     {
       is = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
     }
@@ -61,24 +67,35 @@ public class Client
 
     if (o instanceof Response)
     {
-        Response rs = (Response) o;
-        System.out.format(" and received: %s from Server%n", rs.getValue());
-        switch(request.getClass().getSimpleName()){
-            case "RequestLogin":
-                checkLogin(rs);
-                break;
-            case "RequestAddEmployee":
-                System.out.println("The following user has been added:\n" + rs.getObject().toString());
-                break;
-        }
-
-      if (rs.getValue() == "quit")
+      Response rs = (Response) o;
+      System.out.format(" and received: %s from Server%n", rs.getValue());
+      return rs;
+      /*if (rs.getValue() == "quit")
       {
         //chiama la funzione close
-      }
+      }*/
     }
+    return null;
   }
 
+  public void addEmployee(String name, String surname, String username, String password, String fiscalCode, Workplace workplace, Mansion mansion, String startActivity, String endActivity) throws IOException, ClassNotFoundException {
+     if(logged){
+         if(this.user.getMansion().equals(Mansion.Official)){
+             RequestAddEmployee rq = new RequestAddEmployee(name,surname,username,password,fiscalCode,workplace,mansion,startActivity,endActivity);
+             System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
+             os.writeObject(rq);
+             os.flush();
+             if(this.getResponse().getValue().equals("The employee has been added to the database!")){
+                 System.out.println("The employee has been added to the database!");
+             }
+             else if(this.getResponse().getValue().equals("The fiscal code of this employee is already registered in the database. Please check and try again!")){
+                 System.out.println("The fiscal code of this employee is already registered in the database. Please check and try again!");
+             }
+         }
+         else System.out.println("You can't add a new Employee because you are not an Official");
+     }
+     else System.out.println("You are not logged into the server. You must be logged to make this operation!");
+  }
 
   public void login(String username, String password) throws IOException, ClassNotFoundException{
       this.os = new ObjectOutputStream(client.getOutputStream());
@@ -87,22 +104,7 @@ public class Client
     System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
     os.writeObject(rq);
     os.flush();
-    this.showResponse(rq);
-    //TODO controllare che il login sia valido
-  }
-
-  public void createUser(String name, String surname, String username, String password, String fiscalCode, Workplace workplace, Mansion mansion, String startActivity, String endActivity) throws IOException, ClassNotFoundException {
-     //if(this.user != null) {
-         RequestAddEmployee rq = new RequestAddEmployee(name, surname, username, password, fiscalCode, workplace, mansion, startActivity, endActivity);
-         System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
-         os.writeObject(rq);
-         os.flush();
-         this.showResponse(rq);
-         //TODO Gestire codice fiscale già presente
-        // TODO Gestire utente già presente
-        // TODO Aggiungere controllo utente che crea loggato (Il programma permette una sola azione per client.
-        //        Se uno si logga non può fare altre azioni es. aggiungere utenti o cercare)
-     //}
+    this.checkLogin(this.getResponse());
   }
 
   public void checkLogin(Response response){
@@ -112,8 +114,8 @@ public class Client
        // TODO Gestire nuovo tentativo
    }
    if(response.getValue().equals("Login Successful!")) {
-       setUser((Employee) response.getObject());
-       System.out.println("You are now logged in as\n" + this.user.toString());
+       this.user = (Employee) response.getObject();
+       System.out.println("You are now logged as\n" + this.user.toString());
        this.logged = true;
    }
 
@@ -125,4 +127,3 @@ public class Client
    // new Client().run();
   }
 }
-
