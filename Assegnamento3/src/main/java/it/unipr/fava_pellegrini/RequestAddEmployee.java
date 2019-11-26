@@ -1,6 +1,7 @@
 package it.unipr.fava_pellegrini;
 
 public class RequestAddEmployee extends Request{
+    private Employee newEmployee;
     private String name;
     private String surname;
     private String fiscalCode;
@@ -22,6 +23,15 @@ public class RequestAddEmployee extends Request{
         this.endActivity = endActivity;
         this.username = username;
         this.password = password;
+        this.newEmployee = new Employee(name, surname, username, password, fiscalCode, workplace, mansion, startActivity, endActivity);
+    }
+
+    public Employee getNewEmployee() {
+        return newEmployee;
+    }
+
+    public void setNewEmployee(Employee newEmployee) {
+        this.newEmployee = newEmployee;
     }
 
     public String getUsername() {

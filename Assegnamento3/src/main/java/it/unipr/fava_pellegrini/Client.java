@@ -14,7 +14,7 @@ public class Client
   private static final int MAX = 100;
 
   private Employee user;
-  private boolean logged;
+  private boolean logged; //Tenere o no?
 
   private Socket client;
 
@@ -29,47 +29,6 @@ public class Client
   {
     try
     {
-      // Open a socket connection
-      Socket  client = new Socket(SHOST, SPORT);
-
-      // Open Input - Output Channels
-      ObjectOutputStream os = new ObjectOutputStream(client.getOutputStream());
-      ObjectInputStream  is = null;
-/*
-      while (true)
-      {
-
-        //RequestLogin rq = new RequestLogin(r.nextInt(MAX), "Gino", "1234");
-        Request rq;
-
-        System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
-
-
-        os.writeObject(rq);
-        os.flush();
-
-        if (is == null)
-        {
-          is = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
-        }
-
-        Object o = is.readObject();
-
-        if (o instanceof Response)
-        {
-          Response rs = (Response) o;
-
-          System.out.format(" and received: %s from Server%n", rs.getValue());
-
-          /*
-          if (rs.getValue() == "quit")
-          {
-            break;
-          }
-        }
-      //}
-
-      client.close();
     }
     catch (IOException | ClassNotFoundException e)
     {
@@ -81,7 +40,7 @@ public class Client
    client.close();
  }
 
-  public void connect(){
+  public void connect() throws IOException {
     try {
       // Open a socket connection
       client = new Socket(SHOST, SPORT);
@@ -90,9 +49,11 @@ public class Client
     {
       e.printStackTrace();
     }
+    this.os = new ObjectOutputStream(client.getOutputStream());
+    this.is = null;
   }
 
-  public void showResponse() throws IOException, ClassNotFoundException{
+  public void showResponse(Request request) throws IOException, ClassNotFoundException{
     if (is == null)
     {
       is = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
@@ -102,9 +63,16 @@ public class Client
 
     if (o instanceof Response)
     {
-      Response rs = (Response) o;
-      System.out.format(" and received: %s from Server%n", rs.getValue());
-      checkLogin(rs);
+        Response rs = (Response) o;
+        System.out.format(" and received: %s from Server%n", rs.getValue());
+        switch(request.getClass().getSimpleName()){
+            case "RequestLogin":
+                checkLogin(rs);
+                break;
+            case "RequestAddEmployee":
+                System.out.println("The following user has been added:\n" + rs.getObject().toString());
+                break;
+        }
 
       if (rs.getValue() == "quit")
       {
@@ -115,29 +83,41 @@ public class Client
 
 
   public void login(String username, String password) throws IOException, ClassNotFoundException{
-    this.os = new ObjectOutputStream(client.getOutputStream());
-    this.is = null;
     RequestLogin rq = new RequestLogin(username, password);
     System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
     os.writeObject(rq);
     os.flush();
-    this.showResponse();
+    this.showResponse(rq);
     //TODO controllare che il login sia valido
-    //TODO Assegnare i valori dell'utente loggato a questo client
+  }
+
+  public void createUser(String name, String surname, String username, String password, String fiscalCode, Workplace workplace, Mansion mansion, String startActivity, String endActivity) throws IOException, ClassNotFoundException {
+     //if(this.user != null) {
+         RequestAddEmployee rq = new RequestAddEmployee(name, surname, username, password, fiscalCode, workplace, mansion, startActivity, endActivity);
+         System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
+         os.writeObject(rq);
+         os.flush();
+         this.showResponse(rq);
+         //TODO Gestire codice fiscale già presente
+        // TODO Gestire utente già presente
+        // TODO Aggiungere controllo utente che crea loggato (Il programma permette una sola azione per client.
+        //        Se uno si logga non può fare altre azioni es. aggiungere utenti o cercare)
+     //}
   }
 
   public void checkLogin(Response response){
    if(response.getValue().equals("Bad Login. Retry!")) {
        System.out.println("You are not logged into the server. You must be logged to make researches.");
        this.logged = false;
+       // TODO Gestire nuovo tentativo
    }
    if(response.getValue().equals("Login Successful!")) {
-       System.out.println("You are now logged in.");
-       this.user = (Employee) response.getObject();
-       System.out.println("You are now logged as\n" + this.user.toString());
+       setUser((Employee) response.getObject());
+       System.out.println("You are now logged in as\n" + this.user.toString());
        this.logged = true;
    }
-     //setUser((Employee) response.getObject());
+
+
   }
 
   public static void main(final String[] args)

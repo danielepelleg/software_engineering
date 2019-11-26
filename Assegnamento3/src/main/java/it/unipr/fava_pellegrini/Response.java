@@ -9,6 +9,8 @@ public class Response implements Serializable
   private final String value;
   private Object object;
 
+  //TODO attributo booleano in caso di risposta non andata a buon fine?
+
   public Response(final String r)
   {
     this.value = r;
