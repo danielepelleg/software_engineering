@@ -2,6 +2,8 @@ package it.unipr.fava_pellegrini;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.Random;
 
 public class ServerThread implements Runnable {
@@ -77,7 +79,8 @@ public class ServerThread implements Runnable {
               if (os == null) {
                 os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
               }
-              Response researchResponse = new Response(doResearch(requestResearch));
+              Response researchResponse = new Response("Ricerca effettuata");
+              researchResponse.setList(doResearch(requestResearch));
               os.writeObject(researchResponse);
               os.flush();
               System.out.println(doResearch(requestResearch));
@@ -121,7 +124,7 @@ public class ServerThread implements Runnable {
     }
     else return "The fiscal code of this employee is already registered in the database. Please check and try again!";
   }
-
+/*
   public String doResearch(RequestResearch request){
     String research = "";
     int totalMembers = 0;
@@ -144,8 +147,28 @@ public class ServerThread implements Runnable {
       }
     }
     return research + "Total: " + totalMembers + "\n";
-  }
+  }*/
 
+  public ArrayList<Employee> doResearch(RequestResearch request){
+    ArrayList<Employee> listEmployees = new ArrayList<Employee>();
+    if (request.getMansion().equals(Mansion.Director)) {
+      for (Employee e : this.server.getEmployees()) {
+        if (request.getWorkplace().getName().equals(e.getWorkplace().getName()) && request.getWorkplace().getAddress().equals(e.getWorkplace().getAddress())){
+          if (e.getMansion() != Mansion.Administrator) {
+           listEmployees.add(e);
+          }
+        }
+      }
+    }
+    else if(request.getMansion().equals(Mansion.Administrator)) {
+      for (Employee e : this.server.getEmployees()) {
+        if (e.getWorkplace().getName().equals(request.getWorkplace().getName()) && e.getWorkplace().getAddress().equals(request.getWorkplace().getAddress())) {
+          listEmployees.add(e);
+        }
+      }
+    }
+    return listEmployees;
+  }
 
   public boolean checkFiscalCode(Employee newEmployee) {
     for (Employee e : this.server.employees) {

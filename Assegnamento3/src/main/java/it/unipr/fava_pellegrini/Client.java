@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Client
@@ -59,10 +60,6 @@ public class Client
       Response rs = (Response) o;
       System.out.format(" and received: %s from Server%n", rs.getValue());
       return rs;
-      /*if (rs.getValue() == "quit")
-      {
-        //chiama la funzione close
-      }*/
     }
     return null;
   }
@@ -110,7 +107,11 @@ public class Client
               System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
               os.writeObject(rq);
               os.flush();
-              System.out.println(this.getResponse().getValue());
+              ArrayList<Employee> employees = new ArrayList<Employee>();
+              employees = (ArrayList<Employee>) this.getResponse().getObject();
+              for(Employee e: employees){
+                  System.out.println(e);
+              }
           }
           else System.out.println("You can't make a research because you are not an Administrator or a Director");
       }

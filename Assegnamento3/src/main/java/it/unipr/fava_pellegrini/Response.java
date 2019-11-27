@@ -1,6 +1,7 @@
 package it.unipr.fava_pellegrini;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Response implements Serializable
 {
@@ -32,4 +33,6 @@ public class Response implements Serializable
   public void setEmployee(Employee employee){
     this.object = employee;
   }
+
+  public void setList(ArrayList<Employee> employees) { this.object = employees; }
 }
