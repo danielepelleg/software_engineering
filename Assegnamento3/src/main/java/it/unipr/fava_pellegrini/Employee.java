@@ -1,8 +1,15 @@
 package it.unipr.fava_pellegrini;
 
 import java.io.Serializable;
-import java.util.Date;
 
+/**
+ * Employee Class
+ * Each employee has the name attribute, the surname, the username, the fiscal code, the workplace, the mansion,
+ * a string containing the date he started the activity and a date in which he has to end it.
+ *
+ * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
+ */
 public class Employee implements Serializable {
     private String name;
     private String surname;
@@ -14,8 +21,20 @@ public class Employee implements Serializable {
 
     private String username;
     private String password;
-    private String hashed_password;
 
+    /**
+     * Class constructor.
+     *
+     * @param name the name of the employee to be created
+     * @param surname the surname of the employee to be created
+     * @param username the username of the employee to be created
+     * @param password the password of the employee to be created
+     * @param fiscalCode the fiscal code of the employee to be created
+     * @param workplace the workplace in which the employee works in
+     * @param mansion the mansion the employee holds in the society
+     * @param startActivity the date the employee started to work
+     * @param endActivity the date the contract of the employee will end
+     */
     public Employee(final String name, final String surname, final String username, final String password, final String fiscalCode, final Workplace workplace, final Mansion mansion, final String startActivity, final String endActivity) {
         this.name = name;
         this.surname = surname;
@@ -85,14 +104,6 @@ public class Employee implements Serializable {
         this.password = password;
     }
 
-    public String getHashed_password() {
-        return hashed_password;
-    }
-
-    public void setHashed_password(String hashed_password) {
-        this.hashed_password = hashed_password;
-    }
-
     public String getStartActivity() {
         return startActivity;
     }
@@ -109,6 +120,12 @@ public class Employee implements Serializable {
         this.endActivity = endActivity;
     }
 
+    /**
+     * Return a string showing the employee's attributes
+     *
+     * @return String the string
+     *
+     */
     @Override
     public String toString(){
         return  "Name: " + this.name + "\n" +
@@ -119,6 +136,5 @@ public class Employee implements Serializable {
                 "Mansion: " + this.mansion.toString() + "\n" +
                 "Start Activity Date: " + this.startActivity + "\n" +
                 "End Activity Date: " + this.endActivity + "\n";
-
     }
 }

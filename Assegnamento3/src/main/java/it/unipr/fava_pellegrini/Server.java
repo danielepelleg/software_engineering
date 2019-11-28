@@ -16,6 +16,7 @@ public class Server
   ArrayList<Workplace> workplaces;
   ArrayList<Employee> employees;
 
+
   private static final int SPORT = 4444;
 
   private ServerSocket socket;
@@ -63,7 +64,6 @@ public class Server
         break;
       }
     }
-
     this.pool.shutdown();
   }
 

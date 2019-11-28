@@ -3,18 +3,29 @@ package it.unipr.fava_pellegrini;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Response CLass
+ * A response is sent by the server after it receives a request. It has a String which contains the status of the request,
+ * if an error occurred or the request is been elaborated, and a String message containing what the client has requested.
+ */
 public class Response implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
   private final String value;
+  private final String message;
   private Object object;
 
-  //TODO attributo booleano in caso di risposta non andata a buon fine?
-
-  public Response(final String r)
+  /**
+   * Class Constructor
+   *
+   * @param r the value status of the response
+   * @param m the message of the response
+   */
+  public Response(final String r, String m)
   {
     this.value = r;
+    this.message = m;
   }
 
   public String getValue()
@@ -35,4 +46,8 @@ public class Response implements Serializable
   }
 
   public void setList(ArrayList<Employee> employees) { this.object = employees; }
+
+  public String getMessage() {
+    return message;
+  }
 }
