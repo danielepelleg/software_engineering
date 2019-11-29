@@ -21,7 +21,7 @@ import java.io.IOException;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class Main {
-    public static void main(final String[] args) throws IOException, ClassNotFoundException{
+    public static void main(final String[] args) throws IOException, ClassNotFoundException{/*
         Workplace w = new Workplace("Industria", "Via Mazzini 90");
         Client c1 = new Client();
         Client c2 = new Client();
@@ -31,7 +31,7 @@ public class Main {
         c2.connect();
         c3.connect();
         c4.connect();
-        //c1.login("Peter","pastalover");
+        c1.login("Peter","pastalover");
         c2.login("Dile", "pandistelle");
         c3.login("Beppe", "longS");
         c4.login("Gaietta", "pharmawoman");
@@ -45,6 +45,16 @@ public class Main {
         System.out.println("------------");
         c3.closeConnection();
         c2.closeConnection();
-        c4.closeConnection();
+        c4.closeConnection();*/
+        Workplace w = new Workplace("Industria", "Via Mazzini 90");
+        Client c1 = new Client();
+        //Client c2 = new Client();
+        c1.connect();
+        //c2.connect();
+        c1.login("Peter","pastalover");
+        //c2.login("Dile", "pandistelle");
+        c1.addEmployee("Marco", "Rossi", "Mark", "1234", "MRCRSI67S10A944S", w, Mansion.Employee, "2011-11-03", "2030-12-03");
+        c1.updateEmployee("Guidone", "Barilla", "Guido", "farinaintegrale", "BRLGDU58L30G337M", w, Mansion.Director, "1978-09-12", "2034-12-15");
+        c1.closeConnection();
     }
 }

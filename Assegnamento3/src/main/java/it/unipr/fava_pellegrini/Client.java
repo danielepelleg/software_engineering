@@ -74,9 +74,7 @@ public class Client {
      */
     public void login(String username, String password) throws IOException, ClassNotFoundException {
         RequestLogin rq = new RequestLogin(username, password);
-        System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
-        os.writeObject(rq);
-        os.flush();
+        this.sendRequest(rq);
         this.checkLogin(this.getResponse());
     }
 
@@ -117,10 +115,8 @@ public class Client {
         if (logged) {
             if (this.user.getMansion().equals(Mansion.Official)) {
                 RequestAddEmployee rq = new RequestAddEmployee(name, surname, username, password, fiscalCode, workplace, mansion, startActivity, endActivity);
-                System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
-                os.writeObject(rq);
-                os.flush();
-                System.out.println(this.getResponse().getValue());
+                this.sendRequest(rq);
+                System.out.println(this.getResponse().getMessage());
             } else System.out.println("You can't add a new Employee because you are not an Official");
         } else {
             sendDefault();
@@ -137,9 +133,7 @@ public class Client {
         if (logged) {
             if (this.user.getMansion().equals(Mansion.Director) || (this.user.getMansion().equals(Mansion.Administrator))) {
                 RequestResearch rq = new RequestResearch(this.user.getWorkplace(), this.user.getMansion());
-                System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
-                os.writeObject(rq);
-                os.flush();
+                this.sendRequest(rq);
                 ArrayList<Employee> employees = new ArrayList<Employee>();
                 employees = (ArrayList<Employee>) this.getResponse().getObject();
                 for (Employee e : employees) {
@@ -160,9 +154,7 @@ public class Client {
      */
     public void sendDefault() throws IOException, ClassNotFoundException {
         Request rq = new Request();
-        System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
-        os.writeObject(rq);
-        os.flush();
+        this.sendRequest(rq);
         System.out.println(this.getResponse().getValue());
     }
 
@@ -174,10 +166,20 @@ public class Client {
      */
     public void closeConnection() throws IOException, ClassNotFoundException {
         RequestCloseConnection rq = new RequestCloseConnection();
-        System.out.format("Client sends: %s to Server", rq.getClass().getSimpleName());
-        os.writeObject(rq);
-        os.flush();
+        this.sendRequest(rq);
         System.out.println(this.getResponse().getValue());
         this.client.close();
+    }
+
+    public void sendRequest(Request request) throws IOException {
+        System.out.format("Client sends: %s to Server", request.getClass().getSimpleName());
+        os.writeObject(request);
+        os.flush();
+    }
+
+    public void updateEmployee(String name, String surname, String username, String password, String fiscalCode, Workplace workplace, Mansion mansion, String startActivity, String endActivity) throws IOException, ClassNotFoundException {
+        RequestUpdateEmployee rq = new RequestUpdateEmployee(name, surname, username, password, fiscalCode, workplace, mansion, startActivity, endActivity);
+        this.sendRequest(rq);
+        System.out.println(this.getResponse().getMessage());
     }
 }

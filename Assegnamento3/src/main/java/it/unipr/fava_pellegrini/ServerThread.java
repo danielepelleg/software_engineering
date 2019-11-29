@@ -10,13 +10,12 @@ public class ServerThread implements Runnable {
 
     private Server server;
     private Socket socket;
+    private boolean shutdown = false;
 
     public ServerThread(final Server s, final Socket c) {
         this.server = s;
         this.socket = c;
     }
-
-    private boolean shutdown = false;
 
     @Override
     public void run() {
@@ -81,6 +80,17 @@ public class ServerThread implements Runnable {
                             os.flush();
                             System.out.println(doResearch(requestResearch));
                             break;
+                        case RequestUpdateEmployee:
+                            RequestUpdateEmployee requestUpdateEmployee = (RequestUpdateEmployee) rq;
+                            Thread.sleep(SLEEPTIME);
+                            if (os == null) {
+                                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
+                            }
+                            Response updateEmployeeResponse = new Response("Processing ...", this.updateEmployee(requestUpdateEmployee));
+                            os.writeObject(updateEmployeeResponse);
+                            os.flush();
+                            System.out.println(this.updateEmployee(requestUpdateEmployee));
+                            break;
                         case Request:
                             Thread.sleep(SLEEPTIME);
                             if (os == null) {
@@ -99,15 +109,10 @@ public class ServerThread implements Runnable {
                             os.writeObject(closeConnectionResponse);
                             os.flush();
                             this.shutdown = true;
-                            this.socket.close();
-                            close();
+                            this.close();
                             break;
-                        default:
-                            this.server.close();
-                            return;
                     }
-                } else this.server.close();
-
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 System.exit(0);
@@ -130,13 +135,24 @@ public class ServerThread implements Runnable {
     }
 
     public String createEmployee(RequestAddEmployee request) {
-        Employee newEmployee = new Employee(request.getName(), request.getSurname(), request.getUsername(), request.getPassword(), request.getFiscalCode(), request.getWorkplace(), request.getMansion(), request.getStartActivity(), request.getEndActivity());
-        if (checkFiscalCode(newEmployee)) {
-            this.server.addEmployee(newEmployee);
+        if (checkFiscalCode(request.getNewEmployee())) {
+            this.server.addEmployee(request.getNewEmployee());
             return "The employee has been added to the database!";
         } else
             return "The fiscal code of this employee is already registered in the database. Please check and try again!";
     }
+
+    public String updateEmployee(RequestUpdateEmployee request) {
+        //TODO se uno volesse fare l'update del codice fiscale controllare che non ce ne sia gia uno uguale nel DB
+        for (Employee e : this.server.getEmployees()) {
+            if (e.getUsername().equals(request.getNewEmployee().getUsername())) {
+                e = request.getNewEmployee();
+                return "The employee has been updated successfully!";
+            }
+        }
+        return "Error the employee that you want to update isn't in the database, try again!";
+    }
+
 
     public ArrayList<Employee> doResearch(RequestResearch request) {
         ArrayList<Employee> listEmployees = new ArrayList<Employee>();

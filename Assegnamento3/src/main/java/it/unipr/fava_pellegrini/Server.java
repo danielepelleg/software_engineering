@@ -119,7 +119,7 @@ public class Server
     workplaces.add(w3);
 
     Employee e1 = new Employee("Guido", "Barilla", "Guido", "farinaintegrale", "BRLGDU58L30G337M", w1, Mansion.Administrator, "1978-09-12", "2034-12-15");
-    Employee e2 = new Employee("Pietro", "Barilla", "Peter", "pastalover", "BRLPTR98R10G337J", w1, Mansion.Director, "2019-09-16", "2052-12-31");
+    Employee e2 = new Employee("Pietro", "Barilla", "Peter", "pastalover", "BRLPTR98R10G337J", w1, Mansion.Official, "2019-09-16", "2052-12-31");
     Employee e3 = new Employee("Diletta", "Bighi", "Dile", "pandistelle", "DLTBGH76P46F205T", w1, Mansion.Official, "2014-03-03", "2032-06-18");
     Employee e4 = new Employee("Giacomo", "Pini", "Jack", "lemacine", "GCMPNI67S10A944S", w1, Mansion.Employee, "2011-11-03", "2030-12-03");
 
