@@ -178,8 +178,12 @@ public class Client {
     }
 
     public void updateEmployee(String name, String surname, String username, String password, String fiscalCode, Workplace workplace, Mansion mansion, String startActivity, String endActivity) throws IOException, ClassNotFoundException {
-        RequestUpdateEmployee rq = new RequestUpdateEmployee(name, surname, username, password, fiscalCode, workplace, mansion, startActivity, endActivity);
-        this.sendRequest(rq);
-        System.out.println(this.getResponse().getMessage());
+        if (logged) {
+            if (this.user.getMansion().equals(Mansion.Official)) {
+                RequestUpdateEmployee rq = new RequestUpdateEmployee(name, surname, username, password, fiscalCode, workplace, mansion, startActivity, endActivity);
+                this.sendRequest(rq);
+                System.out.println(this.getResponse().getMessage());
+            } else sendDefault();
+        }
     }
 }
