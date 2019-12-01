@@ -11,18 +11,23 @@ import java.util.Random;
 /**
  * Client Class
  * The client has the SPORT (Server Port) and SHOST (Server address) as a Global variable.
- * <p>
+ * The client can have a name.
+ *
  * It has an Employee attribute, which is set once the user sign into the machine with his username and password,
  * a boolean attribute showing the status of the user (if logged or not) and a Socket attribute, which is set once
  * the client establish a connection with the server.
+ * Once the client has an employee logged, it takes his privileges in its attributes editRight and researchRight.
  */
 public class Client {
     private static final int SPORT = 4444;
     private static final String SHOST = "localhost";
     private static final int MAX = 100;
+    private static String name;
 
     private Employee user;
-    private boolean logged = false;
+    private boolean logged;
+    private boolean editRight;
+    private boolean researchRight;
 
     private Socket client;
 
@@ -38,7 +43,10 @@ public class Client {
             client = new Socket(SHOST, SPORT);
             this.os = new ObjectOutputStream(client.getOutputStream());
             this.is = null;
-        } catch (IOException e) {
+            this.logged = false;
+            this.editRight = false;
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -65,7 +73,7 @@ public class Client {
     }
 
     /**
-     * Send a RequestLogin to the server
+     * Create and send a RequestLogin to the server
      *
      * @param username the username the user wants to sign in with
      * @param password the password
@@ -80,7 +88,8 @@ public class Client {
 
     /**
      * Take the response of the Server to the RequestLogin sent by the Client and check if everything went well.
-     * If so, set the Employee user in this class with the one sent by the server.
+     * If so, set the Employee user in this class with the one sent by the server and grants him
+     * the relative's permission.
      *
      * @param response the response sent by the server
      */
@@ -93,11 +102,13 @@ public class Client {
             this.user = (Employee) response.getObject();
             System.out.println("You are now logged as\n" + this.user.toString());
             this.logged = true;
+            if (this.user.getMansion().equals(Mansion.Official)) this.editRight = true;
+            if (this.user.getMansion().equals(Mansion.Director) || this.user.getMansion().equals(Mansion.Administrator)) this.researchRight = true;
         }
     }
 
     /**
-     * Send a RequestAddEmployee to the server
+     * Create and send a RequestAddEmployee to the server
      *
      * @param name the name of the new employee to be created
      * @param surname the surname of the new employee to be created
@@ -117,14 +128,16 @@ public class Client {
                 RequestAddEmployee rq = new RequestAddEmployee(name, surname, username, password, fiscalCode, workplace, mansion, startActivity, endActivity);
                 this.sendRequest(rq);
                 System.out.println(this.getResponse().getMessage());
-            } else System.out.println("You can't add a new Employee because you are not an Official");
-        } else {
-            sendDefault();
+            } else{
+                System.out.println("You can't add a new Employee because you are not an Official");
+                sendDefault();
+            }
         }
+        else sendDefault();
     }
 
     /**
-     * Send a RequestResearch to the server
+     * Create and send a RequestResearch to the server
      *
      * @throws IOException Input Output Exception, for the Stream
      * @throws ClassNotFoundException if the Object is not an instance of Response
@@ -134,14 +147,18 @@ public class Client {
             if (this.user.getMansion().equals(Mansion.Director) || (this.user.getMansion().equals(Mansion.Administrator))) {
                 RequestResearch rq = new RequestResearch(this.user.getWorkplace(), this.user.getMansion());
                 this.sendRequest(rq);
-                ArrayList<Employee> employees = new ArrayList<Employee>();
+                ArrayList<Employee> employees = new ArrayList<>();
                 employees = (ArrayList<Employee>) this.getResponse().getObject();
                 for (Employee e : employees) {
                     System.out.println(e);
                 }
-            } else System.out.println("You can't make a research because you are not an Administrator or a Director");
+            }
+            else{
+                System.out.println("You can't make a research because you are not an Administrator or a Director");
+                sendDefault();
+            }
         }
-        sendDefault();
+        else sendDefault();
     }
 
     /**
@@ -154,8 +171,11 @@ public class Client {
      */
     public void sendDefault() throws IOException, ClassNotFoundException {
         Request rq = new Request();
+        rq.setLogged(logged);
+        rq.setEditRights(editRight);
+        rq.setResearchRights(researchRight);
         this.sendRequest(rq);
-        System.out.println(this.getResponse().getValue());
+        System.out.println(this.getResponse().getMessage());
     }
 
     /**
@@ -167,23 +187,50 @@ public class Client {
     public void closeConnection() throws IOException, ClassNotFoundException {
         RequestCloseConnection rq = new RequestCloseConnection();
         this.sendRequest(rq);
-        System.out.println(this.getResponse().getValue());
+        System.out.println(this.getResponse().getMessage());
         this.client.close();
     }
 
+    /**
+     * Send a Request to the client
+     *
+     * @param request the request to send
+     * @throws IOException Input Output Exception, for the Stream
+     */
     public void sendRequest(Request request) throws IOException {
-        System.out.format("Client sends: %s to Server", request.getClass().getSimpleName());
+        System.out.format("Client %s sends: %s to Server", name, request.getClass().getSimpleName());
         os.writeObject(request);
         os.flush();
     }
 
-    public void updateEmployee(String name, String surname, String username, String password, String fiscalCode, Workplace workplace, Mansion mansion, String startActivity, String endActivity) throws IOException, ClassNotFoundException {
+    /**
+     * Create and send a RequestUpdateEmployee to the server
+     *
+     * @param currentUsername the current username of the employee to be updated
+     * @param newName the new name of the employee to be updated
+     * @param newSurname the new surname of the employee to be updated
+     * @param newUsername the new username of the employee to be updated
+     * @param newPassword the new password of the employee to be updated
+     * @param newFiscalCode the new fiscal code of the employee to be updated
+     * @param newWorkplace the new workplace of the employee to be updated
+     * @param newMansion the new mansion the employee to updated
+     * @param newStartActivity the new start-activity date of the employee to be updated
+     * @param newEndActivity the new end-activity date of the employee to be updated
+     *
+     * @throws IOException Input Output Exception, for the Stream
+     * @throws ClassNotFoundException if the Object is not an instance of Response
+     */
+    public void updateEmployee(String currentUsername, String newName, String newSurname, String newUsername, String newPassword, String newFiscalCode, Workplace newWorkplace, Mansion newMansion, String newStartActivity, String newEndActivity) throws IOException, ClassNotFoundException {
         if (logged) {
             if (this.user.getMansion().equals(Mansion.Official)) {
-                RequestUpdateEmployee rq = new RequestUpdateEmployee(name, surname, username, password, fiscalCode, workplace, mansion, startActivity, endActivity);
+                RequestUpdateEmployee rq = new RequestUpdateEmployee(currentUsername, newName, newSurname, newUsername, newPassword, newFiscalCode, newWorkplace, newMansion, newStartActivity, newEndActivity);
                 this.sendRequest(rq);
                 System.out.println(this.getResponse().getMessage());
-            } else sendDefault();
+            } else{
+                System.out.println("You can't update the Employee because you are not an Official");
+                sendDefault();
+            }
         }
+        else sendDefault();
     }
 }

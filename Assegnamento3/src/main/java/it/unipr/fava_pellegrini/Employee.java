@@ -120,6 +120,18 @@ public class Employee implements Serializable {
         this.endActivity = endActivity;
     }
 
+    public void setEmployee(Employee e){
+        setName(e.getName());
+        setSurname(e.getSurname());
+        setUsername(e.getUsername());
+        setPassword(e.getPassword());
+        setFiscalCode(e.getFiscalCode());
+        setWorkplace(e.getWorkplace());
+        setMansion(e.getMansion());
+        setStartActivity(e.getStartActivity());
+        setEndActivity(e.getEndActivity());
+    }
+
     /**
      * Return a string showing the employee's attributes
      *

@@ -2,8 +2,9 @@ package it.unipr.fava_pellegrini;
 
 /**
  * RequestResearch Class - Request Subclass
- * Each RequestResearch has the Workplace of which the client wants to research the employees and the mansion
- * of the employee logged who wants to perform the action. The client can do the research just if the user logged is a Director or an Administrator.
+ * Each RequestResearch has the Workplace of which the client wants to research the employees and the mansion of the employee logged
+ * who wants to perform the action. The client can do the research just if the user logged is a Director or an Administrator, and the researches
+ * are limited only to the client's workplace. A client working in a workplace can't perform researches about other workplaces different by his own.
  * Researches won't show the Administrators if a Director does the research, but they will show them if the action is performed by an Administrator-
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240

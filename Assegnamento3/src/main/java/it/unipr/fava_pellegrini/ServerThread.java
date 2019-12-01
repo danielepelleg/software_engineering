@@ -3,114 +3,110 @@ package it.unipr.fava_pellegrini;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Random;
 
+/**
+ * ServerThread Class
+ * Manage the connection open by the client on a socket and accepted by the server through a system of threads
+ * The ServerThread as the MAXIMUM SLEEPTIME and the MINIMUM SLEEPTIME as a Global variable.
+ *
+ * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
+ */
 public class ServerThread implements Runnable {
-    private static final int MAX = 100;
-    private static final long SLEEPTIME = 200;
+    private static final int MAX_SLEEPTIME = 1600;
+    private static final int MIN_SLEEPTIME = 1000;
 
     private Server server;
     private Socket socket;
-    private boolean shutdown = false;
+    private boolean shutdown;
+    ObjectInputStream is;
+    ObjectOutputStream os;
 
+    /**
+     * Class Constructor
+     *
+     * @param s the server on which the thread execute tasks
+     * @param c the socket on which the thread execute tasks
+     */
     public ServerThread(final Server s, final Socket c) {
         this.server = s;
         this.socket = c;
+        this.shutdown = false;
+        this.is = null;
+        this.os = null;
     }
 
+    /**
+     * Start the Server Thread
+     * Read the object sent by the Client, cast it in a Request sent by the Client and send the relative's Response
+     */
     @Override
     public void run() {
-        ObjectInputStream is = null;
-        ObjectOutputStream os = null;
-
         try {
             is = new ObjectInputStream(new BufferedInputStream(this.socket.getInputStream()));
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return;
         }
-
         while (!shutdown) {
             try {
-                // take the request sent by the client on its output stream
                 Object i = is.readObject();
 
                 if (i instanceof Request) {
-                    // convert the object in a request
                     Request rq = (Request) i;
 
-                    String message = null;
+                    String message;
+                    Response response;
 
                     RequestList command = RequestList.valueOf(i.getClass().getSimpleName());
                     System.out.println(command.toString());
                     switch (command) {
-                        case RequestLogin:
+                        case RequestLogin -> {
                             RequestLogin requestLogin = (RequestLogin) rq;
                             message = login(requestLogin);
-                            Thread.sleep(SLEEPTIME);
-                            if (os == null) {
-                                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
-                            }
-                            Response loginResponse = new Response("Please wait ... ", message);
-                            loginResponse.setEmployee(getEmployeeRequested((RequestLogin) rq));
-                            os.writeObject(loginResponse);
-                            os.flush();
-                            System.out.println(message);
-                            break;
-                        case RequestAddEmployee:
+                            response = new Response("Please wait ... ", message);
+                            response.setEmployee(getEmployeeRequested((RequestLogin) rq));
+                            sendResponse(response);
+                        }
+                        case RequestAddEmployee -> {
                             RequestAddEmployee requestAddEmployee = (RequestAddEmployee) rq;
                             message = createEmployee(requestAddEmployee);
-                            Thread.sleep(SLEEPTIME);
-                            if (os == null) {
-                                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
-                            }
-                            Response addEmployeeResponse = new Response("Processing ... ", message);
-                            os.writeObject(addEmployeeResponse);
-                            os.flush();
-                            System.out.println(message);
-                            break;
-                        case RequestResearch:
+                            response = new Response("Processing ... ", message);
+                            sendResponse(response);
+                        }
+                        case RequestResearch -> {
                             RequestResearch requestResearch = (RequestResearch) rq;
-                            Thread.sleep(SLEEPTIME);
-                            if (os == null) {
-                                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
-                            }
-                            Response researchResponse = new Response("Processing ...", "");
-                            researchResponse.setList(doResearch(requestResearch));
-                            os.writeObject(researchResponse);
-                            os.flush();
-                            System.out.println(doResearch(requestResearch));
-                            break;
-                        case RequestUpdateEmployee:
+                            response = new Response("Processing ...", "");
+                            response.setList(doResearch(requestResearch));
+                            response.setMessageListed();
+                            sendResponse(response);
+                        }
+                        case RequestUpdateEmployee -> {
                             RequestUpdateEmployee requestUpdateEmployee = (RequestUpdateEmployee) rq;
-                            Thread.sleep(SLEEPTIME);
-                            if (os == null) {
-                                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
+                            response = new Response("Processing ...", updateEmployee(requestUpdateEmployee));
+                            sendResponse(response);
+                        }
+                        case Request -> {
+                            response = new Response("Error", "");
+                            if(!rq.isLogged()){
+                                response.setMessage("Please Sign in!");
                             }
-                            Response updateEmployeeResponse = new Response("Processing ...", this.updateEmployee(requestUpdateEmployee));
-                            os.writeObject(updateEmployeeResponse);
-                            os.flush();
-                            System.out.println(this.updateEmployee(requestUpdateEmployee));
-                            break;
-                        case Request:
-                            Thread.sleep(SLEEPTIME);
-                            if (os == null) {
-                                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
+                            else {
+                                if (!rq.hasEditRights())
+                                    response.setMessage("Only the Officials can perform this action.");
+                                if (!rq.hasResearchRights())
+                                    response.setMessage("Only the Administrators and the Directors can perform this action!");
                             }
-                            Response rs = new Response("Error", "Please Sign in!");
-                            os.writeObject(rs);
-                            os.flush();
-                            break;
-                        case RequestCloseConnection:
-                            Thread.sleep(SLEEPTIME);
-                            if (os == null) {
-                                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
-                            }
-                            Response closeConnectionResponse = new Response("Processing ...", "Connection Closed");
-                            os.writeObject(closeConnectionResponse);
-                            os.flush();
+                            sendResponse(response);
+                        }
+                        case RequestCloseConnection -> {
+                            response = new Response("Processing ...", "Connection Closed");
+                            sendResponse(response);
                             this.shutdown = true;
-                            this.close();
-                            break;
+                            close();
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -120,12 +116,32 @@ public class ServerThread implements Runnable {
         }
     }
 
-    public void close() {
-        if (this.server.getPool().getActiveCount() == 1) {
-            this.server.close();
+    /**
+     * Send a response to the CLient
+     *
+     * @param response the response to be sent
+     */
+    public void sendResponse(Response response){
+        try {
+            randomSleep();
+            if (os == null) {
+                os = new ObjectOutputStream(new BufferedOutputStream(this.socket.getOutputStream()));
+            }
+            os.writeObject(response);
+            os.flush();
+            System.out.println(response.getMessage());
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 
+    /**
+     * Sign the Client in to the server
+     *
+     * @param request the RequestLogin of the client
+     * @return the result of the Login, whether it worked or not
+     */
     public String login(RequestLogin request) {
         for (Employee e : this.server.getEmployees()) {
             if (request.getUsername().equals(e.getUsername()) && request.getPassword().equals(e.getPassword()))
@@ -134,6 +150,12 @@ public class ServerThread implements Runnable {
         return "Bad Login. Retry!";
     }
 
+    /**
+     * Create a new Employee in the Server
+     *
+     * @param request the RequestAddEmployee containing the new Employee to add
+     * @return the result of the elaboration of the request, whether it worked or not
+     */
     public String createEmployee(RequestAddEmployee request) {
         if (checkFiscalCode(request.getNewEmployee())) {
             this.server.addEmployee(request.getNewEmployee());
@@ -142,18 +164,31 @@ public class ServerThread implements Runnable {
             return "The fiscal code of this employee is already registered in the database. Please check and try again!";
     }
 
+    /**
+     * Update an employee in the Server.
+     *
+     * @param request the RequestUpdateEmployee containing the new Employee to update
+     * @return the result of the elaboration of the request, whether it worked or not
+     */
     public String updateEmployee(RequestUpdateEmployee request) {
-        //TODO se uno volesse fare l'update del codice fiscale controllare che non ce ne sia gia uno uguale nel DB
         for (Employee e : this.server.getEmployees()) {
-            if (e.getUsername().equals(request.getNewEmployee().getUsername())) {
-                e = request.getNewEmployee();
-                return "The employee has been updated successfully!";
+            if (e.getUsername().equals(request.getCurrentUsername())) {
+                if(checkUpdate(request.getNewEmployee())) {
+                    this.server.updateEmployee(request.getCurrentUsername(), request.getNewEmployee());
+                    return "The employee has been updated successfully!\n";
+                }
+                else return "The new fiscal code of the employee you want to update is already present in the database!";
             }
         }
-        return "Error the employee that you want to update isn't in the database, try again!";
+        return "Error the employee you want to update isn't in the database, try again!";
     }
 
-
+    /**
+     * Research the employees request by the Client
+     *
+     * @param request the RequestResearch containing the Workplace through which filter the research.
+     * @return a list containing the employees of the workplace requested
+     */
     public ArrayList<Employee> doResearch(RequestResearch request) {
         ArrayList<Employee> listEmployees = new ArrayList<Employee>();
         if (request.getMansion().equals(Mansion.Director)) {
@@ -174,8 +209,14 @@ public class ServerThread implements Runnable {
         return listEmployees;
     }
 
+    /**
+     * Check if the fiscal code of a new Employee is already present in the database
+     *
+     * @param newEmployee the newEmployee to check
+     * @return true if not present, false if already present
+     */
     public boolean checkFiscalCode(Employee newEmployee) {
-        for (Employee e : this.server.employees) {
+        for (Employee e : this.server.getEmployees()) {
             if (e.getFiscalCode().equals(newEmployee.getFiscalCode())) {
                 return false;
             }
@@ -183,6 +224,31 @@ public class ServerThread implements Runnable {
         return true;
     }
 
+    /**
+     * Check if the updated employee has a correct fiscal code to be inserted in the Server.
+     *
+     * @param newEmployee the employee of which fiscal code must be checked
+     * @return true if the operation of updating is permitted, false otherwise
+     */
+    public boolean checkUpdate(Employee newEmployee){
+        ArrayList<Employee> checkingList = new ArrayList<>();
+        for(Employee e : this.server.getEmployees()){
+            if(e != newEmployee)
+                checkingList.add(e);
+        }
+        for(Employee e : checkingList){
+            if(e.getFiscalCode().equals(newEmployee.getFiscalCode()))
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Return the employee requested by the RequestLogin
+     *
+     * @param request the RequestLogin containing the username and password to sign in
+     * @return the employee requested if inside the database
+     */
     public Employee getEmployeeRequested(RequestLogin request) {
         for (Employee e : this.server.getEmployees()) {
             if (request.getUsername().equals(e.getUsername()) && request.getPassword().equals(e.getPassword())) {
@@ -192,4 +258,25 @@ public class ServerThread implements Runnable {
         return null;
     }
 
+    /** Causes the currently executing thread to sleep (temporarily cease execution)
+     * for a specified number between 1000 (MINIMUM SLEEP TIME) and 1600 (MAXIMUM SLEEP TIME) milliseconds
+     */
+    public void randomSleep(){
+        try {
+            Random r = new Random();
+            Thread.sleep(r.nextInt(MAX_SLEEPTIME-MIN_SLEEPTIME)+MIN_SLEEPTIME);
+        }
+        catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Close the server if there's just one thread that is actively executing tasks.
+     */
+    public void close() {
+        if (this.server.getPool().getActiveCount() == 1) {
+            this.server.close();
+        }
+    }
 }

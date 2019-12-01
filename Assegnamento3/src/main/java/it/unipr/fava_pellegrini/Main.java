@@ -6,8 +6,6 @@ import java.io.IOException;
  * Main Class
  * Test, through a simulation, the classes and methods created
  *
- * 1) The Server is initialized with some workplaces, and some users (workplace's employees). It's important
- *      that every workplaces has at least one official.
  * 2) Randomly, every official adds or updates some employees. The sequence of every action must be broken
  *      with a random timed wait. Once a new fiscal code is generated, it is compared to the already existing ones.
  * 3) Randomly, every director and administrator does a research on the list of employees of a workplace.
@@ -48,13 +46,19 @@ public class Main {
         c4.closeConnection();*/
         Workplace w = new Workplace("Industria", "Via Mazzini 90");
         Client c1 = new Client();
+        Client c2 = new Client();
         //Client c2 = new Client();
         c1.connect();
+        c2.connect();
         //c2.connect();
         c1.login("Peter","pastalover");
-        //c2.login("Dile", "pandistelle");
-        c1.addEmployee("Marco", "Rossi", "Mark", "1234", "MRCRSI67S10A944S", w, Mansion.Employee, "2011-11-03", "2030-12-03");
-        c1.updateEmployee("Guidone", "Barilla", "Guido", "farinaintegrale", "BRLGDU58L30G337M", w, Mansion.Director, "1978-09-12", "2034-12-15");
+
+        c2.login("Guido", "farinaintegrale");
+        //c2.research();
+        c1.research();
+        //c1.addEmployee("Marco", "Rossi", "Mark", "1234", "MRCRSI67S10A944S", w, Mansion.Employee, "2011-11-03", "2030-12-03");
+        c2.updateEmployee("Jack","Guidone", "Barilla", "Guido", "farinaintegrale", "BRLGDU76L30G337M", w, Mansion.Director, "1978-09-12", "2034-12-15");
         c1.closeConnection();
+        c2.closeConnection();
     }
 }
