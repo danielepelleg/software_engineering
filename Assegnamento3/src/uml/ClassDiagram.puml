@@ -4,15 +4,76 @@ title Class Diagram
 top to bottom direction
 
 package SERVER <<Database>> {
-  class BusinessCompany{
+  class Server{
+    {static} COREPOOL
+    {static} MAXPOOL
+    {static} IDLETIME
+    {static} SPORT
+    -socket : ServerSocket
+    -pool : ThreadPoolExecutor
     -workplaces : ArrayList<Workplace>
     -employees : ArrayList<Employee>
-    +void checkFiscalCode()
+    +void run()
+    +void close()
+    __ Operations on Server __
+    +void addEmployee (Employee newEmployee)
+    +void updateEmployee (String username, Employee newEmployee)
+    +Employee getEmployeeRequested(RequestLogin request)
+    __ Controls __
+    +boolean checkFiscalCode(Employee newEmployee)
+    +boolean checkUpdate(Employee newEmployee)
   }
 }
 
-SERVER o-down- Workplace
-SERVER o-down- Employee
+class ServerThread{
+    {static} MAX_SLEEPTIME
+    {static} MIN_SLEEPTIME
+    -server : Server
+    -socket : Socket
+    -shutdown : boolean
+    -is : ObjectInputStream
+    -os : ObjectOutputStream
+    __ Operation on Thread __
+    +void run()
+    +void randomSleep()
+    +void close()
+    __ Operations on Responses __
+    +void sendResponse(Response response)
+    __ Operations on Requests __
+    +String Login(RequestLogin request)
+    +String createEmployee(RequestAddEmployee request)
+    +String updateEmployee(RequestUpdateEmployee request)
+    +ArrayList<Employee> doResearch(RequestResearch request)
+}
+
+SERVER *-up- ServerThread
+
+class Client{
+    {static} SPORT
+    {static} SHOST
+    -name : String
+    -user : Employee
+    -logged : boolean
+    -editRight : boolean
+    -researchRight : boolean
+    -client : Socket
+    -is : ObjectInputStream
+    -os : ObjectOutputStream
+    __ Operations on Client __
+    +void connect()
+    +void closeConnection()
+    __ Creation of Requests __
+    +void login (String username, String password)
+        +void addEmployee(Employee newEmployee)
+        +void updateEmployee(String username, Employee newEmployee)
+        +void research()
+    __ Operations on Requests __
+    +void sendRequest(Request request)
+    +void sendDefault()
+    __ Operations on Responses __
+    +void checkLogin(Response response)
+    +void readResponse()
+}
 
 class Workplace{
     -name : String
@@ -23,36 +84,97 @@ class Employee {
     __ private data __
     -name : String
     -surname : String
-    -fiscalCode : String
-    -workplace : Workplace
-    -mansion : String
-    -startActivity : Date
-    -endActivity : Date
-}
-
-Employee *-left- Workplace
-
-class Official {
     -username : String
     -password : String
-    -- crypted --
-    -hashed_password : String
-    ____
-    +void login(BusinessCompany)
-    +void addEmployee(Employee)
-    +void updateData(Employee)
+    -fiscalCode : String
+    -workplace : Workplace
+    -mansion : Mansion
+    -startActivity : String
+    -endActivity : String
 }
 
-class Director {
-    -adminPrivilege = false : boolean
-    +void searchEmployee(Employee)
+Employee -o SERVER
+Workplace -o SERVER
+
+Enum Mansion {
+    EMPLOYEE
+    OFFICIAL
+    DIRECTOR
+    ADMINISTRATOR
 }
 
-Employee <|-right- Official : <<Inheritance>>
-Official <|-right- Director : <<Inheritance>>
-Director <|-up- Administrator : <<Inheritance>>
-
-class Administrator {
-    -adminPrivilege = true : boolean
+class Request {
+    -logged : boolean
+    -editRights : boolean
+    -researchRight : boolean
 }
+
+Request -o ServerThread
+Request -right-o Client
+
+class RequestLogin{
+    -username : String
+    -password : String
+}
+
+class RequestAddEmployee {
+    -name : String
+    -surname : String
+    -username : String
+    -password : String
+    -fiscalCode : String
+    -workplace : Workplace
+    -mansion : Mansion
+    -startActivity : String
+    -endActivity : String
+    -newEmployee : Employee
+}
+
+class RequestUpdateEmployee{
+    -currentUsername : String
+    -newName : String
+    -newSurname : String
+    -newUsername : String
+    -newPassword : String
+    -newFiscalCode : String
+    -newWorkplace : Workplace
+    -newMansion : Mansion
+    -newStartActivity : String
+    -newEndActivity : String
+    -newEmployee : Employee
+}
+
+class RequestResearch{
+    -workplace : Workplace
+    -mansion : Mansion
+}
+
+class RequestCloseConnection{
+    -command : String
+}
+
+class Response{
+    -value : String
+    -message : String
+    -object : Object
+    +void setEmployee(Employee employee)
+    +void setList(ArrayList<Employee> employees)
+    +int getListSize()
+    +void setMessageListed()
+    +String listToString()
+}
+
+Response o-- ServerThread
+Response -down-o Client
+
+RequestLogin -up-|> Request
+RequestAddEmployee -up-|> Request
+RequestUpdateEmployee -up-|> Request
+RequestResearch -up-|> Request
+RequestCloseConnection -up-|> Request
+
+Employee -right-* Mansion
+Employee *-down- Workplace
+
+
 @enduml
