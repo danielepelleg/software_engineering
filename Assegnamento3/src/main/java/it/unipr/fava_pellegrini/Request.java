@@ -12,30 +12,5 @@ import java.io.Serializable;
 class Request implements Serializable
 {
   private static final long serialVersionUID = 1L;
-  private boolean logged;
-  private boolean editRights;
-  private boolean researchRights;
 
-  public void setLogged(boolean rights){
-    this.logged = rights;
-  }
-
-  public void setEditRights(boolean rights){
-    this.editRights = rights;
-  }
-
-  public void setResearchRights(boolean rights){
-    this.researchRights = rights;
-  }
-
-  public boolean isLogged(){
-    return logged;
-  }
-  public boolean hasEditRights() {
-    return editRights;
-  }
-
-  public boolean hasResearchRights() {
-    return researchRights;
-  }
 }

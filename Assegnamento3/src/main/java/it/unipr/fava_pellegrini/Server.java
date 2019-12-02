@@ -130,7 +130,7 @@ public class Server
     {
       try
       {
-        System.out.println("Waiting for a Connection.");
+
         Socket s = this.socket.accept();
         System.out.println("Connection accepted by: "+ s.getInetAddress());
         this.pool.execute(new ServerThread(this, s));

@@ -22,6 +22,24 @@ public class ServerThread implements Runnable {
     private boolean shutdown;
     ObjectInputStream is;
     ObjectOutputStream os;
+    private Employee user;
+    private boolean userLogged;
+
+    public Employee getUser() {
+        return user;
+    }
+
+    public void setUser(Employee user) {
+        this.user = user;
+    }
+
+    public boolean isUserLogged() {
+        return userLogged;
+    }
+
+    public void setUserLogged(boolean userLogged) {
+        this.userLogged = userLogged;
+    }
 
     /**
      * Class Constructor
@@ -35,6 +53,7 @@ public class ServerThread implements Runnable {
         this.shutdown = false;
         this.is = null;
         this.os = null;
+        this.userLogged = false;
     }
 
     /**
@@ -56,57 +75,90 @@ public class ServerThread implements Runnable {
 
                 if (i instanceof Request) {
                     Request rq = (Request) i;
-
-                    String message;
                     Response response;
-
                     RequestList command = RequestList.valueOf(i.getClass().getSimpleName());
                     System.out.println(command.toString());
                     switch (command) {
                         case RequestLogin -> {
                             RequestLogin requestLogin = (RequestLogin) rq;
-                            message = login(requestLogin);
-                            response = new Response("Please wait ... ", message);
-                            response.setEmployee(getEmployeeRequested((RequestLogin) rq));
-                            sendResponse(response);
+                            if(!this.isUserLogged()){
+                                if(login(requestLogin).equals("Login Successful!")){
+                                    response = new Response("Operation processed", login(requestLogin));
+                                    response.setEmployee(getEmployeeRequested((RequestLogin) rq));
+                                    this.setUserLogged(true);
+                                    this.setUser(getEmployeeRequested((RequestLogin) rq));
+                                    sendResponse(response);
+                                } else {
+                                    response = new Response("ERROR", login(requestLogin));
+                                    sendResponse(response);
+                                }
+                            } else {
+                                response = new Response("ERROR", "You are already logged!");
+                                sendResponse(response);
+                            }
                         }
                         case RequestAddEmployee -> {
                             RequestAddEmployee requestAddEmployee = (RequestAddEmployee) rq;
-                            message = createEmployee(requestAddEmployee);
-                            response = new Response("Processing ... ", message);
-                            sendResponse(response);
+                            if(this.isUserLogged()){
+                                if(checkPermissions(requestAddEmployee)){
+                                    response = new Response("Operation processed", createEmployee(requestAddEmployee));
+                                    sendResponse(response);
+                                }
+                                else {
+                                    response = new Response("ERROR", "You must be an Official to this operation!");
+                                    sendResponse(response);
+                                }
+                            } else {
+                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...");
+                                sendResponse(response);
+                            }
                         }
                         case RequestResearch -> {
                             RequestResearch requestResearch = (RequestResearch) rq;
-                            response = new Response("Processing ...", "");
-                            response.setList(doResearch(requestResearch));
-                            response.setMessageListed();
-                            sendResponse(response);
+                            if(this.isUserLogged()){
+                                if(checkPermissions(requestResearch)){
+                                    response = new Response("Operation processed", "");
+                                    response.setList(doResearch(requestResearch));
+                                    response.setMessageListed();
+                                    sendResponse(response);
+                                }
+                                else {
+                                    response = new Response("ERROR", "You must be an Administrator or a Director to this operation!");
+                                    sendResponse(response);
+                                }
+                            } else {
+                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...");
+                                sendResponse(response);
+                            }
                         }
                         case RequestUpdateEmployee -> {
                             RequestUpdateEmployee requestUpdateEmployee = (RequestUpdateEmployee) rq;
-                            response = new Response("Processing ...", updateEmployee(requestUpdateEmployee));
-                            sendResponse(response);
-                        }
-                        case Request -> {
-                            response = new Response("Error", "");
-                            if(!rq.isLogged()){
-                                response.setMessage("Please Sign in!");
+                            if(this.isUserLogged()){
+                                if(checkPermissions(requestUpdateEmployee)){
+                                    response = new Response("Operation processed", updateEmployee(requestUpdateEmployee));
+                                    sendResponse(response);
+                                }
+                                else {
+                                    response = new Response("ERROR", "You must be an Official to this operation!");
+                                    sendResponse(response);
+                                }
+                            } else {
+                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...");
+                                sendResponse(response);
                             }
-                            else {
-                                if (!rq.hasEditRights())
-                                    response.setMessage("Only the Officials can perform this action.");
-                                if (!rq.hasResearchRights())
-                                    response.setMessage("Only the Administrators and the Directors can perform this action!");
-                            }
-                            sendResponse(response);
                         }
                         case RequestCloseConnection -> {
-                            response = new Response("Processing ...", "Connection Closed");
-                            sendResponse(response);
-                            this.shutdown = true;
-                            close();
+                            if(this.isUserLogged()){
+                                response = new Response("Operation processed", "Connection Closed");
+                                sendResponse(response);
+                                this.shutdown = true;
+                                close();
+                            } else {
+                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...");
+                                sendResponse(response);
+                            }
                         }
+                        default -> throw new IllegalStateException("Unexpected value: " + command);
                     }
                 }
             } catch (Exception e) {
@@ -129,7 +181,6 @@ public class ServerThread implements Runnable {
             }
             os.writeObject(response);
             os.flush();
-            System.out.println(response.getMessage());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -277,6 +328,25 @@ public class ServerThread implements Runnable {
     public void close() {
         if (this.server.getPool().getActiveCount() == 1) {
             this.server.close();
+        }
+    }
+
+    public boolean checkPermissions(Request request){
+        RequestList command = RequestList.valueOf(request.getClass().getSimpleName());
+        switch (command){
+            case RequestAddEmployee, RequestUpdateEmployee -> {
+                if(this.getUser().getMansion().equals(Mansion.Official)){
+                    return true;
+                } else return false;
+            }
+            case RequestResearch -> {
+                if(this.getUser().getMansion().equals(Mansion.Administrator) || this.getUser().getMansion().equals(Mansion.Director)){
+                    return true;
+                } else return false;
+            }
+            default -> {
+                return false;
+            }
         }
     }
 }
