@@ -7,9 +7,10 @@ actor Official
 
 rectangle SERVER{
     Official -- (Add Employee)
-    (Add Employee) .> (Login) : <<include>>
+    (Add Employee) ..> (Check Fiscal Code) : <<include>>
     (Add Employee) ..> (Check Mansion) : <<include>>
-    (Check Mansion) .> (Check Fiscal Code) : <<include>>
+    (Add Employee) ..> (Login) : <<include>>
+    (Login) <.. (Error) : <<extends>>
     (Check Mansion) <.. (Error): <<extends>>
     (Check Fiscal Code) <.. (Error) : <<extends>>
     (Error) ..> (Send Warning Response) : <<include>>

@@ -20,6 +20,7 @@
   - [UML Diagrams](#uml)
     - [Class Diagram](#class-diagram)
     - [Use-Case Diagram](#usecase-diagram)
+    - [Use-Case Diagram](#usecase-diagram---add-new-employee)
   - [Getting Started](#getting-started)
     - [Updates](#updates)
   - [License](#license)
@@ -72,6 +73,11 @@
    <p align="center">
        <img src="./src/main/resources/UseCaseDiagram.svg" alt="UseCaseDiagram">
    </p>
+   
+   ## UseCase Diagram - Add New Employee
+   <p align="center">
+          <img src="./src/main/resources/Add_Employee_Use_Case.svg" alt="UseCaseDiagram-AddNewEmployee">
+      </p>
    
    <!-- GETTING STARTED -->
    ## Getting Started

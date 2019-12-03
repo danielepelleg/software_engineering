@@ -18,10 +18,7 @@ package SERVER <<Database>> {
     __ Operations on Server __
     +void addEmployee (Employee newEmployee)
     +void updateEmployee (String username, Employee newEmployee)
-    +Employee getEmployeeRequested(RequestLogin request)
-    __ Controls __
-    +boolean checkFiscalCode(Employee newEmployee)
-    +boolean checkUpdate(Employee newEmployee)
+    +String listEmployee()
   }
 }
 
@@ -40,10 +37,15 @@ class ServerThread{
     __ Operations on Responses __
     +void sendResponse(Response response)
     __ Operations on Requests __
-    +String Login(RequestLogin request)
+    +String login(RequestLogin request)
     +String createEmployee(RequestAddEmployee request)
     +String updateEmployee(RequestUpdateEmployee request)
     +ArrayList<Employee> doResearch(RequestResearch request)
+    +Employee getEmployeeRequested(RequestLogin request)
+    __ Controls __
+    +boolean checkPermission(Request request)
+    +boolean checkFiscalCode(Employee newEmployee)
+    +boolean checkUpdate(Employee newEmployee)
 }
 
 SERVER *-up- ServerThread
@@ -53,9 +55,6 @@ class Client{
     {static} SHOST
     -name : String
     -user : Employee
-    -logged : boolean
-    -editRight : boolean
-    -researchRight : boolean
     -client : Socket
     -is : ObjectInputStream
     -os : ObjectOutputStream
@@ -64,12 +63,11 @@ class Client{
     +void closeConnection()
     __ Creation of Requests __
     +void login (String username, String password)
-        +void addEmployee(Employee newEmployee)
-        +void updateEmployee(String username, Employee newEmployee)
-        +void research()
+    +void addEmployee(Employee newEmployee)
+    +void updateEmployee(String username, Employee newEmployee)
+    +void research()
     __ Operations on Requests __
     +void sendRequest(Request request)
-    +void sendDefault()
     __ Operations on Responses __
     +void checkLogin(Response response)
     +void readResponse()
@@ -104,9 +102,6 @@ Enum Mansion {
 }
 
 class Request {
-    -logged : boolean
-    -editRights : boolean
-    -researchRight : boolean
 }
 
 Request -o ServerThread

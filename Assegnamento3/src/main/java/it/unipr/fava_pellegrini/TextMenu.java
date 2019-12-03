@@ -31,6 +31,20 @@ public class TextMenu
     Employee e8 = new Employee("Ugo", "Di Francesco", "Frank", "pharman", "DFRGUO64B10G337G", w3, Mansion.Director, "1986-10-10", "2030-10-10");
     Employee e9 = new Employee("Gaia", "Madera", "Gaietta", "pharmawoman", "MDRGAI76S12F839D", w3, Mansion.Official, "2001-03-04", "2042-05-16");
 
+    public void printWorkplaces(){
+        int i = 0;
+        for(Workplace w: workplaces){
+            System.out.println(i++ + " " + w.toString());
+        }
+    }
+
+    public void printEmployees(){
+        int i = 0;
+        for(Employee e: employees){
+            System.out.println(i++ + " " + e.toString());
+        }
+    }
+
     public void createEmployees(){
         employees.add(e1);
         employees.add(e2);
@@ -163,10 +177,8 @@ public class TextMenu
                     System.out.println("Insert the fiscalcode:");
                     String fiscalCodeEmployee = sc.nextLine();
                     System.out.println("List of workplaces:");
-                    for(Workplace w: workplaces){
-                        System.out.println(w.toString());
-                    }
-                    System.out.println("Select the workplace:\n\t1 For the firts\n\t2 For the second\n\t3 For the third");
+                    printWorkplaces();
+                    System.out.println("Select the workplace:\n\t1\n\t2\n\t3");
                     boolean chosen = false;
                     Workplace workplace = new Workplace();
                     while(!chosen){
@@ -191,7 +203,7 @@ public class TextMenu
                         }
                     }
                     System.out.println("Insert the mansion:");
-                    System.out.println("Select the mansion:\n\t0 Administrator\n\t1 Director\n\t2 Official\n\t3 Employee");
+                    System.out.println("Select the mansion:\n\t1 Administrator\n\t2 Director\n\t3 Official\n\t4 Employee");
                     chosen = false;
                     Mansion mansion = Mansion.Employee;
                     while(!chosen){
@@ -215,7 +227,6 @@ public class TextMenu
                             }
                             default -> {
                                 System.out.println("Insert a right value.");
-                                mansionEmployee = sc.nextLine();
                             }
                         }
                     }
@@ -231,10 +242,112 @@ public class TextMenu
         } ) ).addItem( new MenuItem("Update Employee", null, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try{
+                    printEmployees();
+                    System.out.println("Write the username of the employee you want to update:");
+                    Scanner sc = new Scanner(System.in);
+                    String currentUsername = sc.nextLine();
+                    System.out.println("Insert the new name:");
+                    String nameEmployee = sc.nextLine();
+                    System.out.println("Insert the new surname:");
+                    String surnameEmployee = sc.nextLine();
+                    System.out.println("Insert the new username:");
+                    String usernameEmployee = sc.nextLine();
+                    System.out.println("Insert the new password:");
+                    String passwordEmployee = sc.nextLine();
+                    System.out.println("Insert the new fiscalcode:");
+                    String fiscalCodeEmployee = sc.nextLine();
+                    boolean chosen = false;
+                    boolean decision = false;
+                    System.out.println("Do you want to use an existing Workplace? (y/n)");
+                    Workplace workplace = new Workplace();
+                    while(!decision){
+                        String input = sc.nextLine();
+                        switch(input){
+                            case "y" -> {
+                                decision = true;
+                                printWorkplaces();
+                                System.out.println("Select the new workplace:\n\t1\n\t2\n\t3");
+                                while(!chosen){
+                                    String workplaceInput = sc.nextLine();
+                                    switch (workplaceInput) {
+                                        case "1" -> {
+                                            workplace = workplaces.get(0);
+                                            chosen = true;
+                                        }
+                                        case "2" -> {
+                                            workplace = workplaces.get(1);
+                                            chosen = true;
+                                        }
+                                        case "3" -> {
+                                            workplace = workplaces.get(2);
+                                            chosen = true;
+                                        }
+                                        default -> {
+                                            System.out.println("Insert a right value.");
+                                        }
+                                    }
+                                }
+                            }
+                            case "n" -> {
+                                decision = true;
+                                System.out.println("Choose a new name for the Workplace");
+                                String newName = sc.nextLine();
+                                System.out.println("Choose a new address for the Workplace");
+                                String newAddress = sc.nextLine();
+                                workplace = new Workplace(newName, newAddress);
+                            }
+                            default -> {
+                                System.out.println("Insert yes (y) o no (n)");
+                            }
+                        }
+                    }
+                    System.out.println("Insert the new mansion:");
+                    System.out.println("Select the mansion:\n\t1 Administrator\n\t2 Director\n\t3 Official\n\t4 Employee");
+                    chosen = false;
+                    Mansion mansion = Mansion.Employee;
+                    while(!chosen){
+                        String mansionEmployee = sc.nextLine();
+                        switch (mansionEmployee) {
+                            case "1" -> {
+                                mansion = Mansion.Administrator;
+                                chosen = true;
+                            }
+                            case "2" -> {
+                                mansion = Mansion.Director;
+                                chosen = true;
+                            }
+                            case "3" -> {
+                                mansion = Mansion.Official;
+                                chosen = true;
+                            }
+                            case "4" -> {
+                                mansion = Mansion.Employee;
+                                chosen = true;
+                            }
+                            default -> {
+                                System.out.println("Insert a right value.");
+                            }
+                        }
+                    }
+                    System.out.println("Insert the new start activity date:");
+                    String startActivityEmployee = sc.nextLine();
+                    System.out.println("Insert the new end activity date:");
+                    String endActivityEmployee = sc.nextLine();
+                    client.updateEmployee(currentUsername, nameEmployee, surnameEmployee, usernameEmployee, passwordEmployee, fiscalCodeEmployee, workplace, mansion, startActivityEmployee, endActivityEmployee);
+
+                } catch (IOException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
 
             }
         }) ).addItem( new MenuItem( "Research", null, new ActionListener() {
             public void actionPerformed( ActionEvent e ) {
+                try{
+                    client.research();
+                } catch (IOException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
             }
         } ) ).addItem(backLink);
 
