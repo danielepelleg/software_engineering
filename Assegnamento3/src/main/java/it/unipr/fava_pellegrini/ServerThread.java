@@ -139,24 +139,19 @@ public class ServerThread implements Runnable {
                                     sendResponse(response);
                                 }
                                 else {
-                                    response = new Response("ERROR", "You must be an Official to this operation!");
+                                    response = new Response("ERROR", "You must be an Official to this operation!\n");
                                     sendResponse(response);
                                 }
                             } else {
-                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...");
+                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...\n");
                                 sendResponse(response);
                             }
                         }
                         case RequestCloseConnection -> {
-                            if(this.isUserLogged()){
-                                response = new Response("Operation processed", "Connection Closed");
-                                sendResponse(response);
-                                this.shutdown = true;
-                                close();
-                            } else {
-                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...");
-                                sendResponse(response);
-                            }
+                            response = new Response("Operation processed", "Connection Closed");
+                            sendResponse(response);
+                            this.shutdown = true;
+                            close();
                         }
                         default -> throw new IllegalStateException("Unexpected value: " + command);
                     }

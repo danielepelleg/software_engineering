@@ -22,22 +22,32 @@ public class Client {
     private static final int SPORT = 4444;
     private static final String SHOST = "localhost";
     private static final int MAX = 100;
-    private String name;
     private Employee user;
     private Socket client;
+    private boolean logged;
 
     ObjectOutputStream os;
     ObjectInputStream is;
 
+    public Employee getUser() {
+        return user;
+    }
+    public boolean isLogged() {
+        return logged;
+    }
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
+
     /**
      * Class Constructor
      *
-     * @param n the name of the client
      */
-    public Client(final String n) {
-        this.name = n;
+    public Client() {
         this.is = null;
         this.os = null;
+        this.logged = false;
         this.connect();
     }
 
@@ -71,7 +81,7 @@ public class Client {
 
         if (o instanceof Response) {
             Response rs = (Response) o;
-            System.out.format(" and received: %s from Server%n", rs.getValue());
+            System.out.format("%s from Server%n%s%n", rs.getValue(), rs.getMessage());
             return rs;
         }
         return null;
@@ -100,6 +110,7 @@ public class Client {
     public void checkLogin(Response response) {
         if (response.getMessage().equals("Login Successful!")) {
             this.user = (Employee) response.getObject();
+            this.logged = true;
             System.out.println("You are now logged as\n" + this.user.toString());
         }
     }
@@ -122,7 +133,7 @@ public class Client {
     public void addEmployee(String name, String surname, String username, String password, String fiscalCode, Workplace workplace, Mansion mansion, String startActivity, String endActivity) throws IOException, ClassNotFoundException {
         RequestAddEmployee rq = new RequestAddEmployee(name, surname, username, password, fiscalCode, workplace, mansion, startActivity, endActivity);
         this.sendRequest(rq);
-        System.out.println(this.getResponse().getMessage());
+        this.getResponse();
     }
 
     /**
@@ -134,7 +145,7 @@ public class Client {
     public void research() throws IOException, ClassNotFoundException {
         RequestResearch rq = new RequestResearch(this.user.getWorkplace(), this.user.getMansion());
         this.sendRequest(rq);
-        System.out.println(this.getResponse().getMessage());
+        this.getResponse();
     }
 
     /**
@@ -146,7 +157,7 @@ public class Client {
     public void closeConnection() throws IOException, ClassNotFoundException {
         RequestCloseConnection rq = new RequestCloseConnection();
         this.sendRequest(rq);
-        System.out.println(this.getResponse().getMessage());
+        this.getResponse();
         this.client.close();
     }
 
@@ -157,7 +168,7 @@ public class Client {
      * @throws IOException Input Output Exception, for the Stream
      */
     public void sendRequest(Request request) throws IOException {
-        System.out.format("Client %s sends: %s to Server", name, request.getClass().getSimpleName());
+        //System.out.format("Client sends: %s to Server%n", request.getClass().getSimpleName());
         os.writeObject(request);
         os.flush();
     }
@@ -182,6 +193,6 @@ public class Client {
     public void updateEmployee(String currentUsername, String newName, String newSurname, String newUsername, String newPassword, String newFiscalCode, Workplace newWorkplace, Mansion newMansion, String newStartActivity, String newEndActivity) throws IOException, ClassNotFoundException {
         RequestUpdateEmployee rq = new RequestUpdateEmployee(currentUsername, newName, newSurname, newUsername, newPassword, newFiscalCode, newWorkplace, newMansion, newStartActivity, newEndActivity);
         this.sendRequest(rq);
-        System.out.println(this.getResponse().getMessage());
+        this.getResponse();
     }
 }

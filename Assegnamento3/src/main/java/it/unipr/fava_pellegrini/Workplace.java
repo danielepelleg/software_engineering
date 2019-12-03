@@ -25,6 +25,10 @@ public class Workplace implements Serializable {
         this.address = address;
     }
 
+    public Workplace() {
+
+    }
+
     public String getName() {
         return name;
     }
