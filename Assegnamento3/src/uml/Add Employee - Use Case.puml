@@ -3,9 +3,13 @@ title Add New Employee - Use Case Diagram
 
 left to right direction
 
+actor Administrator
+actor Director
 actor Official
 
 rectangle SERVER{
+    Director -- (Add Employee)
+    Administrator -- (Add Employee)
     Official -- (Add Employee)
     (Add Employee) ..> (Check Fiscal Code) : <<include>>
     (Add Employee) ..> (Check Mansion) : <<include>>

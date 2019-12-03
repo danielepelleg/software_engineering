@@ -9,15 +9,19 @@ actor Director
 
 
 rectangle  SERVER {
-    Official -- (Add Employee)
-    Official -- (Update Employee)
+    Administrator -- (Employee Management)
+    Director -- (Employee Management)
+    Official -- (Employee Management)
+    (Employee Management) --> (Update Employee) : <<include>>
+    (Employee Management) --> (Add Employee) : <<include>>
     Director -- (Research)
+
     Administrator -- (Research)
     (Add Employee) ..> (Login) : <<include>>
-    (Add Employee) .left.> (Check FiscalCode) : <<include>>
+    (Add Employee) ..> (Check FiscalCode) : <<include>>
     (Update Employee) ..> (Login) : <<include>>
-    (Update Employee) .right.> (Check FiscalCode) : <<include>>
+    (Update Employee) ..> (Check FiscalCode) : <<include>>
     (Research) ..> (Login) : <<include>>
-    (Research) .> (Check Mansion) : <<include>>
+    (Research) ..> (Check Mansion) : <<include>>
 }
 @enduml
