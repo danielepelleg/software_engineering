@@ -15,9 +15,13 @@ public class Response implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
-  private final String value;
+  private String value;
   private String message;
   private Object object;
+
+  public Response(){
+
+  }
 
   /**
    * Class Constructor
@@ -87,6 +91,12 @@ public class Response implements Serializable
     this.message = result;
   }
 
+  public void setMessage(){
+    String result = "\nHere's the list of the employee that you can update:\n" +
+            ListToString() ;
+    this.message = result;
+  }
+
   /**
    * Convert the list in the Object attribute in a String
    *
@@ -94,9 +104,11 @@ public class Response implements Serializable
    */
   public String ListToString(){
     String result = "";
+    int i = 1;
     ArrayList<Employee> employees = (ArrayList<Employee>) this.object;
     for(Employee e : employees){
-      result += e.toString() + "\n";
+      result += i++ + ") " + e.toString() + "\n";
+
     }
     return result;
   }

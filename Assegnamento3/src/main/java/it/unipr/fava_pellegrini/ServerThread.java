@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * ServerThread Class
@@ -93,7 +94,7 @@ public class ServerThread implements Runnable {
                                     sendResponse(response);
                                 }
                             } else {
-                                response = new Response("ERROR", "You are already logged!");
+                                response = new Response("ERROR", "You are already logged!\n");
                                 sendResponse(response);
                             }
                         }
@@ -105,11 +106,11 @@ public class ServerThread implements Runnable {
                                     sendResponse(response);
                                 }
                                 else {
-                                    response = new Response("ERROR", "You must be an Official to this operation!");
+                                    response = new Response("ERROR", "You don't have permission to do this operation!\n");
                                     sendResponse(response);
                                 }
                             } else {
-                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...");
+                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...\n");
                                 sendResponse(response);
                             }
                         }
@@ -123,11 +124,11 @@ public class ServerThread implements Runnable {
                                     sendResponse(response);
                                 }
                                 else {
-                                    response = new Response("ERROR", "You must be an Administrator or a Director to this operation!");
+                                    response = new Response("ERROR", "You don't have permission to do this operation!\n");
                                     sendResponse(response);
                                 }
                             } else {
-                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...");
+                                response = new Response("ERROR", "You must be logged in to do this operation! Make the login and retry...\n");
                                 sendResponse(response);
                             }
                         }
@@ -139,7 +140,7 @@ public class ServerThread implements Runnable {
                                     sendResponse(response);
                                 }
                                 else {
-                                    response = new Response("ERROR", "You must be an Official to this operation!\n");
+                                    response = new Response("ERROR", "You don't have permission to do this operation!\n");
                                     sendResponse(response);
                                 }
                             } else {
@@ -147,11 +148,27 @@ public class ServerThread implements Runnable {
                                 sendResponse(response);
                             }
                         }
-                        case RequestCloseConnection -> {
-                            response = new Response("Operation processed", "Connection Closed");
-                            sendResponse(response);
-                            this.shutdown = true;
-                            close();
+                        case Request -> {
+                            switch (rq.getString()) {
+                                case "Workplaces" -> {
+                                    response = new Response();
+                                    response.setObject(this.getWorkplaces());
+                                    sendResponse(response);
+                                }
+                                case "Employees" -> {
+                                    response = new Response("Operation processed", "");
+                                    response.setList(this.getEmployees());
+                                    response.setMessage();
+                                    sendResponse(response);
+                                }
+                                case "Quit" -> {
+                                    response = new Response("Operation processed", "Connection Closed");
+                                    sendResponse(response);
+                                    this.shutdown = true;
+                                    close();
+                                }
+                            }
+
                         }
                         default -> throw new IllegalStateException("Unexpected value: " + command);
                     }
@@ -161,6 +178,50 @@ public class ServerThread implements Runnable {
                 System.exit(0);
             }
         }
+    }
+
+    /**
+     * Get the List of the Workplaces of the server
+     *
+     */
+    public ArrayList<Workplace> getWorkplaces() {
+        ArrayList<Workplace> list = new ArrayList<>();
+        for (Workplace w: this.server.getWorkplaces()){
+            list.add(w);
+        }
+        return list;
+    }
+
+    /**
+     * Get the List of the Employees of the server
+     *
+     */
+    public ArrayList<Employee> getEmployees() {
+        ArrayList<Employee> list = new ArrayList<>();
+        for(Employee e: this.server.getEmployees()){
+            switch (this.user.getMansion()){
+                case Official -> {
+                    if (e.getMansion().equals(Mansion.Employee) || e.getMansion().equals(Mansion.Official)){
+                        if (e.getWorkplace().getName().equals(this.getUser().getWorkplace().getName())) {
+                            list.add(e);
+                        }
+                    }
+                }
+                case Director -> {
+                    if (e.getMansion().equals(Mansion.Employee) || e.getMansion().equals(Mansion.Official) || e.getMansion().equals(Mansion.Director)){
+                        if (e.getWorkplace().getName().equals(this.getUser().getWorkplace().getName())) {
+                            list.add(e);
+                        }
+                    }
+                }
+                case Administrator -> {
+                    if (e.getWorkplace().getName().equals(this.getUser().getWorkplace().getName())) {
+                        list.add(e);
+                    }
+                }
+            }
+        }
+        return list;
     }
 
     /**
@@ -326,13 +387,57 @@ public class ServerThread implements Runnable {
         }
     }
 
+    /**
+     * Check the Permissions of the Client who want to do an Operation
+     * Emploloyee can't do any operation
+     * Official can insert or update an Employee or an Official
+     * Director can research, update or insert an Employee, an Official and a Director
+     * Administrator can research, update or insert every kind of user
+     */
     public boolean checkPermissions(Request request){
         RequestList command = RequestList.valueOf(request.getClass().getSimpleName());
         switch (command){
-            case RequestAddEmployee, RequestUpdateEmployee -> {
-                if(this.getUser().getMansion().equals(Mansion.Official)){
-                    return true;
-                } else return false;
+            case RequestAddEmployee -> {
+                RequestAddEmployee requestAddEmployee = (RequestAddEmployee) request;
+                switch (requestAddEmployee.getMansion()){
+                    case Employee, Official -> {
+                        if(this.user.getMansion().equals(Mansion.Employee)){
+                            return false;
+                        } else return true;
+                    }
+                    case Director -> {
+                        if(this.user.getMansion().equals(Mansion.Employee) || this.user.getMansion().equals(Mansion.Official)){
+                            return false;
+                        } else return true;
+                    }
+                    case Administrator -> {
+                        if(this.user.getMansion().equals(Mansion.Administrator)){
+                            return true;
+                        } else return false;
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + requestAddEmployee.getMansion());
+                }
+            }
+            case RequestUpdateEmployee -> {
+                RequestUpdateEmployee requestUpdateEmployee = (RequestUpdateEmployee) request;
+                switch (requestUpdateEmployee.getNewEmployee().getMansion()){
+                    case Employee, Official -> {
+                        if(this.user.getMansion().equals(Mansion.Employee)){
+                            return false;
+                        } else return true;
+                    }
+                    case Director -> {
+                        if(this.user.getMansion().equals(Mansion.Employee) || this.user.getMansion().equals(Mansion.Official)){
+                            return false;
+                        } else return true;
+                    }
+                    case Administrator -> {
+                        if(this.user.getMansion().equals(Mansion.Administrator)){
+                            return true;
+                        } else return false;
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + requestUpdateEmployee.getNewEmployee().getMansion());
+                }
             }
             case RequestResearch -> {
                 if(this.getUser().getMansion().equals(Mansion.Administrator) || this.getUser().getMansion().equals(Mansion.Director)){

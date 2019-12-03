@@ -162,12 +162,12 @@ public class Server {
         Employee e1 = new Employee("Guido", "Barilla", "Guido", "farinaintegrale", "BRLGDU58L30G337M", w1, Mansion.Administrator, "1978-09-12", "2034-12-15");
         Employee e2 = new Employee("Pietro", "Barilla", "Peter", "pastalover", "BRLPTR98R10G337J", w1, Mansion.Official, "2019-09-16", "2052-12-31");
         Employee e3 = new Employee("Diletta", "Bighi", "Dile", "pandistelle", "DLTBGH76P46F205T", w1, Mansion.Official, "2014-03-03", "2032-06-18");
-        Employee e4 = new Employee("Giacomo", "Pini", "Jack", "lemacine", "GCMPNI67S10A944S", w1, Mansion.Employee, "2011-11-03", "2030-12-03");
+        Employee e4 = new Employee("Giacomo", "Pini", "Jack", "pass", "GCMPNI67S10A944S", w1, Mansion.Employee, "2011-11-03", "2030-12-03");
 
         Employee e5 = new Employee("Giuseppe", "Fabbri", "Beppe", "longS", "FBBGPP66A14F205P", w2, Mansion.Director, "1988-02-23", "2036-12-12");
-        Employee e6 = new Employee("Silvia", "Moretti", "Silvietta", "S27ehcq0", "MRTSLV68M66L736S", w2, Mansion.Official, "1990-06-12", "2038-06-12");
+        Employee e6 = new Employee("Silvia", "Moretti", "Silvietta", "password", "MRTSLV68M66L736S", w2, Mansion.Official, "1990-06-12", "2038-06-12");
 
-        Employee e7 = new Employee("Claudio", "Marani", "Claus", "3cb49c90", "MRNCLD73D19A271V", w3, Mansion.Administrator, "2016-07-31", "2028-03-11");
+        Employee e7 = new Employee("Claudio", "Marani", "Claus", "ciao", "MRNCLD73D19A271V", w3, Mansion.Administrator, "2016-07-31", "2028-03-11");
         Employee e8 = new Employee("Ugo", "Di Francesco", "Frank", "pharman", "DFRGUO64B10G337G", w3, Mansion.Director, "1986-10-10", "2030-10-10");
         Employee e9 = new Employee("Gaia", "Madera", "Gaietta", "pharmawoman", "MDRGAI76S12F839D", w3, Mansion.Official, "2001-03-04", "2042-05-16");
 

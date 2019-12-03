@@ -9,8 +9,16 @@ import java.io.Serializable;
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
-class Request implements Serializable
-{
+class Request implements Serializable {
   private static final long serialVersionUID = 1L;
+  private String string;
+
+  public String getString() {
+    return string;
+  }
+
+  public void setString(String string) {
+    this.string = string;
+  }
 
 }

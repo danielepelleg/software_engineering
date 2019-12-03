@@ -11,5 +11,5 @@ package it.unipr.fava_pellegrini;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public enum RequestList {
-    RequestLogin, RequestAddEmployee, RequestUpdateEmployee, RequestResearch, RequestCloseConnection, Request;
+    RequestLogin, RequestAddEmployee, RequestUpdateEmployee, RequestResearch, Request;
 }

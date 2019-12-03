@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Client Class
@@ -155,7 +155,8 @@ public class Client {
      * @throws ClassNotFoundException if the Object is not an instance of Response
      */
     public void closeConnection() throws IOException, ClassNotFoundException {
-        RequestCloseConnection rq = new RequestCloseConnection();
+        Request rq = new Request();
+        rq.setString("Quit");
         this.sendRequest(rq);
         this.getResponse();
         this.client.close();
@@ -168,7 +169,6 @@ public class Client {
      * @throws IOException Input Output Exception, for the Stream
      */
     public void sendRequest(Request request) throws IOException {
-        //System.out.format("Client sends: %s to Server%n", request.getClass().getSimpleName());
         os.writeObject(request);
         os.flush();
     }
@@ -192,6 +192,29 @@ public class Client {
      */
     public void updateEmployee(String currentUsername, String newName, String newSurname, String newUsername, String newPassword, String newFiscalCode, Workplace newWorkplace, Mansion newMansion, String newStartActivity, String newEndActivity) throws IOException, ClassNotFoundException {
         RequestUpdateEmployee rq = new RequestUpdateEmployee(currentUsername, newName, newSurname, newUsername, newPassword, newFiscalCode, newWorkplace, newMansion, newStartActivity, newEndActivity);
+        this.sendRequest(rq);
+        this.getResponse();
+    }
+
+    public ArrayList getObjects(String objects) throws IOException, ClassNotFoundException {
+        Request rq = new Request();
+        rq.setString(objects);
+        this.sendRequest(rq);
+        if (is == null) {
+            is = new ObjectInputStream(new BufferedInputStream(client.getInputStream()));
+        }
+        Object o = is.readObject();
+        if (o instanceof Response) {
+            Response rs = (Response) o;
+            ArrayList list = (ArrayList) rs.getObject();
+            return list;
+        }
+        return null;
+    }
+
+    public void printEmployees(String objects) throws IOException, ClassNotFoundException {
+        Request rq = new Request();
+        rq.setString(objects);
         this.sendRequest(rq);
         this.getResponse();
     }
