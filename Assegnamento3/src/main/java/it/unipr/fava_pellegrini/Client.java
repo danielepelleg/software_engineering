@@ -196,6 +196,12 @@ public class Client {
         this.getResponse();
     }
 
+    /**
+     * Send a Request to the client to get a list of Workplaces
+     *
+     * @param objects it represents the argument of request
+     * @throws IOException Input Output Exception, for the Stream
+     */
     public ArrayList getObjects(String objects) throws IOException, ClassNotFoundException {
         Request rq = new Request();
         rq.setString(objects);
@@ -212,6 +218,12 @@ public class Client {
         return null;
     }
 
+    /**
+     * Send a Request to the client to print the List of the Employees of the server filtered for user update permissions
+     *
+     * @param objects it represents argument of the request
+     * @throws IOException Input Output Exception, for the Stream
+     */
     public void printEmployees(String objects) throws IOException, ClassNotFoundException {
         Request rq = new Request();
         rq.setString(objects);

@@ -193,7 +193,7 @@ public class ServerThread implements Runnable {
     }
 
     /**
-     * Get the List of the Employees of the server
+     * Get the List of the Employees of the server filtered for user update permissions
      *
      */
     public ArrayList<Employee> getEmployees() {

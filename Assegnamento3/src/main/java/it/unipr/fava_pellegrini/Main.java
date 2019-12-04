@@ -1,11 +1,14 @@
 package it.unipr.fava_pellegrini;
 
 /**
+ *
  * Main Class
- * Test, through a simulation with a MENU, the classes and methods created
+ * Test, through a simulation with a MENU, the classes and methods created. The user must login to see his relative menu.
+ * The server responds with error messages if an user asks to perform an action he is not allowed to perform.
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
+ *
  */
 
 import java.awt.event.ActionEvent;
@@ -16,7 +19,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Main
 {
@@ -34,6 +36,10 @@ public class Main
         }
     }
 
+    /**
+     * Menu Class
+     *
+     */
     class Menu
     {
         private List<MenuItem> items = new ArrayList<MenuItem>() ;
@@ -85,6 +91,11 @@ public class Main
         }
     }
 
+    /**
+     *
+     * Menu Item
+     *
+     */
     class MenuItem
     {
         private String title ;
@@ -258,6 +269,10 @@ public class Main
         return rootMenu ;
     }
 
+    /**
+     *The user can choose the Workplace
+     *
+     */
     public Workplace chooseWorkplace() throws IOException, ClassNotFoundException {
         workplaces = client.getObjects("Workplaces");
         chosen = false;
@@ -284,6 +299,10 @@ public class Main
         return null;
     }
 
+    /**
+     *The user can choose the Mansion
+     *
+     */
     public Mansion chooseMansion(){
         chosen = false;
         while(!chosen){
@@ -313,7 +332,10 @@ public class Main
         return null;
     }
 
-    /** Creates a new instance of TextMenu */
+    /**
+     *Creates a new instance of TextMenu
+     *
+     */
     public Main() {
 
     }

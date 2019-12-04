@@ -91,6 +91,9 @@ public class Response implements Serializable
     this.message = result;
   }
 
+  /**
+   * Set the content of the list in the Object attribute with an incremented number
+   */
   public void setMessage(){
     String result = "\nHere's the list of the employee that you can update:\n" +
             ListToString() ;
