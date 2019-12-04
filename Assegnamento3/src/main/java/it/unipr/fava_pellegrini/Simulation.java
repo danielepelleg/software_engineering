@@ -153,8 +153,11 @@ public class Simulation {
                 "who doesn't have full admin privilege,\n " +
                 "tries to perform a Director-Administrator action: the Research");
         this.client.login("Gaietta", "pharmawoman");
+        printLine();
         this.client.research();
+        printLine();
         this.client.closeConnection();
+        printLine();
     }
 
     /**

@@ -70,7 +70,7 @@ public class Client {
      * Read the Server response.
      *
      * @return the response of the server
-     * @throws IOException            Input Output Exception, for the stream
+     * @throws IOException Input Output Exception, for the stream
      * @throws ClassNotFoundException if the Object is not an instance of Response
      */
     public Response getResponse() throws IOException, ClassNotFoundException {
