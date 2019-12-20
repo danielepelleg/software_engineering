@@ -1,5 +1,3 @@
-package it.unipr.fava_pellegrini;
-
 /**
  * Main Class
  * Test, through a simulation, the classes and methods created

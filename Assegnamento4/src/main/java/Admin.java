@@ -1,5 +1,3 @@
-package it.unipr.fava_pellegrini;
-
 /**
  * Admin Class - Member Subclass
  * Each admin has the name attribute, the surname, the username,

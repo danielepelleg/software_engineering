@@ -1,5 +1,3 @@
-package it.unipr.fava_pellegrini;
-
 /**
  * Race Class - Activity Subclass
  * The class has the name of the race and an array of person registered to it

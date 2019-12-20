@@ -1,5 +1,3 @@
-package it.unipr.fava_pellegrini;
-
 /**
  * Activity Class
  * The class has the name of the activity and an array of person registered to it
@@ -7,7 +5,7 @@ package it.unipr.fava_pellegrini;
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
-public class Activity {
+public abstract class Activity {
     private String name;
     private Person[] PersonArray;
 

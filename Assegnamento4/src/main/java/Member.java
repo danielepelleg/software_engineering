@@ -1,5 +1,3 @@
-package it.unipr.fava_pellegrini;
-
 /**
  * Member Class - Person Subclass
  * Each member has the name attribute, the surname, the username,

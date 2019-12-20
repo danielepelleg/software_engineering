@@ -1,5 +1,3 @@
-package it.unipr.fava_pellegrini;
-
 /**
  * Course Class - Activity Subclass
  * The class has the name of the course and an array of person registered to it
