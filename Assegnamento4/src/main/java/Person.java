@@ -100,7 +100,7 @@ public class Person{
      * @return String Person's hashed password
      */
     public String getPassword(){
-        return hashed_password;
+        return this.hashed_password;
     }
 
     /**

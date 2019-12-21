@@ -22,28 +22,11 @@ public class Admin extends Member {
     }
 
     /**
-     * Add a member to an array of Person objects
-     * The array must not contain the member to add -> check
+     * Add a member in the member table on database.
      *
-     * @param m Member to add to the array
-     * @param people Array of Person objects to which to add the member
-     *
-     * @return Person Array + New Member or Initial Person Array if the member is already inside
      */
-    public Person[] addMember (Member m, Person[] people){
-        boolean check = false;
-        Person[] member = new Person[]{m};
-        for (Person person : people) {
-            if (person.equals(m))
-                check = true;
-        }
-        if (!check){
-            Person[] temp = new Person[people.length+1];
-            System.arraycopy(people, 0, temp, 0, people.length);
-            System.arraycopy(member, 0, temp, people.length, member.length);
-            return  temp;
-        }
-        else return people;
+    public void addMember (Person person){
+        DatabaseManager.addMember(person);
     }
 
     /**

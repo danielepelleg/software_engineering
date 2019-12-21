@@ -13,6 +13,10 @@
  */
 public class Main {
     public static void main(String[] args){
+        Admin a1 = new Admin("Giacomo", "Neri", "Jack", "hardtoguess");
+        Member m1 = new Member("Tommaso", "Boni", "Tom", "12345");
+        a1.addMember(m1);
+        /*
         System.out.println("------ 1) Create initial arrays of Admin, Members and Activity ------");
         Member m1 = new Member("Tommaso", "Boni", "Tom", "12345");
         Member m2 = new Member("Luca", "Perini", "Luke", "98765");
@@ -23,10 +27,10 @@ public class Main {
         int counter1 = 1; int counter2 = 1;
         for (Person person : persons) {
             if (person.getClass() == Admin.class) {
-                System.out.println(" a" + counter1 + "\t" + person.show());
+                System.out.println(" a" + counter1 + "\t" + person.show() + " Hash. Pass: " + person.getPassword());
                 counter1++;
             } else if (person.getClass() == Member.class) {
-                System.out.println(" m" + counter2 + "\t" + person.show());
+                System.out.println(" m" + counter2 + "\t" + person.show() + " Hash. Pass: " + person.getPassword());
                 counter2++;
             }
         }
@@ -145,5 +149,6 @@ public class Main {
         for (Activity a : activities){
             System.out.println(a.show());
         }
+         */
     }
 }
