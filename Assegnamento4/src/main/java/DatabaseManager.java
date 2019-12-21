@@ -11,21 +11,27 @@ public abstract class DatabaseManager {
             "createDatabaseIfNotExist=true&serverTimezone=UTC";
     private static final String LOGIN = "root";
     private static final String PASSWORD = "";
-    static Connection conn = null;
+    public static Connection conn = null;
 
     public DatabaseManager(){}
 
+    /**
+     * @return the connection to the Database
+     */
     public static Connection getConnection()
     {
         if (conn != null) return conn;
-        // get db, user, pass from settings file
         return connect();
     }
 
+    /**
+     * Connect to the database.
+     * @return the connection
+     */
     public static Connection connect(){
-        try(Connection conn = DriverManager.getConnection(DBURL + ARGS, LOGIN, PASSWORD);)
-            //Statement stmt = conn.createStatement();)
+        try
         {
+            Connection conn = DriverManager.getConnection(DBURL + ARGS, LOGIN, PASSWORD);
             return conn;
         }
         catch (SQLException e)
@@ -44,13 +50,12 @@ public abstract class DatabaseManager {
     public static boolean checkMember(String username){
         try {
             Statement stmt = getConnection().createStatement();
-            ResultSet rset = stmt.executeQuery("select count(*) as total from sportclub.member WHERE name = '" + username + "'");
-
+            ResultSet rset = stmt.executeQuery("select count(*) as total from sportclub.member WHERE username = '" + username + "'");
             while(rset.next())
             {
                 String number = rset.getString("total");
                 int recurrence = Integer.parseInt(number);
-                if (recurrence == 1){
+                if (recurrence >= 1){
                     System.out.println("This person is already registered in the club");
                     return true;
                 }
@@ -74,7 +79,7 @@ public abstract class DatabaseManager {
         if (!checkMember(person.getUsername())){
             try {
                 Statement stmt = getConnection().createStatement();
-                stmt.executeUpdate("insert into sportclub.member(name, surname, username, hashed_password) VALUES ('"+ person.getName() + "', '" + person.getSurname() +"', '" + person.getUsername() + "', '"+ person.getPassword() +"'");
+                stmt.executeUpdate("insert into sportclub.member(name, surname, username, hashed_password) VALUES ('"+ person.getName() + "', '" + person.getSurname() +"', '" + person.getUsername() + "', '"+ person.getPassword() +"')");
                 System.out.println("done");
             }
             catch(SQLException e)
@@ -85,10 +90,10 @@ public abstract class DatabaseManager {
         }
     }
 
+    //Prova connessione DB
     public static void main(String[] args){
         try(Connection conn = DriverManager.getConnection(DBURL + ARGS, LOGIN, PASSWORD);
             Statement stmt = conn.createStatement();)
-        //Statement stmt = conn.createStatement();)
         {
             System.out.println("OK");
         }
