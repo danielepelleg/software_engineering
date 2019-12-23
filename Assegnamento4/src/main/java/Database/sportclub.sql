@@ -3,8 +3,7 @@ use sportclub;
 
 drop table if exists course;
 create table course (
-    courseid int primary key auto_increment,
-    name varchar(24));
+    name varchar(24) primary key);
 
 insert into course(name) VALUES
 #       new Course("Jnana Yoga")
@@ -12,8 +11,7 @@ insert into course(name) VALUES
 
 drop table if exists race;
 create table race(
-    raceid int primary key auto_increment,
-    name varchar(24));
+    name varchar(24) primary key);
 
 insert into race(name) VALUES
 #       new Race("Tour de France")
@@ -21,10 +19,9 @@ insert into race(name) VALUES
 
 drop table if exists member;
 create table member(
-    memberid int primary key auto_increment,
     name varchar(24),
     surname varchar(24),
-    username varchar(24),
+    username varchar(24) primary key,
     hashed_password varchar(32));
 
 insert into member(name, surname, username, hashed_password) VALUES
@@ -35,10 +32,9 @@ insert into member(name, surname, username, hashed_password) VALUES
 
 drop table if exists administrator;
 create table administrator(
-    adminid int primary key auto_increment,
     name varchar(24),
     surname varchar(24),
-    username varchar(24),
+    username varchar(24) primary key,
     hashed_password varchar(32));
 
 insert into administrator(name, surname, username, hashed_password) VALUES
@@ -49,17 +45,17 @@ insert into administrator(name, surname, username, hashed_password) VALUES
 
 drop table if exists activity_course;
 create table activity_course(
-    course_id int,
-    member_id int,
-    foreign key (course_id) references course(courseid),
-    foreign key  (member_id) references member(memberid),
-    primary key (course_id, member_id));
+    course_name varchar(24),
+    member_username varchar(24),
+    foreign key (course_name) references course(name),
+    foreign key  (member_username) references member(username),
+    primary key (course_name, member_username));
 
 drop table if exists activity_race;
 create table activity_race(
-    race_id int,
-    member_id int,
-    foreign key (race_id) references race(raceid),
-    foreign key  (member_id) references member(memberid),
-    primary key (race_id, member_id));
+    race_name varchar(24),
+    member_username varchar(24),
+    foreign key (race_name) references race(name),
+    foreign key  (member_username) references member(username),
+    primary key (race_name, member_username));
 

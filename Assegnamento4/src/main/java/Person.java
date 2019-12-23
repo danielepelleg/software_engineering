@@ -36,6 +36,21 @@ public class Person{
         setHashedPassword(this.password);
     }
 
+    /**
+     * Class constructor for login.
+     *
+     * Once the Constructor has given the username and password it generates the hashed
+     * password calling the relative method.
+     *
+     * @param username the username of the person to be created
+     * @param password the password of the person to be created
+     */
+    public Person(String username, String password){
+        this.username = username;
+        this.password = password;
+        setHashedPassword(this.password);
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -104,11 +119,26 @@ public class Person{
     }
 
     /**
+     * Edit the attributes.
+     *
+     * @param newName new Name
+     * @param newSurname new Surname
+     * @param newUsername new Username
+     * @param newPassword new Password
+     */
+    public void edit(String newName, String newSurname, String newUsername, String newPassword){
+        this.setName(newName);
+        this.setSurname(newSurname);
+        this.setUsername(newUsername);
+        this.setPassword(newPassword);
+        this.setHashedPassword(newPassword);
+    }
+
+    /**
      * Return a string showing person's
      * name, surname and username
      *
      * @return String the string
-     *
      */
     public String show(){
         return "Name: \t" + this.getName() + "\t Surname: \t" + this.getSurname() + "\t Username: " + this.getUsername();

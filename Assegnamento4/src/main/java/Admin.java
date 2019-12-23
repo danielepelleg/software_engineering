@@ -15,153 +15,87 @@ public class Admin extends Member {
      * @param surname the surname of the admin to be created
      * @param username the username of the admin to be created
      * @param password the password of the admin to be created
-     *
      */
     public Admin(String name, String surname, String username, String password){
         super(name, surname, username, password);
     }
 
     /**
-     * Add a member in the member table on database.
-     *
+     * Add a member in the member table on the database.
      */
-    public void addMember (Person person){
-        DatabaseManager.addMember(person);
+    public void addMember (Member newMember){
+        DatabaseManager.register(newMember);
     }
 
     /**
-     * Delete a member from an array of Person objects
-     * The array must contain the member to delete -> check
-     *
-     * @param m Member to add to the array
-     * @param people Array of Person objects from which delete the member
-     *
-     * @return Person Array - Member or Initial Person Array if the member is not inside
+     * Remove a member from member table on the database.
      */
-    public Person[] deleteMember (Member m, Person[] people) {
-        boolean check = false;
-        for (Person p : people) {
-            if (p.equals(m)) {
-                check = true;
-            }
-        }
-        if (check) {
-            Person[] temp = new Person[people.length - 1];
-            int person_entered = 0;
-            for (int i = 0; i < people.length; i++) {
-                if (!m.equals(people[i])) {
-                    System.arraycopy(people, i, temp, person_entered, 1);
-                    person_entered++;
-                }
-            }
-            return temp;
-        }
-        else return people;
+    public void removeMember (Member member) {
+        DatabaseManager.delete(member);
     }
 
     /**
-     * Add an activity to an array of Activity objects
-     * The array must not contain the activity to add -> check
+     * Add a new activity in the database.
      *
-     * @param a Activity to add to the array
-     * @param activities Array of Activity objects to which to add the activity
-     *
-     * @return Activity Array + New Activity or Initial Activity Array if the activity is already inside
+     * @param newActivity the activity to add.
      */
-    public Activity[] addActivity(Activity a, Activity[] activities){
-        boolean check = false;
-        Activity[] activity = new Activity[]{a};
-        for (Activity value : activities) {
-            if (value.equals(a))
-                check = true;
-        }
-        if (!check){
-            Activity[] temp = new Activity[activities.length+1];
-            System.arraycopy(activities, 0, temp, 0, activities.length);
-            System.arraycopy(activity, 0, temp, activities.length, activity.length);
-            return  temp;
-        }
-        else return activities;
+    public void addActivity(Activity newActivity){
+        DatabaseManager.addActivity(newActivity);
     }
 
     /**
-     * Delete an activity from an array of Activity objects
-     * The array must contain the activity to delete -> check
+     * Remove an activity from the database.
      *
-     * @param a Activity to delete from the array
-     * @param activities Array of Activity objects from which delete the activity
-     *
-     * @return Activity Array - Activity or Initial Activity Array if the activity is not inside
+     * @param activity the activity to add.
      */
-    public Activity[] deleteActivity(Activity a, Activity[] activities){
-        boolean check = false;
-        for (Activity s : activities) {
-            if (s.equals(a)) {
-                check = true;
-            }
-        }
-        if (check) {
-            Activity[] temp = new Activity[activities.length - 1];
-            int inserted = 0;
-            for (int i = 0; i < activities.length; i++) {
-                if (!a.equals(activities[i])) {
-                    System.arraycopy(activities, i, temp, inserted, 1);
-                    inserted++;
-                }
-            }
-            return temp;
-        }
-        else return activities;
+    public void deleteActivity(Activity activity){
+        DatabaseManager.deleteActivity(activity);
     }
 
     /**
      * Subscribe a member to an activity
      *
-     * @param a Activity to which to subscribe the member
-     * @param m Member to subscribe
+     * @param activity Activity to which to subscribe the member
+     * @param member Member to subscribe
      *
      */
-    public void Subscribe(Activity a, Member m){
-        a.Registration(m);
+    public void subscribe(Activity activity, Member member){
+        DatabaseManager.subscribe(activity, member);
     }
 
     /**
      * Unsubscribe a member to an activity
      *
-     * @param a Activity to which to unsubscribe the member
-     * @param m Member to unsubscribe
+     * @param activity Activity to which to unsubscribe the member
+     * @param member Member to unsubscribe
      *
      */
-    public void Unsubscribe(Activity a, Member m){
-        a.Unsubscribe(m);
+    public void unsubscribe(Activity activity, Member member){
+        DatabaseManager.unsubscribe(activity, member);
     }
 
     /**
      * Edit the parameters of a member
      *
-     * @param m Member to edit
-     * @param n new Name
-     * @param s new Surname
-     * @param u new Username
-     * @param p new Password
+     * @param member Member to edit
+     * @param newName new Name
+     * @param newSurname new Surname
+     * @param newUsername new Username
+     * @param newPassword new Password
      *
      */
-    public void editMember(Member m, String n, String s, String u, String p){
-        m.setName(n);
-        m.setSurname(s);
-        m.setUsername(u);
-        m.setPassword(p);
-        m.setHashedPassword(p);
+    public void editMember(Member member, String newName, String newSurname, String newUsername, String newPassword){
+        DatabaseManager.editMember(member, newName, newSurname, newUsername, newPassword);
     }
 
     /**
      * Edit the parameters of an activity
      *
-     * @param a Activity to edit
-     * @param n new Name
+     * @param activity Activity to edit
+     * @param newName new Name
      *
      */
-    public void editActivity(Activity a, String n){
-        a.setName(n);
+    public void editActivity(Activity activity, String newName){
+        DatabaseManager.editActivity(activity, newName);
     }
 }

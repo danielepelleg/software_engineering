@@ -33,58 +33,12 @@ public abstract class Activity {
     }
 
     /**
-     * Add a new subscriber to the activity
-     * The activity must not contain the person to register
+     * Edit the attributes.
      *
-     * @param ego the array that contains the person to be added to @PersonArray
-     *
+     * @param newName new Name
      */
-    public void Registration(Person ego){
-        Person [] p = new Person[]{ego};
-        Person[] temp = new Person[getPersonArray().length+p.length];
-        boolean check = false;
-        for (Person pe : p){
-            for (Person pa : getPersonArray()){
-                if (pe.equals(pa))
-                    check = true;
-            }
-        }
-        if (!check){
-            System.arraycopy(getPersonArray(), 0, temp, 0, getPersonArray().length);
-            System.arraycopy(p, 0, temp, getPersonArray().length, p.length);
-            this.PersonArray = temp;
-        }
-    }
-
-    /**
-     * Remove a subscriber from the activity
-     * The activity must not be empty
-     * The activity must contain the person to unsubscribe
-     *
-     * @param ego the person to be removed from the activity
-     *
-     */
-    public void Unsubscribe(Person ego){
-        if (getPersonArray().length != 0) {
-            Person[] temp = new Person[getPersonArray().length - 1];
-            int inserted = 0;
-            boolean check = false;
-            for (int i = 0; i < getPersonArray().length; i++) {
-                if (getPersonArray()[i].equals(ego))
-                    check = true;
-            }
-            if (check) {
-                for (int i = 0; i < getPersonArray().length; i++) {
-                    if (!getPersonArray()[i].equals(ego)) {
-                        System.arraycopy(getPersonArray(), i, temp, inserted, 1);
-                        inserted++;
-                    }
-                }
-                this.PersonArray = temp;
-            }
-        }
-
-
+    public void edit(String newName){
+        this.setName(newName);
     }
 
     /**

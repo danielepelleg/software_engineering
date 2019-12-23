@@ -11,7 +11,6 @@ public class Race extends Activity {
      * Class constructor.
      *
      * @param name the name of the race to be created
-     *
      */
     Race(String name){
         super(name);

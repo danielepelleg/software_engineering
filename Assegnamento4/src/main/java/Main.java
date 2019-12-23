@@ -16,6 +16,25 @@ public class Main {
         Admin a1 = new Admin("Giacomo", "Neri", "Jack", "hardtoguess");
         Member m1 = new Member("Tommaso", "Boni", "Tom", "12345");
         a1.addMember(m1);
+        Member m2 = new Member("Kia", "magika");
+        m1.login();
+        m2.login();
+        a1.login();
+        Member m3 = new Member("Pietro", "Poli", "Pie", "45678");
+        Admin a3 = new Admin("Daniele", "Pellegrini", "Dann", "1234");
+        m3.login();
+        m3.register();
+        m3.login();
+        a3.register();
+        a3.login();
+        Race bikeRace = new Race("Tour de France");
+        Course yogaCourse = new Course("Jnana Yoga");
+        Race motorRace = new Race("GrandPrix F1");
+        m1.unsubscribe(bikeRace);
+        a3.removeMember(m1);
+        a3.editMember(m3, "Gaia", "Vanni", "Gaietta", "pollice");
+        a3.editActivity(bikeRace, motorRace.getName());
+
         /*
         System.out.println("------ 1) Create initial arrays of Admin, Members and Activity ------");
         Member m1 = new Member("Tommaso", "Boni", "Tom", "12345");
@@ -41,7 +60,7 @@ public class Main {
         for (Activity a : activities) {
             System.out.println(a.show());
         }
-        
+
         System.out.println("\n------ 2a) The admins add, remove and edit members ------");
         System.out.println("Created 1 new member m3.");
         System.out.println("The admin " + a2.getUsername() + " adds the new member to the persons array. Here is the members:\n");
@@ -132,7 +151,7 @@ public class Main {
         for (Activity a : activities){
             System.out.println(a.show());
         }
-        
+
         System.out.println("------ 4) Show information about admins, members and activities  ------");
         System.out.println("\nHere's the members:\n");
         counter1 = 1; counter2 = 1;

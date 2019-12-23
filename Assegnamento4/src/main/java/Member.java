@@ -22,22 +22,44 @@ public class Member extends Person {
     }
 
     /**
+     * Class constructor for login.
+     *
+     * @param username the username of the member to be created
+     * @param password the password of the member to be created
+     */
+    public Member(String username, String password){
+        super(username, password);
+    }
+
+    /**
+     * Register a member in the database.
+     */
+    public void register(){
+        DatabaseManager.register(this);
+    }
+
+    /**
+     * Sign the member in.
+     */
+    public void login(){
+        DatabaseManager.login(this);
+    }
+
+    /**
      * Subscribe the member to an activity.
      *
-     * @param a Activity to which to subscribe the member
-     *
+     * @param activity Activity to which to subscribe the member
      */
-    public void Subscribe(Activity a){
-        a.Registration(Member.this);
+    public void subscribe(Activity activity){
+        DatabaseManager.subscribe(activity, this);
     }
 
     /**
      * Unsubscribe the member to an activity.
      *
-     * @param a Activity to which to unsubscribe the member
-     *
+     * @param activity Activity to which to unsubscribe the member
      */
-    public void Unsubscribe(Activity a){
-        a.Unsubscribe(Member.this);
+    public void unsubscribe(Activity activity){
+        DatabaseManager.unsubscribe(activity, this);
     }
 }
