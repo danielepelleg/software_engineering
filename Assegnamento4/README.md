@@ -17,10 +17,6 @@
   
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
-  - [UML Diagrams](#uml)
-    - [Class Diagram](#class-diagram)
-    - [Use-Case Diagram](#usecase-diagram)
-    - [Use-Case Diagram](#usecase-diagram---add-new-employee)
   - [Getting Started](#getting-started)
     - [Updates](#updates)
   - [License](#license)
@@ -50,15 +46,15 @@
    The system has a GUI, that starts with the login/registration form.
     
     - You have to select if you want to sign in as a member or as administrator. Once you insert the right credentials
-        the system will open your menu.
+       the system will open your menu.
     
     - You can register yourself to the database by inserting an username, which as primary key of the table must be 
-        different from anyone else. Your password will be stored hashed, once you complete the registration. From now
-        you can login with your new credentials.
+       different from anyone else. Your password will be stored hashed, once you complete the registration. From now
+      you can login with your new credentials.
     
-    - Once logged you will be redirected to your menu, where the buttons with the images will guide you to the different
-        operations you are allowed to perform. From this window you can also choose to disconnect, to come back to the 
-        login/registration form.
+    - Once logged you will be redirected to your menu, where the buttons with the images will guide you to the 
+       different operations you are allowed to perform. From this window you can also choose to disconnect, to come 
+      back to the login/registration form.
     
     
    
