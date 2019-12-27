@@ -235,7 +235,26 @@ public abstract class DatabaseManager {
         else System.out.println("Error while deleting activity. This activity is not present in the database.");
     }
 
-    /**
+    public boolean authenticate(String username, String password, boolean isAdmin) {
+        try {
+            PreparedStatement pstmt;
+            if (!isAdmin)
+                pstmt = getConnection().prepareStatement("SELECT  * FROM sportclub.member WHERE username = ? AND hashed_password = ?");
+            else
+                pstmt = getConnection().prepareStatement("SELECT  * FROM sportclub.administrator WHERE username = ? AND hashed_password = ?");
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            ResultSet rset = pstmt.executeQuery();
+            if (rset.next())
+                return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+        /**
      * Sign the member or the admin in.
      */
     public static void login(Member member){
