@@ -1,3 +1,11 @@
+import javafx.fxml.FXMLLoader;
+import javafx.application.Application;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 /**
  * Main Class
  * Test, through a simulation, the classes and methods created
@@ -11,8 +19,32 @@
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
-public class Main {
+public class Main extends Application {
+
+    public static Stage stage;
+
+    private static String UI = "Login/Login.fxml";
+
+    public static Stage getStage(){
+        return stage;
+    }
+
+    public void start(Stage primaryStage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(UI));
+        Scene frame = new Scene(root);
+        primaryStage.setResizable(false);
+        primaryStage.setTitle("SportClub");
+        primaryStage.setScene(frame);
+        primaryStage.centerOnScreen();
+        primaryStage.show();
+        stage = primaryStage;
+    }
+
     public static void main(String[] args){
+        launch(args);
+
+
+        /*
         Admin a1 = new Admin("Giacomo", "Neri", "Jack", "hardtoguess");
         Member m1 = new Member("Tommaso", "Boni", "Tom", "12345");
         a1.addMember(m1);
@@ -34,6 +66,7 @@ public class Main {
         a3.removeMember(m1);
         a3.editMember(m3, "Gaia", "Vanni", "Gaietta", "pollice");
         a3.editActivity(bikeRace, motorRace.getName());
+        */
 
         /*
         System.out.println("------ 1) Create initial arrays of Admin, Members and Activity ------");

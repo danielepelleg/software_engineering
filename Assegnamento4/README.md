@@ -2,7 +2,7 @@
   <br />
     <p align="center">
   <a href="https://github.com/danielepelleg/software_engineering">
-    <img src="./src/main/resources/images/racket.png" alt="Logo" width="130" height="130">
+    <img src="src/main/resources/images/racket.png" alt="Logo" width="130" height="130">
   </a>
   <h1 align="center">Sport Club</h1>
   <p align="center">
@@ -18,6 +18,7 @@
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
   - [Getting Started](#getting-started)
+    - [pom.xml](#pom.xml)
     - [Updates](#updates)
   - [License](#license)
   - [Contributors](#contributors)
@@ -66,6 +67,43 @@
    
    ### Updates
    Pull this repository for updates.
+   
+   ### pom.xml
+        <?xml version="1.0" encoding="UTF-8"?>
+        <project xmlns="http://maven.apache.org/POM/4.0.0"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+        
+            <groupId>it.unipr.fava_pellegrini</groupId>
+            <artifactId>it.unipr.fava_pellegrini</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>8.0.18</version>
+                </dependency>
+            </dependencies>
+            <build>
+            <resources>
+                <resource>
+                    <filtering>false</filtering>
+                    <directory>src/main/java</directory>
+                    <includes>
+                        <include>**/*.fxml</include>
+                    </includes>
+                </resource>
+                <resource>
+                    <filtering>false</filtering>
+                    <directory>src/main/resources/images</directory>
+                    <includes>
+                        <include>**/*.png</include>
+                    </includes>
+                </resource>
+            </resources>
+            </build>
+        </project>
    
    <!-- LICENSE -->
    ## LICENSE

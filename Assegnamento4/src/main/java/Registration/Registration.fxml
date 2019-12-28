@@ -29,7 +29,7 @@
                   <!--Add SportClub Logo -->
                   <ImageView fitHeight="108.0" fitWidth="134.0" layoutX="42.0" layoutY="49.0" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/images/racket.png" />
+                        <Image url="@/images/racket.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="70.0" layoutY="166.0" text="SportClub">
