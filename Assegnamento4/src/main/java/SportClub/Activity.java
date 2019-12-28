@@ -1,5 +1,7 @@
+package SportClub;
+
 /**
- * Activity Class
+ * SportClub.Activity Class
  * The class has the name of the activity and an array of person registered to it
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240

@@ -1,8 +1,10 @@
+package SportClub;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Person Class
+ * SportClub.Person Class
  * Each person has the name attribute, the surname, the username,
  * the password and the hashed password
  *
@@ -68,7 +70,7 @@ public class Person{
     }
 
     /**
-     * Set the Person's hashed password
+     * Set the SportClub.Person's hashed password
      * A message digest is a cryptographic hash function containing a string of digits created by a one-way hashing formula.
      * This one use the MD5 hash cryptographic function, a simple one
      * The message digest takes the string password bytes
@@ -77,7 +79,7 @@ public class Person{
      * The result is a complete hashed password in hex format, given to the class attribute 'hashed_password'
      * The operation of encryption is managed inside a try-catch
      *
-     * @param password for the Person.
+     * @param password for the SportClub.Person.
      *
      */
     public void setHashedPassword(String password) {
@@ -112,7 +114,7 @@ public class Person{
 
     /**
      *
-     * @return String Person's hashed password
+     * @return String SportClub.Person's hashed password
      */
     public String getPassword(){
         return this.hashed_password;

@@ -1,7 +1,11 @@
+package Database;
+import SportClub.*;
+
+
 import java.sql.*;
 
 /**
- * DatabaseManager Class
+ * Database.DatabaseManager Class
  * Handles the connection with the MySQL Database.
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
@@ -235,7 +239,7 @@ public abstract class DatabaseManager {
         else System.out.println("Error while deleting activity. This activity is not present in the database.");
     }
 
-    public boolean authenticate(String username, String password, boolean isAdmin) {
+    public static boolean authenticate(String username, String password, boolean isAdmin) {
         try {
             PreparedStatement pstmt;
             if (!isAdmin)
@@ -254,7 +258,7 @@ public abstract class DatabaseManager {
     }
 
 
-        /**
+    /**
      * Sign the member or the admin in.
      */
     public static void login(Member member){
@@ -332,7 +336,7 @@ public abstract class DatabaseManager {
     /**
      * Edit a member values inside the database.
      *
-     * @param member Member to edit
+     * @param member SportClub.Member to edit
      * @param newName new Name
      * @param newSurname new Surname
      * @param newUsername new Username

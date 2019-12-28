@@ -1,5 +1,9 @@
+package SportClub;
+
+import Database.DatabaseManager;
+
 /**
- * Member Class - Person Subclass
+ * SportClub.Member Class - SportClub.Person Subclass
  * Each member has the name attribute, the surname, the username,
  * the password and the hashed password generated from the last one
  *
@@ -48,7 +52,7 @@ public class Member extends Person {
     /**
      * Subscribe the member to an activity.
      *
-     * @param activity Activity to which to subscribe the member
+     * @param activity SportClub.Activity to which to subscribe the member
      */
     public void subscribe(Activity activity){
         DatabaseManager.subscribe(activity, this);
@@ -57,7 +61,7 @@ public class Member extends Person {
     /**
      * Unsubscribe the member to an activity.
      *
-     * @param activity Activity to which to unsubscribe the member
+     * @param activity SportClub.Activity to which to unsubscribe the member
      */
     public void unsubscribe(Activity activity){
         DatabaseManager.unsubscribe(activity, this);

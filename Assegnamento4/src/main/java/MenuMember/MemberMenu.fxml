@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="MenuMember.MenuMemberController">
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuMember.MenuMemberController">
    <children>
       <SplitPane dividerPositions="0.3">
         <items>
@@ -19,31 +18,23 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="156.0">
                <children>
 
-                  <!--Add Member Profile -->
-                  <ImageView fitHeight="108.0" fitWidth="134.0" layoutX="42.0" layoutY="49.0" preserveRatio="true">
+                  <!--Add SportClub.Member Profile -->
+                  <ImageView fitHeight="108.0" fitWidth="134.0" layoutX="42.0" layoutY="58.0" preserveRatio="true">
                      <image>
                         <Image url="@/images/profile (1).png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="70.0" layoutY="166.0" text="Member">
+                  <Label layoutX="70.0" layoutY="176.0" text="Member">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
 
-                  <!-- Add current Member Data: Name, Surname, Username -->
-                  <Label fx:id="nameLabel"
-                         layoutX="40.0" layoutY="249.0"
-                         prefHeight="18.0" prefWidth="123.0" />
-                  <Label fx:id="usernameLabel"
-                         layoutX="41.0" layoutY="280.0"
-                         prefHeight="18.0" prefWidth="123.0" />
-                  <Label fx:id="surnameLabel"
-                         layoutX="41.0" layoutY="307.0"
-                         prefHeight="18.0" prefWidth="123.0" />
-                  <Button id="logoutButton"  text="Logout"
-                          layoutX="130.0" layoutY="458.0"
-                          onAction="logout"/>
+                  <!-- Add current SportClub.Member Data: Name, Surname, Username -->
+                  <Label fx:id="nameLabel" layoutX="40.0" layoutY="249.0" prefHeight="18.0" prefWidth="123.0" />
+                  <Label fx:id="usernameLabel" layoutX="41.0" layoutY="280.0" prefHeight="18.0" prefWidth="123.0" />
+                  <Label fx:id="surnameLabel" layoutX="41.0" layoutY="307.0" prefHeight="18.0" prefWidth="123.0" />
+                  <Button id="logoutButton" fx:id="logoutButton" layoutX="130.0" layoutY="458.0" onAction="#logout" text="Logout" />
 
                </children>
             </AnchorPane>
@@ -55,45 +46,33 @@
                   <ToolBar layoutX="2.0" layoutY="1.0" prefHeight="53.0" prefWidth="487.0" />
 
                   <!-- Add Course Button -->
-                  <Button fx:id="courseButton" text="Course"
-                          contentDisplay="TOP"
-                          layoutX="52.0" layoutY="112.0"
-                          prefHeight="100.0" prefWidth="100.0"
-                          onAction="#openCoursePage" >
+                  <Button fx:id="courseButton" contentDisplay="TOP" layoutX="52.0" layoutY="112.0" onAction="#openCoursePage" prefHeight="100.0" prefWidth="100.0" text="Course">
                      <graphic>
                         <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/weight.png" />
+                              <Image url="@/images/weight.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
 
-                  <!-- Add Race Button -->
-                  <Button fx:id="raceButton"  text="Races"
-                          contentDisplay="TOP"
-                          layoutX="302.0" layoutY="112.0"
-                          prefHeight="100.0" prefWidth="100.0"
-                          onAction="#openRacePage">
+                  <!-- Add SportClub.Race Button -->
+                  <Button fx:id="raceButton" contentDisplay="TOP" layoutX="302.0" layoutY="112.0" onAction="#openRacePage" prefHeight="100.0" prefWidth="100.0" text="Races">
                      <graphic>
                         <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/racing-flag.png" />
+                              <Image url="@/images/racing-flag.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
 
                   <!-- Add Subscribers Button -->
-                  <Button fx:id="subscribersButton" text="Subscribers"
-                          contentDisplay="TOP"
-                          layoutX="175.0" layoutY="279.0"
-                          prefHeight="100.0" prefWidth="100.0"
-                          onAction="#openSubscribersPage">
+                  <Button fx:id="subscribersButton" contentDisplay="TOP" layoutX="175.0" layoutY="279.0" onAction="#openSubscribersPage" prefHeight="100.0" prefWidth="100.0" text="Subscribers">
                      <graphic>
                         <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/pricing.png" />
+                              <Image url="@/images/pricing.png" />
                            </image>
                         </ImageView>
                      </graphic>

@@ -1,3 +1,4 @@
+drop database if exists sportclub;
 create database if not exists sportclub;
 use sportclub;
 
@@ -6,7 +7,7 @@ create table course (
     name varchar(24) primary key);
 
 insert into course(name) VALUES
-#       new Course("Jnana Yoga")
+#       new SportClub.Course("Jnana Yoga")
 ('Jnana Yoga');
 
 drop table if exists race;
@@ -14,7 +15,7 @@ create table race(
     name varchar(24) primary key);
 
 insert into race(name) VALUES
-#       new Race("Tour de France")
+#       new SportClub.Race("Tour de France")
 ('Tour de France');
 
 drop table if exists member;
@@ -26,9 +27,9 @@ create table member(
 
 insert into member(name, surname, username, hashed_password) VALUES
 ('Tommaso', 'Boni', 'Tom', '827ccb0eea8a706c4c34a16891f84e7b'),
-#       new Member("Tommaso", "Boni", "Tom", "12345")
+#       new SportClub.Member("Tommaso", "Boni", "Tom", "12345")
 ('Luca', 'Perini', 'Luke', 'c37bf859faf392800d739a41fe5af151');
-#       new Member("Luca", "Perini", "Luke", "98765")
+#       new SportClub.Member("Luca", "Perini", "Luke", "98765")
 
 drop table if exists administrator;
 create table administrator(
@@ -39,9 +40,9 @@ create table administrator(
 
 insert into administrator(name, surname, username, hashed_password) VALUES
 ('Giacomo', 'Neri', 'Jack', '5cc7a8cad0c3ef6834ff6bd9f734e741'),
-#       new Admin("Giacomo", "Neri", "Jack", "hardtoguess")
+#       new SportClub.Admin("Giacomo", "Neri", "Jack", "hardtoguess")
 ('Chiara', 'Zanetti', 'Chicca', 'aa7dcd799df5136c89931152a274c449');
-#       new Admin("Chiara", "Zanetti", "Chicca", "hardtofind")
+#       new SportClub.Admin("Chiara", "Zanetti", "Chicca", "hardtofind")
 
 drop table if exists activity_course;
 create table activity_course(

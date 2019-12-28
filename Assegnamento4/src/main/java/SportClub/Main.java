@@ -1,3 +1,5 @@
+package SportClub;
+
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -7,13 +9,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Main Class
+ * SportClub.Main Class
  * Test, through a simulation, the classes and methods created
  *
- * 1)   Create initial arrays of Admin, Members and Activity
+ * 1)   Create initial arrays of SportClub.Admin, Members and SportClub.Activity
  * 2a)  The admins add, remove and edit members
  * 2b)  The admins add, remove and edit activities
- * 3)   A member signs up to a Race and to a Course, then unsubscribe to one of them
+ * 3)   A member signs up to a SportClub.Race and to a SportClub.Course, then unsubscribe to one of them
  * 4)   Show information about admins, members and activities
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
@@ -21,13 +23,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    public static Stage stage;
-
-    private static String UI = "Login/Login.fxml";
-
-    public static Stage getStage(){
-        return stage;
-    }
+    private static String UI = "../Login/Login.fxml";
 
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(UI));
@@ -37,31 +33,29 @@ public class Main extends Application {
         primaryStage.setScene(frame);
         primaryStage.centerOnScreen();
         primaryStage.show();
-        stage = primaryStage;
     }
 
     public static void main(String[] args){
         launch(args);
 
-
         /*
-        Admin a1 = new Admin("Giacomo", "Neri", "Jack", "hardtoguess");
-        Member m1 = new Member("Tommaso", "Boni", "Tom", "12345");
+        SportClub.Admin a1 = new SportClub.Admin("Giacomo", "Neri", "Jack", "hardtoguess");
+        SportClub.Member m1 = new SportClub.Member("Tommaso", "Boni", "Tom", "12345");
         a1.addMember(m1);
-        Member m2 = new Member("Kia", "magika");
+        SportClub.Member m2 = new SportClub.Member("Kia", "magika");
         m1.login();
         m2.login();
         a1.login();
-        Member m3 = new Member("Pietro", "Poli", "Pie", "45678");
-        Admin a3 = new Admin("Daniele", "Pellegrini", "Dann", "1234");
+        SportClub.Member m3 = new SportClub.Member("Pietro", "Poli", "Pie", "45678");
+        SportClub.Admin a3 = new SportClub.Admin("Daniele", "Pellegrini", "Dann", "1234");
         m3.login();
         m3.register();
         m3.login();
         a3.register();
         a3.login();
-        Race bikeRace = new Race("Tour de France");
-        Course yogaCourse = new Course("Jnana Yoga");
-        Race motorRace = new Race("GrandPrix F1");
+        SportClub.Race bikeRace = new SportClub.Race("Tour de France");
+        SportClub.Course yogaCourse = new SportClub.Course("Jnana Yoga");
+        SportClub.Race motorRace = new SportClub.Race("GrandPrix F1");
         m1.unsubscribe(bikeRace);
         a3.removeMember(m1);
         a3.editMember(m3, "Gaia", "Vanni", "Gaietta", "pollice");
@@ -69,38 +63,38 @@ public class Main extends Application {
         */
 
         /*
-        System.out.println("------ 1) Create initial arrays of Admin, Members and Activity ------");
-        Member m1 = new Member("Tommaso", "Boni", "Tom", "12345");
-        Member m2 = new Member("Luca", "Perini", "Luke", "98765");
-        Admin a1 = new Admin("Giacomo", "Neri", "Jack", "hardtoguess");
-        Admin a2 = new Admin("Chiara", "Zanetti", "Chicca", "hardtofind");
-        Person[] persons = new Person[]{a1,a2,m1,m2};
+        System.out.println("------ 1) Create initial arrays of SportClub.Admin, Members and SportClub.Activity ------");
+        SportClub.Member m1 = new SportClub.Member("Tommaso", "Boni", "Tom", "12345");
+        SportClub.Member m2 = new SportClub.Member("Luca", "Perini", "Luke", "98765");
+        SportClub.Admin a1 = new SportClub.Admin("Giacomo", "Neri", "Jack", "hardtoguess");
+        SportClub.Admin a2 = new SportClub.Admin("Chiara", "Zanetti", "Chicca", "hardtofind");
+        SportClub.Person[] persons = new SportClub.Person[]{a1,a2,m1,m2};
         System.out.println("Created 2 administrators and 2 members:\n");
         int counter1 = 1; int counter2 = 1;
-        for (Person person : persons) {
-            if (person.getClass() == Admin.class) {
+        for (SportClub.Person person : persons) {
+            if (person.getClass() == SportClub.Admin.class) {
                 System.out.println(" a" + counter1 + "\t" + person.show() + " Hash. Pass: " + person.getPassword());
                 counter1++;
-            } else if (person.getClass() == Member.class) {
+            } else if (person.getClass() == SportClub.Member.class) {
                 System.out.println(" m" + counter2 + "\t" + person.show() + " Hash. Pass: " + person.getPassword());
                 counter2++;
             }
         }
-        Race bikeRace = new Race("Tour de France");
-        Course yogaCourse = new Course("Jnana Yoga");
-        Activity[] activities = new Activity[]{bikeRace, yogaCourse};
-        System.out.println("\nCreated 1 Race and 1 Course:\n");
-        for (Activity a : activities) {
+        SportClub.Race bikeRace = new SportClub.Race("Tour de France");
+        SportClub.Course yogaCourse = new SportClub.Course("Jnana Yoga");
+        SportClub.Activity[] activities = new SportClub.Activity[]{bikeRace, yogaCourse};
+        System.out.println("\nCreated 1 SportClub.Race and 1 SportClub.Course:\n");
+        for (SportClub.Activity a : activities) {
             System.out.println(a.show());
         }
 
         System.out.println("\n------ 2a) The admins add, remove and edit members ------");
         System.out.println("Created 1 new member m3.");
         System.out.println("The admin " + a2.getUsername() + " adds the new member to the persons array. Here is the members:\n");
-        Member m3 = new Member("Pietro", "Poli", "Pie", "45678");
+        SportClub.Member m3 = new SportClub.Member("Pietro", "Poli", "Pie", "45678");
         persons = a2.addMember(m3, persons);
         for (int i = 0; i < persons.length; i++) {
-        	if(persons[i].getClass() == Member.class)
+        	if(persons[i].getClass() == SportClub.Member.class)
             if (i != persons.length-1)
                 System.out.println(" m" + (i - 1) + "\t" + persons[i].show());
             else System.out.print(" m" + (i - 1) + "\t" + persons[i].show());
@@ -121,7 +115,7 @@ public class Main extends Application {
         System.out.print(m1.show() + "\t Password: " + m1.getPassword() + "\n");
         System.out.println("\nHere is the members:\n");
         for (int i = 0; i < persons.length; i++) {
-        	if(persons[i].getClass() == Member.class) {
+        	if(persons[i].getClass() == SportClub.Member.class) {
         		if (i != 2)
         			System.out.println(" m" + (i - 1) + "\t" + persons[i].show());
         		else{
@@ -132,7 +126,7 @@ public class Main extends Application {
         }
 
         System.out.println("\n------ 2b) The admins add, remove and edit activities ------");
-        Race motorRace = new Race("GrandPrix F1");
+        SportClub.Race motorRace = new SportClub.Race("GrandPrix F1");
         System.out.println("Created 1 new activity " + motorRace.getName() + ".");
         System.out.println("The admin " + a1.getUsername() + " adds the new activity to the activities array. Here is the activities:\n");
         activities = a1.addActivity(motorRace, activities);
@@ -159,7 +153,7 @@ public class Main extends Application {
             }
         }
 
-        System.out.println("\n------ 3) A member signs up to a Race and to a Course, then unsubscribe to one of them  ------");
+        System.out.println("\n------ 3) A member signs up to a SportClub.Race and to a SportClub.Course, then unsubscribe to one of them  ------");
         System.out.println(m1.getUsername() + " and " + m3.getUsername() + " both subscribe to " + bikeRace.getName() + " and " + yogaCourse.getName()+".");
         System.out.println("The admin " + a1.getUsername() + " subscribes the member " + m2.getUsername() + " to the " + bikeRace.getName() +
                 " and Luke signs up to the " + yogaCourse.getName() + "\n");
@@ -169,7 +163,7 @@ public class Main extends Application {
         m3.Subscribe(yogaCourse);
         a1.Subscribe(bikeRace, m2);
         m2.Subscribe(yogaCourse);
-        for (Activity a : activities){
+        for (SportClub.Activity a : activities){
             System.out.println(a.show());
         }
         System.out.println("\n" + m1.getUsername() + " unsubscribes to " + yogaCourse.getName() + " and " + m3.getUsername() + " unsubscribe to " + bikeRace.getName());
@@ -181,24 +175,24 @@ public class Main extends Application {
         a2.Unsubscribe(yogaCourse, m2);
         m2.Unsubscribe(bikeRace);
         m2.Subscribe(motorRace);
-        for (Activity a : activities){
+        for (SportClub.Activity a : activities){
             System.out.println(a.show());
         }
 
         System.out.println("------ 4) Show information about admins, members and activities  ------");
         System.out.println("\nHere's the members:\n");
         counter1 = 1; counter2 = 1;
-        for (Person person : persons) {
-            if (person.getClass() == Admin.class) {
+        for (SportClub.Person person : persons) {
+            if (person.getClass() == SportClub.Admin.class) {
                 System.out.println(" a" + counter1 + "\t" + person.show());
                 counter1++;
-            } else if (person.getClass() == Member.class) {
+            } else if (person.getClass() == SportClub.Member.class) {
                 System.out.println(" m" + counter2 + "\t" + person.show());
                 counter2++;
             }
         }
         System.out.println("\nHere's the activities:\n");
-        for (Activity a : activities){
+        for (SportClub.Activity a : activities){
             System.out.println(a.show());
         }
          */

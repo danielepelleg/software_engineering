@@ -2,8 +2,14 @@ package MenuMember;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MenuMemberController {
 
@@ -17,6 +23,9 @@ public class MenuMemberController {
     private Label surnameLabel;
 
     @FXML
+    private Button logoutButton;
+
+    @FXML
     private Button courseButton;
 
     @FXML
@@ -24,6 +33,9 @@ public class MenuMemberController {
 
     @FXML
     private Button subscribersButton;
+
+    Stage dialogStage = new Stage();
+    Scene scene;
 
     @FXML
     void openCoursePage(ActionEvent event) {
@@ -38,6 +50,25 @@ public class MenuMemberController {
     @FXML
     void openSubscribersPage(ActionEvent event) {
 
+    }
+
+    /**
+     * logout the member
+     * 
+     * @param event press on Logout button
+     */
+    @FXML
+    void logout(ActionEvent event){
+        try{
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Login/Login.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 }

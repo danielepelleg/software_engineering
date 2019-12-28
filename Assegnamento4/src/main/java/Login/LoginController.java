@@ -1,5 +1,10 @@
 package Login;
+import AlertBox.ErrorBox;
+import AlertBox.InfoBox;
+import Database.*;
 
+import AlertBox.WarningBox;
+import SportClub.Member;
 import com.sun.tools.javac.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,6 +48,41 @@ public class LoginController {
     Scene scene;
 
     /**
+     * Check if the UsernameField and the PasswordField have been left empty.
+     *
+     * @return true if they have, false if not
+     */
+    public boolean fieldsEmpty(){
+        if(usernameField.getText().equals("") && passwordField.getText().equals(""))
+            return true;
+        else return false;
+    }
+
+    public void openMemberMenu(ActionEvent event){
+        try {
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../MenuMember/MemberMenu.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openAdminMenu(ActionEvent event){
+        try {
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../MenuMember/MemberMenu.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Reset to empty values the TextField and the PasswordField
      *
      * @param event press on reset button
@@ -79,7 +119,25 @@ public class LoginController {
      */
     @FXML
     void login(ActionEvent event) {
-
+        if(fieldsEmpty())
+            new WarningBox("You have left some fields empty!", "Informations Missing");
+        else{
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            Member member = new Member(username, password);
+            boolean isAdmin = adminButton.isSelected();
+            boolean authentication = DatabaseManager.authenticate(member.getUsername(), member.getPassword(), isAdmin);
+            if(authentication) {
+                new InfoBox("Login Successfull", "Success");
+                if (adminButton.isSelected())
+                    openAdminMenu(event);
+                else openMemberMenu(event);
+            }
+            else{
+                new ErrorBox("Username or password are incorrect", "Bad Login");
+                cancel(event);
+            }
+        }
     }
 
 }

@@ -1,5 +1,9 @@
+package SportClub;
+
+import Database.DatabaseManager;
+
 /**
- * Admin Class - Member Subclass
+ * SportClub.Admin Class - SportClub.Member Subclass
  * Each admin has the name attribute, the surname, the username,
  * the password and the hashed password generated from the last one
  *
@@ -18,6 +22,10 @@ public class Admin extends Member {
      */
     public Admin(String name, String surname, String username, String password){
         super(name, surname, username, password);
+    }
+
+    public Admin(String username, String password) {
+        super(username, password);
     }
 
     /**
@@ -55,8 +63,8 @@ public class Admin extends Member {
     /**
      * Subscribe a member to an activity
      *
-     * @param activity Activity to which to subscribe the member
-     * @param member Member to subscribe
+     * @param activity SportClub.Activity to which to subscribe the member
+     * @param member SportClub.Member to subscribe
      *
      */
     public void subscribe(Activity activity, Member member){
@@ -66,8 +74,8 @@ public class Admin extends Member {
     /**
      * Unsubscribe a member to an activity
      *
-     * @param activity Activity to which to unsubscribe the member
-     * @param member Member to unsubscribe
+     * @param activity SportClub.Activity to which to unsubscribe the member
+     * @param member SportClub.Member to unsubscribe
      *
      */
     public void unsubscribe(Activity activity, Member member){
@@ -77,7 +85,7 @@ public class Admin extends Member {
     /**
      * Edit the parameters of a member
      *
-     * @param member Member to edit
+     * @param member SportClub.Member to edit
      * @param newName new Name
      * @param newSurname new Surname
      * @param newUsername new Username
@@ -91,7 +99,7 @@ public class Admin extends Member {
     /**
      * Edit the parameters of an activity
      *
-     * @param activity Activity to edit
+     * @param activity SportClub.Activity to edit
      * @param newName new Name
      *
      */

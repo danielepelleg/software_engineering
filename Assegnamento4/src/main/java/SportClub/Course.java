@@ -1,5 +1,7 @@
+package SportClub;
+
 /**
- * Course Class - Activity Subclass
+ * SportClub.Course Class - SportClub.Activity Subclass
  * The class has the name of the course and an array of person registered to it
  *
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
@@ -13,7 +15,7 @@ public class Course extends Activity {
      * @param name the name of the course to be created
      *
      */
-    Course(String name) {
+    public Course(String name) {
         super(name);
     }
 }
