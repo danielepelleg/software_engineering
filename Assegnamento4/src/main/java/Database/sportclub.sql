@@ -28,8 +28,11 @@ create table member(
 insert into member(name, surname, username, hashed_password) VALUES
 ('Tommaso', 'Boni', 'Tom', '827ccb0eea8a706c4c34a16891f84e7b'),
 #       new SportClub.Member("Tommaso", "Boni", "Tom", "12345")
-('Luca', 'Perini', 'Luke', 'c37bf859faf392800d739a41fe5af151');
+('Luca', 'Perini', 'Luke', 'c37bf859faf392800d739a41fe5af151'),
 #       new SportClub.Member("Luca", "Perini", "Luke", "98765")
+('Matilde', 'Tanzi', 'Maty', 'd8578edf8458ce06fbc5bb76a58c5ca4');
+#       new SportClub.Member("Matilde", "Tanzi", "Maty", "qwerty")
+
 
 drop table if exists administrator;
 create table administrator(
@@ -41,8 +44,10 @@ create table administrator(
 insert into administrator(name, surname, username, hashed_password) VALUES
 ('Giacomo', 'Neri', 'Jack', '5cc7a8cad0c3ef6834ff6bd9f734e741'),
 #       new SportClub.Admin("Giacomo", "Neri", "Jack", "hardtoguess")
-('Chiara', 'Zanetti', 'Chicca', 'aa7dcd799df5136c89931152a274c449');
+('Chiara', 'Zanetti', 'Chicca', 'aa7dcd799df5136c89931152a274c449'),
 #       new SportClub.Admin("Chiara", "Zanetti", "Chicca", "hardtofind")
+('Matteo', 'Binelli', 'Matte', 'cfc1e5e69ceb8c3597d62a80663b7990');
+#       new SportClub.Member("Matteo", "Binelli", "Matte", "strongman")
 
 drop table if exists activity_course;
 create table activity_course(

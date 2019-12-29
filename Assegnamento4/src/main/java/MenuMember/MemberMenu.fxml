@@ -18,8 +18,8 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="156.0">
                <children>
 
-                  <!--Add SportClub.Member Profile -->
-                  <ImageView fitHeight="108.0" fitWidth="134.0" layoutX="42.0" layoutY="58.0" preserveRatio="true">
+                  <!--Add Member Profile -->
+                  <ImageView fitHeight="108.0" fitWidth="134.0" layoutX="42.0" layoutY="50.0" preserveRatio="true">
                      <image>
                         <Image url="@/images/profile (1).png" />
                      </image>
@@ -31,9 +31,9 @@
                   </Label>
 
                   <!-- Add current SportClub.Member Data: Name, Surname, Username -->
-                  <Label fx:id="nameLabel" layoutX="40.0" layoutY="249.0" prefHeight="18.0" prefWidth="123.0" />
-                  <Label fx:id="usernameLabel" layoutX="41.0" layoutY="280.0" prefHeight="18.0" prefWidth="123.0" />
-                  <Label fx:id="surnameLabel" layoutX="41.0" layoutY="307.0" prefHeight="18.0" prefWidth="123.0" />
+                  <Label fx:id="nameLabel" contentDisplay="CENTER" layoutX="34.0" layoutY="224.0" prefHeight="18.0" prefWidth="123.0" />
+                  <Label fx:id="surnameLabel" contentDisplay="CENTER" layoutX="34.0" layoutY="260.0" prefHeight="18.0" prefWidth="123.0" />
+                  <Label fx:id="usernameLabel" contentDisplay="CENTER" layoutX="34.0" layoutY="297.0" prefHeight="18.0" prefWidth="123.0" />
                   <Button id="logoutButton" fx:id="logoutButton" layoutX="130.0" layoutY="458.0" onAction="#logout" text="Logout" />
 
                </children>

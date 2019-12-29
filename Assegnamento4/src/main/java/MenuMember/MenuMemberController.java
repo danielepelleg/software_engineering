@@ -1,8 +1,10 @@
 package MenuMember;
 
+import SportClub.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,17 +12,19 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MenuMemberController {
+public class MenuMemberController implements Initializable {
 
     @FXML
     private Label nameLabel;
 
     @FXML
-    private Label usernameLabel;
+    private Label surnameLabel;
 
     @FXML
-    private Label surnameLabel;
+    private Label usernameLabel;
 
     @FXML
     private Button logoutButton;
@@ -36,6 +40,20 @@ public class MenuMemberController {
 
     Stage dialogStage = new Stage();
     Scene scene;
+
+    /**
+     * Set the text of the labels.
+     */
+    void setLabels(){
+        nameLabel.setText(Session.getCurrentSession().getName());
+        surnameLabel.setText(Session.getCurrentSession().getSurname());
+        usernameLabel.setText(Session.getCurrentSession().getUsername());
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+        setLabels();
+    }
 
     @FXML
     void openCoursePage(ActionEvent event) {
@@ -53,8 +71,8 @@ public class MenuMemberController {
     }
 
     /**
-     * logout the member
-     * 
+     * Logout the member
+     *
      * @param event press on Logout button
      */
     @FXML

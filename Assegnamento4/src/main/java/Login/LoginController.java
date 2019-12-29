@@ -1,12 +1,8 @@
 package Login;
-import AlertBox.ErrorBox;
-import AlertBox.InfoBox;
-import Database.*;
 
 import AlertBox.WarningBox;
+import SportClub.Admin;
 import SportClub.Member;
-import com.sun.tools.javac.Main;
-import javafx.scene.Parent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +16,16 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+/**
+ * LoginController Class
+ * Controls the Login.fxml events.
+ *
+ * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
+ */
 public class LoginController {
 
     @FXML
@@ -58,6 +63,11 @@ public class LoginController {
         else return false;
     }
 
+    /**
+     * Open the Member menu page.
+     *
+     * @param event successful login as member
+     */
     public void openMemberMenu(ActionEvent event){
         try {
             Node source = (Node) event.getSource();
@@ -70,11 +80,16 @@ public class LoginController {
         }
     }
 
+    /**
+     * Open the Administrator menu page.
+     *
+     * @param event successful login as administrator
+     */
     public void openAdminMenu(ActionEvent event){
         try {
             Node source = (Node) event.getSource();
             dialogStage = (Stage) source.getScene().getWindow();
-            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../MenuMember/MemberMenu.fxml")));
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../MenuAdmin/AdminMenu.fxml")));
             dialogStage.setScene(scene);
             dialogStage.show();
         } catch (IOException e) {
@@ -95,7 +110,7 @@ public class LoginController {
     }
 
     /**
-     * Open the registration page.
+     * Open the Registration page.
      *
      * @param event press on registration button
      */
@@ -124,20 +139,23 @@ public class LoginController {
         else{
             String username = usernameField.getText();
             String password = passwordField.getText();
-            Member member = new Member(username, password);
+            boolean authentication = false;
             boolean isAdmin = adminButton.isSelected();
-            boolean authentication = DatabaseManager.authenticate(member.getUsername(), member.getPassword(), isAdmin);
+            if(isAdmin){
+                Admin admin = new Admin(username, password);
+                authentication = admin.login();
+            }
+            else {
+                Member member = new Member(username, password);
+                authentication = member.login();
+            }
             if(authentication) {
-                new InfoBox("Login Successfull", "Success");
                 if (adminButton.isSelected())
                     openAdminMenu(event);
                 else openMemberMenu(event);
             }
-            else{
-                new ErrorBox("Username or password are incorrect", "Bad Login");
+            else
                 cancel(event);
-            }
         }
     }
-
 }

@@ -1,4 +1,6 @@
 package Database;
+import AlertBox.ErrorBox;
+import AlertBox.InfoBox;
 import SportClub.*;
 
 
@@ -56,22 +58,16 @@ public abstract class DatabaseManager {
      */
     public static boolean checkMember(Member member){
         try {
-            Statement stmt = getConnection().createStatement();
-            ResultSet rset = null;
+            PreparedStatement pstmt = null;
             if(member.getClass().equals(Member.class))
-                rset = stmt.executeQuery("select count(*) as total from sportclub.member WHERE username = '" + member.getUsername() + "'");
+                pstmt = getConnection().prepareStatement("select * from sportclub.member WHERE username = ?");
             if(member.getClass().equals(Admin.class))
-                rset = stmt.executeQuery("select count(*) as total from sportclub.administrator WHERE username = '" + member.getUsername() + "'");
-            while(rset.next() && rset != null)
+                pstmt = getConnection().prepareStatement("select * from sportclub.administrator WHERE username = ?");
+            pstmt.setString(1, member.getUsername());
+            ResultSet rset = pstmt.executeQuery();
+            while(rset.next())
             {
-                String number = rset.getString("total");
-                int recurrence = Integer.parseInt(number);
-                if (recurrence >= 1){
-                    return true;
-                }
-                if (recurrence == 0){
-                    return false;
-                }
+                return true;
             }
         }
         catch(SQLException e)
@@ -79,7 +75,7 @@ public abstract class DatabaseManager {
             System.out.println("\u001B[31m\n" + e.getMessage() + "\u001B[0m");
             System.exit(0);
         }
-        return true;
+        return false;
     }
 
     /**
@@ -158,12 +154,17 @@ public abstract class DatabaseManager {
     public static void register(Member member){
         if (!checkMember(member)){
             try {
-                Statement stmt = getConnection().createStatement();
+                PreparedStatement pstmt = null;
                 if (member.getClass().equals(Member.class))
-                    stmt.executeUpdate("insert into sportclub.member(name, surname, username, hashed_password) VALUES ('"+ member.getName() + "', '" + member.getSurname() +"', '" + member.getUsername() + "', '"+ member.getPassword() +"')");
+                    pstmt = getConnection().prepareStatement("insert into sportclub.member(name, surname, username, hashed_password) VALUES (?, ?, ?, ?)");
                 else if (member.getClass().equals(Admin.class))
-                    stmt.executeUpdate("insert into sportclub.administrator(name, surname, username, hashed_password) VALUES ('"+ member.getName() + "', '" + member.getSurname() +"', '" + member.getUsername() + "', '"+ member.getPassword() +"')");
-                System.out.println("done");
+                    pstmt = getConnection().prepareStatement("insert into sportclub.administrator(name, surname, username, hashed_password) VALUES (?, ?, ?, ?)");
+                pstmt.setString(1, member.getName());
+                pstmt.setString(2, member.getSurname());
+                pstmt.setString(3, member.getUsername());
+                pstmt.setString(4, member.getPassword());
+                pstmt.executeUpdate();
+                new InfoBox("Registration successful! Come back to login page to sign in!", "Success");
             }
             catch(SQLException e)
             {
@@ -171,7 +172,35 @@ public abstract class DatabaseManager {
                 System.exit(0);
             }
         }
-        else System.out.println("This user is already registered in the database!");
+        else new ErrorBox("This user is already registered in the database!", "Registration Error");
+    }
+
+    /**
+     * Sign the member or the admin in.
+     */
+    public static boolean authenticate(Member member, boolean isAdmin) {
+        try {
+            PreparedStatement pstmt;
+            if (!isAdmin)
+                pstmt = getConnection().prepareStatement("SELECT  * FROM sportclub.member WHERE username = ? AND hashed_password = ?");
+            else
+                pstmt = getConnection().prepareStatement("SELECT  * FROM sportclub.administrator WHERE username = ? AND hashed_password = ?");
+            pstmt.setString(1, member.getUsername());
+            pstmt.setString(2, member.getPassword());
+            ResultSet rset = pstmt.executeQuery();
+            if (rset.next()) {
+                String name = rset.getString("name");
+                String surname = rset.getString("surname");
+                String username = rset.getString("username");
+                new Session(new Member(name, surname, username, ""));
+                new InfoBox("Login successful!", "Success");
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        new ErrorBox("Username or password are incorrect", "Bad Login");
+        return false;
     }
 
     /**
@@ -237,57 +266,6 @@ public abstract class DatabaseManager {
             }
         }
         else System.out.println("Error while deleting activity. This activity is not present in the database.");
-    }
-
-    public static boolean authenticate(String username, String password, boolean isAdmin) {
-        try {
-            PreparedStatement pstmt;
-            if (!isAdmin)
-                pstmt = getConnection().prepareStatement("SELECT  * FROM sportclub.member WHERE username = ? AND hashed_password = ?");
-            else
-                pstmt = getConnection().prepareStatement("SELECT  * FROM sportclub.administrator WHERE username = ? AND hashed_password = ?");
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            ResultSet rset = pstmt.executeQuery();
-            if (rset.next())
-                return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-
-    /**
-     * Sign the member or the admin in.
-     */
-    public static void login(Member member){
-        try {
-            Statement stmt = getConnection().createStatement();
-            ResultSet rset = null;
-            if (member.getClass().equals(Member.class))
-                rset = stmt.executeQuery("select count(*) as total from sportclub.member WHERE username = '" + member.getUsername() + "' AND hashed_password = '" + member.getPassword() + "'");
-            else if (member.getClass().equals(Admin.class))
-                rset = stmt.executeQuery("select count(*) as total from sportclub.administrator WHERE username = '" + member.getUsername() + "' AND hashed_password = '" + member.getPassword() + "'");
-            while(rset.next() && rset != null)
-            {
-                String number = rset.getString("total");
-                int recurrence = Integer.parseInt(number);
-                if (recurrence == 1){
-                    System.out.println("Welcome back, " + member.getUsername() + "!");
-                }
-                if (recurrence == 0){
-                    System.out.println("Bad Login. Please retry.");
-                }
-            }
-            if (rset == null)
-                throw new SQLException("Something went wrong. Class not known.");
-        }
-        catch(SQLException e)
-        {
-            System.out.println("\u001B[31m\n" + e.getMessage() + "\u001B[0m");
-            System.exit(0);
-        }
     }
 
     /**

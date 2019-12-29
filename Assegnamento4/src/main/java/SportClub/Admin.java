@@ -29,6 +29,14 @@ public class Admin extends Member {
     }
 
     /**
+     * Sign the admin in.
+     */
+    @Override
+    public boolean login(){
+        return DatabaseManager.authenticate(this, true);
+    }
+
+    /**
      * Add a member in the member table on the database.
      */
     public void addMember (Member newMember){

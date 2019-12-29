@@ -45,8 +45,8 @@ public class Member extends Person {
     /**
      * Sign the member in.
      */
-    public void login(){
-        DatabaseManager.login(this);
+    public boolean login(){
+        return DatabaseManager.authenticate(this, false);
     }
 
     /**

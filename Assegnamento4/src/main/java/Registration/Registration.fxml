@@ -16,8 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="Registration.RegistrationController">
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Registration.RegistrationController">
    <children>
       <SplitPane dividerPositions="0.3">
         <items>
@@ -39,17 +38,10 @@
                   </Label>
 
                   <!-- Add a simple descriprion -->
-                  <Label fx:id="descriptionLabel" text="Sportclub where you can &#10;subscribe to courses&#10;and races."
-                         layoutX="25.0" layoutY="196.0"
-                         prefHeight="108.0" prefWidth="152.0"
-                         textAlignment="CENTER" />
+                  <Label fx:id="descriptionLabel" layoutX="25.0" layoutY="196.0" prefHeight="108.0" prefWidth="152.0" text="Sportclub where you can &#10;subscribe to courses&#10;and races." textAlignment="CENTER" />
 
                   <!-- Add Back to Login Button -->
-                  <Button fx:id="backLoginButton" text="Back to Login"
-                          alignment="CENTER" contentDisplay="CENTER"
-                          layoutX="80.0" layoutY="446.0"
-                          prefHeight="38.0" prefWidth="104.0"
-                          onAction="#openLogin"/>
+                  <Button fx:id="backLoginButton" alignment="CENTER" contentDisplay="CENTER" layoutX="80.0" layoutY="446.0" onAction="#openLogin" prefHeight="38.0" prefWidth="104.0" text="Back to Login" />
 
                </children>
             </AnchorPane>
@@ -72,9 +64,7 @@
                      <children>
 
                         <!-- Add Registration Form -->
-                        <Label text="Registration"
-                               GridPane.halignment="CENTER"
-                               GridPane.columnSpan="2" GridPane.rowSpan="1">
+                        <Label text="Registration" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowSpan="1">
                            <font>
                               <Font name="Arial" size="24" />
                            </font>
@@ -84,62 +74,36 @@
                         </Label>
 
                         <!-- Add Name Field -->
-                        <Label text="Name* :"
-                               GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                        <TextField fx:id="nameField"
-                                   prefHeight="40"
-                                   GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Name* :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="nameField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                         <!-- Add Surname Field -->
-                        <Label text="Surname* :"
-                               GridPane.rowIndex="3" />
-                        <TextField fx:id="surnameField"
-                                   prefHeight="40"
-                                   GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Surname* :" GridPane.rowIndex="3" />
+                        <TextField fx:id="surnameField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                         <!-- Add Username Field -->
-                        <Label text="Username* :"
-                               GridPane.rowIndex="5" />
-                        <TextField fx:id="usernameField"
-                                   prefHeight="40"
-                                   GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Username* :" GridPane.rowIndex="5" />
+                        <TextField fx:id="usernameField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
                         <!-- Add Password Field -->
-                        <Label text="Password* : "
-                               GridPane.rowIndex="7" />
-                        <PasswordField fx:id="passwordField"
-                                       prefHeight="40"
-                                       GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label text="Password* : " GridPane.rowIndex="7" />
+                        <PasswordField fx:id="passwordField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
                         <!-- Add Submit (Register) button -->
-                        <Button fx:id="submitButton" text="Submit"
-                                defaultButton="true"
-                                prefHeight="40.0" prefWidth="90.0"
-                                GridPane.columnSpan="2" GridPane.rowSpan="1"
-                                GridPane.halignment="CENTER" GridPane.rowIndex="8"
-                                onAction="#register">
+                        <Button fx:id="submitButton" defaultButton="true" onAction="#register" prefHeight="40.0" prefWidth="90.0" text="Submit" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.rowSpan="1">
                            <GridPane.margin>
                               <Insets bottom="20.0" top="20.0" />
                            </GridPane.margin>
                         </Button>
 
                         <!-- Add Cancel Button -->
-                        <Button fx:id="cancelButton" text="Cancel"
-                                prefHeight="40" prefWidth="90.0"
-                                GridPane.columnIndex="1" GridPane.rowIndex="8"
-                                GridPane.halignment="RIGHT"
-                                cancelButton="true"
-                                onAction="#cancel">
+                        <Button fx:id="cancelButton" cancelButton="true" onAction="#cancel" prefHeight="40" prefWidth="90.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
                            <GridPane.margin>
                               <Insets bottom="20.0" top="20.0" />
                            </GridPane.margin></Button>
 
                         <!-- Add Administrator Registration Button -->
-                        <CheckBox fx:id="adminButton" text="Administrator &#10;Registration"
-                                  alignment="CENTER"
-                                  contentDisplay="CENTER"
-                                  textAlignment="CENTER"
-                                  GridPane.halignment="LEFT" GridPane.rowIndex="8" />
+                        <CheckBox fx:id="adminButton" alignment="CENTER" contentDisplay="CENTER" text="Administrator &#10;Registration" textAlignment="CENTER" GridPane.halignment="LEFT" GridPane.rowIndex="8" />
 
                      </children>
                      <rowConstraints>
