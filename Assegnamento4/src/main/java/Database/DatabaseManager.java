@@ -120,22 +120,21 @@ public abstract class DatabaseManager {
      */
     public static boolean checkSubscription(Activity activity, String username){
         try {
-            Statement stmt = getConnection().createStatement();
-            ResultSet rset = null;
+            PreparedStatement pstmt = null;
             if(activity.getClass().equals(Course.class))
-                rset = stmt.executeQuery("select count(*) as total from sportclub.activity_course WHERE member_username = '" + username + "' AND course_name = '" + activity.getName() + "'");
+                pstmt = getConnection().prepareStatement
+                        ("select * from sportclub.activity_course " +
+                                "WHERE member_username = ? AND course_name = ?");
             if(activity.getClass().equals(Race.class))
-                rset = stmt.executeQuery("select count(*) as total from sportclub.activity_race WHERE member_username = '" + username + "' AND race_name = '" + activity.getName() + "'");
-            while(rset.next() && rset != null)
+                pstmt = getConnection().prepareStatement
+                        ("select * from sportclub.activity_race " +
+                                "WHERE member_username = ? AND race_name = ?");
+            pstmt.setString(1, username);
+            pstmt.setString(2, activity.getName());
+            ResultSet rset = pstmt.executeQuery();
+            while(rset.next())
             {
-                String number = rset.getString("total");
-                int recurrence = Integer.parseInt(number);
-                if (recurrence >= 1){
-                    return true;
-                }
-                if (recurrence == 0){
-                    return false;
-                }
+                return true;
             }
         }
         catch(SQLException e)
@@ -143,7 +142,7 @@ public abstract class DatabaseManager {
             System.out.println("\u001B[31m\n" + e.getMessage() + "\u001B[0m");
             System.exit(0);
         }
-        return true;
+        return false;
     }
 
     /**
@@ -277,16 +276,25 @@ public abstract class DatabaseManager {
     public static void subscribe(Activity activity, Member member){
         if(!checkSubscription(activity, member.getUsername())){
             try{
-                Statement stmt = getConnection().createStatement();
+                PreparedStatement pstmt = null;
                 if (activity.getClass().equals(Course.class))
-                    stmt.executeUpdate("insert into sportclub.activity_course(course_name, member_username) VALUES ('"+ activity.getName() + "', '" + member.getUsername() +"')");
+                    pstmt = getConnection().prepareStatement
+                            ("insert into sportclub.activity_course(course_name, member_username) " +
+                                    "VALUES (?, ?)");
                 else if (activity.getClass().equals(Race.class))
-                    stmt.executeUpdate("insert into sportclub.activity_race(race_name, member_username) VALUES ('"+ activity.getName() + "', '" + member.getUsername() +"')");}
+                    pstmt = getConnection().prepareStatement
+                            ("insert into sportclub.activity_race(race_name, member_username) " +
+                                    "VALUES (?, ?)");
+                pstmt.setString(1, activity.getName());
+                pstmt.setString(2, member.getUsername());
+                pstmt.executeUpdate();
+                new InfoBox("Subscription Successful!", "Success");
+            }
             catch (SQLException e){
                 e.printStackTrace();
             }
         }
-        else System.out.println(member.getUsername() + ", you are already registered to this activity!");
+        else new ErrorBox("You are already subscribed to this activity!", "Subscription Error");
     }
 
     /**
@@ -298,17 +306,23 @@ public abstract class DatabaseManager {
     public static void unsubscribe(Activity activity, Member member){
         if(checkSubscription(activity, member.getUsername())){
             try{
-                Statement stmt = getConnection().createStatement();
+                PreparedStatement pstmt = null;
                 if (activity.getClass().equals(Course.class))
-                    stmt.executeUpdate("delete from sportclub.activity_course WHERE member_username = '" + member.getUsername() + "' AND course_name = '" + activity.getName() + "'");
+                    pstmt = getConnection().prepareStatement
+                            ("delete from sportclub.activity_course WHERE course_name = ? AND member_username = ?");
                 else if (activity.getClass().equals(Race.class))
-                    stmt.executeUpdate("delete from sportclub.activity_race WHERE member_username = '" + member.getUsername() + "' AND race_name = '" + activity.getName() + "'");;
+                    pstmt = getConnection().prepareStatement
+                            ("delete from sportclub.activity_race WHERE race_name = ? AND member_username = ?");
+                pstmt.setString(1, activity.getName());
+                pstmt.setString(2, member.getUsername());
+                pstmt.executeUpdate();
+                new InfoBox("Unsubscription Successful!", "Success");
             }
             catch (SQLException e){
                 e.printStackTrace();
             }
         }
-        else System.out.println("You are not registered to this activity.");
+        else new ErrorBox("You are not subscribed to this activity!", "Unsubscription Error");
     }
 
     /**

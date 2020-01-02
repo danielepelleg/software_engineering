@@ -1,9 +1,10 @@
-package Course;
+package Race;
 
 import AlertBox.WarningBox;
 import Database.DatabaseManager;
 import MenuMember.Subscription;
 import SportClub.Course;
+import SportClub.Race;
 import SportClub.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,10 +20,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CourseMemberController implements Initializable {
+/**
+ * RaceMemberClass Class
+ * Controls the RaceMember.fxml events.
+ *
+ * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
+ */
+public class RaceMemberController implements Initializable {
 
     @FXML
     private Label usernameLabel;
@@ -46,7 +56,7 @@ public class CourseMemberController implements Initializable {
     private TableView<Subscription> subscriptionTable;
 
     @FXML
-    private TableColumn<Subscription, String> courseColumn;
+    private TableColumn<Subscription, String> raceColumn;
 
     @FXML
     private TableColumn<Subscription, String> subscriptionColumn;
@@ -82,7 +92,7 @@ public class CourseMemberController implements Initializable {
             this.options = FXCollections.observableArrayList();
 
             PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement
-                    ("SELECT * FROM sportclub.course");
+                    ("SELECT * FROM sportclub.race");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 this.options.add(rs.getString(1));
@@ -106,9 +116,9 @@ public class CourseMemberController implements Initializable {
             this.data = FXCollections.observableArrayList();
 
             PreparedStatement pstmt;
-            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT course.name as Course, " +
+            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT race.name as Race, " +
                     "CASE WHEN member_username = ? is not null THEN 'YES' else 'NO' END " +
-                    "FROM sportclub.course LEFT JOIN sportclub.activity_course on course.name = course_name");
+                    "FROM sportclub.race LEFT JOIN sportclub.activity_race on race.name = race_name");
             pstmt.setString(1, Session.getCurrentSession().getUsername());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -119,7 +129,7 @@ public class CourseMemberController implements Initializable {
         {
             System.err.println("Error " + e);
         }
-        this.courseColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
+        this.raceColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         this.subscriptionColumn.setCellValueFactory(new PropertyValueFactory<>("subscribed"));
 
         this.subscriptionTable.setItems(null);
@@ -127,18 +137,18 @@ public class CourseMemberController implements Initializable {
     }
 
     /**
-     * Subscribe the current Member to the Course chosen
+     * Subscribe the current Member to the Race chosen
      *
      * @param event press on subscribe button
      */
     @FXML
     private void subscribeMember(ActionEvent event) {
-        String courseSelected = comboBox.getValue();
-        if (courseSelected != null) {
-            Session.getCurrentSession().subscribe(new Course(courseSelected));
+        String raceSelected = comboBox.getValue();
+        if (raceSelected != null) {
+            Session.getCurrentSession().subscribe(new Race(raceSelected));
             loadData();
         }
-        else new WarningBox("You have to choose a course!", "Information Missing");
+        else new WarningBox("You have to choose a race!", "Information Missing");
     }
 
     /**
@@ -148,12 +158,12 @@ public class CourseMemberController implements Initializable {
      */
     @FXML
     private void unsubscribeMember(ActionEvent event) {
-        String courseSelected = comboBox.getValue();
-        if (courseSelected != null) {
-            Session.getCurrentSession().unsubscribe(new Course(courseSelected));
+        String raceSelected = comboBox.getValue();
+        if (raceSelected != null) {
+            Session.getCurrentSession().unsubscribe(new Race(raceSelected));
             loadData();
         }
-        else new WarningBox("You have to choose a course!", "Information Missing");
+        else new WarningBox("You have to choose a race!", "Information Missing");
     }
 
     /**

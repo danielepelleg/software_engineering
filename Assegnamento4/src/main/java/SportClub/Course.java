@@ -18,4 +18,5 @@ public class Course extends Activity {
     public Course(String name) {
         super(name);
     }
+
 }

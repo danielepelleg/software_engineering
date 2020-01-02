@@ -63,7 +63,8 @@
    
    <!-- GETTING STARTED -->
    ## Getting Started
-   You can just clone this repository.
+   You can just clone this repository and run the databaseCreation.sql in "src/main/java/Database/" to create the
+   database. Before that, remember that the program requires JavaFX installed.
    
    ### Updates
    Pull this repository for updates.
@@ -86,22 +87,15 @@
                 </dependency>
             </dependencies>
             <build>
-            <resources>
-                <resource>
-                    <filtering>false</filtering>
-                    <directory>src/main/java</directory>
-                    <includes>
-                        <include>**/*.fxml</include>
-                    </includes>
-                </resource>
-                <resource>
-                    <filtering>false</filtering>
-                    <directory>src/main/resources/images</directory>
-                    <includes>
-                        <include>**/*.png</include>
-                    </includes>
-                </resource>
-            </resources>
+                <resources>
+                    <resource>
+                        <filtering>false</filtering>
+                        <directory>src/main/java</directory>
+                        <includes>
+                            <include>**/*.fxml</include>
+                        </includes>
+                    </resource>
+                </resources>
             </build>
         </project>
    
@@ -109,6 +103,11 @@
    ## LICENSE
    Distributed under the GPL License. See `LICENSE` for more information.
    <div>Icons made by <a href="https://www.flaticon.com/authors/nikita-golubev" title="Nikita Golubev">Nikita Golubev</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+   <div>Icons made by <a href="https://www.flaticon.com/authors/icongeek26" title="Icongeek26">Icongeek26</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+   <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+   <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+   <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
       
    <!-- CONTRIBUTORS -->
    ## CONTRIBUTORS

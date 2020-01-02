@@ -107,22 +107,23 @@ public class RegistrationController {
      */
     @FXML
     void register(ActionEvent event) {
-        if(fieldsEmpty())
-            new WarningBox("You have left some fields empty!", "Informations Missing");
-        String name = nameField.getText();
-        String surname = surnameField.getText();
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        boolean isAdmin = adminButton.isSelected();
-        if(isAdmin){
-            Admin admin = new Admin(name, surname, username, password);
-            admin.register();
+        if(!fieldsEmpty()){
+            String name = nameField.getText();
+            String surname = surnameField.getText();
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            boolean isAdmin = adminButton.isSelected();
+            if(isAdmin){
+                Admin admin = new Admin(name, surname, username, password);
+                admin.register();
+            }
+            else {
+                Member member = new Member(name, surname, username, password);
+                member.register();
+            }
+            cancel(event);
         }
-        else {
-            Member member = new Member(name, surname, username, password);
-            member.register();
-        }
-        cancel(event);
+        else new WarningBox("You have left some fields empty!", "Informations Missing");
     }
 
 }

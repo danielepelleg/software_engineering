@@ -15,6 +15,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * MenuMemberController Class
+ * Controls the MemberMenu.fxml events.
+ *
+ * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
+ */
 public class MenuMemberController implements Initializable {
 
     @FXML
@@ -41,6 +48,11 @@ public class MenuMemberController implements Initializable {
     Stage dialogStage = new Stage();
     Scene scene;
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+        setLabels();
+    }
+
     /**
      * Set the text of the labels.
      */
@@ -50,28 +62,51 @@ public class MenuMemberController implements Initializable {
         usernameLabel.setText(Session.getCurrentSession().getUsername());
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb){
-        setLabels();
-    }
-
+    /**
+     * Open the Course Subscription - Unsubscription page.
+     *
+     * @param event press on Course Button
+     */
     @FXML
     void openCoursePage(ActionEvent event) {
-
+        try{
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Course/CourseMember.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Open the Race Subscription - Unsubscription page.
+     *
+     * @param event press on Race Button
+     */
     @FXML
     void openRacePage(ActionEvent event) {
-
+        try{
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Race/RaceMember.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void openSubscribersPage(ActionEvent event) {
-
+        //TODO Subscriber.fxml and Controller Class. (Same as admin?)
     }
 
     /**
-     * Logout the member
+     * Logout the member, go to login main page
      *
      * @param event press on Logout button
      */

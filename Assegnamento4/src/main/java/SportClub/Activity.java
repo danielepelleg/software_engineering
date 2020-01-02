@@ -1,5 +1,8 @@
 package SportClub;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  * SportClub.Activity Class
  * The class has the name of the activity and an array of person registered to it
@@ -8,7 +11,7 @@ package SportClub;
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public abstract class Activity {
-    private String name;
+    private final StringProperty name;
     private Person[] PersonArray;
 
     /**
@@ -18,20 +21,28 @@ public abstract class Activity {
      *
      */
     public Activity(String name){
-        this.name = name;
+        this.name = new SimpleStringProperty(name);
         this.PersonArray = new Person[]{};
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String n){
-        this.name = n;
+    public String getName() {
+        return name.get();
     }
 
     public Person[] getPersonArray() {
         return PersonArray;
+    }
+
+    public StringProperty nameProperty() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public void setPersonArray(Person[] personArray) {
+        PersonArray = personArray;
     }
 
     /**

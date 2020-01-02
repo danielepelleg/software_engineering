@@ -11,7 +11,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * MenuAdminController Class
+ * Controls the AdminMenu.fxml events.
+ *
+ * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
+ */
 public class MenuAdminController {
+
+    // TODO Insert right images and complete AdminMenu.fxml with missing admin functions
 
     @FXML
     private Label nameLabel;
@@ -36,21 +45,21 @@ public class MenuAdminController {
 
     @FXML
     void openCoursePage(ActionEvent event) {
-
+        //TODO CourseAdmin.fxml and Controller Class. Add/Remove methods
     }
 
     @FXML
     void openRacePage(ActionEvent event) {
-
+        //TODO RaceAdmin.fxml and Controller Class. Add/Remove methods
     }
 
     @FXML
     void openSubscribersPage(ActionEvent event) {
-
+        //TODO Subscriber.fxml and Controller Class. (Same as Member?)
     }
 
     /**
-     * Logout the administrator
+     * Logout the administrator, open the login main page.
      *
      * @param event press on Logout button
      */

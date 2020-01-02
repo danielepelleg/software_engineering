@@ -5,6 +5,9 @@ import javafx.scene.control.Alert;
 /**
  * Information Box Class
  * Show an alert that informs the user about something.
+ *
+ * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
 public class InfoBox {
 

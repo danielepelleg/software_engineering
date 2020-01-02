@@ -16,8 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * LoginController Class
@@ -57,74 +55,10 @@ public class LoginController {
      *
      * @return true if they have, false if not
      */
-    public boolean fieldsEmpty(){
-        if(usernameField.getText().equals("") && passwordField.getText().equals(""))
+    public boolean fieldsEmpty() {
+        if (usernameField.getText().equals("") && passwordField.getText().equals(""))
             return true;
         else return false;
-    }
-
-    /**
-     * Open the Member menu page.
-     *
-     * @param event successful login as member
-     */
-    public void openMemberMenu(ActionEvent event){
-        try {
-            Node source = (Node) event.getSource();
-            dialogStage = (Stage) source.getScene().getWindow();
-            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../MenuMember/MemberMenu.fxml")));
-            dialogStage.setScene(scene);
-            dialogStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Open the Administrator menu page.
-     *
-     * @param event successful login as administrator
-     */
-    public void openAdminMenu(ActionEvent event){
-        try {
-            Node source = (Node) event.getSource();
-            dialogStage = (Stage) source.getScene().getWindow();
-            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../MenuAdmin/AdminMenu.fxml")));
-            dialogStage.setScene(scene);
-            dialogStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Reset to empty values the TextField and the PasswordField
-     *
-     * @param event press on reset button
-     */
-    @FXML
-    void cancel(ActionEvent event) {
-        this.usernameField.clear();
-        this.passwordField.clear();
-        this.adminButton.setSelected(false);
-    }
-
-    /**
-     * Open the Registration page.
-     *
-     * @param event press on registration button
-     */
-    @FXML
-    void register(ActionEvent event) {
-        try {
-            Node source = (Node) event.getSource();
-            dialogStage = (Stage) source.getScene().getWindow();
-            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Registration/Registration.fxml")));
-            dialogStage.setScene(scene);
-            dialogStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -157,5 +91,69 @@ public class LoginController {
             else
                 cancel(event);
         }
+    }
+
+    /**
+     * Open the Registration page.
+     *
+     * @param event press on registration button
+     */
+    @FXML
+    void register(ActionEvent event) {
+        try {
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Registration/Registration.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Open the Member menu page.
+     *
+     * @param event successful login as member
+     */
+    public void openMemberMenu(ActionEvent event) {
+        try {
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../MenuMember/MemberMenu.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Open the Administrator menu page.
+     *
+     * @param event successful login as administrator
+     */
+    public void openAdminMenu(ActionEvent event) {
+        try {
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../MenuAdmin/AdminMenu.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Reset to empty values the TextField and the PasswordField
+     *
+     * @param event press on reset button
+     */
+    @FXML
+    void cancel(ActionEvent event) {
+        this.usernameField.clear();
+        this.passwordField.clear();
+        this.adminButton.setSelected(false);
     }
 }

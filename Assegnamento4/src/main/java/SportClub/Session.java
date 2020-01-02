@@ -10,8 +10,9 @@ import java.util.ArrayList;
  */
 public class Session {
 
-    public ArrayList<Member> sessions = new ArrayList<>();
+    public static ArrayList<Member> sessions = new ArrayList<>();
     public static Member currentMember;
+    public static Admin currentAdmin;
 
     /**
      * Constructor Class
@@ -25,11 +26,21 @@ public class Session {
     }
 
     /**
+     * Constructor Class
+     * Update the session of the current admin and add him to sessions list.
+     * @param admin
+     */
+    public Session(Admin admin){
+        currentAdmin = admin;
+        sessions.add(currentMember);
+    }
+
+    /**
      * Get the current session.
      *
-     * @return the current member logged.
+     * @return the current member logged (last one inserted in the session list).
      */
     public static Member getCurrentSession(){
-        return currentMember;
+        return sessions.get(sessions.size()-1);
     }
 }
