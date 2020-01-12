@@ -57,12 +57,14 @@ public class CourseAdminController implements Initializable {
     private ObservableList<Subscription> data;
     private ObservableList<String> options;
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         setLabels();
-        loadData();
+        //loadData();
         setComboBox();
+        setUserComboBox();
     }
 
 
@@ -98,6 +100,35 @@ public class CourseAdminController implements Initializable {
     }
 
     /**
+     * Set the options of the userComboBox.
+     */
+    private void setUserComboBox(){
+        try
+        {
+            this.options = FXCollections.observableArrayList();
+
+            PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement
+                    ("SELECT sportclub.administrator.username FROM sportclub.administrator");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                this.options.add(rs.getString(1));
+            }
+            pstmt = DatabaseManager.getConnection().prepareStatement
+                    ("SELECT sportclub.member.username FROM sportclub.member");
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                this.options.add(rs.getString(1));
+            }
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error " + e);
+        }
+        this.userComboBox.setItems(null);
+        this.userComboBox.setItems(this.options);
+    }
+
+    /**
      * Load he data in the TableView
      */
     private void loadData(){
@@ -109,7 +140,8 @@ public class CourseAdminController implements Initializable {
             pstmt = DatabaseManager.getConnection().prepareStatement("SELECT course.name as Course, " +
                     "CASE WHEN member_username = ? is not null THEN 'YES' else 'NO' END " +
                     "FROM sportclub.course LEFT JOIN sportclub.activity_course on course.name = course_name");
-            pstmt.setString(1, Session.getCurrentSession().getUsername());
+            //pstmt.setString(1, Session.getCurrentSession().getUsername());
+            pstmt.setString(1, userComboBox.getValue());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 this.data.add(new Subscription(rs.getString(1), rs.getString(2)));

@@ -73,6 +73,7 @@ public class RaceAdminController implements Initializable {
         setLabels();
         loadData();
         setComboBox();
+        setUserComboBox();
     }
 
 
@@ -105,6 +106,35 @@ public class RaceAdminController implements Initializable {
         }
         this.comboBox.setItems(null);
         this.comboBox.setItems(this.options);
+    }
+
+    /**
+     * Set the options of the userComboBox.
+     */
+    private void setUserComboBox(){
+        try
+        {
+            this.options = FXCollections.observableArrayList();
+
+            PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement
+                    ("SELECT sportclub.administrator.username FROM sportclub.administrator");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                this.options.add(rs.getString(1));
+            }
+            pstmt = DatabaseManager.getConnection().prepareStatement
+                    ("SELECT sportclub.member.username FROM sportclub.member");
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                this.options.add(rs.getString(1));
+            }
+        }
+        catch (SQLException e)
+        {
+            System.err.println("Error " + e);
+        }
+        this.userComboBox.setItems(null);
+        this.userComboBox.setItems(this.options);
     }
 
     /**
