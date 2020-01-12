@@ -68,7 +68,7 @@
                         </Button>
 
                         <!-- Add Subscribers Button -->
-                        <Button fx:id="subscribersButton" contentDisplay="TOP" layoutX="175.0" layoutY="279.0" onAction="#openSubscribersPage" prefHeight="100.0" prefWidth="100.0" text="Subscribers">
+                        <Button fx:id="subscribersButton" contentDisplay="TOP" layoutX="52.0" layoutY="280.0" onAction="#openSubscribersPage" prefHeight="100.0" prefWidth="100.0" text="Subscribers">
                             <graphic>
                                 <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -77,6 +77,15 @@
                                 </ImageView>
                             </graphic>
                         </Button>
+                  <Button fx:id="activitiesButton" contentDisplay="TOP" layoutX="302.0" layoutY="280.0" onAction="#openSubscribersPage" prefHeight="100.0" prefWidth="100.0" text="Activities">
+                     <graphic>
+                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/images/pricing.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
 
                     </children>
                 </AnchorPane>

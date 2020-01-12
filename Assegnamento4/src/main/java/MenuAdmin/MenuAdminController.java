@@ -1,5 +1,6 @@
 package MenuAdmin;
 
+import SportClub.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * MenuAdminController Class
@@ -40,17 +43,58 @@ public class MenuAdminController {
     @FXML
     private Button subscribersButton;
 
+    @FXML
+    private Button activitiesButton;
+
     Stage dialogStage = new Stage();
     Scene scene;
 
-    @FXML
-    void openCoursePage(ActionEvent event) {
-        //TODO CourseAdmin.fxml and Controller Class. Add/Remove methods
+
+    /**
+     * Set the text of the labels.
+     */
+    void setLabels(){
+        nameLabel.setText(Session.getCurrentSession().getName());
+        surnameLabel.setText(Session.getCurrentSession().getSurname());
+        usernameLabel.setText(Session.getCurrentSession().getUsername());
     }
 
+    /**
+     * Open the Course Subscription - Unsubscription page.
+     *
+     * @param event press on Course Button
+     */
+    @FXML
+    void openCoursePage(ActionEvent event) {
+        try{
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Course/CourseAdmin.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Open the Race Subscription - Unsubscription page.
+     *
+     * @param event press on Race Button
+     */
     @FXML
     void openRacePage(ActionEvent event) {
-        //TODO RaceAdmin.fxml and Controller Class. Add/Remove methods
+        try{
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Race/RaceAdmin.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
