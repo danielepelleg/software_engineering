@@ -1,10 +1,26 @@
 package Activities;
 
+import AlertBox.WarningBox;
+import Database.DatabaseManager;
+import MenuMember.Subscription;
+import SportClub.Course;
+import SportClub.Session;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.*;
+import java.util.ResourceBundle;
 
 
 public class ActivitiesController {
@@ -13,13 +29,13 @@ public class ActivitiesController {
     private Button subscribeButton;
 
     @FXML
-    private ComboBox<?> userComboBox;
+    private ComboBox<String> userComboBox;
 
     @FXML
     private Button unsubscribeButton;
 
     @FXML
-    private ComboBox<?> comboBox;
+    private ComboBox<String> comboBox;
 
     @FXML
     private Button loadButton;
@@ -28,13 +44,13 @@ public class ActivitiesController {
     private Button menuButton;
 
     @FXML
-    private TableView<?> subscriptionTable;
+    private TableView<Subscription> subscriptionTable;
 
     @FXML
-    private TableColumn<?, ?> courseColumn;
+    private TableColumn<Subscription, String> courseColumn;
 
     @FXML
-    private TableColumn<?, ?> subscriptionColumn;
+    private TableColumn<Subscription, String> subscriptionColumn;
 
     @FXML
     void backMenu(ActionEvent event) {

@@ -77,7 +77,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                  <Button fx:id="activitiesButton" contentDisplay="TOP" layoutX="302.0" layoutY="280.0" onAction="#openSubscribersPage" prefHeight="100.0" prefWidth="100.0" text="Activities">
+                  <Button fx:id="activitiesButton" contentDisplay="TOP" layoutX="302.0" layoutY="280.0" onAction="#openActivitiesPage" prefHeight="100.0" prefWidth="100.0" text="Activities">
                      <graphic>
                         <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                            <image>
