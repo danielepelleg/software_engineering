@@ -53,27 +53,34 @@ create table member(
     name varchar(24),
     surname varchar(24),
     username varchar(24) primary key,
-    hashed_password varchar(32));
+    hashed_password varchar(32),
+    role varchar(24));
 
 /**
   Insert some members
  */
-insert into member(name, surname, username, hashed_password) VALUES
-('Tommaso', 'Boni', 'Tom', '827ccb0eea8a706c4c34a16891f84e7b'),
+insert into member(name, surname, username, hashed_password, role) VALUES
+('Tommaso', 'Boni', 'Tom', '827ccb0eea8a706c4c34a16891f84e7b', 'Member'),
 #       new SportClub.Member("Tommaso", "Boni", "Tom", "12345")
-('Luca', 'Perini', 'Luke', 'c37bf859faf392800d739a41fe5af151'),
+('Luca', 'Perini', 'Luke', 'c37bf859faf392800d739a41fe5af151', 'Member'),
 #       new SportClub.Member("Luca", "Perini", "Luke", "98765")
-('Matilde', 'Tanzi', 'Maty', 'd8578edf8458ce06fbc5bb76a58c5ca4'),
+('Matilde', 'Tanzi', 'Maty', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'Member'),
 #       new SportClub.Member("Matilde", "Tanzi", "Maty", "qwerty")
-('Pietro', 'Poli', 'Pie', 'c4ded2b85cc5be82fa1d2464eba9a7d3'),
+('Pietro', 'Poli', 'Pie', 'c4ded2b85cc5be82fa1d2464eba9a7d3', 'Member'),
 #       new SportClub.Member("Pietro", "Poli", "Pie", "45678");
-('Camilla', 'Bacchi', 'Cami', '8b09ae7767db2cb77bd2a1ee4107a020');
+('Camilla', 'Bacchi', 'Cami', '8b09ae7767db2cb77bd2a1ee4107a020', 'Member'),
 #       new Sportclub.Member("Camilla", "Bacchi", "Cami", "noteasy");
+('Giacomo', 'Neri', 'Jack', '5cc7a8cad0c3ef6834ff6bd9f734e741', 'Admin'),
+#       new SportClub.Admin("Giacomo", "Neri", "Jack", "hardtoguess")
+('Chiara', 'Zanetti', 'Chicca', 'aa7dcd799df5136c89931152a274c449', 'Admin'),
+#       new SportClub.Admin("Chiara", "Zanetti", "Chicca", "hardtofind")
+('Matteo', 'Binelli', 'Matte', 'cfc1e5e69ceb8c3597d62a80663b7990', 'Admin');
+#       new SportClub.Member("Matteo", "Binelli", "Matte", "strongman")
 
 /**
   Table Administrator
   Store administrators data: name, surname, username and hashed_password
- */
+
 drop table if exists administrator;
 create table administrator(
     name varchar(24),
@@ -81,9 +88,10 @@ create table administrator(
     username varchar(24) primary key,
     hashed_password varchar(32));
 
-/**
+
   Insert some administrators
- */
+
+
 insert into administrator(name, surname, username, hashed_password) VALUES
 ('Giacomo', 'Neri', 'Jack', '5cc7a8cad0c3ef6834ff6bd9f734e741'),
 #       new SportClub.Admin("Giacomo", "Neri", "Jack", "hardtoguess")
@@ -91,7 +99,7 @@ insert into administrator(name, surname, username, hashed_password) VALUES
 #       new SportClub.Admin("Chiara", "Zanetti", "Chicca", "hardtofind")
 ('Matteo', 'Binelli', 'Matte', 'cfc1e5e69ceb8c3597d62a80663b7990');
 #       new SportClub.Member("Matteo", "Binelli", "Matte", "strongman")
-
+*/
 
 /**
   Table Activity Course
