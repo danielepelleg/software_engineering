@@ -99,7 +99,30 @@ public class MenuAdminController {
 
     @FXML
     void openSubscribersPage(ActionEvent event) {
-        //TODO Subscriber.fxml and Controller Class. (Same as Member?)
+        try{
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Users/Users.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void openActivitiesPage(ActionEvent event) {
+        try{
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Activities/Activities.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     /**
