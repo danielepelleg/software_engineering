@@ -23,6 +23,11 @@
                     <children>
                         <VBox alignment="CENTER" layoutX="13.0" layoutY="19.0" prefHeight="458.0" prefWidth="166.0">
                             <children>
+                        <Label prefHeight="51.0" prefWidth="166.0" text="Use this Form to Add or&#10;Update Users:">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Label>
                         <Label prefWidth="32.0" text="Name" />
                         <TextField />
                         <Label text="Surname" />
@@ -31,7 +36,7 @@
                         <TextField />
                         <Label text="Password" />
                         <TextField />
-                                <Label alignment="CENTER" contentDisplay="TOP" layoutX="45.0" layoutY="81.0" prefHeight="35.0" prefWidth="158.0" text="Select the User:">
+                                <Label alignment="CENTER" contentDisplay="TOP" layoutX="45.0" layoutY="81.0" prefHeight="35.0" prefWidth="158.0" text="User to Update or Delete:">
                                     <opaqueInsets>
                                         <Insets />
                                     </opaqueInsets>
