@@ -117,7 +117,7 @@ public class RaceMemberController implements Initializable {
 
             PreparedStatement pstmt;
             pstmt = DatabaseManager.getConnection().prepareStatement("SELECT race.name as Race, " +
-                    "CASE WHEN member_username = ? is not null THEN 'YES' else 'NO' END " +
+                    "CASE WHEN member_username = ? THEN 'YES' else 'NO' END " +
                     "FROM sportclub.race LEFT JOIN sportclub.activity_race on race.name = race_name");
             pstmt.setString(1, Session.getCurrentSession().getUsername());
             ResultSet rs = pstmt.executeQuery();

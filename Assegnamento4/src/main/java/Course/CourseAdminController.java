@@ -108,14 +108,8 @@ public class CourseAdminController implements Initializable {
             this.options = FXCollections.observableArrayList();
 
             PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement
-                    ("SELECT sportclub.administrator.username FROM sportclub.administrator");
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                this.options.add(rs.getString(1));
-            }
-            pstmt = DatabaseManager.getConnection().prepareStatement
                     ("SELECT sportclub.member.username FROM sportclub.member");
-            rs = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 this.options.add(rs.getString(1));
             }
@@ -138,10 +132,10 @@ public class CourseAdminController implements Initializable {
 
             PreparedStatement pstmt;
             pstmt = DatabaseManager.getConnection().prepareStatement("SELECT course.name as Course, " +
-                    "CASE WHEN member_username = ? is not null THEN 'YES' else 'NO' END " +
+                    "CASE WHEN member_username = ? THEN 'YES' else 'NO' END " +
                     "FROM sportclub.course LEFT JOIN sportclub.activity_course on course.name = course_name");
             //pstmt.setString(1, Session.getCurrentSession().getUsername());
-            pstmt.setString(1, userComboBox.getValue());
+            pstmt.setString(1, this.userComboBox.getValue());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 this.data.add(new Subscription(rs.getString(1), rs.getString(2)));
@@ -154,7 +148,7 @@ public class CourseAdminController implements Initializable {
         this.courseColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         this.subscriptionColumn.setCellValueFactory(new PropertyValueFactory<>("subscribed"));
 
-        this.subscriptionTable.setItems(null);
+        //this.subscriptionTable.setItems(null);
         this.subscriptionTable.setItems(this.data);
     }
 

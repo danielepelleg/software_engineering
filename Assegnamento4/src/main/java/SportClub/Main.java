@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(UI));
         Scene frame = new Scene(root);
+        primaryStage.getIcons().add(new Image("/images/racket.png"));
         primaryStage.setResizable(false);
         primaryStage.setTitle("SportClub");
         primaryStage.setScene(frame);

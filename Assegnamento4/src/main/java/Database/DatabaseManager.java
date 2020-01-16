@@ -60,9 +60,9 @@ public abstract class DatabaseManager {
         try {
             PreparedStatement pstmt = null;
             if(member.getClass().equals(Member.class))
-                pstmt = getConnection().prepareStatement("select * from sportclub.member WHERE username = ?");
+                pstmt = getConnection().prepareStatement("select * from sportclub.member WHERE username = ? AND role = 'Member'");
             if(member.getClass().equals(Admin.class))
-                pstmt = getConnection().prepareStatement("select * from sportclub.administrator WHERE username = ?");
+                pstmt = getConnection().prepareStatement("select * from sportclub.member WHERE username = ? AND role = 'Admin'");
             pstmt.setString(1, member.getUsername());
             ResultSet rset = pstmt.executeQuery();
             while(rset.next())
@@ -155,9 +155,9 @@ public abstract class DatabaseManager {
             try {
                 PreparedStatement pstmt = null;
                 if (member.getClass().equals(Member.class))
-                    pstmt = getConnection().prepareStatement("insert into sportclub.member(name, surname, username, hashed_password) VALUES (?, ?, ?, ?)");
+                    pstmt = getConnection().prepareStatement("insert into sportclub.member(name, surname, username, hashed_password, role) VALUES (?, ?, ?, ?, 'Member')");
                 else if (member.getClass().equals(Admin.class))
-                    pstmt = getConnection().prepareStatement("insert into sportclub.administrator(name, surname, username, hashed_password) VALUES (?, ?, ?, ?)");
+                    pstmt = getConnection().prepareStatement("insert into sportclub.member(name, surname, username, hashed_password, role) VALUES (?, ?, ?, ?, 'Admin')");
                 pstmt.setString(1, member.getName());
                 pstmt.setString(2, member.getSurname());
                 pstmt.setString(3, member.getUsername());
@@ -181,9 +181,9 @@ public abstract class DatabaseManager {
         try {
             PreparedStatement pstmt;
             if (!isAdmin)
-                pstmt = getConnection().prepareStatement("SELECT  * FROM sportclub.member WHERE username = ? AND hashed_password = ?");
+                pstmt = getConnection().prepareStatement("SELECT  * FROM sportclub.member WHERE username = ? AND hashed_password = ? AND role = 'Member'");
             else
-                pstmt = getConnection().prepareStatement("SELECT  * FROM sportclub.administrator WHERE username = ? AND hashed_password = ?");
+                pstmt = getConnection().prepareStatement("SELECT  * FROM sportclub.member WHERE username = ? AND hashed_password = ? AND role = 'Admin'");
             pstmt.setString(1, member.getUsername());
             pstmt.setString(2, member.getPassword());
             ResultSet rset = pstmt.executeQuery();
@@ -191,8 +191,10 @@ public abstract class DatabaseManager {
                 String name = rset.getString("name");
                 String surname = rset.getString("surname");
                 String username = rset.getString("username");
-                new Session(new Member(name, surname, username, ""));
-                new InfoBox("Login successful!", "Success");
+                if(!isAdmin)
+                    new Session(new Member(name, surname, username, ""));
+                else new Session(new Admin(name, surname, username, ""));
+                //new InfoBox("Login successful!", "Success");
                 return true;
             }
         } catch (SQLException e) {

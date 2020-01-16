@@ -107,7 +107,7 @@ public class CourseMemberController implements Initializable {
 
             PreparedStatement pstmt;
             pstmt = DatabaseManager.getConnection().prepareStatement("SELECT course.name as Course, " +
-                    "CASE WHEN member_username = ? is not null THEN 'YES' else 'NO' END " +
+                    "CASE WHEN member_username = ? THEN 'YES' else 'NO' END " +
                     "FROM sportclub.course LEFT JOIN sportclub.activity_course on course.name = course_name");
             pstmt.setString(1, Session.getCurrentSession().getUsername());
             ResultSet rs = pstmt.executeQuery();
