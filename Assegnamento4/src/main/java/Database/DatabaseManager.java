@@ -120,6 +120,7 @@ public abstract class DatabaseManager {
      */
     public static boolean checkSubscription(Activity activity, String username){
         try {
+
             PreparedStatement pstmt = null;
             if(activity.getClass().equals(Course.class))
                 pstmt = getConnection().prepareStatement
@@ -300,7 +301,7 @@ public abstract class DatabaseManager {
     }
 
     /**
-     * Subscribe a member to an activity.
+     * Unsubscribe a member to an activity.
      *
      * @param activity the activity to which subscribe the member
      * @param member the member to subscribe
@@ -377,6 +378,28 @@ public abstract class DatabaseManager {
             }
         }
         else System.out.println("Error while updating activity. The activity to update doesn't exist.");
+    }
+
+    public static Member getSelectedMember(String username){
+        try {
+            PreparedStatement pstmt = getConnection().prepareStatement
+                        ("SELECT * FROM sportclub.member WHERE member.username =?");
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            Member member = new Member("","");
+            while (rs.next()){
+                member.setName(rs.getString(1));
+                member.setSurname(rs.getString(2));
+                member.setUsername(rs.getString(3));
+                member.setPass(rs.getString(4));
+
+            }
+            return member;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     //Prova connessione DB

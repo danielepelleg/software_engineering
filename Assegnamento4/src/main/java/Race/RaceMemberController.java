@@ -23,6 +23,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -114,15 +115,23 @@ public class RaceMemberController implements Initializable {
         try
         {
             this.data = FXCollections.observableArrayList();
-
             PreparedStatement pstmt;
-            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT race.name as Race, " +
-                    "CASE WHEN member_username = ? THEN 'YES' else 'NO' END " +
-                    "FROM sportclub.race LEFT JOIN sportclub.activity_race on race.name = race_name");
+            ArrayList<String> allCourses = new ArrayList<>();
+            ArrayList<String> executedCourses = new ArrayList<>();
+            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT R.name as Race,\n" +
+                    "(CASE WHEN AC.member_username = ? THEN 'YES' ELSE 'NO' END) AS Subscription\n" +
+                    "FROM sportclub.race AS R LEFT JOIN sportclub.activity_race AS AC on R.name = AC.race_name\n" +
+                    "WHERE AC.member_username = ?\n UNION\n SELECT R.name as Race,\n" +
+                    "(CASE WHEN AC.member_username != ? THEN 'NO' ELSE 'YES' END) AS Subscription\n" +
+                    "FROM sportclub.race AS R LEFT JOIN sportclub.activity_race AS AC on R.name = AC.race_name\n" +
+                    "WHERE R.name NOT IN (SELECT AC.race_name FROM activity_race AC WHERE AC.member_username = ?)");
             pstmt.setString(1, Session.getCurrentSession().getUsername());
+            pstmt.setString(2, Session.getCurrentSession().getUsername());
+            pstmt.setString(3, Session.getCurrentSession().getUsername());
+            pstmt.setString(4, Session.getCurrentSession().getUsername());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                this.data.add(new Subscription(rs.getString(1), rs.getString(2)));
+                this.data.add(new Subscription(rs.getString(1),rs.getString(2)));
             }
         }
         catch (SQLException e)

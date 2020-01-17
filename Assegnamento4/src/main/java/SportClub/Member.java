@@ -35,6 +35,10 @@ public class Member extends Person {
         super(username, password);
     }
 
+    public Member() {
+        super();
+    }
+
     /**
      * Register a member in the database.
      */

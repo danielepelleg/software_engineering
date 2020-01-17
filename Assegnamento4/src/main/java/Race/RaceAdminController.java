@@ -3,6 +3,7 @@ package Race;
 import AlertBox.WarningBox;
 import Database.DatabaseManager;
 import MenuMember.Subscription;
+import SportClub.Admin;
 import SportClub.Course;
 import SportClub.Race;
 import SportClub.Session;
@@ -23,6 +24,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -71,7 +73,6 @@ public class RaceAdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
         setLabels();
-        loadData();
         setComboBox();
         setUserComboBox();
     }
@@ -117,14 +118,8 @@ public class RaceAdminController implements Initializable {
             this.options = FXCollections.observableArrayList();
 
             PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement
-                    ("SELECT sportclub.administrator.username FROM sportclub.administrator");
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                this.options.add(rs.getString(1));
-            }
-            pstmt = DatabaseManager.getConnection().prepareStatement
                     ("SELECT sportclub.member.username FROM sportclub.member");
-            rs = pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 this.options.add(rs.getString(1));
             }
@@ -141,18 +136,25 @@ public class RaceAdminController implements Initializable {
      * Load he data in the TableView
      */
     private void loadData(){
-        try
-        {
+        try {
             this.data = FXCollections.observableArrayList();
-
             PreparedStatement pstmt;
-            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT race.name as Race, " +
-                    "CASE WHEN member_username = ? THEN 'YES' else 'NO' END " +
-                    "FROM sportclub.race LEFT JOIN sportclub.activity_race on race.name = race_name");
-            pstmt.setString(1, Session.getCurrentSession().getUsername());
+            ArrayList<String> allCourses = new ArrayList<>();
+            ArrayList<String> executedCourses = new ArrayList<>();
+            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT R.name as Race,\n" +
+                    "(CASE WHEN AC.member_username = ? THEN 'YES' ELSE 'NO' END) AS Subscription\n" +
+                    "FROM sportclub.race AS R LEFT JOIN sportclub.activity_race AS AC on R.name = AC.race_name\n" +
+                    "WHERE AC.member_username = ?\n UNION\n SELECT R.name as Race,\n" +
+                    "(CASE WHEN AC.member_username != ? THEN 'NO' ELSE 'YES' END) AS Subscription\n" +
+                    "FROM sportclub.race AS R LEFT JOIN sportclub.activity_race AS AC on R.name = AC.race_name\n" +
+                    "WHERE R.name NOT IN (SELECT AC.race_name FROM activity_race AC WHERE AC.member_username = ?)");
+            pstmt.setString(1, userComboBox.getValue());
+            pstmt.setString(2, userComboBox.getValue());
+            pstmt.setString(3, userComboBox.getValue());
+            pstmt.setString(4, userComboBox.getValue());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                this.data.add(new Subscription(rs.getString(1), rs.getString(2)));
+                this.data.add(new Subscription(rs.getString(1),rs.getString(2)));
             }
         }
         catch (SQLException e)
@@ -174,11 +176,12 @@ public class RaceAdminController implements Initializable {
     @FXML
     private void subscribeMember(ActionEvent event) {
         String raceSelected = comboBox.getValue();
-        if (raceSelected != null) {
-            Session.getCurrentSession().subscribe(new Race(raceSelected));
+        String userSelected = userComboBox.getValue();
+        if (raceSelected != null && userSelected != null) {
+            new Admin().subscribe(new Race(raceSelected), DatabaseManager.getSelectedMember(userSelected));
             loadData();
         }
-        else new WarningBox("You have to choose a race!", "Information Missing");
+        else new WarningBox("You have to choose a course!", "Information Missing");
     }
 
     /**
@@ -189,11 +192,12 @@ public class RaceAdminController implements Initializable {
     @FXML
     private void unsubscribeMember(ActionEvent event) {
         String raceSelected = comboBox.getValue();
-        if (raceSelected != null) {
-            Session.getCurrentSession().unsubscribe(new Race(raceSelected));
+        String userSelected = userComboBox.getValue();
+        if (raceSelected != null && userSelected != null) {
+            new Admin().unsubscribe(new Race(raceSelected), DatabaseManager.getSelectedMember(userSelected));
             loadData();
         }
-        else new WarningBox("You have to choose a race!", "Information Missing");
+        else new WarningBox("You have to choose a course!", "Information Missing");
     }
 
     /**

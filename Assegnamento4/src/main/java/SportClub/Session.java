@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Session {
 
     public static ArrayList<Member> sessions = new ArrayList<>();
+    public static ArrayList<Admin> adminSessions = new ArrayList<>();
     public static Member currentMember;
     public static Admin currentAdmin;
 
@@ -43,4 +44,5 @@ public class Session {
     public static Member getCurrentSession(){
         return sessions.get(sessions.size()-1);
     }
+
 }

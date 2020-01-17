@@ -3,7 +3,9 @@ package Course;
 import AlertBox.WarningBox;
 import Database.DatabaseManager;
 import MenuMember.Subscription;
+import SportClub.Admin;
 import SportClub.Course;
+import SportClub.Member;
 import SportClub.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CourseAdminController implements Initializable {
@@ -126,19 +129,25 @@ public class CourseAdminController implements Initializable {
      * Load he data in the TableView
      */
     private void loadData(){
-        try
-        {
+        try {
             this.data = FXCollections.observableArrayList();
-
             PreparedStatement pstmt;
-            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT course.name as Course, " +
-                    "CASE WHEN member_username = ? THEN 'YES' else 'NO' END " +
-                    "FROM sportclub.course LEFT JOIN sportclub.activity_course on course.name = course_name");
-            //pstmt.setString(1, Session.getCurrentSession().getUsername());
-            pstmt.setString(1, this.userComboBox.getValue());
+            ArrayList<String> allCourses = new ArrayList<>();
+            ArrayList<String> executedCourses = new ArrayList<>();
+            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT C.name as Course,\n" +
+                    "(CASE WHEN AC.member_username = ? THEN 'YES' ELSE 'NO' END) AS Subscription\n" +
+                    "FROM sportclub.course AS C LEFT JOIN sportclub.activity_course AS AC on C.name = AC.course_name\n" +
+                    "WHERE AC.member_username = ?\n UNION\n SELECT C.name as Course,\n" +
+                    "(CASE WHEN AC.member_username != ? THEN 'NO' ELSE 'YES' END) AS Subscription\n" +
+                    "FROM sportclub.course AS C LEFT JOIN sportclub.activity_course AS AC on C.name = AC.course_name\n" +
+                    "WHERE C.name NOT IN (SELECT AC.course_name FROM activity_course AC WHERE AC.member_username = ?)");
+            pstmt.setString(1, userComboBox.getValue());
+            pstmt.setString(2, userComboBox.getValue());
+            pstmt.setString(3, userComboBox.getValue());
+            pstmt.setString(4, userComboBox.getValue());
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                this.data.add(new Subscription(rs.getString(1), rs.getString(2)));
+                this.data.add(new Subscription(rs.getString(1),rs.getString(2)));
             }
         }
         catch (SQLException e)
@@ -148,7 +157,7 @@ public class CourseAdminController implements Initializable {
         this.courseColumn.setCellValueFactory(new PropertyValueFactory<>("activityName"));
         this.subscriptionColumn.setCellValueFactory(new PropertyValueFactory<>("subscribed"));
 
-        //this.subscriptionTable.setItems(null);
+        this.subscriptionTable.setItems(null);
         this.subscriptionTable.setItems(this.data);
     }
 
@@ -160,8 +169,9 @@ public class CourseAdminController implements Initializable {
     @FXML
     private void subscribeMember(ActionEvent event) {
         String courseSelected = comboBox.getValue();
-        if (courseSelected != null) {
-            Session.getCurrentSession().subscribe(new Course(courseSelected));
+        String userSelected = userComboBox.getValue();
+        if (courseSelected != null && userSelected != null) {
+            new Admin().subscribe(new Course(courseSelected), DatabaseManager.getSelectedMember(userSelected));
             loadData();
         }
         else new WarningBox("You have to choose a course!", "Information Missing");
@@ -175,8 +185,9 @@ public class CourseAdminController implements Initializable {
     @FXML
     private void unsubscribeMember(ActionEvent event) {
         String courseSelected = comboBox.getValue();
-        if (courseSelected != null) {
-            Session.getCurrentSession().unsubscribe(new Course(courseSelected));
+        String userSelected = userComboBox.getValue();
+        if (courseSelected != null && userSelected != null) {
+            new Admin().unsubscribe(new Course(courseSelected), DatabaseManager.getSelectedMember(userSelected));
             loadData();
         }
         else new WarningBox("You have to choose a course!", "Information Missing");

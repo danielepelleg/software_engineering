@@ -38,6 +38,10 @@ public class Person{
         setHashedPassword(this.password);
     }
 
+    public Person(){
+
+    }
+
     /**
      * Class constructor for login.
      *
@@ -68,6 +72,11 @@ public class Person{
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setPass(String password) {
+        this.hashed_password = password;
+    }
+
 
     /**
      * Set the SportClub.Person's hashed password

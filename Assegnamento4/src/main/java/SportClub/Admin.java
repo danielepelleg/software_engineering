@@ -28,6 +28,10 @@ public class Admin extends Member {
         super(username, password);
     }
 
+    public Admin(){
+        super();
+    }
+
     /**
      * Sign the admin in.
      */
