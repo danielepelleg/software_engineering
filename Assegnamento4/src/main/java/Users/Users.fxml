@@ -81,11 +81,14 @@
                             <children>
 
                                 <!-- Add TableView -->
-                                <TableView fx:id="subscriptionTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="458.0" prefWidth="453.0">
+                                <TableView fx:id="usersTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="458.0" prefWidth="453.0">
                                     <columns>
                                         <!-- Add Columns -->
-                                        <TableColumn fx:id="courseColumn" prefWidth="220.79999089241028" style="-fx-alignment: center;" text="Course Name" />
-                                        <TableColumn fx:id="subscriptionColumn" prefWidth="235.19996643066406" style="-fx-alignment: center;" text="Subscribed" />
+                                        <TableColumn fx:id="nameColumn" prefWidth="92.79992985725403" style="-fx-alignment: center;" text="Name" />
+                                        <TableColumn fx:id="surnameColumn" prefWidth="91.199951171875" style="-fx-alignment: center;" text="Surname" />
+                              <TableColumn fx:id="usernameColumn" prefWidth="93.59996032714844" text="Username" />
+                              <TableColumn fx:id="userTypeColumn" prefWidth="86.39993286132812" text="User Type" />
+                              <TableColumn fx:id="passwordColumn" prefWidth="88.80001220703127" text="Password" />
                                     </columns>
                                 </TableView>
                             </children>

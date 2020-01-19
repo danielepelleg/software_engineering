@@ -65,7 +65,6 @@ public class CourseAdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
         setLabels();
-        //loadData();
         setComboBox();
         setUserComboBox();
     }
@@ -132,8 +131,6 @@ public class CourseAdminController implements Initializable {
         try {
             this.data = FXCollections.observableArrayList();
             PreparedStatement pstmt;
-            ArrayList<String> allCourses = new ArrayList<>();
-            ArrayList<String> executedCourses = new ArrayList<>();
             pstmt = DatabaseManager.getConnection().prepareStatement("SELECT C.name as Course,\n" +
                     "(CASE WHEN AC.member_username = ? THEN 'YES' ELSE 'NO' END) AS Subscription\n" +
                     "FROM sportclub.course AS C LEFT JOIN sportclub.activity_course AS AC on C.name = AC.course_name\n" +
