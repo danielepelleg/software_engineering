@@ -4,6 +4,7 @@ import SportClub.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 /**
  * MenuAdminController Class
  * Controls the AdminMenu.fxml events.
@@ -21,9 +23,7 @@ import java.util.ResourceBundle;
  * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
  * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
  */
-public class MenuAdminController {
-
-    // TODO Insert right images and complete AdminMenu.fxml with missing admin functions
+public class MenuAdminController implements Initializable {
 
     @FXML
     private Label nameLabel;
@@ -49,15 +49,20 @@ public class MenuAdminController {
     Stage dialogStage = new Stage();
     Scene scene;
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+        setLabels();
+    }
 
     /**
      * Set the text of the labels.
      */
     void setLabels(){
-        nameLabel.setText(Session.getCurrentSession().getName());
-        surnameLabel.setText(Session.getCurrentSession().getSurname());
-        usernameLabel.setText(Session.getCurrentSession().getUsername());
+        nameLabel.setText("Name: " + Session.getAdminSession().getName());
+        surnameLabel.setText("Surname: " + Session.getAdminSession().getSurname());
+        usernameLabel.setText("Username: " + Session.getAdminSession().getUsername());
     }
+
 
     /**
      * Open the Course Subscription - Unsubscription page.
@@ -143,4 +148,5 @@ public class MenuAdminController {
             e.printStackTrace();
         }
     }
+
 }

@@ -159,7 +159,7 @@ public class ActivitiesController implements Initializable {
     @FXML
     void deleteActivity(ActionEvent event) {
         if(activityComboBox.getValue() != null){
-            Admin admin = new Admin();
+            Admin admin = (Admin) Session.getAdminSession();
             admin.deleteActivity(DatabaseManager.getSelectedActivity(activityComboBox.getValue()));
             loadData();
             setActivityComboBox();
@@ -171,7 +171,7 @@ public class ActivitiesController implements Initializable {
     void addActivity(ActionEvent event) {
         if(!fieldsEmpty() && (typeCombobox.getValue() != null)){
             String name = nameField.getText();
-            Admin admin = new Admin();
+            Admin admin = (Admin) Session.getAdminSession();
             if(typeCombobox.getValue().equals("Course")){
                 Course newCourse = new Course(name);
                 admin.addActivity(newCourse);
@@ -201,7 +201,7 @@ public class ActivitiesController implements Initializable {
     void updateActivity(ActionEvent event) {
         if(!fieldsEmpty() && activityComboBox.getValue() != null){
             String name = nameField.getText();
-            Admin admin = new Admin();
+            Admin admin = (Admin) Session.getAdminSession();
             if(DatabaseManager.getSelectedActivity(activityComboBox.getValue()).getClass().equals(Course.class)){
                 Course course = new Course(activityComboBox.getValue());
                 admin.editActivity(course,name);

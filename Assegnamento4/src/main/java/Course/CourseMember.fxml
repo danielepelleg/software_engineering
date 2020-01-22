@@ -37,7 +37,7 @@
                         <Image url="@/images/weight.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="64.0" layoutY="65.0" prefHeight="18.0" prefWidth="62.0" />
+                  <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="65.0" prefHeight="18.0" prefWidth="134.0" />
                   <VBox alignment="CENTER" layoutX="13.0" layoutY="191.0" prefHeight="284.0" prefWidth="166.0">
                      <children>
                         <Label alignment="CENTER" contentDisplay="TOP" text="Select the Course ">
@@ -62,11 +62,6 @@
                            </VBox.margin>
                         </Button>
                         <Button fx:id="unsubscribeButton" mnemonicParsing="false" onAction="#unsubscribeMember" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #AB4642 #AB4642; -fx-text-fill: #ffffff;" text="Unsubscribe">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </Button>
-                              <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadSubscriptionData" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #3e904f; -fx-text-fill: #ffffff;" text="Reload Data">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>

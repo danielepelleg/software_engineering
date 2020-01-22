@@ -57,9 +57,9 @@ public class MenuMemberController implements Initializable {
      * Set the text of the labels.
      */
     void setLabels(){
-        nameLabel.setText(Session.getCurrentSession().getName());
-        surnameLabel.setText(Session.getCurrentSession().getSurname());
-        usernameLabel.setText(Session.getCurrentSession().getUsername());
+        nameLabel.setText("Name: " + Session.getMemberSession().getName());
+        surnameLabel.setText("Surname: " + Session.getMemberSession().getSurname());
+        usernameLabel.setText("Username: " + Session.getMemberSession().getUsername());
     }
 
     /**

@@ -71,7 +71,7 @@ public class CourseMemberController implements Initializable {
      * Set the text of the labels.
      */
     private void setLabels(){
-        usernameLabel.setText(Session.getCurrentSession().getUsername());
+        usernameLabel.setText("Username: " + Session.getMemberSession().getUsername());
     }
 
     /**
@@ -115,7 +115,7 @@ public class CourseMemberController implements Initializable {
             }
             pstmt = DatabaseManager.getConnection().prepareStatement
                     ("SELECT activity_course.course_name FROM activity_course WHERE activity_course.member_username = ?");
-            pstmt.setString(1, Session.getCurrentSession().getUsername());
+            pstmt.setString(1, Session.getMemberSession().getUsername());
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 executedCourses.add(rs.getString(1));
@@ -160,7 +160,7 @@ public class CourseMemberController implements Initializable {
     private void subscribeMember(ActionEvent event) {
         String courseSelected = comboBox.getValue();
         if (courseSelected != null) {
-            Session.getCurrentSession().subscribe(new Course(courseSelected));
+            Session.getMemberSession().subscribe(new Course(courseSelected));
             loadData();
         }
         else new WarningBox("You have to choose a course!", "Information Missing");
@@ -175,7 +175,7 @@ public class CourseMemberController implements Initializable {
     private void unsubscribeMember(ActionEvent event) {
         String courseSelected = comboBox.getValue();
         if (courseSelected != null) {
-            Session.getCurrentSession().unsubscribe(new Course(courseSelected));
+            Session.getMemberSession().unsubscribe(new Course(courseSelected));
             loadData();
         }
         else new WarningBox("You have to choose a course!", "Information Missing");

@@ -170,7 +170,7 @@ public class UsersController implements Initializable{
             String surname = surnameField.getText();
             String username = usernameField.getText();
             String password = passwordField.getText();
-            Admin admin = new Admin();
+            Admin admin = (Admin) Session.getAdminSession();
             if(typeComboBox.getValue().equals("Admin")){
                 Admin newAdmin = new Admin(name,surname,username,password);
                 admin.addMember(newAdmin);
@@ -189,7 +189,7 @@ public class UsersController implements Initializable{
     @FXML
     void deleteUser(ActionEvent event) {
         if(userComboBox.getValue() != null){
-            Admin admin = new Admin();
+            Admin admin = (Admin) Session.getAdminSession();
             admin.removeMember(DatabaseManager.getSelectedMember(userComboBox.getValue()));
             loadData();
             setUserComboBox();
@@ -204,7 +204,7 @@ public class UsersController implements Initializable{
             String surname = surnameField.getText();
             String username = usernameField.getText();
             String password = passwordField.getText();
-            Admin admin = new Admin();
+            Admin admin = (Admin) Session.getAdminSession();
             admin.editMember(DatabaseManager.getSelectedMember(userComboBox.getValue()),name,surname,username,password);
             loadData();
             setUserComboBox();
