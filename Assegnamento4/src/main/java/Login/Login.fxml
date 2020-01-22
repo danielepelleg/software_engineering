@@ -8,9 +8,6 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,46 +16,46 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login.LoginController">
+<AnchorPane prefHeight="574.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login.LoginController">
    <children>
-      <SplitPane dividerPositions="0.3" >
+      <SplitPane dividerPositions="0.3" prefHeight="574.0" prefWidth="745.0">
         <items>
 
            <!-- LEFT AnchorPane -->
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="156.0">
+          <AnchorPane maxWidth="223.5" minWidth="223.5" style="-fx-background-color: #454545;">
                <children>
 
                   <!--Add SportClub Logo -->
-                  <ImageView fitHeight="108.0" fitWidth="134.0" layoutX="42.0" layoutY="49.0" preserveRatio="true">
+                  <ImageView fitHeight="108.0" fitWidth="134.0" layoutX="56.0" layoutY="70.0" preserveRatio="true">
                      <image>
                         <Image url="@/images/racket.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="70.0" layoutY="166.0" text="SportClub">
+                  <Label layoutX="79.0" layoutY="212.0" text="SportClub" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
 
                   <!-- Add a simple descriprion -->
-                  <Label fx:id="descriptionLabel" layoutX="25.0" layoutY="196.0" prefHeight="108.0" prefWidth="152.0" text="Sportclub where you can &#10;subscribe to courses&#10;and races." textAlignment="CENTER" />
+                  <Label fx:id="descriptionLabel" layoutX="44.0" layoutY="232.0" prefHeight="108.0" prefWidth="138.0" text="Sportclub where you can &#10;subscribe to courses&#10;and races." textAlignment="CENTER" textFill="WHITE" />
 
                </children>
             </AnchorPane>
 
            <!--RIGHT AnchorPane -->
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="486.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="486.0" SplitPane.resizableWithParent="false">
                <children>
                   <!-- Add Toolbar -->
-                  <ToolBar layoutX="2.0" layoutY="1.0" prefHeight="53.0" prefWidth="487.0" />
-                  <GridPane alignment="center" hgap="10" layoutY="55.0" prefHeight="444.0" prefWidth="602.0" vgap="10">
+                  <ToolBar layoutX="2.0" layoutY="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="518.0" />
+                  <GridPane alignment="center" hgap="10" layoutX="14.0" layoutY="64.0" prefHeight="444.0" prefWidth="602.0" vgap="10">
                      <padding>
                         <Insets bottom="40" left="40" right="40" top="40" />
                      </padding>
                      <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="193.00000000000003" prefWidth="219.40004882812502" />
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="176.99995117187507" prefWidth="176.99995117187507" />
+                        <ColumnConstraints halignment="RIGHT" maxWidth="127.19996337890626" minWidth="107.19996337890626" prefWidth="112.00001220703126" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="193.00000000000003" prefWidth="255.80002441406248" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="Infinity" minWidth="133.59997558593756" prefWidth="133.59997558593756" />
                      </columnConstraints>
                      <children>
 
@@ -78,37 +75,27 @@
 
                         <!-- Add Password Field -->
                         <Label text="Password* : " GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                        <PasswordField fx:id="passwordField" prefHeight="40" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <PasswordField fx:id="passwordField" prefHeight="40" prefWidth="212.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                         <!-- Add Submit (Login) button -->
-                        <Button fx:id="submitButton" defaultButton="true" onAction="#login" prefHeight="40" prefWidth="90.0" text="Submit" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.rowSpan="1">
+                        <Button fx:id="submitButton" defaultButton="true" onAction="#login" prefHeight="40.0" prefWidth="95.0" text="Submit" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.rowSpan="1">
                            <GridPane.margin>
                               <Insets bottom="20" top="20" />
                            </GridPane.margin>
                         </Button>
 
                         <!-- Add Cancel Button -->
-                        <Button fx:id="cancelButton" cancelButton="true" onAction="#cancel" prefHeight="40" prefWidth="90.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                        <Button fx:id="cancelButton" cancelButton="true" onAction="#cancel" prefHeight="40" prefWidth="95.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
 
                         <!-- Add Text "New to the club?" -->
                         <Label text="New to the club?" underline="true" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
                            <font>
                               <Font size="14.0" />
                            </font>
-                           <effect>
-                              <Lighting>
-                                 <bumpInput>
-                                    <Shadow />
-                                 </bumpInput>
-                                 <light>
-                                    <Light.Distant />
-                                 </light>
-                              </Lighting>
-                           </effect>
                         </Label>
 
                         <!-- Add Register Button -->
-                        <Button fx:id="registerButton" onAction="#register" prefHeight="38.0" prefWidth="104.0" text="Register" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                        <Button fx:id="registerButton" onAction="#register" prefHeight="40.0" prefWidth="110.0" text="Register" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
                            <GridPane.margin>
                               <Insets bottom="20.0" top="20.0" />
                            </GridPane.margin>
