@@ -192,7 +192,6 @@ public abstract class DatabaseManager {
                 if(!isAdmin)
                     new Session(new Member(name, surname, username, ""));
                 else new Session(new Admin(name, surname, username, ""));
-                //new InfoBox("Login successful!", "Success");
                 return true;
             }
         } catch (SQLException e) {

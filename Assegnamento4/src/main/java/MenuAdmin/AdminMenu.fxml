@@ -31,9 +31,9 @@
                         </Label>
 
                         <!-- Add current SportClub.Admin Data: Name, Surname, Username -->
-                        <Label fx:id="nameLabel" contentDisplay="CENTER" layoutX="34.0" layoutY="224.0" prefHeight="18.0" prefWidth="123.0" />
-                        <Label fx:id="surnameLabel" contentDisplay="CENTER" layoutX="34.0" layoutY="260.0" prefHeight="18.0" prefWidth="123.0" />
-                        <Label fx:id="usernameLabel" contentDisplay="CENTER" layoutX="34.0" layoutY="297.0" prefHeight="18.0" prefWidth="123.0" />
+                        <Label fx:id="nameLabel" contentDisplay="CENTER" layoutX="28.0" layoutY="224.0" prefHeight="18.0" prefWidth="134.0" />
+                        <Label fx:id="surnameLabel" contentDisplay="CENTER" layoutX="27.0" layoutY="260.0" prefHeight="18.0" prefWidth="134.0" />
+                        <Label fx:id="usernameLabel" contentDisplay="CENTER" layoutX="27.0" layoutY="297.0" prefHeight="18.0" prefWidth="134.0" />
                         <Button id="logoutButton" fx:id="logoutButton" layoutX="130.0" layoutY="458.0" onAction="#logout" text="Logout" />
 
                     </children>

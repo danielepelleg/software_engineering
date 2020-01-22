@@ -81,7 +81,7 @@ public class RaceMemberController implements Initializable {
      * Set the text of the labels.
      */
     private void setLabels(){
-        usernameLabel.setText(Session.getCurrentSession().getUsername());
+        usernameLabel.setText("Username: " + Session.getMemberSession().getUsername());
     }
 
     /**
@@ -125,7 +125,7 @@ public class RaceMemberController implements Initializable {
             }
             pstmt = DatabaseManager.getConnection().prepareStatement
                     ("SELECT activity_race.race_name FROM activity_race WHERE activity_race.member_username = ?");
-            pstmt.setString(1, Session.getCurrentSession().getUsername());
+            pstmt.setString(1, Session.getMemberSession().getUsername());
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 executedCourses.add(rs.getString(1));
@@ -170,7 +170,7 @@ public class RaceMemberController implements Initializable {
     private void subscribeMember(ActionEvent event) {
         String raceSelected = comboBox.getValue();
         if (raceSelected != null) {
-            Session.getCurrentSession().subscribe(new Race(raceSelected));
+            Session.getMemberSession().subscribe(new Race(raceSelected));
             loadData();
         }
         else new WarningBox("You have to choose a race!", "Information Missing");
@@ -185,7 +185,7 @@ public class RaceMemberController implements Initializable {
     private void unsubscribeMember(ActionEvent event) {
         String raceSelected = comboBox.getValue();
         if (raceSelected != null) {
-            Session.getCurrentSession().unsubscribe(new Race(raceSelected));
+            Session.getMemberSession().unsubscribe(new Race(raceSelected));
             loadData();
         }
         else new WarningBox("You have to choose a race!", "Information Missing");

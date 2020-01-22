@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Session {
 
-    public static ArrayList<Member> sessions = new ArrayList<>();
+    public static ArrayList<Member> membersSessions = new ArrayList<>();
     public static ArrayList<Admin> adminSessions = new ArrayList<>();
     public static Member currentMember;
     public static Admin currentAdmin;
@@ -23,7 +23,7 @@ public class Session {
      */
     public Session(Member member){
         currentMember = member;
-        sessions.add(currentMember);
+        membersSessions.add(currentMember);
     }
 
     /**
@@ -33,16 +33,25 @@ public class Session {
      */
     public Session(Admin admin){
         currentAdmin = admin;
-        sessions.add(currentMember);
+        adminSessions.add(currentAdmin);
     }
 
     /**
-     * Get the current session.
+     * Get the current session of the Members.
      *
      * @return the current member logged (last one inserted in the session list).
      */
-    public static Member getCurrentSession(){
-        return sessions.get(sessions.size()-1);
+    public static Member getMemberSession(){
+        return membersSessions.get(membersSessions.size()-1);
+    }
+
+    /**
+     * Get the current session of the Members.
+     *
+     * @return the current member logged (last one inserted in the session list).
+     */
+    public static Member getAdminSession(){
+        return adminSessions.get(adminSessions.size()-1);
     }
 
 }
