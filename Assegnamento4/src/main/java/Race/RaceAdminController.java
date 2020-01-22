@@ -141,20 +141,36 @@ public class RaceAdminController implements Initializable {
             PreparedStatement pstmt;
             ArrayList<String> allCourses = new ArrayList<>();
             ArrayList<String> executedCourses = new ArrayList<>();
-            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT R.name as Race,\n" +
-                    "(CASE WHEN AC.member_username = ? THEN 'YES' ELSE 'NO' END) AS Subscription\n" +
-                    "FROM sportclub.race AS R LEFT JOIN sportclub.activity_race AS AC on R.name = AC.race_name\n" +
-                    "WHERE AC.member_username = ?\n UNION\n SELECT R.name as Race,\n" +
-                    "(CASE WHEN AC.member_username != ? THEN 'NO' ELSE 'YES' END) AS Subscription\n" +
-                    "FROM sportclub.race AS R LEFT JOIN sportclub.activity_race AS AC on R.name = AC.race_name\n" +
-                    "WHERE R.name NOT IN (SELECT AC.race_name FROM activity_race AC WHERE AC.member_username = ?)");
-            pstmt.setString(1, userComboBox.getValue());
-            pstmt.setString(2, userComboBox.getValue());
-            pstmt.setString(3, userComboBox.getValue());
-            pstmt.setString(4, userComboBox.getValue());
+            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT sportclub.race.name FROM sportclub.race");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                this.data.add(new Subscription(rs.getString(1),rs.getString(2)));
+                allCourses.add(rs.getString(1));
+            }
+            pstmt = DatabaseManager.getConnection().prepareStatement
+                    ("SELECT activity_race.race_name FROM activity_race WHERE activity_race.member_username = ?");
+            pstmt.setString(1, userComboBox.getValue());
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                executedCourses.add(rs.getString(1));
+            }
+            boolean found;
+            if(!allCourses.isEmpty()){
+                for(String course: allCourses){
+                    found = false;
+                    if(!executedCourses.isEmpty()){
+                        for (String executeCourse: executedCourses){
+                            if(course.equals(executeCourse)){
+                                this.data.add(new Subscription(course,"YES"));
+                                found = true;
+                                break;
+                            }
+                        }
+                        if(!found){
+                            this.data.add(new Subscription(course,"NO"));
+                        }
+                    }
+                    else this.data.add(new Subscription(course,"NO"));
+                }
             }
         }
         catch (SQLException e)

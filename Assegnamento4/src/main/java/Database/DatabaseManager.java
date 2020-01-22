@@ -59,10 +59,7 @@ public abstract class DatabaseManager {
     public static boolean checkMember(Member member){
         try {
             PreparedStatement pstmt = null;
-            if(member.getClass().equals(Member.class))
-                pstmt = getConnection().prepareStatement("select * from sportclub.member WHERE username = ? AND role = 'Member'");
-            if(member.getClass().equals(Admin.class))
-                pstmt = getConnection().prepareStatement("select * from sportclub.member WHERE username = ? AND role = 'Admin'");
+            pstmt = getConnection().prepareStatement("select * from sportclub.member WHERE username = ? ");
             pstmt.setString(1, member.getUsername());
             ResultSet rset = pstmt.executeQuery();
             while(rset.next())
@@ -214,10 +211,7 @@ public abstract class DatabaseManager {
         if(checkMember(member)){
             try{
                 Statement stmt = getConnection().createStatement();
-                if (member.getClass().equals(Member.class))
-                    stmt.executeUpdate("delete from sportclub.member WHERE username = '" + member.getUsername() + "'");
-                else if (member.getClass().equals(Admin.class))
-                    stmt.executeUpdate("delete from sportclub.administrator WHERE username = '" + member.getUsername() + "'");
+                stmt.executeUpdate("delete from sportclub.member WHERE username = '" + member.getUsername() + "'");
             }
             catch (SQLException e){
                 e.printStackTrace();
@@ -237,7 +231,6 @@ public abstract class DatabaseManager {
                     stmt.executeUpdate("insert into sportclub.course(name) VALUES ('"+ activity.getName() + "')");
                 else if (activity.getClass().equals(Race.class))
                     stmt.executeUpdate("insert into sportclub.race(name) VALUES ('"+ activity.getName() + "')");
-                System.out.println("done");
             }
             catch(SQLException e)
             {
@@ -259,7 +252,6 @@ public abstract class DatabaseManager {
                     stmt.executeUpdate("delete from sportclub.course WHERE name = '" + activity.getName() + "'");
                 else if (activity.getClass().equals(Race.class))
                     stmt.executeUpdate("delete from sportclub.race WHERE name = '" + activity.getName() + "'");
-                System.out.println("done");
             }
             catch(SQLException e)
             {
@@ -386,15 +378,52 @@ public abstract class DatabaseManager {
                         ("SELECT * FROM sportclub.member WHERE member.username =?");
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
-            Member member = new Member("","");
+            Member member = new Member();
+            Admin admin = new Admin();
             while (rs.next()){
-                member.setName(rs.getString(1));
-                member.setSurname(rs.getString(2));
-                member.setUsername(rs.getString(3));
-                member.setPass(rs.getString(4));
-
+                if(rs.getString(5).equals("Admin")){
+                    admin.setName(rs.getString(1));
+                    admin.setSurname(rs.getString(2));
+                    admin.setUsername(rs.getString(3));
+                    admin.setPass(rs.getString(4));
+                    return admin;
+                }
+                else if(rs.getString(5).equals("Member")){
+                    member.setName(rs.getString(1));
+                    member.setSurname(rs.getString(2));
+                    member.setUsername(rs.getString(3));
+                    member.setPass(rs.getString(4));
+                    return member;
+                }
             }
-            return member;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Activity getSelectedActivity(String name){
+        try {
+            PreparedStatement pstmt = getConnection().prepareStatement("SELECT * FROM sportclub.course WHERE course.name = ?");
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+            Course course = new Course("");
+            while (rs.next()){
+                course.setName(rs.getString(1));
+            }
+            pstmt = getConnection().prepareStatement("SELECT * FROM sportclub.race WHERE race.name = ?");
+            pstmt.setString(1, name);
+            rs = pstmt.executeQuery();
+            Race race = new Race("");
+            while (rs.next()){
+                race.setName(rs.getString(1));
+            }
+            if(!course.getName().equals("")){
+                return course;
+            }
+            else return race;
+
         }
         catch (SQLException e){
             e.printStackTrace();

@@ -1,9 +1,9 @@
 package Activities;
 
+import AlertBox.WarningBox;
 import Database.DatabaseManager;
 
-import SportClub.Activity;
-import SportClub.Course;
+import SportClub.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +31,7 @@ public class ActivitiesController implements Initializable {
     private ComboBox<String> typeCombobox;
 
     @FXML
-    private ComboBox<String> userComboBox;
+    private ComboBox<String> activityComboBox;
 
     @FXML
     private Button deleteButton;
@@ -54,6 +54,10 @@ public class ActivitiesController implements Initializable {
     @FXML
     private TableColumn<Activities, String> activityTypeColumn;
 
+    @FXML
+    private TextField nameField;
+
+
     Stage dialogStage = new Stage();
     Scene scene;
 
@@ -63,7 +67,7 @@ public class ActivitiesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setTypeCombobox();
-        setUserComboBox();
+        setActivityComboBox();
         loadData();
     }
 
@@ -97,13 +101,18 @@ public class ActivitiesController implements Initializable {
     /**
      * Set the options of the userComboBox.
      */
-    private void setUserComboBox(){
+    private void setActivityComboBox(){
         try {
             this.options = FXCollections.observableArrayList();
 
             PreparedStatement pstmt = DatabaseManager.getConnection().prepareStatement
-                    ("SELECT sportclub.member.username FROM sportclub.member");
+                    ("SELECT sportclub.course.name FROM sportclub.course");
             ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                this.options.add(rs.getString(1));
+            }
+            pstmt = DatabaseManager.getConnection().prepareStatement("SELECT sportclub.race.name FROM sportclub.race");
+            rs = pstmt.executeQuery();
             while (rs.next()) {
                 this.options.add(rs.getString(1));
             }
@@ -112,9 +121,13 @@ public class ActivitiesController implements Initializable {
         {
             System.err.println("Error " + e);
         }
-        this.userComboBox.setItems(null);
-        this.userComboBox.setItems(this.options);
+        this.activityComboBox.setItems(null);
+        this.activityComboBox.setItems(this.options);
     }
+
+    /**
+     * Set the options of the typeComboBox.
+     */
     private void setTypeCombobox(){
         this.options = FXCollections.observableArrayList();
         this.options.add("Course");
@@ -145,17 +158,73 @@ public class ActivitiesController implements Initializable {
 
     @FXML
     void deleteActivity(ActionEvent event) {
-
+        if(activityComboBox.getValue() != null){
+            Admin admin = new Admin();
+            admin.deleteActivity(DatabaseManager.getSelectedActivity(activityComboBox.getValue()));
+            loadData();
+            setActivityComboBox();
+        }
+        else new WarningBox("You have left some fields empty!", "Informations Missing");
     }
 
     @FXML
     void addActivity(ActionEvent event) {
+        if(!fieldsEmpty() && (typeCombobox.getValue() != null)){
+            String name = nameField.getText();
+            Admin admin = new Admin();
+            if(typeCombobox.getValue().equals("Course")){
+                Course newCourse = new Course(name);
+                admin.addActivity(newCourse);
+            }
+            else if (typeCombobox.getValue().equals("Race")){
+                Race newRace = new Race(name);
+                admin.addActivity(newRace);
+            }
+            loadData();
+            setActivityComboBox();
+            cancel(event);
+        }
+        else new WarningBox("You have left some fields empty!", "Informations Missing");
+    }
 
+    /**
+     * Reset to empty values the TextField and the PasswordField
+     *
+     * @param event press on reset button
+     */
+    @FXML
+    void cancel(ActionEvent event) {
+        this.nameField.clear();
     }
 
     @FXML
     void updateActivity(ActionEvent event) {
+        if(!fieldsEmpty() && activityComboBox.getValue() != null){
+            String name = nameField.getText();
+            Admin admin = new Admin();
+            if(DatabaseManager.getSelectedActivity(activityComboBox.getValue()).getClass().equals(Course.class)){
+                Course course = new Course(activityComboBox.getValue());
+                admin.editActivity(course,name);
+            }
+            else if (DatabaseManager.getSelectedActivity(activityComboBox.getValue()).getClass().equals(Race.class)){
+                Race race = new Race(activityComboBox.getValue());
+                admin.editActivity(race,name);
+            }
+            loadData();
+            setActivityComboBox();
+            cancel(event);
+        }
+        else new WarningBox("You have left some fields empty!", "Informations Missing");
+    }
 
+    /**
+     * Check if the UsernameField and the PasswordField have been left empty.
+     *
+     * @return true if they have, false if not
+     */
+    public boolean fieldsEmpty(){
+        if(nameField.getText().equals("")) { return true;}
+        else return false;
     }
 
 }

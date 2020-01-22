@@ -4,8 +4,7 @@ import Activities.Activities;
 import AlertBox.WarningBox;
 import Database.DatabaseManager;
 import MenuMember.Subscription;
-import SportClub.Course;
-import SportClub.Session;
+import SportClub.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +27,9 @@ public class UsersController implements Initializable{
 
     @FXML
     private ComboBox<String> userComboBox;
+
+    @FXML
+    private ComboBox<String> typeComboBox;
 
     @FXML
     private Button deleteButton;
@@ -59,6 +61,18 @@ public class UsersController implements Initializable{
     @FXML
     private TableColumn<String, Users> passwordColumn;
 
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField surnameField;
+
+    @FXML
+    private TextField usernameField;
+
+    @FXML
+    private TextField passwordField;
+
     Stage dialogStage = new Stage();
     Scene scene;
 
@@ -69,6 +83,7 @@ public class UsersController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadData();
         setUserComboBox();
+        setTypeCombobox();
     }
 
     /**
@@ -119,6 +134,17 @@ public class UsersController implements Initializable{
     }
 
     /**
+     * Set the options of the typeComboBox.
+     */
+    private void setTypeCombobox(){
+        this.options = FXCollections.observableArrayList();
+        this.options.add("Admin");
+        this.options.add("Member");
+        this.typeComboBox.setItems(null);
+        this.typeComboBox.setItems(this.options);
+    }
+
+    /**
      * Back to Member menu page.
      *
      * @param event press on Back to Menu button
@@ -139,16 +165,76 @@ public class UsersController implements Initializable{
 
     @FXML
     void addUser(ActionEvent event) {
-
+        if(!fieldsEmpty() && typeComboBox.getValue() != null){
+            String name = nameField.getText();
+            String surname = surnameField.getText();
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            Admin admin = new Admin();
+            if(typeComboBox.getValue().equals("Admin")){
+                Admin newAdmin = new Admin(name,surname,username,password);
+                admin.addMember(newAdmin);
+            }
+            else if(typeComboBox.getValue().equals("Member")){
+                Member newMember = new Member(name,surname,username,password);
+                admin.addMember(newMember);
+            }
+            loadData();
+            setUserComboBox();
+            cancel(event);
+        }
+        else new WarningBox("You have left some fields empty!", "Informations Missing");
     }
 
     @FXML
     void deleteUser(ActionEvent event) {
-
+        if(userComboBox.getValue() != null){
+            Admin admin = new Admin();
+            admin.removeMember(DatabaseManager.getSelectedMember(userComboBox.getValue()));
+            loadData();
+            setUserComboBox();
+        }
+        else new WarningBox("You have left some fields empty!", "Informations Missing");
     }
 
     @FXML
     void updateUser(ActionEvent event) {
+        if(!fieldsEmpty() && userComboBox.getValue() != null){
+            String name = nameField.getText();
+            String surname = surnameField.getText();
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            Admin admin = new Admin();
+            admin.editMember(DatabaseManager.getSelectedMember(userComboBox.getValue()),name,surname,username,password);
+            loadData();
+            setUserComboBox();
+            cancel(event);
+        }
+        else new WarningBox("You have left some fields empty!", "Informations Missing");
+    }
 
+    /**
+     * Reset to empty values the TextField and the PasswordField
+     *
+     * @param event press on reset button
+     */
+    @FXML
+    void cancel(ActionEvent event) {
+        this.nameField.clear();
+        this.surnameField.clear();
+        this.usernameField.clear();
+        this.passwordField.clear();
+    }
+
+    /**
+     * Check if the UsernameField and the PasswordField have been left empty.
+     *
+     * @return true if they have, false if not
+     */
+    public boolean fieldsEmpty(){
+        if(nameField.getText().equals("") || surnameField.getText().equals("") || usernameField.getText().equals("") || passwordField.getText().equals("")) {
+            return true;
+        }
+        else return false;
     }
 }

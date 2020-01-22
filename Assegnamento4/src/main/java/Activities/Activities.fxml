@@ -29,13 +29,13 @@
                                     </opaqueInsets>
                                 </Label>
                                 <Label prefWidth="32.0" text="Name" />
-                                <TextField />
+                                <TextField fx:id="nameField" />
                                 <Label prefHeight="20.0" prefWidth="158.0" text="Select the type of the Activity:">
                            <padding>
                               <Insets top="10.0" />
                            </padding></Label>
                         <ComboBox fx:id="typeCombobox" layoutX="13.0" layoutY="197.0" prefHeight="31.0" prefWidth="160.0" promptText="select" />
-                                <Label alignment="CENTER" contentDisplay="TOP" layoutX="45.0" layoutY="81.0" prefHeight="35.0" prefWidth="158.0" text="User to Update or Delete:">
+                                <Label alignment="CENTER" contentDisplay="TOP" layoutX="45.0" layoutY="81.0" prefHeight="35.0" prefWidth="158.0" text="Activity to Update or Delete:">
                                     <opaqueInsets>
                                         <Insets />
                                     </opaqueInsets>
@@ -43,7 +43,7 @@
                                         <Insets top="10.0" />
                                     </padding>
                                 </Label>
-                                <ComboBox fx:id="userComboBox" layoutX="13.0" layoutY="113.0" prefHeight="31.0" prefWidth="160.0" promptText="select" />
+                                <ComboBox fx:id="activityComboBox" layoutX="13.0" layoutY="113.0" prefHeight="31.0" prefWidth="160.0" promptText="select" />
                                 <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteActivity" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #AB4642 #AB4642; -fx-text-fill: #ffffff;" text="Delete Activity">
                                     <VBox.margin>
                                         <Insets top="10.0" />

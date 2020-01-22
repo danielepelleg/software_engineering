@@ -23,19 +23,21 @@
                     <children>
                         <VBox alignment="CENTER" layoutX="13.0" layoutY="19.0" prefHeight="458.0" prefWidth="166.0">
                             <children>
-                        <Label prefHeight="51.0" prefWidth="166.0" text="Use this Form to Add or&#10;Update Users:">
+                        <Label prefHeight="13.0" prefWidth="166.0" text="Form to Add or Update:">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                         </Label>
                         <Label prefWidth="32.0" text="Name" />
-                        <TextField />
+                        <TextField fx:id="nameField" />
                         <Label text="Surname" />
-                        <TextField />
+                        <TextField fx:id="surnameField" />
                         <Label text="Username" />
-                        <TextField />
+                        <TextField fx:id="usernameField" />
                         <Label text="Password" />
-                        <TextField />
+                        <TextField fx:id="passwordField" />
+                        <Label text="Select the User Type" />
+                        <ComboBox fx:id="typeComboBox" layoutX="13.0" layoutY="269.0" prefHeight="31.0" prefWidth="160.0" promptText="select" />
                                 <Label alignment="CENTER" contentDisplay="TOP" layoutX="45.0" layoutY="81.0" prefHeight="35.0" prefWidth="158.0" text="User to Update or Delete:">
                                     <opaqueInsets>
                                         <Insets />
@@ -60,7 +62,7 @@
                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button fx:id="menuButton" mnemonicParsing="false" onAction="#backMenu" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #A9A9A9; -fx-text-fill: #ffffff;" text="Back to Menu">
+                                <Button fx:id="menuButton" mnemonicParsing="false" onAction="#backMenu" prefHeight="26.0" prefWidth="110.0" style="-fx-background-color: #A9A9A9; -fx-text-fill: #ffffff;" text="Back to Menu">
                                     <VBox.margin>
                                         <Insets top="30.0" />
                                     </VBox.margin>
