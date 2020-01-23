@@ -9,9 +9,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="574.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Activities.ActivitiesController">
     <children>
@@ -19,49 +21,81 @@
             <items>
 
                 <!-- LEFT AnchorPane -->
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="156.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="156.0" style="-fx-background-color: #454545;">
                     <children>
-                        <VBox alignment="CENTER" layoutX="13.0" layoutY="19.0" prefHeight="458.0" prefWidth="166.0">
+                        <Label layoutX="90.0" layoutY="14.0" text="Admin" textFill="WHITE">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <effect>
+                                <Blend />
+                            </effect>
+                        </Label>
+                        <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="42.0" prefHeight="18.0" prefWidth="134.0" textFill="WHITE" />
+                        <VBox alignment="CENTER" layoutX="18.0" layoutY="77.0" prefHeight="394.0" prefWidth="184.0" style="-fx-background-color: #e1f3e5; -fx-background-radius: 12;">
                             <children>
-                                <Label prefHeight="51.0" prefWidth="166.0" text="Use this Form to Add or&#10;Update the Activity:">
-                                    <opaqueInsets>
-                                        <Insets />
-                                    </opaqueInsets>
-                                </Label>
-                                <Label prefWidth="32.0" text="Name" />
-                                <TextField fx:id="nameField" />
-                                <Label prefHeight="20.0" prefWidth="158.0" text="Select the type of the Activity:">
+                                <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="27.0" prefWidth="158.0" text="Name">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                            <padding>
-                              <Insets top="10.0" />
-                           </padding></Label>
-                        <ComboBox fx:id="typeCombobox" layoutX="13.0" layoutY="197.0" prefHeight="31.0" prefWidth="160.0" promptText="select" />
-                                <Label alignment="CENTER" contentDisplay="TOP" layoutX="45.0" layoutY="81.0" prefHeight="35.0" prefWidth="158.0" text="Activity to Update or Delete:">
+                              <Insets bottom="5.0" top="5.0" />
+                           </padding>
+                        </Label>
+                                <TextField fx:id="nameField">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin></TextField>
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="173.0" text="Select the type to add:" textAlignment="CENTER">
+                           <padding>
+                              <Insets bottom="5.0" top="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <ComboBox fx:id="typeCombobox" layoutX="13.0" layoutY="197.0" prefHeight="26.0" prefWidth="177.0" promptText="select">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin></ComboBox>
+                                <Label alignment="CENTER" contentDisplay="TOP" layoutX="45.0" layoutY="81.0" prefHeight="35.0" prefWidth="174.0" text="Activity to Update or Delete:">
                                     <opaqueInsets>
                                         <Insets />
                                     </opaqueInsets>
                                     <padding>
-                                        <Insets top="10.0" />
+                                        <Insets bottom="5.0" top="5.0" />
                                     </padding>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                                 </Label>
-                                <ComboBox fx:id="activityComboBox" layoutX="13.0" layoutY="113.0" prefHeight="31.0" prefWidth="160.0" promptText="select" />
-                                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteActivity" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #AB4642 #AB4642; -fx-text-fill: #ffffff;" text="Delete Activity">
+                                <ComboBox fx:id="activityComboBox" layoutX="13.0" layoutY="113.0" prefHeight="26.0" prefWidth="174.0" promptText="select">
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin></ComboBox>
+                                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteActivity" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #AB4642 #AB4642; -fx-text-fill: #ffffff;" text="Delete Activity">
                                     <VBox.margin>
                                         <Insets top="10.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button fx:id="addButton" mnemonicParsing="false" onAction="#addActivity" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #7cafc2; -fx-text-fill: #ffffff;" text="Add Activity">
+                                <Button fx:id="addButton" mnemonicParsing="false" onAction="#addActivity" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #7cafc2; -fx-text-fill: #ffffff;" text="Add Activity">
                                     <VBox.margin>
                                         <Insets top="10.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateActivity" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #3e904f; -fx-text-fill: #ffffff;" text="Update Activity">
+                                <Button fx:id="updateButton" mnemonicParsing="false" onAction="#updateActivity" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #3e904f; -fx-text-fill: #ffffff;" text="Update Activity">
                                     <VBox.margin>
                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                     </VBox.margin>
                                 </Button>
-                                <Button fx:id="menuButton" mnemonicParsing="false" onAction="#backMenu" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #A9A9A9; -fx-text-fill: #ffffff;" text="Back to Menu">
+                                <Button fx:id="menuButton" mnemonicParsing="false" onAction="#backMenu" prefHeight="32.0" prefWidth="120.0" style="-fx-background-color: #A9A9A9; -fx-text-fill: #ffffff;" text="Back to Menu">
                                     <VBox.margin>
-                                        <Insets top="30.0" />
+                                        <Insets bottom="10.0" top="20.0" />
                                     </VBox.margin>
                                 </Button>
                             </children>
@@ -75,17 +109,20 @@
                     <children>
 
                         <!-- Add Toolbar -->
-                        <ToolBar prefHeight="54.0" prefWidth="450.0" />
-                        <HBox layoutX="-3.0" layoutY="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="458.0" prefWidth="459.0">
+                        <ToolBar prefHeight="54.0" prefWidth="518.0" />
+                        <HBox layoutX="-3.0" layoutY="54.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="520.0" prefWidth="526.0">
                             <children>
 
                                 <!-- Add TableView -->
-                                <TableView fx:id="activityTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="458.0" prefWidth="453.0">
+                                <TableView fx:id="activityTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="522.0" prefWidth="522.0">
                                     <columns>
                                         <!-- Add Columns -->
-                                        <TableColumn fx:id="activityNameColumn" prefWidth="220.79999089241028" style="-fx-alignment: center;" text="Activity Name" />
-                                        <TableColumn fx:id="activityTypeColumn" prefWidth="235.19996643066406" style="-fx-alignment: center;" text="Type of Activity" />
+                                        <TableColumn fx:id="activityNameColumn" prefWidth="252" style="-fx-alignment: center;" text="Activity Name" />
+                                        <TableColumn fx:id="activityTypeColumn" prefWidth="268" style="-fx-alignment: center;" text="Type of Activity" />
                                     </columns>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                                 </TableView>
                             </children>
                         </HBox>

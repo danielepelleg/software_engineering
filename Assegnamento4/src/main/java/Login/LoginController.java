@@ -48,6 +48,7 @@ public class LoginController {
     private CheckBox adminButton;
 
     Stage dialogStage = new Stage();
+
     Scene scene;
 
     /**

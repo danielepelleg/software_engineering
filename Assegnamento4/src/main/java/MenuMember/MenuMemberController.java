@@ -48,6 +48,9 @@ public class MenuMemberController implements Initializable {
     Stage dialogStage = new Stage();
     Scene scene;
 
+    /**
+     * Initialize the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb){
         setLabels();
@@ -100,9 +103,22 @@ public class MenuMemberController implements Initializable {
         }
     }
 
+    /**
+     * Open the numbers of subscribers page
+     * @param event press on Subscribers Button
+     */
     @FXML
     void openSubscribersPage(ActionEvent event) {
-        //TODO Subscriber.fxml and Controller Class. (Same as admin?)
+        try {
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Subscribers/Subscribers.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -118,6 +134,7 @@ public class MenuMemberController implements Initializable {
             this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Login/Login.fxml")));
             dialogStage.setScene(scene);
             dialogStage.show();
+            Session.clearSession();
         }
         catch (IOException e){
             e.printStackTrace();

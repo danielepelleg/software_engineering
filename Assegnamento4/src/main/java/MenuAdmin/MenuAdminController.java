@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 /**
  * MenuAdminController Class
  * Controls the AdminMenu.fxml events.
@@ -41,14 +40,21 @@ public class MenuAdminController implements Initializable {
     private Button raceButton;
 
     @FXML
-    private Button subscribersButton;
+    private Button usersButton;
 
     @FXML
     private Button activitiesButton;
 
+    @FXML
+    private Button subscribersButton;
+
     Stage dialogStage = new Stage();
+
     Scene scene;
 
+    /**
+     * Initialize the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb){
         setLabels();
@@ -62,7 +68,6 @@ public class MenuAdminController implements Initializable {
         surnameLabel.setText("Surname: " + Session.getAdminSession().getSurname());
         usernameLabel.setText("Username: " + Session.getAdminSession().getUsername());
     }
-
 
     /**
      * Open the Course Subscription - Unsubscription page.
@@ -102,8 +107,13 @@ public class MenuAdminController implements Initializable {
         }
     }
 
+    /**
+     * Open the Users Information Page
+     *
+     * @param event press on Users Button
+     */
     @FXML
-    void openSubscribersPage(ActionEvent event) {
+    void openUsersPage(ActionEvent event) {
         try{
             Node source = (Node) event.getSource();
             dialogStage = (Stage) source.getScene().getWindow();
@@ -116,6 +126,11 @@ public class MenuAdminController implements Initializable {
         }
     }
 
+    /**
+     * Open the Activities Information Page
+     *
+     * @param event press on Activities Button
+     */
     @FXML
     void openActivitiesPage(ActionEvent event) {
         try{
@@ -126,6 +141,24 @@ public class MenuAdminController implements Initializable {
             dialogStage.show();
         }
         catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Open the numbers of subscribers page
+     * @param event press on Subscribers Button
+     */
+    @FXML
+    void openSubscribersPage(ActionEvent event) {
+        try {
+            Node source = (Node) event.getSource();
+            dialogStage = (Stage) source.getScene().getWindow();
+            this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Subscribers/Subscribers.fxml")));
+            dialogStage.setScene(scene);
+            dialogStage.show();
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -143,10 +176,10 @@ public class MenuAdminController implements Initializable {
             this.scene = new Scene(FXMLLoader.load(getClass().getResource("../Login/Login.fxml")));
             dialogStage.setScene(scene);
             dialogStage.show();
+            Session.clearSession();
         }
         catch (IOException e){
             e.printStackTrace();
         }
     }
-
 }

@@ -1,9 +1,7 @@
 package Users;
 
-import Activities.Activities;
 import AlertBox.WarningBox;
 import Database.DatabaseManager;
-import MenuMember.Subscription;
 import SportClub.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -62,6 +60,9 @@ public class UsersController implements Initializable{
     private TableColumn<String, Users> passwordColumn;
 
     @FXML
+    private Label usernameLabel;
+
+    @FXML
     private TextField nameField;
 
     @FXML
@@ -84,6 +85,14 @@ public class UsersController implements Initializable{
         loadData();
         setUserComboBox();
         setTypeCombobox();
+        setLabels();
+    }
+
+    /**
+     * Set the text of the labels.
+     */
+    private void setLabels(){
+        usernameLabel.setText(Session.getAdminSession().getUsername());
     }
 
     /**
@@ -163,6 +172,11 @@ public class UsersController implements Initializable{
         }
     }
 
+    /**
+     * Add a user in the database
+     *
+     * @param event press on Add Button
+     */
     @FXML
     void addUser(ActionEvent event) {
         if(!fieldsEmpty() && typeComboBox.getValue() != null){
@@ -186,6 +200,11 @@ public class UsersController implements Initializable{
         else new WarningBox("You have left some fields empty!", "Informations Missing");
     }
 
+    /**
+     * Delete a user from the database
+     *
+     * @param event press on Delete Button
+     */
     @FXML
     void deleteUser(ActionEvent event) {
         if(userComboBox.getValue() != null){
@@ -197,6 +216,11 @@ public class UsersController implements Initializable{
         else new WarningBox("You have left some fields empty!", "Informations Missing");
     }
 
+    /**
+     * Update a user's data in the database
+     *
+     * @param event press on Update Button
+     */
     @FXML
     void updateUser(ActionEvent event) {
         if(!fieldsEmpty() && userComboBox.getValue() != null){

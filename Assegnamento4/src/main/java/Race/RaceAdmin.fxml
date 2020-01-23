@@ -8,11 +8,13 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="574.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Race.RaceAdminController">
     <children>
@@ -20,17 +22,31 @@
             <items>
 
                 <!-- LEFT AnchorPane -->
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="156.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="156.0" style="-fx-background-color: #454545;">
                     <children>
-                        <VBox alignment="CENTER" layoutX="13.0" layoutY="91.0" prefHeight="386.0" prefWidth="166.0">
+                        <Label layoutX="90.0" layoutY="14.0" text="Admin" textFill="WHITE">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <effect>
+                                <Blend />
+                            </effect>
+                        </Label>
+                  <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="43.0" layoutY="41.0" prefHeight="18.0" prefWidth="134.0" textFill="WHITE" />
+                        <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="65.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@/images/racing-flag.png" />
+                            </image>
+                        </ImageView>
+                        <VBox alignment="CENTER" layoutX="23.0" layoutY="169.0" prefHeight="370.0" prefWidth="174.0" style="-fx-background-color: #e1f3e5; -fx-background-radius: 12;">
                             <children>
-                                <Label alignment="CENTER" contentDisplay="TOP" layoutX="45.0" layoutY="81.0" prefHeight="54.0" prefWidth="79.0" text="Select the User">
-                                    <opaqueInsets>
-                                        <Insets />
-                                    </opaqueInsets>
+                                <Label alignment="CENTER" contentDisplay="TOP" layoutX="45.0" layoutY="81.0" prefHeight="54.0" prefWidth="96.0" text="Select the User">
                                     <padding>
                                         <Insets top="10.0" />
                                     </padding>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                                 </Label>
                                 <ComboBox fx:id="userComboBox" layoutX="13.0" layoutY="113.0" prefHeight="31.0" prefWidth="160.0" promptText="select" />
                                 <Button fx:id="loadButton" mnemonicParsing="false" onAction="#loadSubscriptionData" prefHeight="32.0" prefWidth="110.0" style="-fx-background-color: #3e904f; -fx-text-fill: #ffffff;" text="Search">
@@ -45,6 +61,9 @@
                                     <padding>
                                         <Insets top="10.0" />
                                     </padding>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
                                 </Label>
                                 <ComboBox fx:id="comboBox" prefHeight="31.0" prefWidth="160.0" promptText="select">
                                     <VBox.margin>
@@ -68,11 +87,6 @@
                                 </Button>
                             </children>
                         </VBox>
-                        <ImageView fitHeight="70.0" fitWidth="79.0" layoutX="57.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@/images/racing-flag.png" />
-                            </image>
-                        </ImageView>
 
                     </children>
                 </AnchorPane>
@@ -82,16 +96,16 @@
                     <children>
 
                         <!-- Add Toolbar -->
-                        <ToolBar prefHeight="54.0" prefWidth="450.0" />
-                        <HBox layoutX="-3.0" layoutY="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="458.0" prefWidth="459.0">
+                        <ToolBar prefHeight="54.0" prefWidth="518.0" />
+                        <HBox layoutX="-3.0" layoutY="54.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="520.0" prefWidth="526.0">
                             <children>
 
                                 <!-- Add TableView -->
-                                <TableView fx:id="subscriptionTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="458.0" prefWidth="453.0">
+                                <TableView fx:id="subscriptionTable" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="522.0" prefWidth="522.0">
                                     <columns>
                                         <!-- Add Columns -->
-                                        <TableColumn fx:id="raceColumn" prefWidth="220.79999089241028" style="-fx-alignment: center;" text="Race Name" />
-                                        <TableColumn fx:id="subscriptionColumn" prefWidth="235.19996643066406" style="-fx-alignment: center;" text="Subscribed" />
+                                        <TableColumn fx:id="raceColumn" prefWidth="252" style="-fx-alignment: center;" text="Race Name" />
+                                        <TableColumn fx:id="subscriptionColumn" prefWidth="268" style="-fx-alignment: center;" text="Subscribed" />
                                     </columns>
                                 </TableView>
                             </children>

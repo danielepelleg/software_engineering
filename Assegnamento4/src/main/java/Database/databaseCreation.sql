@@ -78,30 +78,6 @@ insert into member(name, surname, username, hashed_password, role) VALUES
 #       new SportClub.Member("Matteo", "Binelli", "Matte", "strongman")
 
 /**
-  Table Administrator
-  Store administrators data: name, surname, username and hashed_password
-
-drop table if exists administrator;
-create table administrator(
-    name varchar(24),
-    surname varchar(24),
-    username varchar(24) primary key,
-    hashed_password varchar(32));
-
-
-  Insert some administrators
-
-
-insert into administrator(name, surname, username, hashed_password) VALUES
-('Giacomo', 'Neri', 'Jack', '5cc7a8cad0c3ef6834ff6bd9f734e741'),
-#       new SportClub.Admin("Giacomo", "Neri", "Jack", "hardtoguess")
-('Chiara', 'Zanetti', 'Chicca', 'aa7dcd799df5136c89931152a274c449'),
-#       new SportClub.Admin("Chiara", "Zanetti", "Chicca", "hardtofind")
-('Matteo', 'Binelli', 'Matte', 'cfc1e5e69ceb8c3597d62a80663b7990');
-#       new SportClub.Member("Matteo", "Binelli", "Matte", "strongman")
-*/
-
-/**
   Table Activity Course
   For each subscription to a course, show the name of the course and
   the username of the member subscribed.
@@ -113,6 +89,14 @@ create table activity_course(
     foreign key (course_name) references course(name),
     foreign key  (member_username) references member(username),
     primary key (course_name, member_username));
+insert into activity_course(course_name, member_username) VALUES
+('Jnana Yoga', 'Maty'),
+('Jnana Yoga', 'Luke'),
+('Jnana Yoga', 'Tom'),
+('Percorso Nascita', 'Maty'),
+('Percorso Nascita', 'Chicca'),
+('Percorso Nascita', 'Matte'),
+('Percorso Nascita', 'Cami');
 
 /**
   Table Activity Race
@@ -126,6 +110,15 @@ create table activity_race(
     foreign key (race_name) references race(name),
     foreign key  (member_username) references member(username),
     primary key (race_name, member_username));
+insert into activity_race(race_name, member_username) VALUES
+('GrandPrix F1', 'Chicca'),
+('GrandPrix F1', 'Jack'),
+('GrandPrix F1', 'Matte'),
+('GrandPrix F1', 'Tom'),
+('GrandPrix F1', 'Pie'),
+('Tour de France', 'Maty'),
+('Tour de France', 'Luke'),
+('Tour de France', 'Matte');
 
 /**
   View numberSubscribersRace

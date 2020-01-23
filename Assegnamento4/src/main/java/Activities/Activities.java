@@ -4,6 +4,12 @@ package Activities;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Activities Class
+ * This class is used to display the data about an activity
+ * in the TableView on Activities.fxml
+ *
+ */
 public class Activities {
 
     private final StringProperty activityName;
@@ -15,6 +21,11 @@ public class Activities {
         this.activityType = new SimpleStringProperty(activityType);
     }
 
+    /**
+     * Class Getters - Very important for the functionality of the table view.
+     *
+     * @return String
+     */
     public String getActivityName() {
         return activityName.get();
     }
@@ -23,9 +34,18 @@ public class Activities {
         return activityName;
     }
 
+    /**
+     * Class Setters
+     */
     public void setActivityName(String activityName) {
         this.activityName.set(activityName);
     }
+
+    /**
+     * Class Getters - Very important for the functionality of the table view.
+     *
+     * @return StringProperty
+     */
 
     public String getActivityType() {
         return activityType.get();

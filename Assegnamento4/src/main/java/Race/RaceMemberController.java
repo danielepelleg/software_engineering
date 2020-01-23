@@ -2,8 +2,7 @@ package Race;
 
 import AlertBox.WarningBox;
 import Database.DatabaseManager;
-import MenuMember.Subscription;
-import SportClub.Course;
+import Subscribers.Subscription;
 import SportClub.Race;
 import SportClub.Session;
 import javafx.collections.FXCollections;
@@ -68,6 +67,9 @@ public class RaceMemberController implements Initializable {
     private ObservableList<Subscription> data;
     private ObservableList<String> options;
 
+    /**
+     * Initialize the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -76,12 +78,11 @@ public class RaceMemberController implements Initializable {
         setComboBox();
     }
 
-
     /**
      * Set the text of the labels.
      */
     private void setLabels(){
-        usernameLabel.setText("Username: " + Session.getMemberSession().getUsername());
+        usernameLabel.setText(Session.getMemberSession().getUsername());
     }
 
     /**

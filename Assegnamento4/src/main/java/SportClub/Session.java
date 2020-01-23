@@ -37,6 +37,14 @@ public class Session {
     }
 
     /**
+     * Clear the Array Session
+     */
+    public static void clearSession(){
+        membersSessions.clear();
+        adminSessions.clear();
+    }
+
+    /**
      * Get the current session of the Members.
      *
      * @return the current member logged (last one inserted in the session list).

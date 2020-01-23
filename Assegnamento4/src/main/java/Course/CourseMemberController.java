@@ -2,7 +2,7 @@ package Course;
 
 import AlertBox.WarningBox;
 import Database.DatabaseManager;
-import MenuMember.Subscription;
+import Subscribers.Subscription;
 import SportClub.Course;
 import SportClub.Session;
 import javafx.collections.FXCollections;
@@ -23,6 +23,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * CourseMemberController Class
+ * Controls the CourseMember.fxml events.
+ *
+ * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
+ */
 public class CourseMemberController implements Initializable {
 
     @FXML
@@ -41,9 +48,6 @@ public class CourseMemberController implements Initializable {
     private Button menuButton;
 
     @FXML
-    private Button loadButton;
-
-    @FXML
     private TableView<Subscription> subscriptionTable;
 
     @FXML
@@ -53,11 +57,16 @@ public class CourseMemberController implements Initializable {
     private TableColumn<Subscription, String> subscriptionColumn;
 
     Stage dialogStage = new Stage();
+
     Scene scene;
 
     private ObservableList<Subscription> data;
+
     private ObservableList<String> options;
 
+    /**
+     * Initialize the page.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -66,12 +75,11 @@ public class CourseMemberController implements Initializable {
         setComboBox();
     }
 
-
     /**
      * Set the text of the labels.
      */
     private void setLabels(){
-        usernameLabel.setText("Username: " + Session.getMemberSession().getUsername());
+        usernameLabel.setText(Session.getMemberSession().getUsername());
     }
 
     /**
@@ -99,7 +107,7 @@ public class CourseMemberController implements Initializable {
     }
 
     /**
-     * Load he data in the TableView
+     * Load the data in the TableView
      */
     private void loadData(){
         try
@@ -114,7 +122,7 @@ public class CourseMemberController implements Initializable {
                 allCourses.add(rs.getString(1));
             }
             pstmt = DatabaseManager.getConnection().prepareStatement
-                    ("SELECT activity_course.course_name FROM activity_course WHERE activity_course.member_username = ?");
+                    ("SELECT AC.course_name FROM activity_course AC WHERE AC.member_username = ?");
             pstmt.setString(1, Session.getMemberSession().getUsername());
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -179,16 +187,6 @@ public class CourseMemberController implements Initializable {
             loadData();
         }
         else new WarningBox("You have to choose a course!", "Information Missing");
-    }
-
-    /**
-     * Update the data in the table view
-     *
-     * @param event press on load button
-     */
-    @FXML
-    private void loadSubscriptionData(ActionEvent event) {
-        loadData();
     }
 
     /**

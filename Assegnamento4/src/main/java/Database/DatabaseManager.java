@@ -117,7 +117,6 @@ public abstract class DatabaseManager {
      */
     public static boolean checkSubscription(Activity activity, String username){
         try {
-
             PreparedStatement pstmt = null;
             if(activity.getClass().equals(Course.class))
                 pstmt = getConnection().prepareStatement
@@ -282,7 +281,7 @@ public abstract class DatabaseManager {
                 pstmt.setString(1, activity.getName());
                 pstmt.setString(2, member.getUsername());
                 pstmt.executeUpdate();
-                new InfoBox("Subscription Successful!", "Success");
+                //new InfoBox("Subscription Successful!", "Success");
             }
             catch (SQLException e){
                 e.printStackTrace();
@@ -310,7 +309,7 @@ public abstract class DatabaseManager {
                 pstmt.setString(1, activity.getName());
                 pstmt.setString(2, member.getUsername());
                 pstmt.executeUpdate();
-                new InfoBox("Unsubscription Successful!", "Success");
+                //new InfoBox("Unsubscription Successful!", "Success");
             }
             catch (SQLException e){
                 e.printStackTrace();
@@ -371,6 +370,12 @@ public abstract class DatabaseManager {
         else System.out.println("Error while updating activity. The activity to update doesn't exist.");
     }
 
+    /**
+     * Return the selected Member
+     *
+     * @param username of the member to select
+     * @return the Member
+     */
     public static Member getSelectedMember(String username){
         try {
             PreparedStatement pstmt = getConnection().prepareStatement
@@ -402,6 +407,12 @@ public abstract class DatabaseManager {
         return null;
     }
 
+    /**
+     * Return the selected Activity
+     *
+     * @param name of the activity to select
+     * @return the Activity
+     */
     public static Activity getSelectedActivity(String name){
         try {
             PreparedStatement pstmt = getConnection().prepareStatement("SELECT * FROM sportclub.course WHERE course.name = ?");
@@ -430,16 +441,20 @@ public abstract class DatabaseManager {
         return null;
     }
 
-    //Prova connessione DB
+    /**
+     * Test database connection
+     * @param args
+     */
     public static void main(String[] args){
         try(Connection conn = DriverManager.getConnection(DBURL + ARGS, LOGIN, PASSWORD);
             Statement stmt = conn.createStatement();)
         {
-            System.out.println("OK");
+            System.out.println("Database Connected!");
         }
         catch (SQLException e)
         {
             e.printStackTrace();
+            System.out.println("Database connection error!");
         }
     }
 }

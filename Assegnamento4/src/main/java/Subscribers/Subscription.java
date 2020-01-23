@@ -1,4 +1,4 @@
-package MenuMember;
+package Subscribers;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -28,6 +28,7 @@ public class Subscription {
      *
      * @return String
      */
+
     public String getActivityName() {
         return activityName.get();
     }

@@ -2,9 +2,8 @@ package Race;
 
 import AlertBox.WarningBox;
 import Database.DatabaseManager;
-import MenuMember.Subscription;
+import Subscribers.Subscription;
 import SportClub.Admin;
-import SportClub.Course;
 import SportClub.Race;
 import SportClub.Session;
 import javafx.collections.FXCollections;
@@ -55,6 +54,9 @@ public class RaceAdminController implements Initializable {
     private Button loadButton;
 
     @FXML
+    private Label usernameLabel;
+
+    @FXML
     private TableView<Subscription> subscriptionTable;
 
     @FXML
@@ -69,6 +71,9 @@ public class RaceAdminController implements Initializable {
     private ObservableList<Subscription> data;
     private ObservableList<String> options;
 
+    /**
+     * Initialize the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -77,12 +82,11 @@ public class RaceAdminController implements Initializable {
         setUserComboBox();
     }
 
-
     /**
      * Set the text of the labels.
      */
     private void setLabels(){
-        //usernameLabel.setText(Session.getCurrentSession().getUsername());
+        usernameLabel.setText(Session.getAdminSession().getUsername());
     }
 
     /**
@@ -147,7 +151,7 @@ public class RaceAdminController implements Initializable {
                 allCourses.add(rs.getString(1));
             }
             pstmt = DatabaseManager.getConnection().prepareStatement
-                    ("SELECT activity_race.race_name FROM activity_race WHERE activity_race.member_username = ?");
+                    ("SELECT race_name FROM activity_race AR WHERE AR.member_username = ?");
             pstmt.setString(1, userComboBox.getValue());
             rs = pstmt.executeQuery();
             while (rs.next()) {

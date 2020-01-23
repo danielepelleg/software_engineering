@@ -55,6 +55,9 @@ public class ActivitiesController implements Initializable {
     private TableColumn<Activities, String> activityTypeColumn;
 
     @FXML
+    private Label usernameLabel;
+
+    @FXML
     private TextField nameField;
 
 
@@ -64,11 +67,24 @@ public class ActivitiesController implements Initializable {
     private ObservableList<Activities> data;
     private ObservableList<String> options;
 
+    /**
+     * Initialize the page
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setTypeCombobox();
         setActivityComboBox();
         loadData();
+        setLabels();
+    }
+
+    /**
+     * Set the text of the labels.
+     */
+    private void setLabels(){
+        usernameLabel.setText(Session.getAdminSession().getUsername());
     }
 
     /**
@@ -155,7 +171,11 @@ public class ActivitiesController implements Initializable {
         }
     }
 
-
+    /**
+     * Delete the activity chosen from the database
+     *
+     * @param event press on Delete Button
+     */
     @FXML
     void deleteActivity(ActionEvent event) {
         if(activityComboBox.getValue() != null){
@@ -167,6 +187,11 @@ public class ActivitiesController implements Initializable {
         else new WarningBox("You have left some fields empty!", "Informations Missing");
     }
 
+    /**
+     * Add a new activity in the database
+     *
+     * @param event press on Add Button
+     */
     @FXML
     void addActivity(ActionEvent event) {
         if(!fieldsEmpty() && (typeCombobox.getValue() != null)){
@@ -197,6 +222,10 @@ public class ActivitiesController implements Initializable {
         this.nameField.clear();
     }
 
+    /**
+     * Update the data in the tableview
+     * @param event
+     */
     @FXML
     void updateActivity(ActionEvent event) {
         if(!fieldsEmpty() && activityComboBox.getValue() != null){

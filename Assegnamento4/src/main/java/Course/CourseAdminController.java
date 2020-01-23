@@ -2,10 +2,9 @@ package Course;
 
 import AlertBox.WarningBox;
 import Database.DatabaseManager;
-import MenuMember.Subscription;
+import Subscribers.Subscription;
 import SportClub.Admin;
 import SportClub.Course;
-import SportClub.Member;
 import SportClub.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +24,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * CourseAdminController Class
+ * Controls the CourseAdmin.fxml events.
+ *
+ * @author Daniele Pellegrini <daniele.pellegrini@studenti.unipr.it> - 285240
+ * @author Riccardo Fava <riccardo.fava@studenti.unipr.it> - 287516
+ */
 public class CourseAdminController implements Initializable {
 
     @FXML
@@ -46,6 +52,9 @@ public class CourseAdminController implements Initializable {
     private Button loadButton;
 
     @FXML
+    private Label usernameLabel;
+
+    @FXML
     private TableView<Subscription> subscriptionTable;
 
     @FXML
@@ -61,6 +70,9 @@ public class CourseAdminController implements Initializable {
     private ObservableList<String> options;
 
 
+    /**
+     * Initialize the page
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -69,12 +81,11 @@ public class CourseAdminController implements Initializable {
         setUserComboBox();
     }
 
-
     /**
      * Set the text of the labels.
      */
     private void setLabels(){
-
+        usernameLabel.setText(Session.getAdminSession().getUsername());
     }
 
     /**
@@ -139,7 +150,7 @@ public class CourseAdminController implements Initializable {
                 allCourses.add(rs.getString(1));
             }
             pstmt = DatabaseManager.getConnection().prepareStatement
-                    ("SELECT activity_course.course_name FROM activity_course WHERE activity_course.member_username = ?");
+                    ("SELECT AC.course_name FROM activity_course AC WHERE AC.member_username = ?");
             pstmt.setString(1, userComboBox.getValue());
             rs = pstmt.executeQuery();
             while (rs.next()) {
