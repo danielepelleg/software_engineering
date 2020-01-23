@@ -20,6 +20,7 @@
   - [Getting Started](#getting-started)
     - [pom.xml](#pom.xml)
     - [Updates](#updates)
+  - [Screenshots](#screenshots)
   - [License](#license)
   - [Contributors](#contributors)
    
@@ -109,6 +110,19 @@
    <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
    <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></div>
    <div>Icons made by <a href="https://www.flaticon.com/authors/mynamepong" title="mynamepong">mynamepong</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></div>
+   
+   <!-- LICENSE -->
+   ## SCREENSHOTS
+   <img src="src/main/resources/screenshots/Login.png" alt="Login">
+   <img src="src/main/resources/screenshots/Registration.png" alt="Login">
+   <img src="src/main/resources/screenshots/MenuAdmin.png" alt="Login">
+   <img src="src/main/resources/screenshots/Activities_Admin.png" alt="Login">
+   <img src="src/main/resources/screenshots/Users_Admin.png" alt="Login">
+   <img src="src/main/resources/screenshots/MenuMember.png" alt="Login">
+   <img src="src/main/resources/screenshots/Course_Member.png" alt="Login">
+   <img src="src/main/resources/screenshots/Race_Member.png" alt="Login">
+   <img src="src/main/resources/screenshots/Subscribers_Member.png" alt="Login">
+   
    <!-- CONTRIBUTORS -->
    ## CONTRIBUTORS
    [Daniele Pellegrini](https://github.com/danielepelleg) - 285240
