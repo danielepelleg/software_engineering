@@ -26,6 +26,7 @@ rectangle  APPLICATION {
     Member -- (Registration)
     (Subscribe to an Activity) --> (Login) : <<include>>
     (Unsubscribe to an Activity) --> (Login) : <<include>>
+    (View Subscribers Number) --> (Login) : <<include>>
     Activity -up- (Create Activity)
     Activity -up- (Delete Activity)
     Activity -up- (Update Activity)
