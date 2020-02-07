@@ -173,6 +173,8 @@ public abstract class DatabaseManager {
 
     /**
      * Sign the member or the admin in.
+     *
+     * @return true if the login success, false otherwise
      */
     public static boolean authenticate(Member member, boolean isAdmin) {
         try {
