@@ -18,7 +18,7 @@
   - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
   - [Getting Started](#getting-started)
-    - [pom.xml](#pom.xml)
+    - [pom.xml](#pomxml)
     - [Updates](#updates)
   - [Database](#database)
     - [Tables](#tables)
