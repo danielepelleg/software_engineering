@@ -6,7 +6,7 @@
   </a>
   <h1 align="center">Sport Club</h1>
   <p align="center">
-    Java implementation of a JavaFX software representing a sport club with courses and races.
+    Java implementation of a JavaFX software representing a Sport Club with courses and races.
   </p>
   <p align="center">
     Maven Project
