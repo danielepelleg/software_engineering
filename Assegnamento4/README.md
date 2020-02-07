@@ -20,6 +20,11 @@
   - [Getting Started](#getting-started)
     - [pom.xml](#pom.xml)
     - [Updates](#updates)
+  - [Database](#database)
+    - [Tables](#tables)
+    - [Views](#views)
+  - [UML Diagrams](#uml)
+    -[Use Case Diagram](#use-case)
   - [Screenshots](#screenshots)
   - [License](#license)
   - [Contributors](#contributors)
@@ -60,7 +65,11 @@
     
     
    
-  <!-- UML DIAGRAMS  -->
+   <!-- UML DIAGRAMS  -->
+   ## UML Diagrams
+   
+   ### Use Case
+   <img src="src/main/resources/diagrams/UseCaseDiagram.png" alt="useCase"> 
    
    <!-- GETTING STARTED -->
    ## Getting Started
@@ -99,6 +108,27 @@
                 </resources>
             </build>
         </project>
+        
+   <!-- DATABASE -->
+   ## DATABASE
+   
+   ### Tables
+   <img src="src/main/resources/diagrams/Tables.png" alt="tables"> 
+   
+   ### Views
+   <img src="src/main/resources/diagrams/Views.png" alt="views"> 
+    
+   <!-- SCREENSHOTS -->
+   ## SCREENSHOTS
+   <img src="src/main/resources/screenshots/Login.png" alt="Login">      
+   <img src="src/main/resources/screenshots/Registration.png" alt="Login">
+   <img src="src/main/resources/screenshots/MenuAdmin.png" alt="Login">
+   <img src="src/main/resources/screenshots/Activities_Admin.png" alt="Login">
+   <img src="src/main/resources/screenshots/Users_Admin.png" alt="Login">
+   <img src="src/main/resources/screenshots/MenuMember.png" alt="Login">
+   <img src="src/main/resources/screenshots/Course_Member.png" alt="Login">
+   <img src="src/main/resources/screenshots/Race_Member.png" alt="Login">
+   <img src="src/main/resources/screenshots/Subscribers_Member.png" alt="Login">
    
    <!-- LICENSE -->
    ## LICENSE
@@ -111,17 +141,6 @@
    <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></div>
    <div>Icons made by <a href="https://www.flaticon.com/authors/mynamepong" title="mynamepong">mynamepong</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></div>
    
-   <!-- LICENSE -->
-   ## SCREENSHOTS
-   <img src="src/main/resources/screenshots/Login.png" alt="Login">
-   <img src="src/main/resources/screenshots/Registration.png" alt="Login">
-   <img src="src/main/resources/screenshots/MenuAdmin.png" alt="Login">
-   <img src="src/main/resources/screenshots/Activities_Admin.png" alt="Login">
-   <img src="src/main/resources/screenshots/Users_Admin.png" alt="Login">
-   <img src="src/main/resources/screenshots/MenuMember.png" alt="Login">
-   <img src="src/main/resources/screenshots/Course_Member.png" alt="Login">
-   <img src="src/main/resources/screenshots/Race_Member.png" alt="Login">
-   <img src="src/main/resources/screenshots/Subscribers_Member.png" alt="Login">
    
    <!-- CONTRIBUTORS -->
    ## CONTRIBUTORS

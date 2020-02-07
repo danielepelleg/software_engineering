@@ -1,0 +1,31 @@
+Per creare il Database "SportClub" utilizzare il file script.sql nella master root 
+del proprio editor di programmazione, se lo permette. E' presente una seconda copia
+di questo file all'interno del package "Database" dell'applicazione, per un utilizzo immediato.
+
+Testandolo su IntelliJ Idea 2019.3.2 lo script è risultato eseguibile all'interno 
+dell'editor di testo.
+
+Il database per un corretto funzionamento andrà a creare:
+- 3 Tabelle
+- 3 Viste
+
+Il database verrà in seguito popolato inserendo diversi amministratori, utenti, corsi e gare 
+(attività del database) e isrizioni degli utenti a gare e corsi.
+
+// ACCESSO UTENTE FREE
+Username: Maty 		Password: qwerty
+
+// ACCESSO ADMIN
+Username: Tom 		Password: 1234
+
+Di seguito sono elencate le Tabelle presenti in "Cinema":
+- Member
+- Course
+- Race
+- Activity_Course
+- Acitity_Race
+
+Di seguito le Viste:
+- NumberSubscribers
+- NumberSubscribersRace
+- NumberSubscribersCourse

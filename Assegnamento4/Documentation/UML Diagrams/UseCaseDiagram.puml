@@ -1,0 +1,33 @@
+@startuml
+title SportClub - Use Case Diagram
+
+left to right direction
+
+actor Administrator
+actor Member
+actor Activity
+
+
+rectangle  APPLICATION {
+    Administrator --|> Member
+    Administrator -- (Club Management)
+    (Club Management) <.. (Members Management) : <<extend>>
+    (Club Management) <.. (Activities Management) : <<extend>>
+    (Club Management) -left-> (Login) : <<include>>
+    (Members Management) <.. (Add Member) : <<extend>>
+    (Members Management) <.. (Delete Member) : <<extend>>
+    (Members Management) <.. (Update Member) : <<extend>>
+    (Activities Management) <.. (Create Activity) : <<extend>>
+    (Activities Management) <.. (Delete Activity) : <<extend>>
+    (Activities Management) <.. (Update Activity) : <<extend>>
+    Member -- (Subscribe to an Activity)
+    Member -- (Unsubscribe to an Activity)
+    Member -- (View Subscribers Number)
+    Member -- (Registration)
+    (Subscribe to an Activity) --> (Login) : <<include>>
+    (Unsubscribe to an Activity) --> (Login) : <<include>>
+    Activity -up- (Create Activity)
+    Activity -up- (Delete Activity)
+    Activity -up- (Update Activity)
+}
+@enduml

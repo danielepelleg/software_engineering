@@ -86,8 +86,8 @@ drop table if exists activity_course;
 create table activity_course(
     course_name varchar(24),
     member_username varchar(24),
-    foreign key (course_name) references course(name),
-    foreign key  (member_username) references member(username),
+    foreign key (course_name) references course(name) ON DELETE CASCADE ON UPDATE CASCADE,
+    foreign key  (member_username) references member(username) ON DELETE CASCADE ON UPDATE CASCADE,
     primary key (course_name, member_username));
 insert into activity_course(course_name, member_username) VALUES
 ('Jnana Yoga', 'Maty'),
@@ -107,8 +107,8 @@ drop table if exists activity_race;
 create table activity_race(
     race_name varchar(24),
     member_username varchar(24),
-    foreign key (race_name) references race(name),
-    foreign key  (member_username) references member(username),
+    foreign key (race_name) references race(name) ON DELETE CASCADE ON UPDATE CASCADE,
+    foreign key  (member_username) references member(username) ON DELETE CASCADE ON UPDATE CASCADE,
     primary key (race_name, member_username));
 insert into activity_race(race_name, member_username) VALUES
 ('GrandPrix F1', 'Chicca'),

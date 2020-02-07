@@ -35,6 +35,7 @@ import java.util.ResourceBundle;
  */
 public class RaceAdminController implements Initializable {
 
+
     @FXML
     private ComboBox<String> userComboBox;
 
