@@ -113,10 +113,14 @@
    ## DATABASE
    
    ### Tables
+   <p align="center">
    <img src="src/main/resources/diagrams/Tables.png" alt="tables"> 
+   </p>
    
    ### Views
+   <p align="center">
    <img src="src/main/resources/diagrams/Views.png" alt="views"> 
+   </p>
     
    <!-- SCREENSHOTS -->
    ## SCREENSHOTS
