@@ -23,7 +23,7 @@
   - [Database](#database)
     - [Tables](#tables)
     - [Views](#views)
-  - [UML Diagrams](#uml)
+  - [UML Diagrams](#uml-diagrams)
     -[Use Case Diagram](#use-case)
   - [Screenshots](#screenshots)
   - [License](#license)
@@ -62,14 +62,6 @@
     - Once logged you will be redirected to your menu, where the buttons with the images will guide you to the 
        different operations you are allowed to perform. From this window you can also choose to disconnect, to come 
       back to the login/registration form.
-    
-    
-   
-   <!-- UML DIAGRAMS  -->
-   ## UML Diagrams
-   
-   ### Use Case
-   <img src="src/main/resources/diagrams/UseCaseDiagram.png" alt="useCase"> 
    
    <!-- GETTING STARTED -->
    ## Getting Started
@@ -121,6 +113,12 @@
    <p align="center">
    <img src="src/main/resources/diagrams/Views.png" alt="views"> 
    </p>
+   
+   <!-- UML DIAGRAMS  -->
+   ## UML Diagrams
+      
+   ### Use Case
+   <img src="src/main/resources/diagrams/UseCaseDiagram.png" alt="useCase"> 
     
    <!-- SCREENSHOTS -->
    ## SCREENSHOTS
